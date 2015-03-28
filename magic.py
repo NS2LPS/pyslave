@@ -21,13 +21,14 @@ del listall, openall
 
 
 # Scripts launching, pausing
-import slave
+from pyslave import slave
 
 @register_line_magic
-def call(filename):
+@needs_local_scope
+def call(filename, local_ns):
     if not filename.endswith('.py'):
         filename += '.py'
-    slave.slave_window.call(filename)
+    slave.slave_window.call(filename, local_ns)
 
 @register_line_magic
 def pause(line):

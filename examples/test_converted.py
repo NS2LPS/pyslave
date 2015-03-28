@@ -1,12 +1,11 @@
 # Auto generated script file
 
-from matplotlib.pyplot import subplots
+#from matplotlib.pyplot import subplots
 import time
-import numpy as np
+#import numpy as np
 
 fig,ax = subplots()
-x = np.linspace(0,1,1000)
-print "header"
+#x = np.linspace(0,1,1000)
 
 # Main script function
 def script_main(thread):

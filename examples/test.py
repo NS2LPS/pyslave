@@ -1,6 +1,4 @@
-from matplotlib.pyplot import subplots
 import time
-import numpy as np
 
 fig,ax = subplots()
 x = np.linspace(0,1,1000)

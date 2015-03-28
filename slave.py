@@ -66,7 +66,7 @@ class SlaveWindow(QtGui.QMainWindow):
     #    if filename:
     #        self.call(filename)
 
-    def call(self, filename):
+    def call(self, filename, local_ns):
         if not filename.endswith('_converted.py'):
             try:
                 convert(filename)
@@ -77,14 +77,15 @@ class SlaveWindow(QtGui.QMainWindow):
                 return
         filename = filename[:-3] + '_converted.py'
         try:
-            current_script = imp.load_source('current_script', filename)
+            #current_script = imp.load_source('current_script', filename)
+            execfile(filename, local_ns)
         except :
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
             for e in error_msgs : print e
             print 'Error while loading {0}.'.format(filename)
             return
         # Setup the thread and starts it
-        self.thread = ScriptThread(self, current_script.script_main)
+        self.thread = ScriptThread(self, local_ns['script_main'])
         self.thread.finished.connect(self.thread_finished)
         self.thread.terminated.connect(self.thread_terminated)
         self.thread.display_signal.connect(self.thread_display)
@@ -141,7 +142,6 @@ slave_window = SlaveWindow()
 slave_window.show()
 
 def __replace__(line):
-    line = line.replace('#import','from pyslave.instruments import __loaded__\nglobals().update(__loaded__)')
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause?','thread.pause()')
     line = line.replace('#break?','if thread.stopflag : break')
