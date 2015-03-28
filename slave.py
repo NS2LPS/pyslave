@@ -77,12 +77,10 @@ class SlaveWindow(QtGui.QMainWindow):
                 return
         filename = filename[:-3] + '_converted.py'
         try:
-            print "import"
             current_script = imp.load_source('current_script', filename)
-            print "import"
         except :
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            print error_msgs
+            for e in error_msgs : print e
             print 'Error while loading {0}.'.format(filename)
             return
         # Setup the thread and starts it
@@ -143,7 +141,7 @@ slave_window = SlaveWindow()
 slave_window.show()
 
 def __replace__(line):
-    line = line.replace('#import','from pylab import *\nimport time\nimport h5py\nfrom instruments import __loaded__\nglobals().update(__loaded__)')
+    line = line.replace('#import','from pylab import *\nimport time\nimport h5py\nfrom pyslave.instruments import __loaded__\nglobals().update(__loaded__)')
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause?','thread.pause()')
     line = line.replace('#break?','if thread.stopflag : break')

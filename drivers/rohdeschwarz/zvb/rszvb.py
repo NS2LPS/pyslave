@@ -698,7 +698,7 @@ rszvb_init.errcheck = __errorcheck__
 rszvb_init.output = True
 # rszvb_ApplicationExample ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 startFrequency', 'ViReal64 stopFrequency', 'ViReal64 power', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR stimulusData[]', 'ViReal64 _VI_FAR responseData[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double,c_double,c_double,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'startFrequency'),(1, 'stopFrequency'),(1, 'power'),(2, 'noOfValues'),(1, 'stimulusData[]'),(1, 'responseData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'startFrequency'),(1, 'stopFrequency'),(1, 'power'),(2, 'noOfValues'),(1, 'stimulusData[]'),(1, 'responseData[]'),)
 rszvb_ApplicationExample  = prototype(('rszvb_ApplicationExample', rszvbDLL), paramflags)
 rszvb_ApplicationExample.name = 'rszvb_ApplicationExample'
 rszvb_ApplicationExample.errcheck = __errorcheck__
@@ -796,140 +796,140 @@ rszvb_writeFromFile.errcheck = __errorcheck__
 rszvb_writeFromFile.output = False
 # rszvb_SelectPowerMeter ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 powerMeter', 'ViInt32 outPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'powerMeter'),(1, 'outPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'powerMeter'),(1, 'outPort'),)
 rszvb_SelectPowerMeter  = prototype(('rszvb_SelectPowerMeter', rszvbDLL), paramflags)
 rszvb_SelectPowerMeter.name = 'rszvb_SelectPowerMeter'
 rszvb_SelectPowerMeter.errcheck = __errorcheck__
 rszvb_SelectPowerMeter.output = False
 # rszvb_SelectSParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outPort', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outPort'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outPort'),(1, 'inPort'),)
 rszvb_SelectSParameters  = prototype(('rszvb_SelectSParameters', rszvbDLL), paramflags)
 rszvb_SelectSParameters.name = 'rszvb_SelectSParameters'
 rszvb_SelectSParameters.errcheck = __errorcheck__
 rszvb_SelectSParameters.output = False
 # rszvb_SelectMoreSParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outMode', 'ViInt32 outPort', 'ViInt32 inMode', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
 rszvb_SelectMoreSParameters  = prototype(('rszvb_SelectMoreSParameters', rszvbDLL), paramflags)
 rszvb_SelectMoreSParameters.name = 'rszvb_SelectMoreSParameters'
 rszvb_SelectMoreSParameters.errcheck = __errorcheck__
 rszvb_SelectMoreSParameters.output = False
 # rszvb_SelectRatios ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 ratios']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'ratios'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'ratios'),)
 rszvb_SelectRatios  = prototype(('rszvb_SelectRatios', rszvbDLL), paramflags)
 rszvb_SelectRatios.name = 'rszvb_SelectRatios'
 rszvb_SelectRatios.errcheck = __errorcheck__
 rszvb_SelectRatios.output = False
 # rszvb_SelectMoreRatios ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 sourcePort', 'ViInt32 numeratorType', 'ViInt32 numeratorPortNumber', 'ViInt32 denominatorType', 'ViInt32 denominatorPortNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'sourcePort'),(1, 'numeratorType'),(1, 'numeratorPortNumber'),(1, 'denominatorType'),(1, 'denominatorPortNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'sourcePort'),(1, 'numeratorType'),(1, 'numeratorPortNumber'),(1, 'denominatorType'),(1, 'denominatorPortNumber'),)
 rszvb_SelectMoreRatios  = prototype(('rszvb_SelectMoreRatios', rszvbDLL), paramflags)
 rszvb_SelectMoreRatios.name = 'rszvb_SelectMoreRatios'
 rszvb_SelectMoreRatios.errcheck = __errorcheck__
 rszvb_SelectMoreRatios.output = False
 # rszvb_SelectMoreRatiosWithDetector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 sourcePort', 'ViInt32 numeratorType', 'ViInt32 numeratorPortNumber', 'ViInt32 denominatorType', 'ViInt32 denominatorPortNumber', 'ViInt32 detector', 'ViReal64 observationTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'sourcePort'),(1, 'numeratorType'),(1, 'numeratorPortNumber'),(1, 'denominatorType'),(1, 'denominatorPortNumber'),(1, 'detector'),(1, 'observationTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'sourcePort'),(1, 'numeratorType'),(1, 'numeratorPortNumber'),(1, 'denominatorType'),(1, 'denominatorPortNumber'),(1, 'detector'),(1, 'observationTime'),)
 rszvb_SelectMoreRatiosWithDetector  = prototype(('rszvb_SelectMoreRatiosWithDetector', rszvbDLL), paramflags)
 rszvb_SelectMoreRatiosWithDetector.name = 'rszvb_SelectMoreRatiosWithDetector'
 rszvb_SelectMoreRatiosWithDetector.errcheck = __errorcheck__
 rszvb_SelectMoreRatiosWithDetector.output = False
 # rszvb_SelectMoreRatiosGenerator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 generatorNumber', 'ViInt32 numeratorType', 'ViInt32 numeratorPortNumber', 'ViInt32 denominatorType', 'ViInt32 denominatorPortNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'generatorNumber'),(1, 'numeratorType'),(1, 'numeratorPortNumber'),(1, 'denominatorType'),(1, 'denominatorPortNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'generatorNumber'),(1, 'numeratorType'),(1, 'numeratorPortNumber'),(1, 'denominatorType'),(1, 'denominatorPortNumber'),)
 rszvb_SelectMoreRatiosGenerator  = prototype(('rszvb_SelectMoreRatiosGenerator', rszvbDLL), paramflags)
 rszvb_SelectMoreRatiosGenerator.name = 'rszvb_SelectMoreRatiosGenerator'
 rszvb_SelectMoreRatiosGenerator.errcheck = __errorcheck__
 rszvb_SelectMoreRatiosGenerator.output = False
 # rszvb_SelectMoreRatiosGeneratorWithDetector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 generatorNumber', 'ViInt32 numeratorType', 'ViInt32 numeratorPortNumber', 'ViInt32 denominatorType', 'ViInt32 denominatorPortNumber', 'ViInt32 detector', 'ViReal64 observationTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'generatorNumber'),(1, 'numeratorType'),(1, 'numeratorPortNumber'),(1, 'denominatorType'),(1, 'denominatorPortNumber'),(1, 'detector'),(1, 'observationTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'generatorNumber'),(1, 'numeratorType'),(1, 'numeratorPortNumber'),(1, 'denominatorType'),(1, 'denominatorPortNumber'),(1, 'detector'),(1, 'observationTime'),)
 rszvb_SelectMoreRatiosGeneratorWithDetector  = prototype(('rszvb_SelectMoreRatiosGeneratorWithDetector', rszvbDLL), paramflags)
 rszvb_SelectMoreRatiosGeneratorWithDetector.name = 'rszvb_SelectMoreRatiosGeneratorWithDetector'
 rszvb_SelectMoreRatiosGeneratorWithDetector.errcheck = __errorcheck__
 rszvb_SelectMoreRatiosGeneratorWithDetector.output = False
 # rszvb_SelectWaveQuantities ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 waveQuantities']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'waveQuantities'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'waveQuantities'),)
 rszvb_SelectWaveQuantities  = prototype(('rszvb_SelectWaveQuantities', rszvbDLL), paramflags)
 rszvb_SelectWaveQuantities.name = 'rszvb_SelectWaveQuantities'
 rszvb_SelectWaveQuantities.errcheck = __errorcheck__
 rszvb_SelectWaveQuantities.output = False
 # rszvb_SelectMoreWaveQuantities ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 waveQuantityType', 'ViInt32 waveQuantityPortNumber', 'ViInt32 sourcePort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'waveQuantityType'),(1, 'waveQuantityPortNumber'),(1, 'sourcePort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'waveQuantityType'),(1, 'waveQuantityPortNumber'),(1, 'sourcePort'),)
 rszvb_SelectMoreWaveQuantities  = prototype(('rszvb_SelectMoreWaveQuantities', rszvbDLL), paramflags)
 rszvb_SelectMoreWaveQuantities.name = 'rszvb_SelectMoreWaveQuantities'
 rszvb_SelectMoreWaveQuantities.errcheck = __errorcheck__
 rszvb_SelectMoreWaveQuantities.output = False
 # rszvb_SelectMoreWaveQuantitiesWithDetector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 waveQuantityType', 'ViInt32 waveQuantityPortNumber', 'ViInt32 sourcePort', 'ViInt32 detector', 'ViReal64 observationTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'waveQuantityType'),(1, 'waveQuantityPortNumber'),(1, 'sourcePort'),(1, 'detector'),(1, 'observationTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'waveQuantityType'),(1, 'waveQuantityPortNumber'),(1, 'sourcePort'),(1, 'detector'),(1, 'observationTime'),)
 rszvb_SelectMoreWaveQuantitiesWithDetector  = prototype(('rszvb_SelectMoreWaveQuantitiesWithDetector', rszvbDLL), paramflags)
 rszvb_SelectMoreWaveQuantitiesWithDetector.name = 'rszvb_SelectMoreWaveQuantitiesWithDetector'
 rszvb_SelectMoreWaveQuantitiesWithDetector.errcheck = __errorcheck__
 rszvb_SelectMoreWaveQuantitiesWithDetector.output = False
 # rszvb_SelectImpedances ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outPort', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outPort'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outPort'),(1, 'inPort'),)
 rszvb_SelectImpedances  = prototype(('rszvb_SelectImpedances', rszvbDLL), paramflags)
 rszvb_SelectImpedances.name = 'rszvb_SelectImpedances'
 rszvb_SelectImpedances.errcheck = __errorcheck__
 rszvb_SelectImpedances.output = False
 # rszvb_SelectMoreImpedances ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outMode', 'ViInt32 outPort', 'ViInt32 inMode', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
 rszvb_SelectMoreImpedances  = prototype(('rszvb_SelectMoreImpedances', rszvbDLL), paramflags)
 rszvb_SelectMoreImpedances.name = 'rszvb_SelectMoreImpedances'
 rszvb_SelectMoreImpedances.errcheck = __errorcheck__
 rszvb_SelectMoreImpedances.output = False
 # rszvb_SelectAdmitances ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outPort', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outPort'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outPort'),(1, 'inPort'),)
 rszvb_SelectAdmitances  = prototype(('rszvb_SelectAdmitances', rszvbDLL), paramflags)
 rszvb_SelectAdmitances.name = 'rszvb_SelectAdmitances'
 rszvb_SelectAdmitances.errcheck = __errorcheck__
 rszvb_SelectAdmitances.output = False
 # rszvb_SelectMoreAdmitances ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outMode', 'ViInt32 outPort', 'ViInt32 inMode', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
 rszvb_SelectMoreAdmitances  = prototype(('rszvb_SelectMoreAdmitances', rszvbDLL), paramflags)
 rszvb_SelectMoreAdmitances.name = 'rszvb_SelectMoreAdmitances'
 rszvb_SelectMoreAdmitances.errcheck = __errorcheck__
 rszvb_SelectMoreAdmitances.output = False
 # rszvb_SelectZParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outMode', 'ViInt32 outPort', 'ViInt32 inMode', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
 rszvb_SelectZParameters  = prototype(('rszvb_SelectZParameters', rszvbDLL), paramflags)
 rszvb_SelectZParameters.name = 'rszvb_SelectZParameters'
 rszvb_SelectZParameters.errcheck = __errorcheck__
 rszvb_SelectZParameters.output = False
 # rszvb_SelectYParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outMode', 'ViInt32 outPort', 'ViInt32 inMode', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outMode'),(1, 'outPort'),(1, 'inMode'),(1, 'inPort'),)
 rszvb_SelectYParameters  = prototype(('rszvb_SelectYParameters', rszvbDLL), paramflags)
 rszvb_SelectYParameters.name = 'rszvb_SelectYParameters'
 rszvb_SelectYParameters.errcheck = __errorcheck__
 rszvb_SelectYParameters.output = False
 # rszvb_SelectStabilityFactors ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 DUTOut', 'ViInt32 DUTIn', 'ViInt32 stabilityFactor']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'DUTOut'),(1, 'DUTIn'),(1, 'stabilityFactor'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'DUTOut'),(1, 'DUTIn'),(1, 'stabilityFactor'),)
 rszvb_SelectStabilityFactors  = prototype(('rszvb_SelectStabilityFactors', rszvbDLL), paramflags)
 rszvb_SelectStabilityFactors.name = 'rszvb_SelectStabilityFactors'
 rszvb_SelectStabilityFactors.errcheck = __errorcheck__
 rszvb_SelectStabilityFactors.output = False
 # rszvb_SelectDCMeasurement ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 DCMeas']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'DCMeas'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'DCMeas'),)
 rszvb_SelectDCMeasurement  = prototype(('rszvb_SelectDCMeasurement', rszvbDLL), paramflags)
 rszvb_SelectDCMeasurement.name = 'rszvb_SelectDCMeasurement'
 rszvb_SelectDCMeasurement.errcheck = __errorcheck__
 rszvb_SelectDCMeasurement.output = False
 # rszvb_SelectPAEMeasurement ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 DUTOut', 'ViInt32 DUTIn']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'DUTOut'),(1, 'DUTIn'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'DUTOut'),(1, 'DUTIn'),)
 rszvb_SelectPAEMeasurement  = prototype(('rszvb_SelectPAEMeasurement', rszvbDLL), paramflags)
 rszvb_SelectPAEMeasurement.name = 'rszvb_SelectPAEMeasurement'
 rszvb_SelectPAEMeasurement.errcheck = __errorcheck__
@@ -943,28 +943,28 @@ rszvb_DefinePAEMeasurement.errcheck = __errorcheck__
 rszvb_DefinePAEMeasurement.output = False
 # rszvb_SelectNoiseFigure ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outPort', 'ViInt32 inPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outPort'),(1, 'inPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outPort'),(1, 'inPort'),)
 rszvb_SelectNoiseFigure  = prototype(('rszvb_SelectNoiseFigure', rszvbDLL), paramflags)
 rszvb_SelectNoiseFigure.name = 'rszvb_SelectNoiseFigure'
 rszvb_SelectNoiseFigure.errcheck = __errorcheck__
 rszvb_SelectNoiseFigure.output = False
 # rszvb_CreateTrace ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViString parameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'parameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'parameter'),)
 rszvb_CreateTrace  = prototype(('rszvb_CreateTrace', rszvbDLL), paramflags)
 rszvb_CreateTrace.name = 'rszvb_CreateTrace'
 rszvb_CreateTrace.errcheck = __errorcheck__
 rszvb_CreateTrace.output = False
 # rszvb_ConfigureMesurementParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViString parameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'parameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'parameter'),)
 rszvb_ConfigureMesurementParameters  = prototype(('rszvb_ConfigureMesurementParameters', rszvbDLL), paramflags)
 rszvb_ConfigureMesurementParameters.name = 'rszvb_ConfigureMesurementParameters'
 rszvb_ConfigureMesurementParameters.errcheck = __errorcheck__
 rszvb_ConfigureMesurementParameters.output = False
 # rszvb_QueryMesurementParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 bufferSize', 'ViChar _VI_FAR parameters[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'bufferSize'),(1, 'parameters[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'bufferSize'),(1, 'parameters[]'),)
 rszvb_QueryMesurementParameters  = prototype(('rszvb_QueryMesurementParameters', rszvbDLL), paramflags)
 rszvb_QueryMesurementParameters.name = 'rszvb_QueryMesurementParameters'
 rszvb_QueryMesurementParameters.errcheck = __errorcheck__
@@ -1118,14 +1118,14 @@ rszvb_GetTraceTop.errcheck = __errorcheck__
 rszvb_GetTraceTop.output = True
 # rszvb_TraceAdd ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),)
 rszvb_TraceAdd  = prototype(('rszvb_TraceAdd', rszvbDLL), paramflags)
 rszvb_TraceAdd.name = 'rszvb_TraceAdd'
 rszvb_TraceAdd.errcheck = __errorcheck__
 rszvb_TraceAdd.output = False
 # rszvb_TraceAddMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 outMode', 'ViInt32 inMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),(1, 'outMode'),(1, 'inMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'outMode'),(1, 'inMode'),)
 rszvb_TraceAddMode  = prototype(('rszvb_TraceAddMode', rszvbDLL), paramflags)
 rszvb_TraceAddMode.name = 'rszvb_TraceAddMode'
 rszvb_TraceAddMode.errcheck = __errorcheck__
@@ -1146,21 +1146,21 @@ rszvb_GetTraceDisplayState.errcheck = __errorcheck__
 rszvb_GetTraceDisplayState.output = True
 # rszvb_TraceAddSParameterGroup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 numberOfLogicalPortNumbers', 'ViInt32 _VI_FAR logicalPortNumber_s[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'numberOfLogicalPortNumbers'),(1, 'logicalPortNumber_s[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'numberOfLogicalPortNumbers'),(1, 'logicalPortNumber_s[]'),)
 rszvb_TraceAddSParameterGroup  = prototype(('rszvb_TraceAddSParameterGroup', rszvbDLL), paramflags)
 rszvb_TraceAddSParameterGroup.name = 'rszvb_TraceAddSParameterGroup'
 rszvb_TraceAddSParameterGroup.errcheck = __errorcheck__
 rszvb_TraceAddSParameterGroup.output = False
 # rszvb_QueryTraceAddSParameterGroup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 _VI_FAR logicalPortNumber_s[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'logicalPortNumber_s[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPortNumber_s[]'),)
 rszvb_QueryTraceAddSParameterGroup  = prototype(('rszvb_QueryTraceAddSParameterGroup', rszvbDLL), paramflags)
 rszvb_QueryTraceAddSParameterGroup.name = 'rszvb_QueryTraceAddSParameterGroup'
 rszvb_QueryTraceAddSParameterGroup.errcheck = __errorcheck__
 rszvb_QueryTraceAddSParameterGroup.output = False
 # rszvb_TraceAddDiagramArea ['ViSession instrumentHandle', 'ViInt32 window', 'ViInt32 window_Trace', 'ViInt32 channel', 'ViString traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'window_Trace'),(1, 'channel'),(1, 'traceName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'window_Trace'),(1, 'channel',1),(1, 'traceName'),)
 rszvb_TraceAddDiagramArea  = prototype(('rszvb_TraceAddDiagramArea', rszvbDLL), paramflags)
 rszvb_TraceAddDiagramArea.name = 'rszvb_TraceAddDiagramArea'
 rszvb_TraceAddDiagramArea.errcheck = __errorcheck__
@@ -1188,21 +1188,21 @@ rszvb_TraceUnassignDiagramArea.errcheck = __errorcheck__
 rszvb_TraceUnassignDiagramArea.output = False
 # rszvb_TraceSelect ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),)
 rszvb_TraceSelect  = prototype(('rszvb_TraceSelect', rszvbDLL), paramflags)
 rszvb_TraceSelect.name = 'rszvb_TraceSelect'
 rszvb_TraceSelect.errcheck = __errorcheck__
 rszvb_TraceSelect.output = False
 # rszvb_TraceDelete ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),)
 rszvb_TraceDelete  = prototype(('rszvb_TraceDelete', rszvbDLL), paramflags)
 rszvb_TraceDelete.name = 'rszvb_TraceDelete'
 rszvb_TraceDelete.errcheck = __errorcheck__
 rszvb_TraceDelete.output = False
 # rszvb_TraceDeleteAll ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_TraceDeleteAll  = prototype(('rszvb_TraceDeleteAll', rszvbDLL), paramflags)
 rszvb_TraceDeleteAll.name = 'rszvb_TraceDeleteAll'
 rszvb_TraceDeleteAll.errcheck = __errorcheck__
@@ -1216,7 +1216,7 @@ rszvb_TraceDeleteAllChannels.errcheck = __errorcheck__
 rszvb_TraceDeleteAllChannels.output = False
 # rszvb_TraceList ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'catalog[]'),(1, 'bufferSize'),)
 rszvb_TraceList  = prototype(('rszvb_TraceList', rszvbDLL), paramflags)
 rszvb_TraceList.name = 'rszvb_TraceList'
 rszvb_TraceList.errcheck = __errorcheck__
@@ -1230,7 +1230,7 @@ rszvb_TraceRename.errcheck = __errorcheck__
 rszvb_TraceRename.output = False
 # rszvb_ChannelTraceRename ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),)
 rszvb_ChannelTraceRename  = prototype(('rszvb_ChannelTraceRename', rszvbDLL), paramflags)
 rszvb_ChannelTraceRename.name = 'rszvb_ChannelTraceRename'
 rszvb_ChannelTraceRename.errcheck = __errorcheck__
@@ -1937,14 +1937,14 @@ rszvb_ChannelTraceExportDataWithOptionsExt.errcheck = __errorcheck__
 rszvb_ChannelTraceExportDataWithOptionsExt.output = False
 # rszvb_TraceExportDataPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString fileName', 'ViInt32 exportData', 'ViInt32 port1', 'ViInt32 port2', 'ViInt32 port3', 'ViInt32 port4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fileName'),(1, 'exportData'),(1, 'port1'),(1, 'port2'),(1, 'port3'),(1, 'port4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fileName'),(1, 'exportData'),(1, 'port1'),(1, 'port2'),(1, 'port3'),(1, 'port4'),)
 rszvb_TraceExportDataPorts  = prototype(('rszvb_TraceExportDataPorts', rszvbDLL), paramflags)
 rszvb_TraceExportDataPorts.name = 'rszvb_TraceExportDataPorts'
 rszvb_TraceExportDataPorts.errcheck = __errorcheck__
 rszvb_TraceExportDataPorts.output = False
 # rszvb_TraceExportDataPortsIncomplete ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString fileName', 'ViInt32 exportData', 'ViInt32 port1', 'ViInt32 port2', 'ViInt32 port3', 'ViInt32 port4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fileName'),(1, 'exportData'),(1, 'port1'),(1, 'port2'),(1, 'port3'),(1, 'port4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fileName'),(1, 'exportData'),(1, 'port1'),(1, 'port2'),(1, 'port3'),(1, 'port4'),)
 rszvb_TraceExportDataPortsIncomplete  = prototype(('rszvb_TraceExportDataPortsIncomplete', rszvbDLL), paramflags)
 rszvb_TraceExportDataPortsIncomplete.name = 'rszvb_TraceExportDataPortsIncomplete'
 rszvb_TraceExportDataPortsIncomplete.errcheck = __errorcheck__
@@ -2007,84 +2007,84 @@ rszvb_TraceShiftResponseValue.errcheck = __errorcheck__
 rszvb_TraceShiftResponseValue.output = False
 # rszvb_SetHold ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 hold']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'hold'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'hold'),)
 rszvb_SetHold  = prototype(('rszvb_SetHold', rszvbDLL), paramflags)
 rszvb_SetHold.name = 'rszvb_SetHold'
 rszvb_SetHold.errcheck = __errorcheck__
 rszvb_SetHold.output = False
 # rszvb_GetHold ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* hold']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'hold'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'hold'),)
 rszvb_GetHold  = prototype(('rszvb_GetHold', rszvbDLL), paramflags)
 rszvb_GetHold.name = 'rszvb_GetHold'
 rszvb_GetHold.errcheck = __errorcheck__
 rszvb_GetHold.output = True
 # rszvb_LinearityDeviationManual ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 slope', 'ViReal64 constant', 'ViReal64 electricalLength']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'slope'),(1, 'constant'),(1, 'electricalLength'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'slope'),(1, 'constant'),(1, 'electricalLength'),)
 rszvb_LinearityDeviationManual  = prototype(('rszvb_LinearityDeviationManual', rszvbDLL), paramflags)
 rszvb_LinearityDeviationManual.name = 'rszvb_LinearityDeviationManual'
 rszvb_LinearityDeviationManual.errcheck = __errorcheck__
 rszvb_LinearityDeviationManual.output = False
 # rszvb_LinearityDeviationAuto ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_LinearityDeviationAuto  = prototype(('rszvb_LinearityDeviationAuto', rszvbDLL), paramflags)
 rszvb_LinearityDeviationAuto.name = 'rszvb_LinearityDeviationAuto'
 rszvb_LinearityDeviationAuto.errcheck = __errorcheck__
 rszvb_LinearityDeviationAuto.output = False
 # rszvb_SetLinearityDeviationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetLinearityDeviationState  = prototype(('rszvb_SetLinearityDeviationState', rszvbDLL), paramflags)
 rszvb_SetLinearityDeviationState.name = 'rszvb_SetLinearityDeviationState'
 rszvb_SetLinearityDeviationState.errcheck = __errorcheck__
 rszvb_SetLinearityDeviationState.output = False
 # rszvb_GetLinearityDeviationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetLinearityDeviationState  = prototype(('rszvb_GetLinearityDeviationState', rszvbDLL), paramflags)
 rszvb_GetLinearityDeviationState.name = 'rszvb_GetLinearityDeviationState'
 rszvb_GetLinearityDeviationState.errcheck = __errorcheck__
 rszvb_GetLinearityDeviationState.output = True
 # rszvb_SetLinearityDeviationSlope ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 slope']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'slope'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'slope'),)
 rszvb_SetLinearityDeviationSlope  = prototype(('rszvb_SetLinearityDeviationSlope', rszvbDLL), paramflags)
 rszvb_SetLinearityDeviationSlope.name = 'rszvb_SetLinearityDeviationSlope'
 rszvb_SetLinearityDeviationSlope.errcheck = __errorcheck__
 rszvb_SetLinearityDeviationSlope.output = False
 # rszvb_GetLinearityDeviationSlope ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* slope']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'slope'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'slope'),)
 rszvb_GetLinearityDeviationSlope  = prototype(('rszvb_GetLinearityDeviationSlope', rszvbDLL), paramflags)
 rszvb_GetLinearityDeviationSlope.name = 'rszvb_GetLinearityDeviationSlope'
 rszvb_GetLinearityDeviationSlope.errcheck = __errorcheck__
 rszvb_GetLinearityDeviationSlope.output = True
 # rszvb_SetLinearityDeviationConstant ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 constant']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'constant'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'constant'),)
 rszvb_SetLinearityDeviationConstant  = prototype(('rszvb_SetLinearityDeviationConstant', rszvbDLL), paramflags)
 rszvb_SetLinearityDeviationConstant.name = 'rszvb_SetLinearityDeviationConstant'
 rszvb_SetLinearityDeviationConstant.errcheck = __errorcheck__
 rszvb_SetLinearityDeviationConstant.output = False
 # rszvb_GetLinearityDeviationConstant ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* constant']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'constant'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'constant'),)
 rszvb_GetLinearityDeviationConstant  = prototype(('rszvb_GetLinearityDeviationConstant', rszvbDLL), paramflags)
 rszvb_GetLinearityDeviationConstant.name = 'rszvb_GetLinearityDeviationConstant'
 rszvb_GetLinearityDeviationConstant.errcheck = __errorcheck__
 rszvb_GetLinearityDeviationConstant.output = True
 # rszvb_SetLinearityDeviationElectricalLength ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 electricalLength']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'electricalLength'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'electricalLength'),)
 rszvb_SetLinearityDeviationElectricalLength  = prototype(('rszvb_SetLinearityDeviationElectricalLength', rszvbDLL), paramflags)
 rszvb_SetLinearityDeviationElectricalLength.name = 'rszvb_SetLinearityDeviationElectricalLength'
 rszvb_SetLinearityDeviationElectricalLength.errcheck = __errorcheck__
 rszvb_SetLinearityDeviationElectricalLength.output = False
 # rszvb_GetLinearityDeviationElectricalLength ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* electricalLength']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'electricalLength'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'electricalLength'),)
 rszvb_GetLinearityDeviationElectricalLength  = prototype(('rszvb_GetLinearityDeviationElectricalLength', rszvbDLL), paramflags)
 rszvb_GetLinearityDeviationElectricalLength.name = 'rszvb_GetLinearityDeviationElectricalLength'
 rszvb_GetLinearityDeviationElectricalLength.errcheck = __errorcheck__
@@ -2742,196 +2742,196 @@ rszvb_SaveRecallRippleLimit.errcheck = __errorcheck__
 rszvb_SaveRecallRippleLimit.output = False
 # rszvb_SetStartFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 startFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'startFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'startFrequency'),)
 rszvb_SetStartFrequency  = prototype(('rszvb_SetStartFrequency', rszvbDLL), paramflags)
 rszvb_SetStartFrequency.name = 'rszvb_SetStartFrequency'
 rszvb_SetStartFrequency.errcheck = __errorcheck__
 rszvb_SetStartFrequency.output = False
 # rszvb_GetStartFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* startFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'startFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'startFrequency'),)
 rszvb_GetStartFrequency  = prototype(('rszvb_GetStartFrequency', rszvbDLL), paramflags)
 rszvb_GetStartFrequency.name = 'rszvb_GetStartFrequency'
 rszvb_GetStartFrequency.errcheck = __errorcheck__
 rszvb_GetStartFrequency.output = True
 # rszvb_SetStopFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 stopFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stopFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stopFrequency'),)
 rszvb_SetStopFrequency  = prototype(('rszvb_SetStopFrequency', rszvbDLL), paramflags)
 rszvb_SetStopFrequency.name = 'rszvb_SetStopFrequency'
 rszvb_SetStopFrequency.errcheck = __errorcheck__
 rszvb_SetStopFrequency.output = False
 # rszvb_GetStopFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* stopFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'stopFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'stopFrequency'),)
 rszvb_GetStopFrequency  = prototype(('rszvb_GetStopFrequency', rszvbDLL), paramflags)
 rszvb_GetStopFrequency.name = 'rszvb_GetStopFrequency'
 rszvb_GetStopFrequency.errcheck = __errorcheck__
 rszvb_GetStopFrequency.output = True
 # rszvb_SetCenterFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 centerFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'centerFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'centerFrequency'),)
 rszvb_SetCenterFrequency  = prototype(('rszvb_SetCenterFrequency', rszvbDLL), paramflags)
 rszvb_SetCenterFrequency.name = 'rszvb_SetCenterFrequency'
 rszvb_SetCenterFrequency.errcheck = __errorcheck__
 rszvb_SetCenterFrequency.output = False
 # rszvb_GetCenterFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* centerFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'centerFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'centerFrequency'),)
 rszvb_GetCenterFrequency  = prototype(('rszvb_GetCenterFrequency', rszvbDLL), paramflags)
 rszvb_GetCenterFrequency.name = 'rszvb_GetCenterFrequency'
 rszvb_GetCenterFrequency.errcheck = __errorcheck__
 rszvb_GetCenterFrequency.output = True
 # rszvb_SetFrequencySpan ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 span']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'span'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'span'),)
 rszvb_SetFrequencySpan  = prototype(('rszvb_SetFrequencySpan', rszvbDLL), paramflags)
 rszvb_SetFrequencySpan.name = 'rszvb_SetFrequencySpan'
 rszvb_SetFrequencySpan.errcheck = __errorcheck__
 rszvb_SetFrequencySpan.output = False
 # rszvb_GetFrequencySpan ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* span']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'span'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'span'),)
 rszvb_GetFrequencySpan  = prototype(('rszvb_GetFrequencySpan', rszvbDLL), paramflags)
 rszvb_GetFrequencySpan.name = 'rszvb_GetFrequencySpan'
 rszvb_GetFrequencySpan.errcheck = __errorcheck__
 rszvb_GetFrequencySpan.output = True
 # rszvb_SetPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 power']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'power'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'power'),)
 rszvb_SetPower  = prototype(('rszvb_SetPower', rszvbDLL), paramflags)
 rszvb_SetPower.name = 'rszvb_SetPower'
 rszvb_SetPower.errcheck = __errorcheck__
 rszvb_SetPower.output = False
 # rszvb_GetPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* power']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'power'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'power'),)
 rszvb_GetPower  = prototype(('rszvb_GetPower', rszvbDLL), paramflags)
 rszvb_GetPower.name = 'rszvb_GetPower'
 rszvb_GetPower.errcheck = __errorcheck__
 rszvb_GetPower.output = True
 # rszvb_SetCWFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 CWFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'CWFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'CWFrequency'),)
 rszvb_SetCWFrequency  = prototype(('rszvb_SetCWFrequency', rszvbDLL), paramflags)
 rszvb_SetCWFrequency.name = 'rszvb_SetCWFrequency'
 rszvb_SetCWFrequency.errcheck = __errorcheck__
 rszvb_SetCWFrequency.output = False
 # rszvb_GetCWFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* CWFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'CWFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'CWFrequency'),)
 rszvb_GetCWFrequency  = prototype(('rszvb_GetCWFrequency', rszvbDLL), paramflags)
 rszvb_GetCWFrequency.name = 'rszvb_GetCWFrequency'
 rszvb_GetCWFrequency.errcheck = __errorcheck__
 rszvb_GetCWFrequency.output = True
 # rszvb_SetStartPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 startPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'startPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'startPower'),)
 rszvb_SetStartPower  = prototype(('rszvb_SetStartPower', rszvbDLL), paramflags)
 rszvb_SetStartPower.name = 'rszvb_SetStartPower'
 rszvb_SetStartPower.errcheck = __errorcheck__
 rszvb_SetStartPower.output = False
 # rszvb_GetStartPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* startPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'startPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'startPower'),)
 rszvb_GetStartPower  = prototype(('rszvb_GetStartPower', rszvbDLL), paramflags)
 rszvb_GetStartPower.name = 'rszvb_GetStartPower'
 rszvb_GetStartPower.errcheck = __errorcheck__
 rszvb_GetStartPower.output = True
 # rszvb_SetStopPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 stopPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stopPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stopPower'),)
 rszvb_SetStopPower  = prototype(('rszvb_SetStopPower', rszvbDLL), paramflags)
 rszvb_SetStopPower.name = 'rszvb_SetStopPower'
 rszvb_SetStopPower.errcheck = __errorcheck__
 rszvb_SetStopPower.output = False
 # rszvb_GetStopPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* stopPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'stopPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'stopPower'),)
 rszvb_GetStopPower  = prototype(('rszvb_GetStopPower', rszvbDLL), paramflags)
 rszvb_GetStopPower.name = 'rszvb_GetStopPower'
 rszvb_GetStopPower.errcheck = __errorcheck__
 rszvb_GetStopPower.output = True
 # rszvb_SetSourcePort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 sourcePort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sourcePort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sourcePort'),)
 rszvb_SetSourcePort  = prototype(('rszvb_SetSourcePort', rszvbDLL), paramflags)
 rszvb_SetSourcePort.name = 'rszvb_SetSourcePort'
 rszvb_SetSourcePort.errcheck = __errorcheck__
 rszvb_SetSourcePort.output = False
 # rszvb_GetSourcePort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* sourcePort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sourcePort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sourcePort'),)
 rszvb_GetSourcePort  = prototype(('rszvb_GetSourcePort', rszvbDLL), paramflags)
 rszvb_GetSourcePort.name = 'rszvb_GetSourcePort'
 rszvb_GetSourcePort.errcheck = __errorcheck__
 rszvb_GetSourcePort.output = True
 # rszvb_ConfigurePowerBandwidthAverage ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean RFState', 'ViReal64 measBandwidth', 'ViBoolean averageState', 'ViInt32 averageFactor']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool,c_double,c_bool,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'RFState'),(1, 'measBandwidth'),(1, 'averageState'),(1, 'averageFactor'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'RFState'),(1, 'measBandwidth'),(1, 'averageState'),(1, 'averageFactor'),)
 rszvb_ConfigurePowerBandwidthAverage  = prototype(('rszvb_ConfigurePowerBandwidthAverage', rszvbDLL), paramflags)
 rszvb_ConfigurePowerBandwidthAverage.name = 'rszvb_ConfigurePowerBandwidthAverage'
 rszvb_ConfigurePowerBandwidthAverage.errcheck = __errorcheck__
 rszvb_ConfigurePowerBandwidthAverage.output = False
 # rszvb_SetReceiverStepAttenuators ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 analyzerPort', 'ViReal64 attenuationFactor']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'analyzerPort'),(1, 'attenuationFactor'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'analyzerPort'),(1, 'attenuationFactor'),)
 rszvb_SetReceiverStepAttenuators  = prototype(('rszvb_SetReceiverStepAttenuators', rszvbDLL), paramflags)
 rszvb_SetReceiverStepAttenuators.name = 'rszvb_SetReceiverStepAttenuators'
 rszvb_SetReceiverStepAttenuators.errcheck = __errorcheck__
 rszvb_SetReceiverStepAttenuators.output = False
 # rszvb_GetReceiverStepAttenuators ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 analyzerPort', 'ViReal64* attenuationFactor']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'analyzerPort'),(2, 'attenuationFactor'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'analyzerPort'),(2, 'attenuationFactor'),)
 rszvb_GetReceiverStepAttenuators  = prototype(('rszvb_GetReceiverStepAttenuators', rszvbDLL), paramflags)
 rszvb_GetReceiverStepAttenuators.name = 'rszvb_GetReceiverStepAttenuators'
 rszvb_GetReceiverStepAttenuators.errcheck = __errorcheck__
 rszvb_GetReceiverStepAttenuators.output = True
 # rszvb_SetGeneratorStepAttenuators ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 attenuationFactor']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'attenuationFactor'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'attenuationFactor'),)
 rszvb_SetGeneratorStepAttenuators  = prototype(('rszvb_SetGeneratorStepAttenuators', rszvbDLL), paramflags)
 rszvb_SetGeneratorStepAttenuators.name = 'rszvb_SetGeneratorStepAttenuators'
 rszvb_SetGeneratorStepAttenuators.errcheck = __errorcheck__
 rszvb_SetGeneratorStepAttenuators.output = False
 # rszvb_GetGeneratorStepAttenuators ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* attenuationFactor']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'attenuationFactor'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'attenuationFactor'),)
 rszvb_GetGeneratorStepAttenuators  = prototype(('rszvb_GetGeneratorStepAttenuators', rszvbDLL), paramflags)
 rszvb_GetGeneratorStepAttenuators.name = 'rszvb_GetGeneratorStepAttenuators'
 rszvb_GetGeneratorStepAttenuators.errcheck = __errorcheck__
 rszvb_GetGeneratorStepAttenuators.output = True
 # rszvb_SetAutomaticGeneratorAttenuator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean automaticAttenuation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'automaticAttenuation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'automaticAttenuation'),)
 rszvb_SetAutomaticGeneratorAttenuator  = prototype(('rszvb_SetAutomaticGeneratorAttenuator', rszvbDLL), paramflags)
 rszvb_SetAutomaticGeneratorAttenuator.name = 'rszvb_SetAutomaticGeneratorAttenuator'
 rszvb_SetAutomaticGeneratorAttenuator.errcheck = __errorcheck__
 rszvb_SetAutomaticGeneratorAttenuator.output = False
 # rszvb_GetAutomaticGeneratorAttenuator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* automaticAttenuation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'automaticAttenuation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'automaticAttenuation'),)
 rszvb_GetAutomaticGeneratorAttenuator  = prototype(('rszvb_GetAutomaticGeneratorAttenuator', rszvbDLL), paramflags)
 rszvb_GetAutomaticGeneratorAttenuator.name = 'rszvb_GetAutomaticGeneratorAttenuator'
 rszvb_GetAutomaticGeneratorAttenuator.errcheck = __errorcheck__
 rszvb_GetAutomaticGeneratorAttenuator.output = True
 # rszvb_GetAutomaticGeneratorAttenuation ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* attenuation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'attenuation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'attenuation'),)
 rszvb_GetAutomaticGeneratorAttenuation  = prototype(('rszvb_GetAutomaticGeneratorAttenuation', rszvbDLL), paramflags)
 rszvb_GetAutomaticGeneratorAttenuation.name = 'rszvb_GetAutomaticGeneratorAttenuation'
 rszvb_GetAutomaticGeneratorAttenuation.errcheck = __errorcheck__
 rszvb_GetAutomaticGeneratorAttenuation.output = True
 # rszvb_SetGeneratorAttenuatorMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 attenuationMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'attenuationMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'attenuationMode'),)
 rszvb_SetGeneratorAttenuatorMode  = prototype(('rszvb_SetGeneratorAttenuatorMode', rszvbDLL), paramflags)
 rszvb_SetGeneratorAttenuatorMode.name = 'rszvb_SetGeneratorAttenuatorMode'
 rszvb_SetGeneratorAttenuatorMode.errcheck = __errorcheck__
 rszvb_SetGeneratorAttenuatorMode.output = False
 # rszvb_GetGeneratorAttenuatorMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* attenuationMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'attenuationMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'attenuationMode'),)
 rszvb_GetGeneratorAttenuatorMode  = prototype(('rszvb_GetGeneratorAttenuatorMode', rszvbDLL), paramflags)
 rszvb_GetGeneratorAttenuatorMode.name = 'rszvb_GetGeneratorAttenuatorMode'
 rszvb_GetGeneratorAttenuatorMode.errcheck = __errorcheck__
@@ -2952,504 +2952,504 @@ rszvb_GetRFState.errcheck = __errorcheck__
 rszvb_GetRFState.output = True
 # rszvb_SetMeasBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 measBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'measBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'measBandwidth'),)
 rszvb_SetMeasBandwidth  = prototype(('rszvb_SetMeasBandwidth', rszvbDLL), paramflags)
 rszvb_SetMeasBandwidth.name = 'rszvb_SetMeasBandwidth'
 rszvb_SetMeasBandwidth.errcheck = __errorcheck__
 rszvb_SetMeasBandwidth.output = False
 # rszvb_GetMeasBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* measBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'measBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'measBandwidth'),)
 rszvb_GetMeasBandwidth  = prototype(('rszvb_GetMeasBandwidth', rszvbDLL), paramflags)
 rszvb_GetMeasBandwidth.name = 'rszvb_GetMeasBandwidth'
 rszvb_GetMeasBandwidth.errcheck = __errorcheck__
 rszvb_GetMeasBandwidth.output = True
 # rszvb_SetMeasBandwidthSelectivity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 measBandwidthSelectivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'measBandwidthSelectivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'measBandwidthSelectivity'),)
 rszvb_SetMeasBandwidthSelectivity  = prototype(('rszvb_SetMeasBandwidthSelectivity', rszvbDLL), paramflags)
 rszvb_SetMeasBandwidthSelectivity.name = 'rszvb_SetMeasBandwidthSelectivity'
 rszvb_SetMeasBandwidthSelectivity.errcheck = __errorcheck__
 rszvb_SetMeasBandwidthSelectivity.output = False
 # rszvb_GetMeasBandwidthSelectivity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* measBandwidthSelectivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'measBandwidthSelectivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'measBandwidthSelectivity'),)
 rszvb_GetMeasBandwidthSelectivity  = prototype(('rszvb_GetMeasBandwidthSelectivity', rszvbDLL), paramflags)
 rszvb_GetMeasBandwidthSelectivity.name = 'rszvb_GetMeasBandwidthSelectivity'
 rszvb_GetMeasBandwidthSelectivity.errcheck = __errorcheck__
 rszvb_GetMeasBandwidthSelectivity.output = True
 # rszvb_SetMeasBandwidthReduction ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean reduction']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'reduction'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'reduction'),)
 rszvb_SetMeasBandwidthReduction  = prototype(('rszvb_SetMeasBandwidthReduction', rszvbDLL), paramflags)
 rszvb_SetMeasBandwidthReduction.name = 'rszvb_SetMeasBandwidthReduction'
 rszvb_SetMeasBandwidthReduction.errcheck = __errorcheck__
 rszvb_SetMeasBandwidthReduction.output = False
 # rszvb_GetMeasBandwidthReduction ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* reduction']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'reduction'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'reduction'),)
 rszvb_GetMeasBandwidthReduction  = prototype(('rszvb_GetMeasBandwidthReduction', rszvbDLL), paramflags)
 rszvb_GetMeasBandwidthReduction.name = 'rszvb_GetMeasBandwidthReduction'
 rszvb_GetMeasBandwidthReduction.errcheck = __errorcheck__
 rszvb_GetMeasBandwidthReduction.output = True
 # rszvb_SetAverageState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean averageState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'averageState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'averageState'),)
 rszvb_SetAverageState  = prototype(('rszvb_SetAverageState', rszvbDLL), paramflags)
 rszvb_SetAverageState.name = 'rszvb_SetAverageState'
 rszvb_SetAverageState.errcheck = __errorcheck__
 rszvb_SetAverageState.output = False
 # rszvb_GetAverageState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* averageState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'averageState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'averageState'),)
 rszvb_GetAverageState  = prototype(('rszvb_GetAverageState', rszvbDLL), paramflags)
 rszvb_GetAverageState.name = 'rszvb_GetAverageState'
 rszvb_GetAverageState.errcheck = __errorcheck__
 rszvb_GetAverageState.output = True
 # rszvb_SetAverageFactor ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 averageFactor']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'averageFactor'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'averageFactor'),)
 rszvb_SetAverageFactor  = prototype(('rszvb_SetAverageFactor', rszvbDLL), paramflags)
 rszvb_SetAverageFactor.name = 'rszvb_SetAverageFactor'
 rszvb_SetAverageFactor.errcheck = __errorcheck__
 rszvb_SetAverageFactor.output = False
 # rszvb_GetAverageFactor ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* averageFactor']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'averageFactor'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'averageFactor'),)
 rszvb_GetAverageFactor  = prototype(('rszvb_GetAverageFactor', rszvbDLL), paramflags)
 rszvb_GetAverageFactor.name = 'rszvb_GetAverageFactor'
 rszvb_GetAverageFactor.errcheck = __errorcheck__
 rszvb_GetAverageFactor.output = True
 # rszvb_GetCurrentSweep ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* currentSweep']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'currentSweep'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'currentSweep'),)
 rszvb_GetCurrentSweep  = prototype(('rszvb_GetCurrentSweep', rszvbDLL), paramflags)
 rszvb_GetCurrentSweep.name = 'rszvb_GetCurrentSweep'
 rszvb_GetCurrentSweep.errcheck = __errorcheck__
 rszvb_GetCurrentSweep.output = True
 # rszvb_RestartAverage ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_RestartAverage  = prototype(('rszvb_RestartAverage', rszvbDLL), paramflags)
 rszvb_RestartAverage.name = 'rszvb_RestartAverage'
 rszvb_RestartAverage.errcheck = __errorcheck__
 rszvb_RestartAverage.output = False
 # rszvb_SetPartialMeasurementResolutionBandwidthMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bandwidthMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'bandwidthMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bandwidthMode'),)
 rszvb_SetPartialMeasurementResolutionBandwidthMode  = prototype(('rszvb_SetPartialMeasurementResolutionBandwidthMode', rszvbDLL), paramflags)
 rszvb_SetPartialMeasurementResolutionBandwidthMode.name = 'rszvb_SetPartialMeasurementResolutionBandwidthMode'
 rszvb_SetPartialMeasurementResolutionBandwidthMode.errcheck = __errorcheck__
 rszvb_SetPartialMeasurementResolutionBandwidthMode.output = False
 # rszvb_GetPartialMeasurementResolutionBandwidthMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* bandwidthMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'bandwidthMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'bandwidthMode'),)
 rszvb_GetPartialMeasurementResolutionBandwidthMode  = prototype(('rszvb_GetPartialMeasurementResolutionBandwidthMode', rszvbDLL), paramflags)
 rszvb_GetPartialMeasurementResolutionBandwidthMode.name = 'rszvb_GetPartialMeasurementResolutionBandwidthMode'
 rszvb_GetPartialMeasurementResolutionBandwidthMode.errcheck = __errorcheck__
 rszvb_GetPartialMeasurementResolutionBandwidthMode.output = True
 # rszvb_SetGeneratorPortResolutionBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generatorPort', 'ViReal64 resolutionBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generatorPort'),(1, 'resolutionBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generatorPort'),(1, 'resolutionBandwidth'),)
 rszvb_SetGeneratorPortResolutionBandwidth  = prototype(('rszvb_SetGeneratorPortResolutionBandwidth', rszvbDLL), paramflags)
 rszvb_SetGeneratorPortResolutionBandwidth.name = 'rszvb_SetGeneratorPortResolutionBandwidth'
 rszvb_SetGeneratorPortResolutionBandwidth.errcheck = __errorcheck__
 rszvb_SetGeneratorPortResolutionBandwidth.output = False
 # rszvb_GetGeneratorPortResolutionBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generatorPort', 'ViReal64* resolutionBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generatorPort'),(2, 'resolutionBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generatorPort'),(2, 'resolutionBandwidth'),)
 rszvb_GetGeneratorPortResolutionBandwidth  = prototype(('rszvb_GetGeneratorPortResolutionBandwidth', rszvbDLL), paramflags)
 rszvb_GetGeneratorPortResolutionBandwidth.name = 'rszvb_GetGeneratorPortResolutionBandwidth'
 rszvb_GetGeneratorPortResolutionBandwidth.errcheck = __errorcheck__
 rszvb_GetGeneratorPortResolutionBandwidth.output = True
 # rszvb_SetPhysicalPortResolutionBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 analyzerPort', 'ViReal64 resolutionBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'analyzerPort'),(1, 'resolutionBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'analyzerPort'),(1, 'resolutionBandwidth'),)
 rszvb_SetPhysicalPortResolutionBandwidth  = prototype(('rszvb_SetPhysicalPortResolutionBandwidth', rszvbDLL), paramflags)
 rszvb_SetPhysicalPortResolutionBandwidth.name = 'rszvb_SetPhysicalPortResolutionBandwidth'
 rszvb_SetPhysicalPortResolutionBandwidth.errcheck = __errorcheck__
 rszvb_SetPhysicalPortResolutionBandwidth.output = False
 # rszvb_GetPhysicalPortResolutionBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 analyzerPort', 'ViReal64* resolutionBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'analyzerPort'),(2, 'resolutionBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'analyzerPort'),(2, 'resolutionBandwidth'),)
 rszvb_GetPhysicalPortResolutionBandwidth  = prototype(('rszvb_GetPhysicalPortResolutionBandwidth', rszvbDLL), paramflags)
 rszvb_GetPhysicalPortResolutionBandwidth.name = 'rszvb_GetPhysicalPortResolutionBandwidth'
 rszvb_GetPhysicalPortResolutionBandwidth.errcheck = __errorcheck__
 rszvb_GetPhysicalPortResolutionBandwidth.output = True
 # rszvb_SetSweepType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sweepType'),)
 rszvb_SetSweepType  = prototype(('rszvb_SetSweepType', rszvbDLL), paramflags)
 rszvb_SetSweepType.name = 'rszvb_SetSweepType'
 rszvb_SetSweepType.errcheck = __errorcheck__
 rszvb_SetSweepType.output = False
 # rszvb_GetSweepType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sweepType'),)
 rszvb_GetSweepType  = prototype(('rszvb_GetSweepType', rszvbDLL), paramflags)
 rszvb_GetSweepType.name = 'rszvb_GetSweepType'
 rszvb_GetSweepType.errcheck = __errorcheck__
 rszvb_GetSweepType.output = True
 # rszvb_InsertNewSegment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 startFrequency', 'ViReal64 stopFrequency', 'ViInt32 numberOfPoints', 'ViReal64 power', 'ViInt32 sweepTimeSelect', 'ViReal64 time', 'ViReal64 pointDelay', 'ViReal64 measBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_double,c_int32,c_double,c_int32,c_double,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'startFrequency'),(1, 'stopFrequency'),(1, 'numberOfPoints'),(1, 'power'),(1, 'sweepTimeSelect'),(1, 'time'),(1, 'pointDelay'),(1, 'measBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'startFrequency'),(1, 'stopFrequency'),(1, 'numberOfPoints'),(1, 'power'),(1, 'sweepTimeSelect'),(1, 'time'),(1, 'pointDelay'),(1, 'measBandwidth'),)
 rszvb_InsertNewSegment  = prototype(('rszvb_InsertNewSegment', rszvbDLL), paramflags)
 rszvb_InsertNewSegment.name = 'rszvb_InsertNewSegment'
 rszvb_InsertNewSegment.errcheck = __errorcheck__
 rszvb_InsertNewSegment.output = False
 # rszvb_RedefineSegment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 startFrequency', 'ViReal64 stopFrequency', 'ViInt32 numberOfPoints', 'ViReal64 power', 'ViInt32 sweepTimeSelect', 'ViReal64 time', 'ViReal64 pointDelay', 'ViReal64 measBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_double,c_int32,c_double,c_int32,c_double,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'startFrequency'),(1, 'stopFrequency'),(1, 'numberOfPoints'),(1, 'power'),(1, 'sweepTimeSelect'),(1, 'time'),(1, 'pointDelay'),(1, 'measBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'startFrequency'),(1, 'stopFrequency'),(1, 'numberOfPoints'),(1, 'power'),(1, 'sweepTimeSelect'),(1, 'time'),(1, 'pointDelay'),(1, 'measBandwidth'),)
 rszvb_RedefineSegment  = prototype(('rszvb_RedefineSegment', rszvbDLL), paramflags)
 rszvb_RedefineSegment.name = 'rszvb_RedefineSegment'
 rszvb_RedefineSegment.errcheck = __errorcheck__
 rszvb_RedefineSegment.output = False
 # rszvb_AddNewSegment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),)
 rszvb_AddNewSegment  = prototype(('rszvb_AddNewSegment', rszvbDLL), paramflags)
 rszvb_AddNewSegment.name = 'rszvb_AddNewSegment'
 rszvb_AddNewSegment.errcheck = __errorcheck__
 rszvb_AddNewSegment.output = False
 # rszvb_DeleteSelectedSegment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),)
 rszvb_DeleteSelectedSegment  = prototype(('rszvb_DeleteSelectedSegment', rszvbDLL), paramflags)
 rszvb_DeleteSelectedSegment.name = 'rszvb_DeleteSelectedSegment'
 rszvb_DeleteSelectedSegment.errcheck = __errorcheck__
 rszvb_DeleteSelectedSegment.output = False
 # rszvb_DeleteAllSegments ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_DeleteAllSegments  = prototype(('rszvb_DeleteAllSegments', rszvbDLL), paramflags)
 rszvb_DeleteAllSegments.name = 'rszvb_DeleteAllSegments'
 rszvb_DeleteAllSegments.errcheck = __errorcheck__
 rszvb_DeleteAllSegments.output = False
 # rszvb_GetSweepSegmentsCount ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* count']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'count'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'count'),)
 rszvb_GetSweepSegmentsCount  = prototype(('rszvb_GetSweepSegmentsCount', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentsCount.name = 'rszvb_GetSweepSegmentsCount'
 rszvb_GetSweepSegmentsCount.errcheck = __errorcheck__
 rszvb_GetSweepSegmentsCount.output = True
 # rszvb_SetSweepSegmentState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'state'),)
 rszvb_SetSweepSegmentState  = prototype(('rszvb_SetSweepSegmentState', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentState.name = 'rszvb_SetSweepSegmentState'
 rszvb_SetSweepSegmentState.errcheck = __errorcheck__
 rszvb_SetSweepSegmentState.output = False
 # rszvb_GetSweepSegmentState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'state'),)
 rszvb_GetSweepSegmentState  = prototype(('rszvb_GetSweepSegmentState', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentState.name = 'rszvb_GetSweepSegmentState'
 rszvb_GetSweepSegmentState.errcheck = __errorcheck__
 rszvb_GetSweepSegmentState.output = True
 # rszvb_SetSweepSegmentStartFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 startFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'startFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'startFrequency'),)
 rszvb_SetSweepSegmentStartFrequency  = prototype(('rszvb_SetSweepSegmentStartFrequency', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentStartFrequency.name = 'rszvb_SetSweepSegmentStartFrequency'
 rszvb_SetSweepSegmentStartFrequency.errcheck = __errorcheck__
 rszvb_SetSweepSegmentStartFrequency.output = False
 # rszvb_GetSweepSegmentStartFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* startFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'startFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'startFrequency'),)
 rszvb_GetSweepSegmentStartFrequency  = prototype(('rszvb_GetSweepSegmentStartFrequency', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentStartFrequency.name = 'rszvb_GetSweepSegmentStartFrequency'
 rszvb_GetSweepSegmentStartFrequency.errcheck = __errorcheck__
 rszvb_GetSweepSegmentStartFrequency.output = True
 # rszvb_SetSweepSegmentStopFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 stopFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'stopFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'stopFrequency'),)
 rszvb_SetSweepSegmentStopFrequency  = prototype(('rszvb_SetSweepSegmentStopFrequency', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentStopFrequency.name = 'rszvb_SetSweepSegmentStopFrequency'
 rszvb_SetSweepSegmentStopFrequency.errcheck = __errorcheck__
 rszvb_SetSweepSegmentStopFrequency.output = False
 # rszvb_GetSweepSegmentStopFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* stopFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'stopFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'stopFrequency'),)
 rszvb_GetSweepSegmentStopFrequency  = prototype(('rszvb_GetSweepSegmentStopFrequency', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentStopFrequency.name = 'rszvb_GetSweepSegmentStopFrequency'
 rszvb_GetSweepSegmentStopFrequency.errcheck = __errorcheck__
 rszvb_GetSweepSegmentStopFrequency.output = True
 # rszvb_SetSweepSegmentNumberOfPoints ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32 numberOfPoints']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'numberOfPoints'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'numberOfPoints'),)
 rszvb_SetSweepSegmentNumberOfPoints  = prototype(('rszvb_SetSweepSegmentNumberOfPoints', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentNumberOfPoints.name = 'rszvb_SetSweepSegmentNumberOfPoints'
 rszvb_SetSweepSegmentNumberOfPoints.errcheck = __errorcheck__
 rszvb_SetSweepSegmentNumberOfPoints.output = False
 # rszvb_GetSweepSegmentNumberOfPoints ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32* numberOfPoints']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'numberOfPoints'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'numberOfPoints'),)
 rszvb_GetSweepSegmentNumberOfPoints  = prototype(('rszvb_GetSweepSegmentNumberOfPoints', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentNumberOfPoints.name = 'rszvb_GetSweepSegmentNumberOfPoints'
 rszvb_GetSweepSegmentNumberOfPoints.errcheck = __errorcheck__
 rszvb_GetSweepSegmentNumberOfPoints.output = True
 # rszvb_SetSweepSegmentName ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViString name']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'name'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'name'),)
 rszvb_SetSweepSegmentName  = prototype(('rszvb_SetSweepSegmentName', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentName.name = 'rszvb_SetSweepSegmentName'
 rszvb_SetSweepSegmentName.errcheck = __errorcheck__
 rszvb_SetSweepSegmentName.output = False
 # rszvb_GetSweepSegmentName ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32 bufferSize', 'ViChar _VI_FAR name[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'bufferSize'),(1, 'name[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'bufferSize'),(1, 'name[]'),)
 rszvb_GetSweepSegmentName  = prototype(('rszvb_GetSweepSegmentName', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentName.name = 'rszvb_GetSweepSegmentName'
 rszvb_GetSweepSegmentName.errcheck = __errorcheck__
 rszvb_GetSweepSegmentName.output = False
 # rszvb_SetSweepSegmentPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 power']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'power'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'power'),)
 rszvb_SetSweepSegmentPower  = prototype(('rszvb_SetSweepSegmentPower', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentPower.name = 'rszvb_SetSweepSegmentPower'
 rszvb_SetSweepSegmentPower.errcheck = __errorcheck__
 rszvb_SetSweepSegmentPower.output = False
 # rszvb_GetSweepSegmentPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* power']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'power'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'power'),)
 rszvb_GetSweepSegmentPower  = prototype(('rszvb_GetSweepSegmentPower', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentPower.name = 'rszvb_GetSweepSegmentPower'
 rszvb_GetSweepSegmentPower.errcheck = __errorcheck__
 rszvb_GetSweepSegmentPower.output = True
 # rszvb_SetSweepSegmentIndependentPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean power']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'power'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'power'),)
 rszvb_SetSweepSegmentIndependentPower  = prototype(('rszvb_SetSweepSegmentIndependentPower', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentIndependentPower.name = 'rszvb_SetSweepSegmentIndependentPower'
 rszvb_SetSweepSegmentIndependentPower.errcheck = __errorcheck__
 rszvb_SetSweepSegmentIndependentPower.output = False
 # rszvb_GetSweepSegmentIndependentPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* power']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'power'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'power'),)
 rszvb_GetSweepSegmentIndependentPower  = prototype(('rszvb_GetSweepSegmentIndependentPower', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentIndependentPower.name = 'rszvb_GetSweepSegmentIndependentPower'
 rszvb_GetSweepSegmentIndependentPower.errcheck = __errorcheck__
 rszvb_GetSweepSegmentIndependentPower.output = True
 # rszvb_SetSweepSegmentMeasBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 measBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'measBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'measBandwidth'),)
 rszvb_SetSweepSegmentMeasBandwidth  = prototype(('rszvb_SetSweepSegmentMeasBandwidth', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentMeasBandwidth.name = 'rszvb_SetSweepSegmentMeasBandwidth'
 rszvb_SetSweepSegmentMeasBandwidth.errcheck = __errorcheck__
 rszvb_SetSweepSegmentMeasBandwidth.output = False
 # rszvb_GetSweepSegmentMeasBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* measBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'measBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'measBandwidth'),)
 rszvb_GetSweepSegmentMeasBandwidth  = prototype(('rszvb_GetSweepSegmentMeasBandwidth', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentMeasBandwidth.name = 'rszvb_GetSweepSegmentMeasBandwidth'
 rszvb_GetSweepSegmentMeasBandwidth.errcheck = __errorcheck__
 rszvb_GetSweepSegmentMeasBandwidth.output = True
 # rszvb_SetSweepSegmentIndependentBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean measBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'measBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'measBandwidth'),)
 rszvb_SetSweepSegmentIndependentBandwidth  = prototype(('rszvb_SetSweepSegmentIndependentBandwidth', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentIndependentBandwidth.name = 'rszvb_SetSweepSegmentIndependentBandwidth'
 rszvb_SetSweepSegmentIndependentBandwidth.errcheck = __errorcheck__
 rszvb_SetSweepSegmentIndependentBandwidth.output = False
 # rszvb_GetSweepSegmentIndependentBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* measBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'measBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'measBandwidth'),)
 rszvb_GetSweepSegmentIndependentBandwidth  = prototype(('rszvb_GetSweepSegmentIndependentBandwidth', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentIndependentBandwidth.name = 'rszvb_GetSweepSegmentIndependentBandwidth'
 rszvb_GetSweepSegmentIndependentBandwidth.errcheck = __errorcheck__
 rszvb_GetSweepSegmentIndependentBandwidth.output = True
 # rszvb_SetSweepSegmentSpurAvoid ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32 spurAvoid']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'spurAvoid'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'spurAvoid'),)
 rszvb_SetSweepSegmentSpurAvoid  = prototype(('rszvb_SetSweepSegmentSpurAvoid', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentSpurAvoid.name = 'rszvb_SetSweepSegmentSpurAvoid'
 rszvb_SetSweepSegmentSpurAvoid.errcheck = __errorcheck__
 rszvb_SetSweepSegmentSpurAvoid.output = False
 # rszvb_GetSweepSegmentSpurAvoid ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32* spurAvoid']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'spurAvoid'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'spurAvoid'),)
 rszvb_GetSweepSegmentSpurAvoid  = prototype(('rszvb_GetSweepSegmentSpurAvoid', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentSpurAvoid.name = 'rszvb_GetSweepSegmentSpurAvoid'
 rszvb_GetSweepSegmentSpurAvoid.errcheck = __errorcheck__
 rszvb_GetSweepSegmentSpurAvoid.output = True
 # rszvb_SetSweepSegmentIndependentSpurAvoid ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean spurAvoid']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'spurAvoid'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'spurAvoid'),)
 rszvb_SetSweepSegmentIndependentSpurAvoid  = prototype(('rszvb_SetSweepSegmentIndependentSpurAvoid', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentIndependentSpurAvoid.name = 'rszvb_SetSweepSegmentIndependentSpurAvoid'
 rszvb_SetSweepSegmentIndependentSpurAvoid.errcheck = __errorcheck__
 rszvb_SetSweepSegmentIndependentSpurAvoid.output = False
 # rszvb_GetSweepSegmentIndependentSpurAvoid ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* spurAvoid']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'spurAvoid'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'spurAvoid'),)
 rszvb_GetSweepSegmentIndependentSpurAvoid  = prototype(('rszvb_GetSweepSegmentIndependentSpurAvoid', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentIndependentSpurAvoid.name = 'rszvb_GetSweepSegmentIndependentSpurAvoid'
 rszvb_GetSweepSegmentIndependentSpurAvoid.errcheck = __errorcheck__
 rszvb_GetSweepSegmentIndependentSpurAvoid.output = True
 # rszvb_SetSweepSegmentSelectivity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32 selectivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'selectivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'selectivity'),)
 rszvb_SetSweepSegmentSelectivity  = prototype(('rszvb_SetSweepSegmentSelectivity', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentSelectivity.name = 'rszvb_SetSweepSegmentSelectivity'
 rszvb_SetSweepSegmentSelectivity.errcheck = __errorcheck__
 rszvb_SetSweepSegmentSelectivity.output = False
 # rszvb_GetSweepSegmentSelectivity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32* selectivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'selectivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'selectivity'),)
 rszvb_GetSweepSegmentSelectivity  = prototype(('rszvb_GetSweepSegmentSelectivity', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentSelectivity.name = 'rszvb_GetSweepSegmentSelectivity'
 rszvb_GetSweepSegmentSelectivity.errcheck = __errorcheck__
 rszvb_GetSweepSegmentSelectivity.output = True
 # rszvb_SetSweepSegmentIndependentSelectivity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean selectivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'selectivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'selectivity'),)
 rszvb_SetSweepSegmentIndependentSelectivity  = prototype(('rszvb_SetSweepSegmentIndependentSelectivity', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentIndependentSelectivity.name = 'rszvb_SetSweepSegmentIndependentSelectivity'
 rszvb_SetSweepSegmentIndependentSelectivity.errcheck = __errorcheck__
 rszvb_SetSweepSegmentIndependentSelectivity.output = False
 # rszvb_GetSweepSegmentIndependentSelectivity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* selectivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'selectivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'selectivity'),)
 rszvb_GetSweepSegmentIndependentSelectivity  = prototype(('rszvb_GetSweepSegmentIndependentSelectivity', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentIndependentSelectivity.name = 'rszvb_GetSweepSegmentIndependentSelectivity'
 rszvb_GetSweepSegmentIndependentSelectivity.errcheck = __errorcheck__
 rszvb_GetSweepSegmentIndependentSelectivity.output = True
 # rszvb_SetSweepSegmentSweepTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 time']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'time'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'time'),)
 rszvb_SetSweepSegmentSweepTime  = prototype(('rszvb_SetSweepSegmentSweepTime', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentSweepTime.name = 'rszvb_SetSweepSegmentSweepTime'
 rszvb_SetSweepSegmentSweepTime.errcheck = __errorcheck__
 rszvb_SetSweepSegmentSweepTime.output = False
 # rszvb_GetSweepSegmentSweepTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* time']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'time'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'time'),)
 rszvb_GetSweepSegmentSweepTime  = prototype(('rszvb_GetSweepSegmentSweepTime', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentSweepTime.name = 'rszvb_GetSweepSegmentSweepTime'
 rszvb_GetSweepSegmentSweepTime.errcheck = __errorcheck__
 rszvb_GetSweepSegmentSweepTime.output = True
 # rszvb_SetSweepSegmentIndependentTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean time']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'time'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'time'),)
 rszvb_SetSweepSegmentIndependentTime  = prototype(('rszvb_SetSweepSegmentIndependentTime', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentIndependentTime.name = 'rszvb_SetSweepSegmentIndependentTime'
 rszvb_SetSweepSegmentIndependentTime.errcheck = __errorcheck__
 rszvb_SetSweepSegmentIndependentTime.output = False
 # rszvb_GetSweepSegmentIndependentTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* time']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'time'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'time'),)
 rszvb_GetSweepSegmentIndependentTime  = prototype(('rszvb_GetSweepSegmentIndependentTime', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentIndependentTime.name = 'rszvb_GetSweepSegmentIndependentTime'
 rszvb_GetSweepSegmentIndependentTime.errcheck = __errorcheck__
 rszvb_GetSweepSegmentIndependentTime.output = True
 # rszvb_SetSweepSegmentPointDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 pointDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'pointDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'pointDelay'),)
 rszvb_SetSweepSegmentPointDelay  = prototype(('rszvb_SetSweepSegmentPointDelay', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentPointDelay.name = 'rszvb_SetSweepSegmentPointDelay'
 rszvb_SetSweepSegmentPointDelay.errcheck = __errorcheck__
 rszvb_SetSweepSegmentPointDelay.output = False
 # rszvb_GetSweepSegmentPointDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* pointDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'pointDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'pointDelay'),)
 rszvb_GetSweepSegmentPointDelay  = prototype(('rszvb_GetSweepSegmentPointDelay', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentPointDelay.name = 'rszvb_GetSweepSegmentPointDelay'
 rszvb_GetSweepSegmentPointDelay.errcheck = __errorcheck__
 rszvb_GetSweepSegmentPointDelay.output = True
 # rszvb_SetSweepSegmentIndependentPointDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean pointDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'pointDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'pointDelay'),)
 rszvb_SetSweepSegmentIndependentPointDelay  = prototype(('rszvb_SetSweepSegmentIndependentPointDelay', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentIndependentPointDelay.name = 'rszvb_SetSweepSegmentIndependentPointDelay'
 rszvb_SetSweepSegmentIndependentPointDelay.errcheck = __errorcheck__
 rszvb_SetSweepSegmentIndependentPointDelay.output = False
 # rszvb_GetSweepSegmentIndependentPointDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* pointDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'pointDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'pointDelay'),)
 rszvb_GetSweepSegmentIndependentPointDelay  = prototype(('rszvb_GetSweepSegmentIndependentPointDelay', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentIndependentPointDelay.name = 'rszvb_GetSweepSegmentIndependentPointDelay'
 rszvb_GetSweepSegmentIndependentPointDelay.errcheck = __errorcheck__
 rszvb_GetSweepSegmentIndependentPointDelay.output = True
 # rszvb_SetSweepSegmentTriggering ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean triggering']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'triggering'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'triggering'),)
 rszvb_SetSweepSegmentTriggering  = prototype(('rszvb_SetSweepSegmentTriggering', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentTriggering.name = 'rszvb_SetSweepSegmentTriggering'
 rszvb_SetSweepSegmentTriggering.errcheck = __errorcheck__
 rszvb_SetSweepSegmentTriggering.output = False
 # rszvb_GetSweepSegmentTriggering ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* triggering']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'triggering'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'triggering'),)
 rszvb_GetSweepSegmentTriggering  = prototype(('rszvb_GetSweepSegmentTriggering', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentTriggering.name = 'rszvb_GetSweepSegmentTriggering'
 rszvb_GetSweepSegmentTriggering.errcheck = __errorcheck__
 rszvb_GetSweepSegmentTriggering.output = True
 # rszvb_SetSweepSelectiveSegmentTriggering ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean triggering']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggering'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggering'),)
 rszvb_SetSweepSelectiveSegmentTriggering  = prototype(('rszvb_SetSweepSelectiveSegmentTriggering', rszvbDLL), paramflags)
 rszvb_SetSweepSelectiveSegmentTriggering.name = 'rszvb_SetSweepSelectiveSegmentTriggering'
 rszvb_SetSweepSelectiveSegmentTriggering.errcheck = __errorcheck__
 rszvb_SetSweepSelectiveSegmentTriggering.output = False
 # rszvb_GetSweepSelectiveSegmentTriggering ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* triggering']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'triggering'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'triggering'),)
 rszvb_GetSweepSelectiveSegmentTriggering  = prototype(('rszvb_GetSweepSelectiveSegmentTriggering', rszvbDLL), paramflags)
 rszvb_GetSweepSelectiveSegmentTriggering.name = 'rszvb_GetSweepSelectiveSegmentTriggering'
 rszvb_GetSweepSelectiveSegmentTriggering.errcheck = __errorcheck__
 rszvb_GetSweepSelectiveSegmentTriggering.output = True
 # rszvb_SetSweepSegmentBitsState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetSweepSegmentBitsState  = prototype(('rszvb_SetSweepSegmentBitsState', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentBitsState.name = 'rszvb_SetSweepSegmentBitsState'
 rszvb_SetSweepSegmentBitsState.errcheck = __errorcheck__
 rszvb_SetSweepSegmentBitsState.output = False
 # rszvb_GetSweepSegmentBitsState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetSweepSegmentBitsState  = prototype(('rszvb_GetSweepSegmentBitsState', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentBitsState.name = 'rszvb_GetSweepSegmentBitsState'
 rszvb_GetSweepSegmentBitsState.errcheck = __errorcheck__
 rszvb_GetSweepSegmentBitsState.output = True
 # rszvb_SetSweepSegmentBitValues ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean bit0', 'ViBoolean bit1', 'ViBoolean bit2', 'ViBoolean bit3']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool,c_bool,c_bool,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'bit0'),(1, 'bit1'),(1, 'bit2'),(1, 'bit3'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'bit0'),(1, 'bit1'),(1, 'bit2'),(1, 'bit3'),)
 rszvb_SetSweepSegmentBitValues  = prototype(('rszvb_SetSweepSegmentBitValues', rszvbDLL), paramflags)
 rszvb_SetSweepSegmentBitValues.name = 'rszvb_SetSweepSegmentBitValues'
 rszvb_SetSweepSegmentBitValues.errcheck = __errorcheck__
 rszvb_SetSweepSegmentBitValues.output = False
 # rszvb_GetSweepSegmentBitValues ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* bit0', 'ViBoolean* bit1', 'ViBoolean* bit2', 'ViBoolean* bit3']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool),POINTER(c_bool),POINTER(c_bool),POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'bit0'),(2, 'bit1'),(2, 'bit2'),(2, 'bit3'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'bit0'),(2, 'bit1'),(2, 'bit2'),(2, 'bit3'),)
 rszvb_GetSweepSegmentBitValues  = prototype(('rszvb_GetSweepSegmentBitValues', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentBitValues.name = 'rszvb_GetSweepSegmentBitValues'
 rszvb_GetSweepSegmentBitValues.errcheck = __errorcheck__
 rszvb_GetSweepSegmentBitValues.output = True
 # rszvb_GetSweepSegmentCenterFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* centerFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'centerFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'centerFrequency'),)
 rszvb_GetSweepSegmentCenterFrequency  = prototype(('rszvb_GetSweepSegmentCenterFrequency', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentCenterFrequency.name = 'rszvb_GetSweepSegmentCenterFrequency'
 rszvb_GetSweepSegmentCenterFrequency.errcheck = __errorcheck__
 rszvb_GetSweepSegmentCenterFrequency.output = True
 # rszvb_GetSweepSegmentFrequencySpan ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* frequencySpan']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'frequencySpan'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'frequencySpan'),)
 rszvb_GetSweepSegmentFrequencySpan  = prototype(('rszvb_GetSweepSegmentFrequencySpan', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentFrequencySpan.name = 'rszvb_GetSweepSegmentFrequencySpan'
 rszvb_GetSweepSegmentFrequencySpan.errcheck = __errorcheck__
 rszvb_GetSweepSegmentFrequencySpan.output = True
 # rszvb_SaveSegment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString fileName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fileName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fileName'),)
 rszvb_SaveSegment  = prototype(('rszvb_SaveSegment', rszvbDLL), paramflags)
 rszvb_SaveSegment.name = 'rszvb_SaveSegment'
 rszvb_SaveSegment.errcheck = __errorcheck__
 rszvb_SaveSegment.output = False
 # rszvb_LoadSegment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString fileName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fileName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fileName'),)
 rszvb_LoadSegment  = prototype(('rszvb_LoadSegment', rszvbDLL), paramflags)
 rszvb_LoadSegment.name = 'rszvb_LoadSegment'
 rszvb_LoadSegment.errcheck = __errorcheck__
@@ -3463,133 +3463,133 @@ rszvb_QueryOverlappingSweepSegments.errcheck = __errorcheck__
 rszvb_QueryOverlappingSweepSegments.output = True
 # rszvb_QuerySumOfSweepSegmentsTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* sweepTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sweepTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sweepTime'),)
 rszvb_QuerySumOfSweepSegmentsTime  = prototype(('rszvb_QuerySumOfSweepSegmentsTime', rszvbDLL), paramflags)
 rszvb_QuerySumOfSweepSegmentsTime.name = 'rszvb_QuerySumOfSweepSegmentsTime'
 rszvb_QuerySumOfSweepSegmentsTime.errcheck = __errorcheck__
 rszvb_QuerySumOfSweepSegmentsTime.output = True
 # rszvb_SetPulseTimeStart ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 timeStart']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'timeStart'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'timeStart'),)
 rszvb_SetPulseTimeStart  = prototype(('rszvb_SetPulseTimeStart', rszvbDLL), paramflags)
 rszvb_SetPulseTimeStart.name = 'rszvb_SetPulseTimeStart'
 rszvb_SetPulseTimeStart.errcheck = __errorcheck__
 rszvb_SetPulseTimeStart.output = False
 # rszvb_GetPulseTimeStart ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* timeStart']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'timeStart'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'timeStart'),)
 rszvb_GetPulseTimeStart  = prototype(('rszvb_GetPulseTimeStart', rszvbDLL), paramflags)
 rszvb_GetPulseTimeStart.name = 'rszvb_GetPulseTimeStart'
 rszvb_GetPulseTimeStart.errcheck = __errorcheck__
 rszvb_GetPulseTimeStart.output = True
 # rszvb_SetPulseTimeStop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 timeStop']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'timeStop'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'timeStop'),)
 rszvb_SetPulseTimeStop  = prototype(('rszvb_SetPulseTimeStop', rszvbDLL), paramflags)
 rszvb_SetPulseTimeStop.name = 'rszvb_SetPulseTimeStop'
 rszvb_SetPulseTimeStop.errcheck = __errorcheck__
 rszvb_SetPulseTimeStop.output = False
 # rszvb_GetPulseTimeStop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* timeStop']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'timeStop'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'timeStop'),)
 rszvb_GetPulseTimeStop  = prototype(('rszvb_GetPulseTimeStop', rszvbDLL), paramflags)
 rszvb_GetPulseTimeStop.name = 'rszvb_GetPulseTimeStop'
 rszvb_GetPulseTimeStop.errcheck = __errorcheck__
 rszvb_GetPulseTimeStop.output = True
 # rszvb_SetPulseTimeBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 timeBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'timeBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'timeBandwidth'),)
 rszvb_SetPulseTimeBandwidth  = prototype(('rszvb_SetPulseTimeBandwidth', rszvbDLL), paramflags)
 rszvb_SetPulseTimeBandwidth.name = 'rszvb_SetPulseTimeBandwidth'
 rszvb_SetPulseTimeBandwidth.errcheck = __errorcheck__
 rszvb_SetPulseTimeBandwidth.output = False
 # rszvb_GetPulseTimeBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* timeBandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'timeBandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'timeBandwidth'),)
 rszvb_GetPulseTimeBandwidth  = prototype(('rszvb_GetPulseTimeBandwidth', rszvbDLL), paramflags)
 rszvb_GetPulseTimeBandwidth.name = 'rszvb_GetPulseTimeBandwidth'
 rszvb_GetPulseTimeBandwidth.errcheck = __errorcheck__
 rszvb_GetPulseTimeBandwidth.output = True
 # rszvb_SetPulseCoupledSectionLimitLinesState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean coupleLimits']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'coupleLimits'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'coupleLimits'),)
 rszvb_SetPulseCoupledSectionLimitLinesState  = prototype(('rszvb_SetPulseCoupledSectionLimitLinesState', rszvbDLL), paramflags)
 rszvb_SetPulseCoupledSectionLimitLinesState.name = 'rszvb_SetPulseCoupledSectionLimitLinesState'
 rszvb_SetPulseCoupledSectionLimitLinesState.errcheck = __errorcheck__
 rszvb_SetPulseCoupledSectionLimitLinesState.output = False
 # rszvb_GetPulseCoupledSectionLimitLinesState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* coupleLimits']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'coupleLimits'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'coupleLimits'),)
 rszvb_GetPulseCoupledSectionLimitLinesState  = prototype(('rszvb_GetPulseCoupledSectionLimitLinesState', rszvbDLL), paramflags)
 rszvb_GetPulseCoupledSectionLimitLinesState.name = 'rszvb_GetPulseCoupledSectionLimitLinesState'
 rszvb_GetPulseCoupledSectionLimitLinesState.errcheck = __errorcheck__
 rszvb_GetPulseCoupledSectionLimitLinesState.output = True
 # rszvb_SetPulseEvaluationMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViInt32 evaluationMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'evaluationMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'evaluationMode'),)
 rszvb_SetPulseEvaluationMode  = prototype(('rszvb_SetPulseEvaluationMode', rszvbDLL), paramflags)
 rszvb_SetPulseEvaluationMode.name = 'rszvb_SetPulseEvaluationMode'
 rszvb_SetPulseEvaluationMode.errcheck = __errorcheck__
 rszvb_SetPulseEvaluationMode.output = False
 # rszvb_GetPulseEvaluationMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViInt32* evaluationMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'evaluationMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'evaluationMode'),)
 rszvb_GetPulseEvaluationMode  = prototype(('rszvb_GetPulseEvaluationMode', rszvbDLL), paramflags)
 rszvb_GetPulseEvaluationMode.name = 'rszvb_GetPulseEvaluationMode'
 rszvb_GetPulseEvaluationMode.errcheck = __errorcheck__
 rszvb_GetPulseEvaluationMode.output = True
 # rszvb_SetPulseEvaluationSectionStart ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViReal64 evaluationStartTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'evaluationStartTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'evaluationStartTime'),)
 rszvb_SetPulseEvaluationSectionStart  = prototype(('rszvb_SetPulseEvaluationSectionStart', rszvbDLL), paramflags)
 rszvb_SetPulseEvaluationSectionStart.name = 'rszvb_SetPulseEvaluationSectionStart'
 rszvb_SetPulseEvaluationSectionStart.errcheck = __errorcheck__
 rszvb_SetPulseEvaluationSectionStart.output = False
 # rszvb_GetPulseEvaluationSectionStart ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViReal64* evaluationStartTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'evaluationStartTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'evaluationStartTime'),)
 rszvb_GetPulseEvaluationSectionStart  = prototype(('rszvb_GetPulseEvaluationSectionStart', rszvbDLL), paramflags)
 rszvb_GetPulseEvaluationSectionStart.name = 'rszvb_GetPulseEvaluationSectionStart'
 rszvb_GetPulseEvaluationSectionStart.errcheck = __errorcheck__
 rszvb_GetPulseEvaluationSectionStart.output = True
 # rszvb_SetPulseEvaluationSectionStop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViReal64 evaluationStopTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'evaluationStopTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'evaluationStopTime'),)
 rszvb_SetPulseEvaluationSectionStop  = prototype(('rszvb_SetPulseEvaluationSectionStop', rszvbDLL), paramflags)
 rszvb_SetPulseEvaluationSectionStop.name = 'rszvb_SetPulseEvaluationSectionStop'
 rszvb_SetPulseEvaluationSectionStop.errcheck = __errorcheck__
 rszvb_SetPulseEvaluationSectionStop.output = False
 # rszvb_GetPulseEvaluationSectionStop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViReal64* evaluationStopTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'evaluationStopTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'evaluationStopTime'),)
 rszvb_GetPulseEvaluationSectionStop  = prototype(('rszvb_GetPulseEvaluationSectionStop', rszvbDLL), paramflags)
 rszvb_GetPulseEvaluationSectionStop.name = 'rszvb_GetPulseEvaluationSectionStop'
 rszvb_GetPulseEvaluationSectionStop.errcheck = __errorcheck__
 rszvb_GetPulseEvaluationSectionStop.output = True
 # rszvb_SetPulseSectionLimitLinesState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViBoolean limitLinesState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'limitLinesState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'limitLinesState'),)
 rszvb_SetPulseSectionLimitLinesState  = prototype(('rszvb_SetPulseSectionLimitLinesState', rszvbDLL), paramflags)
 rszvb_SetPulseSectionLimitLinesState.name = 'rszvb_SetPulseSectionLimitLinesState'
 rszvb_SetPulseSectionLimitLinesState.errcheck = __errorcheck__
 rszvb_SetPulseSectionLimitLinesState.output = False
 # rszvb_GetPulseSectionLimitLinesState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViBoolean* limitLinesState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'limitLinesState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'limitLinesState'),)
 rszvb_GetPulseSectionLimitLinesState  = prototype(('rszvb_GetPulseSectionLimitLinesState', rszvbDLL), paramflags)
 rszvb_GetPulseSectionLimitLinesState.name = 'rszvb_GetPulseSectionLimitLinesState'
 rszvb_GetPulseSectionLimitLinesState.errcheck = __errorcheck__
 rszvb_GetPulseSectionLimitLinesState.output = True
 # rszvb_SetPulseShiftStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViReal64 shiftStimulus']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'shiftStimulus'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(1, 'shiftStimulus'),)
 rszvb_SetPulseShiftStimulus  = prototype(('rszvb_SetPulseShiftStimulus', rszvbDLL), paramflags)
 rszvb_SetPulseShiftStimulus.name = 'rszvb_SetPulseShiftStimulus'
 rszvb_SetPulseShiftStimulus.errcheck = __errorcheck__
 rszvb_SetPulseShiftStimulus.output = False
 # rszvb_GetPulseShiftStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverType', 'ViInt32 recordNumber', 'ViInt32 interfaceType', 'ViInt32 generatorPortNumber', 'ViReal64* shiftStimulus']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'shiftStimulus'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverType'),(1, 'recordNumber'),(1, 'interfaceType'),(1, 'generatorPortNumber'),(2, 'shiftStimulus'),)
 rszvb_GetPulseShiftStimulus  = prototype(('rszvb_GetPulseShiftStimulus', rszvbDLL), paramflags)
 rszvb_GetPulseShiftStimulus.name = 'rszvb_GetPulseShiftStimulus'
 rszvb_GetPulseShiftStimulus.errcheck = __errorcheck__
@@ -3603,245 +3603,245 @@ rszvb_ReadTimeSamplesData.errcheck = __errorcheck__
 rszvb_ReadTimeSamplesData.output = True
 # rszvb_SetSweepNumberOfPoints ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 numberOfPoints']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'numberOfPoints'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'numberOfPoints'),)
 rszvb_SetSweepNumberOfPoints  = prototype(('rszvb_SetSweepNumberOfPoints', rszvbDLL), paramflags)
 rszvb_SetSweepNumberOfPoints.name = 'rszvb_SetSweepNumberOfPoints'
 rszvb_SetSweepNumberOfPoints.errcheck = __errorcheck__
 rszvb_SetSweepNumberOfPoints.output = False
 # rszvb_GetSweepNumberOfPoints ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* numberOfPoints']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'numberOfPoints'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'numberOfPoints'),)
 rszvb_GetSweepNumberOfPoints  = prototype(('rszvb_GetSweepNumberOfPoints', rszvbDLL), paramflags)
 rszvb_GetSweepNumberOfPoints.name = 'rszvb_GetSweepNumberOfPoints'
 rszvb_GetSweepNumberOfPoints.errcheck = __errorcheck__
 rszvb_GetSweepNumberOfPoints.output = True
 # rszvb_SetFrequencyStepSize ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 stepSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stepSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stepSize'),)
 rszvb_SetFrequencyStepSize  = prototype(('rszvb_SetFrequencyStepSize', rszvbDLL), paramflags)
 rszvb_SetFrequencyStepSize.name = 'rszvb_SetFrequencyStepSize'
 rszvb_SetFrequencyStepSize.errcheck = __errorcheck__
 rszvb_SetFrequencyStepSize.output = False
 # rszvb_GetFrequencyStepSize ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* stepSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'stepSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'stepSize'),)
 rszvb_GetFrequencyStepSize  = prototype(('rszvb_GetFrequencyStepSize', rszvbDLL), paramflags)
 rszvb_GetFrequencyStepSize.name = 'rszvb_GetFrequencyStepSize'
 rszvb_GetFrequencyStepSize.errcheck = __errorcheck__
 rszvb_GetFrequencyStepSize.output = True
 # rszvb_SetSweepCount ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 sweepCount']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sweepCount'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sweepCount'),)
 rszvb_SetSweepCount  = prototype(('rszvb_SetSweepCount', rszvbDLL), paramflags)
 rszvb_SetSweepCount.name = 'rszvb_SetSweepCount'
 rszvb_SetSweepCount.errcheck = __errorcheck__
 rszvb_SetSweepCount.output = False
 # rszvb_GetSweepCount ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* sweepCount']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sweepCount'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sweepCount'),)
 rszvb_GetSweepCount  = prototype(('rszvb_GetSweepCount', rszvbDLL), paramflags)
 rszvb_GetSweepCount.name = 'rszvb_GetSweepCount'
 rszvb_GetSweepCount.errcheck = __errorcheck__
 rszvb_GetSweepCount.output = True
 # rszvb_ConfigureSweepTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean autoSweepTime', 'ViReal64 sweepTime', 'ViReal64 measDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'autoSweepTime'),(1, 'sweepTime'),(1, 'measDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'autoSweepTime'),(1, 'sweepTime'),(1, 'measDelay'),)
 rszvb_ConfigureSweepTime  = prototype(('rszvb_ConfigureSweepTime', rszvbDLL), paramflags)
 rszvb_ConfigureSweepTime.name = 'rszvb_ConfigureSweepTime'
 rszvb_ConfigureSweepTime.errcheck = __errorcheck__
 rszvb_ConfigureSweepTime.output = False
 # rszvb_SetSweepTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 sweepTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sweepTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sweepTime'),)
 rszvb_SetSweepTime  = prototype(('rszvb_SetSweepTime', rszvbDLL), paramflags)
 rszvb_SetSweepTime.name = 'rszvb_SetSweepTime'
 rszvb_SetSweepTime.errcheck = __errorcheck__
 rszvb_SetSweepTime.output = False
 # rszvb_GetSweepTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* sweepTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sweepTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sweepTime'),)
 rszvb_GetSweepTime  = prototype(('rszvb_GetSweepTime', rszvbDLL), paramflags)
 rszvb_GetSweepTime.name = 'rszvb_GetSweepTime'
 rszvb_GetSweepTime.errcheck = __errorcheck__
 rszvb_GetSweepTime.output = True
 # rszvb_SetSweepMeasDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 measDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'measDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'measDelay'),)
 rszvb_SetSweepMeasDelay  = prototype(('rszvb_SetSweepMeasDelay', rszvbDLL), paramflags)
 rszvb_SetSweepMeasDelay.name = 'rszvb_SetSweepMeasDelay'
 rszvb_SetSweepMeasDelay.errcheck = __errorcheck__
 rszvb_SetSweepMeasDelay.output = False
 # rszvb_GetSweepMeasDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* measDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'measDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'measDelay'),)
 rszvb_GetSweepMeasDelay  = prototype(('rszvb_GetSweepMeasDelay', rszvbDLL), paramflags)
 rszvb_GetSweepMeasDelay.name = 'rszvb_GetSweepMeasDelay'
 rszvb_GetSweepMeasDelay.errcheck = __errorcheck__
 rszvb_GetSweepMeasDelay.output = True
 # rszvb_SetSweepTimeAuto ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean autoSweepTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'autoSweepTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'autoSweepTime'),)
 rszvb_SetSweepTimeAuto  = prototype(('rszvb_SetSweepTimeAuto', rszvbDLL), paramflags)
 rszvb_SetSweepTimeAuto.name = 'rszvb_SetSweepTimeAuto'
 rszvb_SetSweepTimeAuto.errcheck = __errorcheck__
 rszvb_SetSweepTimeAuto.output = False
 # rszvb_GetSweepTimeAuto ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* autoSweepTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'autoSweepTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'autoSweepTime'),)
 rszvb_GetSweepTimeAuto  = prototype(('rszvb_GetSweepTimeAuto', rszvbDLL), paramflags)
 rszvb_GetSweepTimeAuto.name = 'rszvb_GetSweepTimeAuto'
 rszvb_GetSweepTimeAuto.errcheck = __errorcheck__
 rszvb_GetSweepTimeAuto.output = True
 # rszvb_ConfigureTriggerFreeRun ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_ConfigureTriggerFreeRun  = prototype(('rszvb_ConfigureTriggerFreeRun', rszvbDLL), paramflags)
 rszvb_ConfigureTriggerFreeRun.name = 'rszvb_ConfigureTriggerFreeRun'
 rszvb_ConfigureTriggerFreeRun.errcheck = __errorcheck__
 rszvb_ConfigureTriggerFreeRun.output = False
 # rszvb_ConfigureTriggerExternal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 triggerOn']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerOn'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerOn'),)
 rszvb_ConfigureTriggerExternal  = prototype(('rszvb_ConfigureTriggerExternal', rszvbDLL), paramflags)
 rszvb_ConfigureTriggerExternal.name = 'rszvb_ConfigureTriggerExternal'
 rszvb_ConfigureTriggerExternal.errcheck = __errorcheck__
 rszvb_ConfigureTriggerExternal.output = False
 # rszvb_ConfigureTriggerPeriodic ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 triggerPeriod']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerPeriod'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerPeriod'),)
 rszvb_ConfigureTriggerPeriodic  = prototype(('rszvb_ConfigureTriggerPeriodic', rszvbDLL), paramflags)
 rszvb_ConfigureTriggerPeriodic.name = 'rszvb_ConfigureTriggerPeriodic'
 rszvb_ConfigureTriggerPeriodic.errcheck = __errorcheck__
 rszvb_ConfigureTriggerPeriodic.output = False
 # rszvb_ConfigureTriggerRFPower ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_ConfigureTriggerRFPower  = prototype(('rszvb_ConfigureTriggerRFPower', rszvbDLL), paramflags)
 rszvb_ConfigureTriggerRFPower.name = 'rszvb_ConfigureTriggerRFPower'
 rszvb_ConfigureTriggerRFPower.errcheck = __errorcheck__
 rszvb_ConfigureTriggerRFPower.output = False
 # rszvb_ConfigureTriggerManual ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_ConfigureTriggerManual  = prototype(('rszvb_ConfigureTriggerManual', rszvbDLL), paramflags)
 rszvb_ConfigureTriggerManual.name = 'rszvb_ConfigureTriggerManual'
 rszvb_ConfigureTriggerManual.errcheck = __errorcheck__
 rszvb_ConfigureTriggerManual.output = False
 # rszvb_ConfigureTriggerSettings ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 triggerMeasSequence', 'ViReal64 triggerDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerMeasSequence'),(1, 'triggerDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerMeasSequence'),(1, 'triggerDelay'),)
 rszvb_ConfigureTriggerSettings  = prototype(('rszvb_ConfigureTriggerSettings', rszvbDLL), paramflags)
 rszvb_ConfigureTriggerSettings.name = 'rszvb_ConfigureTriggerSettings'
 rszvb_ConfigureTriggerSettings.errcheck = __errorcheck__
 rszvb_ConfigureTriggerSettings.output = False
 # rszvb_SetTriggerSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 triggerSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerSource'),)
 rszvb_SetTriggerSource  = prototype(('rszvb_SetTriggerSource', rszvbDLL), paramflags)
 rszvb_SetTriggerSource.name = 'rszvb_SetTriggerSource'
 rszvb_SetTriggerSource.errcheck = __errorcheck__
 rszvb_SetTriggerSource.output = False
 # rszvb_GetTriggerSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* triggerSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'triggerSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'triggerSource'),)
 rszvb_GetTriggerSource  = prototype(('rszvb_GetTriggerSource', rszvbDLL), paramflags)
 rszvb_GetTriggerSource.name = 'rszvb_GetTriggerSource'
 rszvb_GetTriggerSource.errcheck = __errorcheck__
 rszvb_GetTriggerSource.output = True
 # rszvb_SetTriggerDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 triggerDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerDelay'),)
 rszvb_SetTriggerDelay  = prototype(('rszvb_SetTriggerDelay', rszvbDLL), paramflags)
 rszvb_SetTriggerDelay.name = 'rszvb_SetTriggerDelay'
 rszvb_SetTriggerDelay.errcheck = __errorcheck__
 rszvb_SetTriggerDelay.output = False
 # rszvb_GetTriggerDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* triggerDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'triggerDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'triggerDelay'),)
 rszvb_GetTriggerDelay  = prototype(('rszvb_GetTriggerDelay', rszvbDLL), paramflags)
 rszvb_GetTriggerDelay.name = 'rszvb_GetTriggerDelay'
 rszvb_GetTriggerDelay.errcheck = __errorcheck__
 rszvb_GetTriggerDelay.output = True
 # rszvb_SetPartialMeasurementTriggerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 triggerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerMode'),)
 rszvb_SetPartialMeasurementTriggerMode  = prototype(('rszvb_SetPartialMeasurementTriggerMode', rszvbDLL), paramflags)
 rszvb_SetPartialMeasurementTriggerMode.name = 'rszvb_SetPartialMeasurementTriggerMode'
 rszvb_SetPartialMeasurementTriggerMode.errcheck = __errorcheck__
 rszvb_SetPartialMeasurementTriggerMode.output = False
 # rszvb_GetPartialMeasurementTriggerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* triggerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'triggerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'triggerMode'),)
 rszvb_GetPartialMeasurementTriggerMode  = prototype(('rszvb_GetPartialMeasurementTriggerMode', rszvbDLL), paramflags)
 rszvb_GetPartialMeasurementTriggerMode.name = 'rszvb_GetPartialMeasurementTriggerMode'
 rszvb_GetPartialMeasurementTriggerMode.errcheck = __errorcheck__
 rszvb_GetPartialMeasurementTriggerMode.output = True
 # rszvb_SetGeneratorPortTriggerDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generatorPort', 'ViReal64 triggerDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generatorPort'),(1, 'triggerDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generatorPort'),(1, 'triggerDelay'),)
 rszvb_SetGeneratorPortTriggerDelay  = prototype(('rszvb_SetGeneratorPortTriggerDelay', rszvbDLL), paramflags)
 rszvb_SetGeneratorPortTriggerDelay.name = 'rszvb_SetGeneratorPortTriggerDelay'
 rszvb_SetGeneratorPortTriggerDelay.errcheck = __errorcheck__
 rszvb_SetGeneratorPortTriggerDelay.output = False
 # rszvb_GetGeneratorPortTriggerDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generatorPort', 'ViReal64* triggerDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generatorPort'),(2, 'triggerDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generatorPort'),(2, 'triggerDelay'),)
 rszvb_GetGeneratorPortTriggerDelay  = prototype(('rszvb_GetGeneratorPortTriggerDelay', rszvbDLL), paramflags)
 rszvb_GetGeneratorPortTriggerDelay.name = 'rszvb_GetGeneratorPortTriggerDelay'
 rszvb_GetGeneratorPortTriggerDelay.errcheck = __errorcheck__
 rszvb_GetGeneratorPortTriggerDelay.output = True
 # rszvb_SetPhysicalPortTriggerDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 analyzerPort', 'ViReal64 triggerDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'analyzerPort'),(1, 'triggerDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'analyzerPort'),(1, 'triggerDelay'),)
 rszvb_SetPhysicalPortTriggerDelay  = prototype(('rszvb_SetPhysicalPortTriggerDelay', rszvbDLL), paramflags)
 rszvb_SetPhysicalPortTriggerDelay.name = 'rszvb_SetPhysicalPortTriggerDelay'
 rszvb_SetPhysicalPortTriggerDelay.errcheck = __errorcheck__
 rszvb_SetPhysicalPortTriggerDelay.output = False
 # rszvb_GetPhysicalPortTriggerDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 analyzerPort', 'ViReal64* triggerDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'analyzerPort'),(2, 'triggerDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'analyzerPort'),(2, 'triggerDelay'),)
 rszvb_GetPhysicalPortTriggerDelay  = prototype(('rszvb_GetPhysicalPortTriggerDelay', rszvbDLL), paramflags)
 rszvb_GetPhysicalPortTriggerDelay.name = 'rszvb_GetPhysicalPortTriggerDelay'
 rszvb_GetPhysicalPortTriggerDelay.errcheck = __errorcheck__
 rszvb_GetPhysicalPortTriggerDelay.output = True
 # rszvb_SetTriggeredMeasSequence ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 triggerMeasSequence']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerMeasSequence'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerMeasSequence'),)
 rszvb_SetTriggeredMeasSequence  = prototype(('rszvb_SetTriggeredMeasSequence', rszvbDLL), paramflags)
 rszvb_SetTriggeredMeasSequence.name = 'rszvb_SetTriggeredMeasSequence'
 rszvb_SetTriggeredMeasSequence.errcheck = __errorcheck__
 rszvb_SetTriggeredMeasSequence.output = False
 # rszvb_GetTriggeredMeasSequence ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* triggerMeasSequence']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'triggerMeasSequence'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'triggerMeasSequence'),)
 rszvb_GetTriggeredMeasSequence  = prototype(('rszvb_GetTriggeredMeasSequence', rszvbDLL), paramflags)
 rszvb_GetTriggeredMeasSequence.name = 'rszvb_GetTriggeredMeasSequence'
 rszvb_GetTriggeredMeasSequence.errcheck = __errorcheck__
 rszvb_GetTriggeredMeasSequence.output = True
 # rszvb_SetTriggerOn ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 triggerOn']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerOn'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerOn'),)
 rszvb_SetTriggerOn  = prototype(('rszvb_SetTriggerOn', rszvbDLL), paramflags)
 rszvb_SetTriggerOn.name = 'rszvb_SetTriggerOn'
 rszvb_SetTriggerOn.errcheck = __errorcheck__
 rszvb_SetTriggerOn.output = False
 # rszvb_GetTriggerOn ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* triggerOn']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'triggerOn'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'triggerOn'),)
 rszvb_GetTriggerOn  = prototype(('rszvb_GetTriggerOn', rszvbDLL), paramflags)
 rszvb_GetTriggerOn.name = 'rszvb_GetTriggerOn'
 rszvb_GetTriggerOn.errcheck = __errorcheck__
 rszvb_GetTriggerOn.output = True
 # rszvb_SetTriggerPeriod ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 triggerPeriod']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'triggerPeriod'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'triggerPeriod'),)
 rszvb_SetTriggerPeriod  = prototype(('rszvb_SetTriggerPeriod', rszvbDLL), paramflags)
 rszvb_SetTriggerPeriod.name = 'rszvb_SetTriggerPeriod'
 rszvb_SetTriggerPeriod.errcheck = __errorcheck__
 rszvb_SetTriggerPeriod.output = False
 # rszvb_GetTriggerPeriod ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* triggerPeriod']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'triggerPeriod'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'triggerPeriod'),)
 rszvb_GetTriggerPeriod  = prototype(('rszvb_GetTriggerPeriod', rszvbDLL), paramflags)
 rszvb_GetTriggerPeriod.name = 'rszvb_GetTriggerPeriod'
 rszvb_GetTriggerPeriod.errcheck = __errorcheck__
@@ -3862,14 +3862,14 @@ rszvb_SendTriggerWaitOPC.errcheck = __errorcheck__
 rszvb_SendTriggerWaitOPC.output = False
 # rszvb_SendChannelTrigger ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_SendChannelTrigger  = prototype(('rszvb_SendChannelTrigger', rszvbDLL), paramflags)
 rszvb_SendChannelTrigger.name = 'rszvb_SendChannelTrigger'
 rszvb_SendChannelTrigger.errcheck = __errorcheck__
 rszvb_SendChannelTrigger.output = False
 # rszvb_SendChannelTriggerWaitOPC ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 timeout']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'timeout'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'timeout'),)
 rszvb_SendChannelTriggerWaitOPC  = prototype(('rszvb_SendChannelTriggerWaitOPC', rszvbDLL), paramflags)
 rszvb_SendChannelTriggerWaitOPC.name = 'rszvb_SendChannelTriggerWaitOPC'
 rszvb_SendChannelTriggerWaitOPC.errcheck = __errorcheck__
@@ -3890,140 +3890,140 @@ rszvb_GetSweepSingleAllChans.errcheck = __errorcheck__
 rszvb_GetSweepSingleAllChans.output = True
 # rszvb_SweepRestart ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_SweepRestart  = prototype(('rszvb_SweepRestart', rszvbDLL), paramflags)
 rszvb_SweepRestart.name = 'rszvb_SweepRestart'
 rszvb_SweepRestart.errcheck = __errorcheck__
 rszvb_SweepRestart.output = False
 # rszvb_SetSweepSingle ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 singleSweep']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'singleSweep'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'singleSweep'),)
 rszvb_SetSweepSingle  = prototype(('rszvb_SetSweepSingle', rszvbDLL), paramflags)
 rszvb_SetSweepSingle.name = 'rszvb_SetSweepSingle'
 rszvb_SetSweepSingle.errcheck = __errorcheck__
 rszvb_SetSweepSingle.output = False
 # rszvb_GetSweepSingle ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* singleSweep']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'singleSweep'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'singleSweep'),)
 rszvb_GetSweepSingle  = prototype(('rszvb_GetSweepSingle', rszvbDLL), paramflags)
 rszvb_GetSweepSingle.name = 'rszvb_GetSweepSingle'
 rszvb_GetSweepSingle.errcheck = __errorcheck__
 rszvb_GetSweepSingle.output = True
 # rszvb_DefineGroupOfMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group', 'ViInt32 firstPort', 'ViInt32 lastPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'group'),(1, 'firstPort'),(1, 'lastPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),(1, 'firstPort'),(1, 'lastPort'),)
 rszvb_DefineGroupOfMeasuredPorts  = prototype(('rszvb_DefineGroupOfMeasuredPorts', rszvbDLL), paramflags)
 rszvb_DefineGroupOfMeasuredPorts.name = 'rszvb_DefineGroupOfMeasuredPorts'
 rszvb_DefineGroupOfMeasuredPorts.errcheck = __errorcheck__
 rszvb_DefineGroupOfMeasuredPorts.output = False
 # rszvb_GetGroupOfMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group', 'ViInt32* firstPort', 'ViInt32* lastPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'group'),(2, 'firstPort'),(2, 'lastPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),(2, 'firstPort'),(2, 'lastPort'),)
 rszvb_GetGroupOfMeasuredPorts  = prototype(('rszvb_GetGroupOfMeasuredPorts', rszvbDLL), paramflags)
 rszvb_GetGroupOfMeasuredPorts.name = 'rszvb_GetGroupOfMeasuredPorts'
 rszvb_GetGroupOfMeasuredPorts.errcheck = __errorcheck__
 rszvb_GetGroupOfMeasuredPorts.output = True
 # rszvb_DefineGroupOfAllMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group', 'ViInt32 numberOfPortsInGroup', 'ViInt32 _VI_FAR ports[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'group'),(1, 'numberOfPortsInGroup'),(1, 'ports[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),(1, 'numberOfPortsInGroup'),(1, 'ports[]'),)
 rszvb_DefineGroupOfAllMeasuredPorts  = prototype(('rszvb_DefineGroupOfAllMeasuredPorts', rszvbDLL), paramflags)
 rszvb_DefineGroupOfAllMeasuredPorts.name = 'rszvb_DefineGroupOfAllMeasuredPorts'
 rszvb_DefineGroupOfAllMeasuredPorts.errcheck = __errorcheck__
 rszvb_DefineGroupOfAllMeasuredPorts.output = False
 # rszvb_GetGroupOfAllMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group', 'ViInt32* numberOfPortsInGroup', 'ViInt32 _VI_FAR ports[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'group'),(2, 'numberOfPortsInGroup'),(1, 'ports[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),(2, 'numberOfPortsInGroup'),(1, 'ports[]'),)
 rszvb_GetGroupOfAllMeasuredPorts  = prototype(('rszvb_GetGroupOfAllMeasuredPorts', rszvbDLL), paramflags)
 rszvb_GetGroupOfAllMeasuredPorts.name = 'rszvb_GetGroupOfAllMeasuredPorts'
 rszvb_GetGroupOfAllMeasuredPorts.errcheck = __errorcheck__
 rszvb_GetGroupOfAllMeasuredPorts.output = True
 # rszvb_GetPortGroupsCount ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* portGroups']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'portGroups'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'portGroups'),)
 rszvb_GetPortGroupsCount  = prototype(('rszvb_GetPortGroupsCount', rszvbDLL), paramflags)
 rszvb_GetPortGroupsCount.name = 'rszvb_GetPortGroupsCount'
 rszvb_GetPortGroupsCount.errcheck = __errorcheck__
 rszvb_GetPortGroupsCount.output = True
 # rszvb_DeleteGroupOfMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'group'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),)
 rszvb_DeleteGroupOfMeasuredPorts  = prototype(('rszvb_DeleteGroupOfMeasuredPorts', rszvbDLL), paramflags)
 rszvb_DeleteGroupOfMeasuredPorts.name = 'rszvb_DeleteGroupOfMeasuredPorts'
 rszvb_DeleteGroupOfMeasuredPorts.errcheck = __errorcheck__
 rszvb_DeleteGroupOfMeasuredPorts.output = False
 # rszvb_DeleteAllGroupsOfMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_DeleteAllGroupsOfMeasuredPorts  = prototype(('rszvb_DeleteAllGroupsOfMeasuredPorts', rszvbDLL), paramflags)
 rszvb_DeleteAllGroupsOfMeasuredPorts.name = 'rszvb_DeleteAllGroupsOfMeasuredPorts'
 rszvb_DeleteAllGroupsOfMeasuredPorts.errcheck = __errorcheck__
 rszvb_DeleteAllGroupsOfMeasuredPorts.output = False
 # rszvb_DefineBalancedPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 logicalPort', 'ViInt32 physicalPort1', 'ViInt32 physicalPort2']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'logicalPort'),(1, 'physicalPort1'),(1, 'physicalPort2'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPort'),(1, 'physicalPort1'),(1, 'physicalPort2'),)
 rszvb_DefineBalancedPort  = prototype(('rszvb_DefineBalancedPort', rszvbDLL), paramflags)
 rszvb_DefineBalancedPort.name = 'rszvb_DefineBalancedPort'
 rszvb_DefineBalancedPort.errcheck = __errorcheck__
 rszvb_DefineBalancedPort.output = False
 # rszvb_GetBalancedPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 logicalPort', 'ViInt32* physicalPort1', 'ViInt32* physicalPort2']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'logicalPort'),(2, 'physicalPort1'),(2, 'physicalPort2'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPort'),(2, 'physicalPort1'),(2, 'physicalPort2'),)
 rszvb_GetBalancedPort  = prototype(('rszvb_GetBalancedPort', rszvbDLL), paramflags)
 rszvb_GetBalancedPort.name = 'rszvb_GetBalancedPort'
 rszvb_GetBalancedPort.errcheck = __errorcheck__
 rszvb_GetBalancedPort.output = True
 # rszvb_DeleteBalancedPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 logicalPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'logicalPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPort'),)
 rszvb_DeleteBalancedPort  = prototype(('rszvb_DeleteBalancedPort', rszvbDLL), paramflags)
 rszvb_DeleteBalancedPort.name = 'rszvb_DeleteBalancedPort'
 rszvb_DeleteBalancedPort.errcheck = __errorcheck__
 rszvb_DeleteBalancedPort.output = False
 # rszvb_DeleteAllBalancedPorts ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_DeleteAllBalancedPorts  = prototype(('rszvb_DeleteAllBalancedPorts', rszvbDLL), paramflags)
 rszvb_DeleteAllBalancedPorts.name = 'rszvb_DeleteAllBalancedPorts'
 rszvb_DeleteAllBalancedPorts.errcheck = __errorcheck__
 rszvb_DeleteAllBalancedPorts.output = False
 # rszvb_SetDifferentialModeImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 logicalPort', 'ViReal64 impedance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'logicalPort'),(1, 'impedance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPort'),(1, 'impedance'),)
 rszvb_SetDifferentialModeImpedance  = prototype(('rszvb_SetDifferentialModeImpedance', rszvbDLL), paramflags)
 rszvb_SetDifferentialModeImpedance.name = 'rszvb_SetDifferentialModeImpedance'
 rszvb_SetDifferentialModeImpedance.errcheck = __errorcheck__
 rszvb_SetDifferentialModeImpedance.output = False
 # rszvb_GetDifferentialModeImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 logicalPort', 'ViReal64* impedance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'logicalPort'),(2, 'impedance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPort'),(2, 'impedance'),)
 rszvb_GetDifferentialModeImpedance  = prototype(('rszvb_GetDifferentialModeImpedance', rszvbDLL), paramflags)
 rszvb_GetDifferentialModeImpedance.name = 'rszvb_GetDifferentialModeImpedance'
 rszvb_GetDifferentialModeImpedance.errcheck = __errorcheck__
 rszvb_GetDifferentialModeImpedance.output = True
 # rszvb_SetCommonModeImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 logicalPort', 'ViReal64 impedance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'logicalPort'),(1, 'impedance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPort'),(1, 'impedance'),)
 rszvb_SetCommonModeImpedance  = prototype(('rszvb_SetCommonModeImpedance', rszvbDLL), paramflags)
 rszvb_SetCommonModeImpedance.name = 'rszvb_SetCommonModeImpedance'
 rszvb_SetCommonModeImpedance.errcheck = __errorcheck__
 rszvb_SetCommonModeImpedance.output = False
 # rszvb_GetCommonModeImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 logicalPort', 'ViReal64* impedance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'logicalPort'),(2, 'impedance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPort'),(2, 'impedance'),)
 rszvb_GetCommonModeImpedance  = prototype(('rszvb_GetCommonModeImpedance', rszvbDLL), paramflags)
 rszvb_GetCommonModeImpedance.name = 'rszvb_GetCommonModeImpedance'
 rszvb_GetCommonModeImpedance.errcheck = __errorcheck__
 rszvb_GetCommonModeImpedance.output = True
 # rszvb_DefinePortPair ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair', 'ViInt32 port1', 'ViInt32 port2']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),(1, 'port1'),(1, 'port2'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),(1, 'port1'),(1, 'port2'),)
 rszvb_DefinePortPair  = prototype(('rszvb_DefinePortPair', rszvbDLL), paramflags)
 rszvb_DefinePortPair.name = 'rszvb_DefinePortPair'
 rszvb_DefinePortPair.errcheck = __errorcheck__
 rszvb_DefinePortPair.output = False
 # rszvb_DeletePortPair ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),)
 rszvb_DeletePortPair  = prototype(('rszvb_DeletePortPair', rszvbDLL), paramflags)
 rszvb_DeletePortPair.name = 'rszvb_DeletePortPair'
 rszvb_DeletePortPair.errcheck = __errorcheck__
@@ -4044,84 +4044,84 @@ rszvb_GetDefaultConfigurationState.errcheck = __errorcheck__
 rszvb_GetDefaultConfigurationState.output = True
 # rszvb_SetPortConfigration ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portGroupA', 'ViInt32 portGroupB', 'ViInt32 portGroupC', 'ViInt32 portGroupD']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portGroupA'),(1, 'portGroupB'),(1, 'portGroupC'),(1, 'portGroupD'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portGroupA'),(1, 'portGroupB'),(1, 'portGroupC'),(1, 'portGroupD'),)
 rszvb_SetPortConfigration  = prototype(('rszvb_SetPortConfigration', rszvbDLL), paramflags)
 rszvb_SetPortConfigration.name = 'rszvb_SetPortConfigration'
 rszvb_SetPortConfigration.errcheck = __errorcheck__
 rszvb_SetPortConfigration.output = False
 # rszvb_GetPortConfigration ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* portGroupA', 'ViInt32* portGroupB', 'ViInt32* portGroupC', 'ViInt32* portGroupD']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'portGroupA'),(2, 'portGroupB'),(2, 'portGroupC'),(2, 'portGroupD'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'portGroupA'),(2, 'portGroupB'),(2, 'portGroupC'),(2, 'portGroupD'),)
 rszvb_GetPortConfigration  = prototype(('rszvb_GetPortConfigration', rszvbDLL), paramflags)
 rszvb_GetPortConfigration.name = 'rszvb_GetPortConfigration'
 rszvb_GetPortConfigration.errcheck = __errorcheck__
 rszvb_GetPortConfigration.output = True
 # rszvb_SetConverterPowerOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 portPowerOffset', 'ViInt32 offsetParameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'portPowerOffset'),(1, 'offsetParameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'portPowerOffset'),(1, 'offsetParameter'),)
 rszvb_SetConverterPowerOffset  = prototype(('rszvb_SetConverterPowerOffset', rszvbDLL), paramflags)
 rszvb_SetConverterPowerOffset.name = 'rszvb_SetConverterPowerOffset'
 rszvb_SetConverterPowerOffset.errcheck = __errorcheck__
 rszvb_SetConverterPowerOffset.output = False
 # rszvb_GetConverterPowerOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* portPowerOffset', 'ViInt32* offsetParameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'portPowerOffset'),(2, 'offsetParameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'portPowerOffset'),(2, 'offsetParameter'),)
 rszvb_GetConverterPowerOffset  = prototype(('rszvb_GetConverterPowerOffset', rszvbDLL), paramflags)
 rszvb_GetConverterPowerOffset.name = 'rszvb_GetConverterPowerOffset'
 rszvb_GetConverterPowerOffset.errcheck = __errorcheck__
 rszvb_GetConverterPowerOffset.output = True
 # rszvb_SetConverterCalPowerOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 converter', 'ViReal64 calPowerOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'converter'),(1, 'calPowerOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'converter'),(1, 'calPowerOffset'),)
 rszvb_SetConverterCalPowerOffset  = prototype(('rszvb_SetConverterCalPowerOffset', rszvbDLL), paramflags)
 rszvb_SetConverterCalPowerOffset.name = 'rszvb_SetConverterCalPowerOffset'
 rszvb_SetConverterCalPowerOffset.errcheck = __errorcheck__
 rszvb_SetConverterCalPowerOffset.output = False
 # rszvb_GetConverterCalPowerOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 converter', 'ViReal64* calPowerOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'converter'),(2, 'calPowerOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'converter'),(2, 'calPowerOffset'),)
 rszvb_GetConverterCalPowerOffset  = prototype(('rszvb_GetConverterCalPowerOffset', rszvbDLL), paramflags)
 rszvb_GetConverterCalPowerOffset.name = 'rszvb_GetConverterCalPowerOffset'
 rszvb_GetConverterCalPowerOffset.errcheck = __errorcheck__
 rszvb_GetConverterCalPowerOffset.output = True
 # rszvb_SetAdvancedPowerTransferModelFrequencyState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetAdvancedPowerTransferModelFrequencyState  = prototype(('rszvb_SetAdvancedPowerTransferModelFrequencyState', rszvbDLL), paramflags)
 rszvb_SetAdvancedPowerTransferModelFrequencyState.name = 'rszvb_SetAdvancedPowerTransferModelFrequencyState'
 rszvb_SetAdvancedPowerTransferModelFrequencyState.errcheck = __errorcheck__
 rszvb_SetAdvancedPowerTransferModelFrequencyState.output = False
 # rszvb_GetAdvancedPowerTransferModelFrequencyState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetAdvancedPowerTransferModelFrequencyState  = prototype(('rszvb_GetAdvancedPowerTransferModelFrequencyState', rszvbDLL), paramflags)
 rszvb_GetAdvancedPowerTransferModelFrequencyState.name = 'rszvb_GetAdvancedPowerTransferModelFrequencyState'
 rszvb_GetAdvancedPowerTransferModelFrequencyState.errcheck = __errorcheck__
 rszvb_GetAdvancedPowerTransferModelFrequencyState.output = True
 # rszvb_SetSenseTypeOfPortTransferModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 modelType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'modelType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'modelType'),)
 rszvb_SetSenseTypeOfPortTransferModel  = prototype(('rszvb_SetSenseTypeOfPortTransferModel', rszvbDLL), paramflags)
 rszvb_SetSenseTypeOfPortTransferModel.name = 'rszvb_SetSenseTypeOfPortTransferModel'
 rszvb_SetSenseTypeOfPortTransferModel.errcheck = __errorcheck__
 rszvb_SetSenseTypeOfPortTransferModel.output = False
 # rszvb_GetSenseTypeOfPortTransferModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* modelType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'modelType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'modelType'),)
 rszvb_GetSenseTypeOfPortTransferModel  = prototype(('rszvb_GetSenseTypeOfPortTransferModel', rszvbDLL), paramflags)
 rszvb_GetSenseTypeOfPortTransferModel.name = 'rszvb_GetSenseTypeOfPortTransferModel'
 rszvb_GetSenseTypeOfPortTransferModel.errcheck = __errorcheck__
 rszvb_GetSenseTypeOfPortTransferModel.output = True
 # rszvb_SetSenseTypeOfAdvancedPowerTransferModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 modelType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'modelType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'modelType'),)
 rszvb_SetSenseTypeOfAdvancedPowerTransferModel  = prototype(('rszvb_SetSenseTypeOfAdvancedPowerTransferModel', rszvbDLL), paramflags)
 rszvb_SetSenseTypeOfAdvancedPowerTransferModel.name = 'rszvb_SetSenseTypeOfAdvancedPowerTransferModel'
 rszvb_SetSenseTypeOfAdvancedPowerTransferModel.errcheck = __errorcheck__
 rszvb_SetSenseTypeOfAdvancedPowerTransferModel.output = False
 # rszvb_GetSenseTypeOfAdvancedPowerTransferModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* modelType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'modelType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'modelType'),)
 rszvb_GetSenseTypeOfAdvancedPowerTransferModel  = prototype(('rszvb_GetSenseTypeOfAdvancedPowerTransferModel', rszvbDLL), paramflags)
 rszvb_GetSenseTypeOfAdvancedPowerTransferModel.name = 'rszvb_GetSenseTypeOfAdvancedPowerTransferModel'
 rszvb_GetSenseTypeOfAdvancedPowerTransferModel.errcheck = __errorcheck__
@@ -4170,686 +4170,686 @@ rszvb_GetConverterPortAssignment.errcheck = __errorcheck__
 rszvb_GetConverterPortAssignment.output = False
 # rszvb_SetPortTransferModelState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetPortTransferModelState  = prototype(('rszvb_SetPortTransferModelState', rszvbDLL), paramflags)
 rszvb_SetPortTransferModelState.name = 'rszvb_SetPortTransferModelState'
 rszvb_SetPortTransferModelState.errcheck = __errorcheck__
 rszvb_SetPortTransferModelState.output = False
 # rszvb_GetPortTransferModelState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetPortTransferModelState  = prototype(('rszvb_GetPortTransferModelState', rszvbDLL), paramflags)
 rszvb_GetPortTransferModelState.name = 'rszvb_GetPortTransferModelState'
 rszvb_GetPortTransferModelState.errcheck = __errorcheck__
 rszvb_GetPortTransferModelState.output = True
 # rszvb_SetPortWaveguideAttenuator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 waveguideAttenuator', 'ViReal64 attenuation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'waveguideAttenuator'),(1, 'attenuation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'waveguideAttenuator'),(1, 'attenuation'),)
 rszvb_SetPortWaveguideAttenuator  = prototype(('rszvb_SetPortWaveguideAttenuator', rszvbDLL), paramflags)
 rszvb_SetPortWaveguideAttenuator.name = 'rszvb_SetPortWaveguideAttenuator'
 rszvb_SetPortWaveguideAttenuator.errcheck = __errorcheck__
 rszvb_SetPortWaveguideAttenuator.output = False
 # rszvb_GetPortWaveguideAttenuatorType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* waveguideAttenuator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'waveguideAttenuator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'waveguideAttenuator'),)
 rszvb_GetPortWaveguideAttenuatorType  = prototype(('rszvb_GetPortWaveguideAttenuatorType', rszvbDLL), paramflags)
 rszvb_GetPortWaveguideAttenuatorType.name = 'rszvb_GetPortWaveguideAttenuatorType'
 rszvb_GetPortWaveguideAttenuatorType.errcheck = __errorcheck__
 rszvb_GetPortWaveguideAttenuatorType.output = True
 # rszvb_GetPortWaveguideAttenuator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 waveguideAttenuator', 'ViReal64* attenuation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'waveguideAttenuator'),(2, 'attenuation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'waveguideAttenuator'),(2, 'attenuation'),)
 rszvb_GetPortWaveguideAttenuator  = prototype(('rszvb_GetPortWaveguideAttenuator', rszvbDLL), paramflags)
 rszvb_GetPortWaveguideAttenuator.name = 'rszvb_GetPortWaveguideAttenuator'
 rszvb_GetPortWaveguideAttenuator.errcheck = __errorcheck__
 rszvb_GetPortWaveguideAttenuator.output = True
 # rszvb_SetPortWaveguideAttenuatorSlope ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 slope']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'slope'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'slope'),)
 rszvb_SetPortWaveguideAttenuatorSlope  = prototype(('rszvb_SetPortWaveguideAttenuatorSlope', rszvbDLL), paramflags)
 rszvb_SetPortWaveguideAttenuatorSlope.name = 'rszvb_SetPortWaveguideAttenuatorSlope'
 rszvb_SetPortWaveguideAttenuatorSlope.errcheck = __errorcheck__
 rszvb_SetPortWaveguideAttenuatorSlope.output = False
 # rszvb_GetPortWaveguideAttenuatorSlope ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* slope']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'slope'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'slope'),)
 rszvb_GetPortWaveguideAttenuatorSlope  = prototype(('rszvb_GetPortWaveguideAttenuatorSlope', rszvbDLL), paramflags)
 rszvb_GetPortWaveguideAttenuatorSlope.name = 'rszvb_GetPortWaveguideAttenuatorSlope'
 rszvb_GetPortWaveguideAttenuatorSlope.errcheck = __errorcheck__
 rszvb_GetPortWaveguideAttenuatorSlope.output = True
 # rszvb_SetPortWaveguideAttenuatorOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 offset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'offset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'offset'),)
 rszvb_SetPortWaveguideAttenuatorOffset  = prototype(('rszvb_SetPortWaveguideAttenuatorOffset', rszvbDLL), paramflags)
 rszvb_SetPortWaveguideAttenuatorOffset.name = 'rszvb_SetPortWaveguideAttenuatorOffset'
 rszvb_SetPortWaveguideAttenuatorOffset.errcheck = __errorcheck__
 rszvb_SetPortWaveguideAttenuatorOffset.output = False
 # rszvb_GetPortWaveguideAttenuatorOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* offset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'offset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'offset'),)
 rszvb_GetPortWaveguideAttenuatorOffset  = prototype(('rszvb_GetPortWaveguideAttenuatorOffset', rszvbDLL), paramflags)
 rszvb_GetPortWaveguideAttenuatorOffset.name = 'rszvb_GetPortWaveguideAttenuatorOffset'
 rszvb_GetPortWaveguideAttenuatorOffset.errcheck = __errorcheck__
 rszvb_GetPortWaveguideAttenuatorOffset.output = True
 # rszvb_SetPortElectronicPowerTreshold ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 threshold']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'threshold'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'threshold'),)
 rszvb_SetPortElectronicPowerTreshold  = prototype(('rszvb_SetPortElectronicPowerTreshold', rszvbDLL), paramflags)
 rszvb_SetPortElectronicPowerTreshold.name = 'rszvb_SetPortElectronicPowerTreshold'
 rszvb_SetPortElectronicPowerTreshold.errcheck = __errorcheck__
 rszvb_SetPortElectronicPowerTreshold.output = False
 # rszvb_GetPortElectronicPowerTreshold ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* threshold']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'threshold'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'threshold'),)
 rszvb_GetPortElectronicPowerTreshold  = prototype(('rszvb_GetPortElectronicPowerTreshold', rszvbDLL), paramflags)
 rszvb_GetPortElectronicPowerTreshold.name = 'rszvb_GetPortElectronicPowerTreshold'
 rszvb_GetPortElectronicPowerTreshold.errcheck = __errorcheck__
 rszvb_GetPortElectronicPowerTreshold.output = True
 # rszvb_SetPortElectronicPowerReduction ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 reduction']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'reduction'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'reduction'),)
 rszvb_SetPortElectronicPowerReduction  = prototype(('rszvb_SetPortElectronicPowerReduction', rszvbDLL), paramflags)
 rszvb_SetPortElectronicPowerReduction.name = 'rszvb_SetPortElectronicPowerReduction'
 rszvb_SetPortElectronicPowerReduction.errcheck = __errorcheck__
 rszvb_SetPortElectronicPowerReduction.output = False
 # rszvb_GetPortElectronicPowerReduction ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* reduction']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'reduction'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'reduction'),)
 rszvb_GetPortElectronicPowerReduction  = prototype(('rszvb_GetPortElectronicPowerReduction', rszvbDLL), paramflags)
 rszvb_GetPortElectronicPowerReduction.name = 'rszvb_GetPortElectronicPowerReduction'
 rszvb_GetPortElectronicPowerReduction.errcheck = __errorcheck__
 rszvb_GetPortElectronicPowerReduction.output = True
 # rszvb_SetSimultaneousMeasurementOfPortsGroups ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetSimultaneousMeasurementOfPortsGroups  = prototype(('rszvb_SetSimultaneousMeasurementOfPortsGroups', rszvbDLL), paramflags)
 rszvb_SetSimultaneousMeasurementOfPortsGroups.name = 'rszvb_SetSimultaneousMeasurementOfPortsGroups'
 rszvb_SetSimultaneousMeasurementOfPortsGroups.errcheck = __errorcheck__
 rszvb_SetSimultaneousMeasurementOfPortsGroups.output = False
 # rszvb_GetSimultaneousMeasurementOfPortsGroups ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetSimultaneousMeasurementOfPortsGroups  = prototype(('rszvb_GetSimultaneousMeasurementOfPortsGroups', rszvbDLL), paramflags)
 rszvb_GetSimultaneousMeasurementOfPortsGroups.name = 'rszvb_GetSimultaneousMeasurementOfPortsGroups'
 rszvb_GetSimultaneousMeasurementOfPortsGroups.errcheck = __errorcheck__
 rszvb_GetSimultaneousMeasurementOfPortsGroups.output = True
 # rszvb_SetSimultaneousMeasurementFrequencyOffsetState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetSimultaneousMeasurementFrequencyOffsetState  = prototype(('rszvb_SetSimultaneousMeasurementFrequencyOffsetState', rszvbDLL), paramflags)
 rszvb_SetSimultaneousMeasurementFrequencyOffsetState.name = 'rszvb_SetSimultaneousMeasurementFrequencyOffsetState'
 rszvb_SetSimultaneousMeasurementFrequencyOffsetState.errcheck = __errorcheck__
 rszvb_SetSimultaneousMeasurementFrequencyOffsetState.output = False
 # rszvb_GetSimultaneousMeasurementFrequencyOffsetState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetSimultaneousMeasurementFrequencyOffsetState  = prototype(('rszvb_GetSimultaneousMeasurementFrequencyOffsetState', rszvbDLL), paramflags)
 rszvb_GetSimultaneousMeasurementFrequencyOffsetState.name = 'rszvb_GetSimultaneousMeasurementFrequencyOffsetState'
 rszvb_GetSimultaneousMeasurementFrequencyOffsetState.errcheck = __errorcheck__
 rszvb_GetSimultaneousMeasurementFrequencyOffsetState.output = True
 # rszvb_SetSimultaneousMeasurementMinimumFrequencyOffsetMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 minimumFrequencyOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'minimumFrequencyOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'minimumFrequencyOffset'),)
 rszvb_SetSimultaneousMeasurementMinimumFrequencyOffsetMode  = prototype(('rszvb_SetSimultaneousMeasurementMinimumFrequencyOffsetMode', rszvbDLL), paramflags)
 rszvb_SetSimultaneousMeasurementMinimumFrequencyOffsetMode.name = 'rszvb_SetSimultaneousMeasurementMinimumFrequencyOffsetMode'
 rszvb_SetSimultaneousMeasurementMinimumFrequencyOffsetMode.errcheck = __errorcheck__
 rszvb_SetSimultaneousMeasurementMinimumFrequencyOffsetMode.output = False
 # rszvb_GetSimultaneousMeasurementMinimumFrequencyOffsetMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* minimumFrequencyOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'minimumFrequencyOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'minimumFrequencyOffset'),)
 rszvb_GetSimultaneousMeasurementMinimumFrequencyOffsetMode  = prototype(('rszvb_GetSimultaneousMeasurementMinimumFrequencyOffsetMode', rszvbDLL), paramflags)
 rszvb_GetSimultaneousMeasurementMinimumFrequencyOffsetMode.name = 'rszvb_GetSimultaneousMeasurementMinimumFrequencyOffsetMode'
 rszvb_GetSimultaneousMeasurementMinimumFrequencyOffsetMode.errcheck = __errorcheck__
 rszvb_GetSimultaneousMeasurementMinimumFrequencyOffsetMode.output = True
 # rszvb_SetFrequencyConversion ['ViSession instrumentHandle', 'ViInt32 measurementType', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 numerator', 'ViInt32 denominator', 'ViReal64 offset', 'ViInt32 sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_double,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'measurementType'),(1, 'channel'),(1, 'port'),(1, 'numerator'),(1, 'denominator'),(1, 'offset'),(1, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'measurementType'),(1, 'channel',1),(1, 'port'),(1, 'numerator'),(1, 'denominator'),(1, 'offset'),(1, 'sweepType'),)
 rszvb_SetFrequencyConversion  = prototype(('rszvb_SetFrequencyConversion', rszvbDLL), paramflags)
 rszvb_SetFrequencyConversion.name = 'rszvb_SetFrequencyConversion'
 rszvb_SetFrequencyConversion.errcheck = __errorcheck__
 rszvb_SetFrequencyConversion.output = False
 # rszvb_GetFrequencyConversion ['ViSession instrumentHandle', 'ViInt32 measurementType', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* numerator', 'ViInt32* denominator', 'ViReal64* offset', 'ViInt32* sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32),POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'measurementType'),(1, 'channel'),(1, 'port'),(2, 'numerator'),(2, 'denominator'),(2, 'offset'),(2, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'measurementType'),(1, 'channel',1),(1, 'port'),(2, 'numerator'),(2, 'denominator'),(2, 'offset'),(2, 'sweepType'),)
 rszvb_GetFrequencyConversion  = prototype(('rszvb_GetFrequencyConversion', rszvbDLL), paramflags)
 rszvb_GetFrequencyConversion.name = 'rszvb_GetFrequencyConversion'
 rszvb_GetFrequencyConversion.errcheck = __errorcheck__
 rszvb_GetFrequencyConversion.output = True
 # rszvb_SetPowerMeterFrequencyConversion ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 powerMeterNumber', 'ViInt32 numerator', 'ViInt32 denominator', 'ViReal64 offset', 'ViInt32 sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_double,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'powerMeterNumber'),(1, 'numerator'),(1, 'denominator'),(1, 'offset'),(1, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'powerMeterNumber'),(1, 'numerator'),(1, 'denominator'),(1, 'offset'),(1, 'sweepType'),)
 rszvb_SetPowerMeterFrequencyConversion  = prototype(('rszvb_SetPowerMeterFrequencyConversion', rszvbDLL), paramflags)
 rszvb_SetPowerMeterFrequencyConversion.name = 'rszvb_SetPowerMeterFrequencyConversion'
 rszvb_SetPowerMeterFrequencyConversion.errcheck = __errorcheck__
 rszvb_SetPowerMeterFrequencyConversion.output = False
 # rszvb_GetPowerMeterFrequencyConversion ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 powerMeterNumber', 'ViInt32* numerator', 'ViInt32* denominator', 'ViReal64* offset', 'ViInt32* sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32),POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'powerMeterNumber'),(2, 'numerator'),(2, 'denominator'),(2, 'offset'),(2, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'powerMeterNumber'),(2, 'numerator'),(2, 'denominator'),(2, 'offset'),(2, 'sweepType'),)
 rszvb_GetPowerMeterFrequencyConversion  = prototype(('rszvb_GetPowerMeterFrequencyConversion', rszvbDLL), paramflags)
 rszvb_GetPowerMeterFrequencyConversion.name = 'rszvb_GetPowerMeterFrequencyConversion'
 rszvb_GetPowerMeterFrequencyConversion.errcheck = __errorcheck__
 rszvb_GetPowerMeterFrequencyConversion.output = True
 # rszvb_SetGeneratorFrequencyConversion ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 generatorNumber', 'ViBoolean state', 'ViInt32 numerator', 'ViInt32 denominator', 'ViReal64 offset', 'ViInt32 sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_bool,c_int32,c_int32,c_double,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'generatorNumber'),(1, 'state'),(1, 'numerator'),(1, 'denominator'),(1, 'offset'),(1, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'generatorNumber'),(1, 'state'),(1, 'numerator'),(1, 'denominator'),(1, 'offset'),(1, 'sweepType'),)
 rszvb_SetGeneratorFrequencyConversion  = prototype(('rszvb_SetGeneratorFrequencyConversion', rszvbDLL), paramflags)
 rszvb_SetGeneratorFrequencyConversion.name = 'rszvb_SetGeneratorFrequencyConversion'
 rszvb_SetGeneratorFrequencyConversion.errcheck = __errorcheck__
 rszvb_SetGeneratorFrequencyConversion.output = False
 # rszvb_GetGeneratorFrequencyConversion ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 generatorNumber', 'ViBoolean* state', 'ViInt32* numerator', 'ViInt32* denominator', 'ViReal64* offset', 'ViInt32* sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_bool),POINTER(c_int32),POINTER(c_int32),POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'generatorNumber'),(2, 'state'),(2, 'numerator'),(2, 'denominator'),(2, 'offset'),(2, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'generatorNumber'),(2, 'state'),(2, 'numerator'),(2, 'denominator'),(2, 'offset'),(2, 'sweepType'),)
 rszvb_GetGeneratorFrequencyConversion  = prototype(('rszvb_GetGeneratorFrequencyConversion', rszvbDLL), paramflags)
 rszvb_GetGeneratorFrequencyConversion.name = 'rszvb_GetGeneratorFrequencyConversion'
 rszvb_GetGeneratorFrequencyConversion.errcheck = __errorcheck__
 rszvb_GetGeneratorFrequencyConversion.output = True
 # rszvb_SetConverterSourceFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 numerator', 'ViInt32 denominator', 'ViReal64 offset', 'ViInt32 sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_double,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'numerator'),(1, 'denominator'),(1, 'offset'),(1, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'numerator'),(1, 'denominator'),(1, 'offset'),(1, 'sweepType'),)
 rszvb_SetConverterSourceFrequency  = prototype(('rszvb_SetConverterSourceFrequency', rszvbDLL), paramflags)
 rszvb_SetConverterSourceFrequency.name = 'rszvb_SetConverterSourceFrequency'
 rszvb_SetConverterSourceFrequency.errcheck = __errorcheck__
 rszvb_SetConverterSourceFrequency.output = False
 # rszvb_GetConverterSourceFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* numerator', 'ViInt32* denominator', 'ViReal64* offset', 'ViInt32* sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32),POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'numerator'),(2, 'denominator'),(2, 'offset'),(2, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'numerator'),(2, 'denominator'),(2, 'offset'),(2, 'sweepType'),)
 rszvb_GetConverterSourceFrequency  = prototype(('rszvb_GetConverterSourceFrequency', rszvbDLL), paramflags)
 rszvb_GetConverterSourceFrequency.name = 'rszvb_GetConverterSourceFrequency'
 rszvb_GetConverterSourceFrequency.errcheck = __errorcheck__
 rszvb_GetConverterSourceFrequency.output = True
 # rszvb_SetMeasureAWavesState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetMeasureAWavesState  = prototype(('rszvb_SetMeasureAWavesState', rszvbDLL), paramflags)
 rszvb_SetMeasureAWavesState.name = 'rszvb_SetMeasureAWavesState'
 rszvb_SetMeasureAWavesState.errcheck = __errorcheck__
 rszvb_SetMeasureAWavesState.output = False
 # rszvb_GetMeasureAWavesState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetMeasureAWavesState  = prototype(('rszvb_GetMeasureAWavesState', rszvbDLL), paramflags)
 rszvb_GetMeasureAWavesState.name = 'rszvb_GetMeasureAWavesState'
 rszvb_GetMeasureAWavesState.errcheck = __errorcheck__
 rszvb_GetMeasureAWavesState.output = True
 # rszvb_SetLocalOscilatorAState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetLocalOscilatorAState  = prototype(('rszvb_SetLocalOscilatorAState', rszvbDLL), paramflags)
 rszvb_SetLocalOscilatorAState.name = 'rszvb_SetLocalOscilatorAState'
 rszvb_SetLocalOscilatorAState.errcheck = __errorcheck__
 rszvb_SetLocalOscilatorAState.output = False
 # rszvb_GetLocalOscilatorAState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetLocalOscilatorAState  = prototype(('rszvb_GetLocalOscilatorAState', rszvbDLL), paramflags)
 rszvb_GetLocalOscilatorAState.name = 'rszvb_GetLocalOscilatorAState'
 rszvb_GetLocalOscilatorAState.errcheck = __errorcheck__
 rszvb_GetLocalOscilatorAState.output = True
 # rszvb_SetLocalOscilatorBState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetLocalOscilatorBState  = prototype(('rszvb_SetLocalOscilatorBState', rszvbDLL), paramflags)
 rszvb_SetLocalOscilatorBState.name = 'rszvb_SetLocalOscilatorBState'
 rszvb_SetLocalOscilatorBState.errcheck = __errorcheck__
 rszvb_SetLocalOscilatorBState.output = False
 # rszvb_GetLocalOscilatorBState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetLocalOscilatorBState  = prototype(('rszvb_GetLocalOscilatorBState', rszvbDLL), paramflags)
 rszvb_GetLocalOscilatorBState.name = 'rszvb_GetLocalOscilatorBState'
 rszvb_GetLocalOscilatorBState.errcheck = __errorcheck__
 rszvb_GetLocalOscilatorBState.output = True
 # rszvb_SetLogicalPortCommonRefImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 real', 'ViReal64 imaginary']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'real'),(1, 'imaginary'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'real'),(1, 'imaginary'),)
 rszvb_SetLogicalPortCommonRefImpedance  = prototype(('rszvb_SetLogicalPortCommonRefImpedance', rszvbDLL), paramflags)
 rszvb_SetLogicalPortCommonRefImpedance.name = 'rszvb_SetLogicalPortCommonRefImpedance'
 rszvb_SetLogicalPortCommonRefImpedance.errcheck = __errorcheck__
 rszvb_SetLogicalPortCommonRefImpedance.output = False
 # rszvb_GetLogicalPortCommonRefImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* real', 'ViReal64* imaginary']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double),POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'real'),(2, 'imaginary'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'real'),(2, 'imaginary'),)
 rszvb_GetLogicalPortCommonRefImpedance  = prototype(('rszvb_GetLogicalPortCommonRefImpedance', rszvbDLL), paramflags)
 rszvb_GetLogicalPortCommonRefImpedance.name = 'rszvb_GetLogicalPortCommonRefImpedance'
 rszvb_GetLogicalPortCommonRefImpedance.errcheck = __errorcheck__
 rszvb_GetLogicalPortCommonRefImpedance.output = True
 # rszvb_SetLogicalPortDifferentialRefImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 real', 'ViReal64 imaginary']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'real'),(1, 'imaginary'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'real'),(1, 'imaginary'),)
 rszvb_SetLogicalPortDifferentialRefImpedance  = prototype(('rszvb_SetLogicalPortDifferentialRefImpedance', rszvbDLL), paramflags)
 rszvb_SetLogicalPortDifferentialRefImpedance.name = 'rszvb_SetLogicalPortDifferentialRefImpedance'
 rszvb_SetLogicalPortDifferentialRefImpedance.errcheck = __errorcheck__
 rszvb_SetLogicalPortDifferentialRefImpedance.output = False
 # rszvb_GetLogicalPortDifferentialRefImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* real', 'ViReal64* imaginary']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double),POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'real'),(2, 'imaginary'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'real'),(2, 'imaginary'),)
 rszvb_GetLogicalPortDifferentialRefImpedance  = prototype(('rszvb_GetLogicalPortDifferentialRefImpedance', rszvbDLL), paramflags)
 rszvb_GetLogicalPortDifferentialRefImpedance.name = 'rszvb_GetLogicalPortDifferentialRefImpedance'
 rszvb_GetLogicalPortDifferentialRefImpedance.errcheck = __errorcheck__
 rszvb_GetLogicalPortDifferentialRefImpedance.output = True
 # rszvb_SetPortImpedancesRenormalization ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 theory']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'theory'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'theory'),)
 rszvb_SetPortImpedancesRenormalization  = prototype(('rszvb_SetPortImpedancesRenormalization', rszvbDLL), paramflags)
 rszvb_SetPortImpedancesRenormalization.name = 'rszvb_SetPortImpedancesRenormalization'
 rszvb_SetPortImpedancesRenormalization.errcheck = __errorcheck__
 rszvb_SetPortImpedancesRenormalization.output = False
 # rszvb_GetPortImpedancesRenormalization ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* theory']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'theory'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'theory'),)
 rszvb_GetPortImpedancesRenormalization  = prototype(('rszvb_GetPortImpedancesRenormalization', rszvbDLL), paramflags)
 rszvb_GetPortImpedancesRenormalization.name = 'rszvb_GetPortImpedancesRenormalization'
 rszvb_GetPortImpedancesRenormalization.errcheck = __errorcheck__
 rszvb_GetPortImpedancesRenormalization.output = True
 # rszvb_SetPhysicalPortRefImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 real', 'ViReal64 imaginary']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'real'),(1, 'imaginary'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'real'),(1, 'imaginary'),)
 rszvb_SetPhysicalPortRefImpedance  = prototype(('rszvb_SetPhysicalPortRefImpedance', rszvbDLL), paramflags)
 rszvb_SetPhysicalPortRefImpedance.name = 'rszvb_SetPhysicalPortRefImpedance'
 rszvb_SetPhysicalPortRefImpedance.errcheck = __errorcheck__
 rszvb_SetPhysicalPortRefImpedance.output = False
 # rszvb_GetPhysicalPortRefImpedance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* real', 'ViReal64* imaginary']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double),POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'real'),(2, 'imaginary'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'real'),(2, 'imaginary'),)
 rszvb_GetPhysicalPortRefImpedance  = prototype(('rszvb_GetPhysicalPortRefImpedance', rszvbDLL), paramflags)
 rszvb_GetPhysicalPortRefImpedance.name = 'rszvb_GetPhysicalPortRefImpedance'
 rszvb_GetPhysicalPortRefImpedance.errcheck = __errorcheck__
 rszvb_GetPhysicalPortRefImpedance.output = True
 # rszvb_SetIFGain ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 IFGain']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'IFGain'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'IFGain'),)
 rszvb_SetIFGain  = prototype(('rszvb_SetIFGain', rszvbDLL), paramflags)
 rszvb_SetIFGain.name = 'rszvb_SetIFGain'
 rszvb_SetIFGain.errcheck = __errorcheck__
 rszvb_SetIFGain.output = False
 # rszvb_GetIFGain ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* IFGain']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'IFGain'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'IFGain'),)
 rszvb_GetIFGain  = prototype(('rszvb_GetIFGain', rszvbDLL), paramflags)
 rszvb_GetIFGain.name = 'rszvb_GetIFGain'
 rszvb_GetIFGain.errcheck = __errorcheck__
 rszvb_GetIFGain.output = True
 # rszvb_SetIFGainReferenceChannel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 IFGain']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'IFGain'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'IFGain'),)
 rszvb_SetIFGainReferenceChannel  = prototype(('rszvb_SetIFGainReferenceChannel', rszvbDLL), paramflags)
 rszvb_SetIFGainReferenceChannel.name = 'rszvb_SetIFGainReferenceChannel'
 rszvb_SetIFGainReferenceChannel.errcheck = __errorcheck__
 rszvb_SetIFGainReferenceChannel.output = False
 # rszvb_GetIFGainReferenceChannel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* IFGain']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'IFGain'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'IFGain'),)
 rszvb_GetIFGainReferenceChannel  = prototype(('rszvb_GetIFGainReferenceChannel', rszvbDLL), paramflags)
 rszvb_GetIFGainReferenceChannel.name = 'rszvb_GetIFGainReferenceChannel'
 rszvb_GetIFGainReferenceChannel.errcheck = __errorcheck__
 rszvb_GetIFGainReferenceChannel.output = True
 # rszvb_SetRFSignalSourceState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetRFSignalSourceState  = prototype(('rszvb_SetRFSignalSourceState', rszvbDLL), paramflags)
 rszvb_SetRFSignalSourceState.name = 'rszvb_SetRFSignalSourceState'
 rszvb_SetRFSignalSourceState.errcheck = __errorcheck__
 rszvb_SetRFSignalSourceState.output = False
 # rszvb_GetRFSignalSourceState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetRFSignalSourceState  = prototype(('rszvb_GetRFSignalSourceState', rszvbDLL), paramflags)
 rszvb_GetRFSignalSourceState.name = 'rszvb_GetRFSignalSourceState'
 rszvb_GetRFSignalSourceState.errcheck = __errorcheck__
 rszvb_GetRFSignalSourceState.output = True
 # rszvb_SetPermanentSignalSourceState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetPermanentSignalSourceState  = prototype(('rszvb_SetPermanentSignalSourceState', rszvbDLL), paramflags)
 rszvb_SetPermanentSignalSourceState.name = 'rszvb_SetPermanentSignalSourceState'
 rszvb_SetPermanentSignalSourceState.errcheck = __errorcheck__
 rszvb_SetPermanentSignalSourceState.output = False
 # rszvb_GetPermanentSignalSourceState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetPermanentSignalSourceState  = prototype(('rszvb_GetPermanentSignalSourceState', rszvbDLL), paramflags)
 rszvb_GetPermanentSignalSourceState.name = 'rszvb_GetPermanentSignalSourceState'
 rszvb_GetPermanentSignalSourceState.errcheck = __errorcheck__
 rszvb_GetPermanentSignalSourceState.output = True
 # rszvb_SetPermanentSignalGeneratorState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 generatorNumber', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'generatorNumber'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'generatorNumber'),(1, 'state'),)
 rszvb_SetPermanentSignalGeneratorState  = prototype(('rszvb_SetPermanentSignalGeneratorState', rszvbDLL), paramflags)
 rszvb_SetPermanentSignalGeneratorState.name = 'rszvb_SetPermanentSignalGeneratorState'
 rszvb_SetPermanentSignalGeneratorState.errcheck = __errorcheck__
 rszvb_SetPermanentSignalGeneratorState.output = False
 # rszvb_GetPermanentSignalGeneratorState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 generatorNumber', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'generatorNumber'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'generatorNumber'),(2, 'state'),)
 rszvb_GetPermanentSignalGeneratorState  = prototype(('rszvb_GetPermanentSignalGeneratorState', rszvbDLL), paramflags)
 rszvb_GetPermanentSignalGeneratorState.name = 'rszvb_GetPermanentSignalGeneratorState'
 rszvb_GetPermanentSignalGeneratorState.errcheck = __errorcheck__
 rszvb_GetPermanentSignalGeneratorState.output = True
 # rszvb_SetPortPowerGeneratorOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViInt32 generatorNumber', 'ViReal64 portPowerOffset', 'ViInt32 offsetParameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_double,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'generatorNumber'),(1, 'portPowerOffset'),(1, 'offsetParameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'generatorNumber'),(1, 'portPowerOffset'),(1, 'offsetParameter'),)
 rszvb_SetPortPowerGeneratorOffset  = prototype(('rszvb_SetPortPowerGeneratorOffset', rszvbDLL), paramflags)
 rszvb_SetPortPowerGeneratorOffset.name = 'rszvb_SetPortPowerGeneratorOffset'
 rszvb_SetPortPowerGeneratorOffset.errcheck = __errorcheck__
 rszvb_SetPortPowerGeneratorOffset.output = False
 # rszvb_GetPortPowerGeneratorOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViInt32 generatorNumber', 'ViReal64* portPowerOffset', 'ViInt32* offsetParameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'generatorNumber'),(2, 'portPowerOffset'),(2, 'offsetParameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'generatorNumber'),(2, 'portPowerOffset'),(2, 'offsetParameter'),)
 rszvb_GetPortPowerGeneratorOffset  = prototype(('rszvb_GetPortPowerGeneratorOffset', rszvbDLL), paramflags)
 rszvb_GetPortPowerGeneratorOffset.name = 'rszvb_GetPortPowerGeneratorOffset'
 rszvb_GetPortPowerGeneratorOffset.errcheck = __errorcheck__
 rszvb_GetPortPowerGeneratorOffset.output = True
 # rszvb_SetSlope ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 slope']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'slope'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'slope'),)
 rszvb_SetSlope  = prototype(('rszvb_SetSlope', rszvbDLL), paramflags)
 rszvb_SetSlope.name = 'rszvb_SetSlope'
 rszvb_SetSlope.errcheck = __errorcheck__
 rszvb_SetSlope.output = False
 # rszvb_GetSlope ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* slope']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'slope'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'slope'),)
 rszvb_GetSlope  = prototype(('rszvb_GetSlope', rszvbDLL), paramflags)
 rszvb_GetSlope.name = 'rszvb_GetSlope'
 rszvb_GetSlope.errcheck = __errorcheck__
 rszvb_GetSlope.output = True
 # rszvb_SetSourceCombinerState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetSourceCombinerState  = prototype(('rszvb_SetSourceCombinerState', rszvbDLL), paramflags)
 rszvb_SetSourceCombinerState.name = 'rszvb_SetSourceCombinerState'
 rszvb_SetSourceCombinerState.errcheck = __errorcheck__
 rszvb_SetSourceCombinerState.output = False
 # rszvb_GetSourceCombinerState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetSourceCombinerState  = prototype(('rszvb_GetSourceCombinerState', rszvbDLL), paramflags)
 rszvb_GetSourceCombinerState.name = 'rszvb_GetSourceCombinerState'
 rszvb_GetSourceCombinerState.errcheck = __errorcheck__
 rszvb_GetSourceCombinerState.output = True
 # rszvb_SetFrequencyStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString frequencyStimulus']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'frequencyStimulus'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'frequencyStimulus'),)
 rszvb_SetFrequencyStimulus  = prototype(('rszvb_SetFrequencyStimulus', rszvbDLL), paramflags)
 rszvb_SetFrequencyStimulus.name = 'rszvb_SetFrequencyStimulus'
 rszvb_SetFrequencyStimulus.errcheck = __errorcheck__
 rszvb_SetFrequencyStimulus.output = False
 # rszvb_GetFrequencyStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR frequencyStimulus[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'frequencyStimulus[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'frequencyStimulus[]'),)
 rszvb_GetFrequencyStimulus  = prototype(('rszvb_GetFrequencyStimulus', rszvbDLL), paramflags)
 rszvb_GetFrequencyStimulus.name = 'rszvb_GetFrequencyStimulus'
 rszvb_GetFrequencyStimulus.errcheck = __errorcheck__
 rszvb_GetFrequencyStimulus.output = False
 # rszvb_SetPowerStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString powerStimulus']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'powerStimulus'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'powerStimulus'),)
 rszvb_SetPowerStimulus  = prototype(('rszvb_SetPowerStimulus', rszvbDLL), paramflags)
 rszvb_SetPowerStimulus.name = 'rszvb_SetPowerStimulus'
 rszvb_SetPowerStimulus.errcheck = __errorcheck__
 rszvb_SetPowerStimulus.output = False
 # rszvb_GetPowerStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR powerStimulus[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'powerStimulus[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'powerStimulus[]'),)
 rszvb_GetPowerStimulus  = prototype(('rszvb_GetPowerStimulus', rszvbDLL), paramflags)
 rszvb_GetPowerStimulus.name = 'rszvb_GetPowerStimulus'
 rszvb_GetPowerStimulus.errcheck = __errorcheck__
 rszvb_GetPowerStimulus.output = False
 # rszvb_SetTDIFState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean trueDifferentialModeState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'trueDifferentialModeState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'trueDifferentialModeState'),)
 rszvb_SetTDIFState  = prototype(('rszvb_SetTDIFState', rszvbDLL), paramflags)
 rszvb_SetTDIFState.name = 'rszvb_SetTDIFState'
 rszvb_SetTDIFState.errcheck = __errorcheck__
 rszvb_SetTDIFState.output = False
 # rszvb_GetTDIFState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* trueDifferentialModeState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'trueDifferentialModeState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'trueDifferentialModeState'),)
 rszvb_GetTDIFState  = prototype(('rszvb_GetTDIFState', rszvbDLL), paramflags)
 rszvb_GetTDIFState.name = 'rszvb_GetTDIFState'
 rszvb_GetTDIFState.errcheck = __errorcheck__
 rszvb_GetTDIFState.output = True
 # rszvb_SetTDIFAmplitudeImbalanceLogicalPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),)
 rszvb_SetTDIFAmplitudeImbalanceLogicalPort  = prototype(('rszvb_SetTDIFAmplitudeImbalanceLogicalPort', rszvbDLL), paramflags)
 rszvb_SetTDIFAmplitudeImbalanceLogicalPort.name = 'rszvb_SetTDIFAmplitudeImbalanceLogicalPort'
 rszvb_SetTDIFAmplitudeImbalanceLogicalPort.errcheck = __errorcheck__
 rszvb_SetTDIFAmplitudeImbalanceLogicalPort.output = False
 # rszvb_GetTDIFAmplitudeImbalanceLogicalPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'port'),)
 rszvb_GetTDIFAmplitudeImbalanceLogicalPort  = prototype(('rszvb_GetTDIFAmplitudeImbalanceLogicalPort', rszvbDLL), paramflags)
 rszvb_GetTDIFAmplitudeImbalanceLogicalPort.name = 'rszvb_GetTDIFAmplitudeImbalanceLogicalPort'
 rszvb_GetTDIFAmplitudeImbalanceLogicalPort.errcheck = __errorcheck__
 rszvb_GetTDIFAmplitudeImbalanceLogicalPort.output = True
 # rszvb_SetTDIFAmplitudeImbalanceStartPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 startPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'startPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'startPower'),)
 rszvb_SetTDIFAmplitudeImbalanceStartPower  = prototype(('rszvb_SetTDIFAmplitudeImbalanceStartPower', rszvbDLL), paramflags)
 rszvb_SetTDIFAmplitudeImbalanceStartPower.name = 'rszvb_SetTDIFAmplitudeImbalanceStartPower'
 rszvb_SetTDIFAmplitudeImbalanceStartPower.errcheck = __errorcheck__
 rszvb_SetTDIFAmplitudeImbalanceStartPower.output = False
 # rszvb_GetTDIFAmplitudeImbalanceStartPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* startPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'startPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'startPower'),)
 rszvb_GetTDIFAmplitudeImbalanceStartPower  = prototype(('rszvb_GetTDIFAmplitudeImbalanceStartPower', rszvbDLL), paramflags)
 rszvb_GetTDIFAmplitudeImbalanceStartPower.name = 'rszvb_GetTDIFAmplitudeImbalanceStartPower'
 rszvb_GetTDIFAmplitudeImbalanceStartPower.errcheck = __errorcheck__
 rszvb_GetTDIFAmplitudeImbalanceStartPower.output = True
 # rszvb_SetTDIFAmplitudeImbalanceStopPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 stopPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stopPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stopPower'),)
 rszvb_SetTDIFAmplitudeImbalanceStopPower  = prototype(('rszvb_SetTDIFAmplitudeImbalanceStopPower', rszvbDLL), paramflags)
 rszvb_SetTDIFAmplitudeImbalanceStopPower.name = 'rszvb_SetTDIFAmplitudeImbalanceStopPower'
 rszvb_SetTDIFAmplitudeImbalanceStopPower.errcheck = __errorcheck__
 rszvb_SetTDIFAmplitudeImbalanceStopPower.output = False
 # rszvb_GetTDIFAmplitudeImbalanceStopPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* stopPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'stopPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'stopPower'),)
 rszvb_GetTDIFAmplitudeImbalanceStopPower  = prototype(('rszvb_GetTDIFAmplitudeImbalanceStopPower', rszvbDLL), paramflags)
 rszvb_GetTDIFAmplitudeImbalanceStopPower.name = 'rszvb_GetTDIFAmplitudeImbalanceStopPower'
 rszvb_GetTDIFAmplitudeImbalanceStopPower.errcheck = __errorcheck__
 rszvb_GetTDIFAmplitudeImbalanceStopPower.output = True
 # rszvb_SetTDIFPhaseImbalanceLogicalPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),)
 rszvb_SetTDIFPhaseImbalanceLogicalPort  = prototype(('rszvb_SetTDIFPhaseImbalanceLogicalPort', rszvbDLL), paramflags)
 rszvb_SetTDIFPhaseImbalanceLogicalPort.name = 'rszvb_SetTDIFPhaseImbalanceLogicalPort'
 rszvb_SetTDIFPhaseImbalanceLogicalPort.errcheck = __errorcheck__
 rszvb_SetTDIFPhaseImbalanceLogicalPort.output = False
 # rszvb_GetTDIFPhaseImbalanceLogicalPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'port'),)
 rszvb_GetTDIFPhaseImbalanceLogicalPort  = prototype(('rszvb_GetTDIFPhaseImbalanceLogicalPort', rszvbDLL), paramflags)
 rszvb_GetTDIFPhaseImbalanceLogicalPort.name = 'rszvb_GetTDIFPhaseImbalanceLogicalPort'
 rszvb_GetTDIFPhaseImbalanceLogicalPort.errcheck = __errorcheck__
 rszvb_GetTDIFPhaseImbalanceLogicalPort.output = True
 # rszvb_SetTDIFPhaseImbalanceStartPhase ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 startPhase']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'startPhase'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'startPhase'),)
 rszvb_SetTDIFPhaseImbalanceStartPhase  = prototype(('rszvb_SetTDIFPhaseImbalanceStartPhase', rszvbDLL), paramflags)
 rszvb_SetTDIFPhaseImbalanceStartPhase.name = 'rszvb_SetTDIFPhaseImbalanceStartPhase'
 rszvb_SetTDIFPhaseImbalanceStartPhase.errcheck = __errorcheck__
 rszvb_SetTDIFPhaseImbalanceStartPhase.output = False
 # rszvb_GetTDIFPhaseImbalanceStartPhase ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* startPhase']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'startPhase'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'startPhase'),)
 rszvb_GetTDIFPhaseImbalanceStartPhase  = prototype(('rszvb_GetTDIFPhaseImbalanceStartPhase', rszvbDLL), paramflags)
 rszvb_GetTDIFPhaseImbalanceStartPhase.name = 'rszvb_GetTDIFPhaseImbalanceStartPhase'
 rszvb_GetTDIFPhaseImbalanceStartPhase.errcheck = __errorcheck__
 rszvb_GetTDIFPhaseImbalanceStartPhase.output = True
 # rszvb_SetTDIFPhaseImbalanceStopPhase ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 stopPhase']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stopPhase'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stopPhase'),)
 rszvb_SetTDIFPhaseImbalanceStopPhase  = prototype(('rszvb_SetTDIFPhaseImbalanceStopPhase', rszvbDLL), paramflags)
 rszvb_SetTDIFPhaseImbalanceStopPhase.name = 'rszvb_SetTDIFPhaseImbalanceStopPhase'
 rszvb_SetTDIFPhaseImbalanceStopPhase.errcheck = __errorcheck__
 rszvb_SetTDIFPhaseImbalanceStopPhase.output = False
 # rszvb_GetTDIFPhaseImbalanceStopPhase ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* stopPhase']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'stopPhase'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'stopPhase'),)
 rszvb_GetTDIFPhaseImbalanceStopPhase  = prototype(('rszvb_GetTDIFPhaseImbalanceStopPhase', rszvbDLL), paramflags)
 rszvb_GetTDIFPhaseImbalanceStopPhase.name = 'rszvb_GetTDIFPhaseImbalanceStopPhase'
 rszvb_GetTDIFPhaseImbalanceStopPhase.errcheck = __errorcheck__
 rszvb_GetTDIFPhaseImbalanceStopPhase.output = True
 # rszvb_SetTDIFSourcePowerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 sourcePowerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sourcePowerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sourcePowerMode'),)
 rszvb_SetTDIFSourcePowerMode  = prototype(('rszvb_SetTDIFSourcePowerMode', rszvbDLL), paramflags)
 rszvb_SetTDIFSourcePowerMode.name = 'rszvb_SetTDIFSourcePowerMode'
 rszvb_SetTDIFSourcePowerMode.errcheck = __errorcheck__
 rszvb_SetTDIFSourcePowerMode.output = False
 # rszvb_GetTDIFSourcePowerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* sourcePowerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sourcePowerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sourcePowerMode'),)
 rszvb_GetTDIFSourcePowerMode  = prototype(('rszvb_GetTDIFSourcePowerMode', rszvbDLL), paramflags)
 rszvb_GetTDIFSourcePowerMode.name = 'rszvb_GetTDIFSourcePowerMode'
 rszvb_GetTDIFSourcePowerMode.errcheck = __errorcheck__
 rszvb_GetTDIFSourcePowerMode.output = True
 # rszvb_SetTDIFCompensationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean compensationState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'compensationState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'compensationState'),)
 rszvb_SetTDIFCompensationState  = prototype(('rszvb_SetTDIFCompensationState', rszvbDLL), paramflags)
 rszvb_SetTDIFCompensationState.name = 'rszvb_SetTDIFCompensationState'
 rszvb_SetTDIFCompensationState.errcheck = __errorcheck__
 rszvb_SetTDIFCompensationState.output = False
 # rszvb_GetTDIFCompensationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* compensationState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'compensationState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'compensationState'),)
 rszvb_GetTDIFCompensationState  = prototype(('rszvb_GetTDIFCompensationState', rszvbDLL), paramflags)
 rszvb_GetTDIFCompensationState.name = 'rszvb_GetTDIFCompensationState'
 rszvb_GetTDIFCompensationState.errcheck = __errorcheck__
 rszvb_GetTDIFCompensationState.output = True
 # rszvb_SetTDIFReceiverFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 receiverFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverFrequency'),)
 rszvb_SetTDIFReceiverFrequency  = prototype(('rszvb_SetTDIFReceiverFrequency', rszvbDLL), paramflags)
 rszvb_SetTDIFReceiverFrequency.name = 'rszvb_SetTDIFReceiverFrequency'
 rszvb_SetTDIFReceiverFrequency.errcheck = __errorcheck__
 rszvb_SetTDIFReceiverFrequency.output = False
 # rszvb_GetTDIFReceiverFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* receiverFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'receiverFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'receiverFrequency'),)
 rszvb_GetTDIFReceiverFrequency  = prototype(('rszvb_GetTDIFReceiverFrequency', rszvbDLL), paramflags)
 rszvb_GetTDIFReceiverFrequency.name = 'rszvb_GetTDIFReceiverFrequency'
 rszvb_GetTDIFReceiverFrequency.errcheck = __errorcheck__
 rszvb_GetTDIFReceiverFrequency.output = True
 # rszvb_SetPulseGeneratorState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean pulseGeneratorState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'pulseGeneratorState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'pulseGeneratorState'),)
 rszvb_SetPulseGeneratorState  = prototype(('rszvb_SetPulseGeneratorState', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorState.name = 'rszvb_SetPulseGeneratorState'
 rszvb_SetPulseGeneratorState.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorState.output = False
 # rszvb_GetPulseGeneratorState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* pulseGeneratorState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'pulseGeneratorState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'pulseGeneratorState'),)
 rszvb_GetPulseGeneratorState  = prototype(('rszvb_GetPulseGeneratorState', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorState.name = 'rszvb_GetPulseGeneratorState'
 rszvb_GetPulseGeneratorState.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorState.output = True
 # rszvb_DefinePulseGenerator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViInt32 pulseType', 'ViReal64 pulseWidth', 'ViReal64 singleTrainPulsePeriod', 'ViInt32 pulsePolarity', 'ViInt32 pulseMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_double,c_double,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(1, 'pulseType'),(1, 'pulseWidth'),(1, 'singleTrainPulsePeriod'),(1, 'pulsePolarity'),(1, 'pulseMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(1, 'pulseType'),(1, 'pulseWidth'),(1, 'singleTrainPulsePeriod'),(1, 'pulsePolarity'),(1, 'pulseMode'),)
 rszvb_DefinePulseGenerator  = prototype(('rszvb_DefinePulseGenerator', rszvbDLL), paramflags)
 rszvb_DefinePulseGenerator.name = 'rszvb_DefinePulseGenerator'
 rszvb_DefinePulseGenerator.errcheck = __errorcheck__
 rszvb_DefinePulseGenerator.output = False
 # rszvb_DefinePulseTrainSegments ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViInt32 _VI_FAR pulseTrainActive[]', 'ViReal64 _VI_FAR startTime[]', 'ViReal64 _VI_FAR stopTime[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'bufferSize'),(1, 'pulseTrainActive[]'),(1, 'startTime[]'),(1, 'stopTime[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'pulseTrainActive[]'),(1, 'startTime[]'),(1, 'stopTime[]'),)
 rszvb_DefinePulseTrainSegments  = prototype(('rszvb_DefinePulseTrainSegments', rszvbDLL), paramflags)
 rszvb_DefinePulseTrainSegments.name = 'rszvb_DefinePulseTrainSegments'
 rszvb_DefinePulseTrainSegments.errcheck = __errorcheck__
 rszvb_DefinePulseTrainSegments.output = False
 # rszvb_ConfigureChoppedPulseProfile ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean choppedPulseProfileMode', 'ViReal64 delayIncrement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'choppedPulseProfileMode'),(1, 'delayIncrement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'choppedPulseProfileMode'),(1, 'delayIncrement'),)
 rszvb_ConfigureChoppedPulseProfile  = prototype(('rszvb_ConfigureChoppedPulseProfile', rszvbDLL), paramflags)
 rszvb_ConfigureChoppedPulseProfile.name = 'rszvb_ConfigureChoppedPulseProfile'
 rszvb_ConfigureChoppedPulseProfile.errcheck = __errorcheck__
 rszvb_ConfigureChoppedPulseProfile.output = False
 # rszvb_SetPulseGeneratorType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViInt32 pulseType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(1, 'pulseType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(1, 'pulseType'),)
 rszvb_SetPulseGeneratorType  = prototype(('rszvb_SetPulseGeneratorType', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorType.name = 'rszvb_SetPulseGeneratorType'
 rszvb_SetPulseGeneratorType.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorType.output = False
 # rszvb_GetPulseGeneratorType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViInt32* pulseType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(2, 'pulseType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(2, 'pulseType'),)
 rszvb_GetPulseGeneratorType  = prototype(('rszvb_GetPulseGeneratorType', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorType.name = 'rszvb_GetPulseGeneratorType'
 rszvb_GetPulseGeneratorType.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorType.output = True
 # rszvb_SetPulseGeneratorWidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViReal64 pulseWidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(1, 'pulseWidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(1, 'pulseWidth'),)
 rszvb_SetPulseGeneratorWidth  = prototype(('rszvb_SetPulseGeneratorWidth', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorWidth.name = 'rszvb_SetPulseGeneratorWidth'
 rszvb_SetPulseGeneratorWidth.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorWidth.output = False
 # rszvb_GetPulseGeneratorWidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViReal64* pulseWidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(2, 'pulseWidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(2, 'pulseWidth'),)
 rszvb_GetPulseGeneratorWidth  = prototype(('rszvb_GetPulseGeneratorWidth', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorWidth.name = 'rszvb_GetPulseGeneratorWidth'
 rszvb_GetPulseGeneratorWidth.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorWidth.output = True
 # rszvb_SetPulseGeneratorSinglePeriod ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 singlePulsePeriod']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'singlePulsePeriod'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'singlePulsePeriod'),)
 rszvb_SetPulseGeneratorSinglePeriod  = prototype(('rszvb_SetPulseGeneratorSinglePeriod', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorSinglePeriod.name = 'rszvb_SetPulseGeneratorSinglePeriod'
 rszvb_SetPulseGeneratorSinglePeriod.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorSinglePeriod.output = False
 # rszvb_GetPulseGeneratorSinglePeriod ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* singlePulsePeriod']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'singlePulsePeriod'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'singlePulsePeriod'),)
 rszvb_GetPulseGeneratorSinglePeriod  = prototype(('rszvb_GetPulseGeneratorSinglePeriod', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorSinglePeriod.name = 'rszvb_GetPulseGeneratorSinglePeriod'
 rszvb_GetPulseGeneratorSinglePeriod.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorSinglePeriod.output = True
 # rszvb_SetPulseGeneratorTrainPeriod ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 trainPulsePeriod']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'trainPulsePeriod'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'trainPulsePeriod'),)
 rszvb_SetPulseGeneratorTrainPeriod  = prototype(('rszvb_SetPulseGeneratorTrainPeriod', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorTrainPeriod.name = 'rszvb_SetPulseGeneratorTrainPeriod'
 rszvb_SetPulseGeneratorTrainPeriod.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorTrainPeriod.output = False
 # rszvb_GetPulseGeneratorTrainPeriod ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* trainPulsePeriod']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'trainPulsePeriod'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'trainPulsePeriod'),)
 rszvb_GetPulseGeneratorTrainPeriod  = prototype(('rszvb_GetPulseGeneratorTrainPeriod', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorTrainPeriod.name = 'rszvb_GetPulseGeneratorTrainPeriod'
 rszvb_GetPulseGeneratorTrainPeriod.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorTrainPeriod.output = True
 # rszvb_SetPulseGeneratorPolarity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViInt32 pulsePolarity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(1, 'pulsePolarity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(1, 'pulsePolarity'),)
 rszvb_SetPulseGeneratorPolarity  = prototype(('rszvb_SetPulseGeneratorPolarity', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorPolarity.name = 'rszvb_SetPulseGeneratorPolarity'
 rszvb_SetPulseGeneratorPolarity.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorPolarity.output = False
 # rszvb_GetPulseGeneratorPolarity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViInt32* pulsePolarity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(2, 'pulsePolarity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(2, 'pulsePolarity'),)
 rszvb_GetPulseGeneratorPolarity  = prototype(('rszvb_GetPulseGeneratorPolarity', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorPolarity.name = 'rszvb_GetPulseGeneratorPolarity'
 rszvb_GetPulseGeneratorPolarity.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorPolarity.output = True
 # rszvb_SetPulseGeneratorMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 pulseMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'pulseMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'pulseMode'),)
 rszvb_SetPulseGeneratorMode  = prototype(('rszvb_SetPulseGeneratorMode', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorMode.name = 'rszvb_SetPulseGeneratorMode'
 rszvb_SetPulseGeneratorMode.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorMode.output = False
 # rszvb_GetPulseGeneratorMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* pulseMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'pulseMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'pulseMode'),)
 rszvb_GetPulseGeneratorMode  = prototype(('rszvb_GetPulseGeneratorMode', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorMode.name = 'rszvb_GetPulseGeneratorMode'
 rszvb_GetPulseGeneratorMode.errcheck = __errorcheck__
@@ -4870,357 +4870,357 @@ rszvb_GetPulseGeneratorMasterChannel.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorMasterChannel.output = True
 # rszvb_GetPulseTrainSegments ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViInt32 _VI_FAR pulseTrainActive[]', 'ViReal64 _VI_FAR startTime[]', 'ViReal64 _VI_FAR stopTime[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'bufferSize'),(1, 'pulseTrainActive[]'),(1, 'startTime[]'),(1, 'stopTime[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'pulseTrainActive[]'),(1, 'startTime[]'),(1, 'stopTime[]'),)
 rszvb_GetPulseTrainSegments  = prototype(('rszvb_GetPulseTrainSegments', rszvbDLL), paramflags)
 rszvb_GetPulseTrainSegments.name = 'rszvb_GetPulseTrainSegments'
 rszvb_GetPulseTrainSegments.errcheck = __errorcheck__
 rszvb_GetPulseTrainSegments.output = False
 # rszvb_SetPulseTrainSegmentState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean segmentState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'segmentState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'segmentState'),)
 rszvb_SetPulseTrainSegmentState  = prototype(('rszvb_SetPulseTrainSegmentState', rszvbDLL), paramflags)
 rszvb_SetPulseTrainSegmentState.name = 'rszvb_SetPulseTrainSegmentState'
 rszvb_SetPulseTrainSegmentState.errcheck = __errorcheck__
 rszvb_SetPulseTrainSegmentState.output = False
 # rszvb_GetPulseTrainSegmentState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViBoolean* segmentState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'segmentState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'segmentState'),)
 rszvb_GetPulseTrainSegmentState  = prototype(('rszvb_GetPulseTrainSegmentState', rszvbDLL), paramflags)
 rszvb_GetPulseTrainSegmentState.name = 'rszvb_GetPulseTrainSegmentState'
 rszvb_GetPulseTrainSegmentState.errcheck = __errorcheck__
 rszvb_GetPulseTrainSegmentState.output = True
 # rszvb_SetPulseTrainSegmentStart ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 segmentStart']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'segmentStart'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'segmentStart'),)
 rszvb_SetPulseTrainSegmentStart  = prototype(('rszvb_SetPulseTrainSegmentStart', rszvbDLL), paramflags)
 rszvb_SetPulseTrainSegmentStart.name = 'rszvb_SetPulseTrainSegmentStart'
 rszvb_SetPulseTrainSegmentStart.errcheck = __errorcheck__
 rszvb_SetPulseTrainSegmentStart.output = False
 # rszvb_GetPulseTrainSegmentStart ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* segmentStart']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'segmentStart'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'segmentStart'),)
 rszvb_GetPulseTrainSegmentStart  = prototype(('rszvb_GetPulseTrainSegmentStart', rszvbDLL), paramflags)
 rszvb_GetPulseTrainSegmentStart.name = 'rszvb_GetPulseTrainSegmentStart'
 rszvb_GetPulseTrainSegmentStart.errcheck = __errorcheck__
 rszvb_GetPulseTrainSegmentStart.output = True
 # rszvb_SetPulseTrainSegmentStop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64 segmentStop']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(1, 'segmentStop'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'segmentStop'),)
 rszvb_SetPulseTrainSegmentStop  = prototype(('rszvb_SetPulseTrainSegmentStop', rszvbDLL), paramflags)
 rszvb_SetPulseTrainSegmentStop.name = 'rszvb_SetPulseTrainSegmentStop'
 rszvb_SetPulseTrainSegmentStop.errcheck = __errorcheck__
 rszvb_SetPulseTrainSegmentStop.output = False
 # rszvb_GetPulseTrainSegmentStop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViReal64* segmentStop']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'segment'),(2, 'segmentStop'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(2, 'segmentStop'),)
 rszvb_GetPulseTrainSegmentStop  = prototype(('rszvb_GetPulseTrainSegmentStop', rszvbDLL), paramflags)
 rszvb_GetPulseTrainSegmentStop.name = 'rszvb_GetPulseTrainSegmentStop'
 rszvb_GetPulseTrainSegmentStop.errcheck = __errorcheck__
 rszvb_GetPulseTrainSegmentStop.output = True
 # rszvb_GetPulseTrainSegmentCount ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* segmentCount']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'segmentCount'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'segmentCount'),)
 rszvb_GetPulseTrainSegmentCount  = prototype(('rszvb_GetPulseTrainSegmentCount', rszvbDLL), paramflags)
 rszvb_GetPulseTrainSegmentCount.name = 'rszvb_GetPulseTrainSegmentCount'
 rszvb_GetPulseTrainSegmentCount.errcheck = __errorcheck__
 rszvb_GetPulseTrainSegmentCount.output = True
 # rszvb_DeleteAllPulseTrainSegments ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_DeleteAllPulseTrainSegments  = prototype(('rszvb_DeleteAllPulseTrainSegments', rszvbDLL), paramflags)
 rszvb_DeleteAllPulseTrainSegments.name = 'rszvb_DeleteAllPulseTrainSegments'
 rszvb_DeleteAllPulseTrainSegments.errcheck = __errorcheck__
 rszvb_DeleteAllPulseTrainSegments.output = False
 # rszvb_SavePulseTrainFile ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViString fileName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(1, 'fileName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(1, 'fileName'),)
 rszvb_SavePulseTrainFile  = prototype(('rszvb_SavePulseTrainFile', rszvbDLL), paramflags)
 rszvb_SavePulseTrainFile.name = 'rszvb_SavePulseTrainFile'
 rszvb_SavePulseTrainFile.errcheck = __errorcheck__
 rszvb_SavePulseTrainFile.output = False
 # rszvb_LoadPulseTrainFile ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 generator', 'ViString fileName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'generator'),(1, 'fileName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'generator'),(1, 'fileName'),)
 rszvb_LoadPulseTrainFile  = prototype(('rszvb_LoadPulseTrainFile', rszvbDLL), paramflags)
 rszvb_LoadPulseTrainFile.name = 'rszvb_LoadPulseTrainFile'
 rszvb_LoadPulseTrainFile.errcheck = __errorcheck__
 rszvb_LoadPulseTrainFile.output = False
 # rszvb_SetPulseGeneratorDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 delay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'delay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'delay'),)
 rszvb_SetPulseGeneratorDelay  = prototype(('rszvb_SetPulseGeneratorDelay', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorDelay.name = 'rszvb_SetPulseGeneratorDelay'
 rszvb_SetPulseGeneratorDelay.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorDelay.output = False
 # rszvb_GetPulseGeneratorDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* delay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'delay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'delay'),)
 rszvb_GetPulseGeneratorDelay  = prototype(('rszvb_GetPulseGeneratorDelay', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorDelay.name = 'rszvb_GetPulseGeneratorDelay'
 rszvb_GetPulseGeneratorDelay.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorDelay.output = True
 # rszvb_SetChoppedPulseProfileMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean choppedPulseProfileMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'choppedPulseProfileMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'choppedPulseProfileMode'),)
 rszvb_SetChoppedPulseProfileMode  = prototype(('rszvb_SetChoppedPulseProfileMode', rszvbDLL), paramflags)
 rszvb_SetChoppedPulseProfileMode.name = 'rszvb_SetChoppedPulseProfileMode'
 rszvb_SetChoppedPulseProfileMode.errcheck = __errorcheck__
 rszvb_SetChoppedPulseProfileMode.output = False
 # rszvb_GetChoppedPulseProfileMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* choppedPulseProfileMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'choppedPulseProfileMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'choppedPulseProfileMode'),)
 rszvb_GetChoppedPulseProfileMode  = prototype(('rszvb_GetChoppedPulseProfileMode', rszvbDLL), paramflags)
 rszvb_GetChoppedPulseProfileMode.name = 'rszvb_GetChoppedPulseProfileMode'
 rszvb_GetChoppedPulseProfileMode.errcheck = __errorcheck__
 rszvb_GetChoppedPulseProfileMode.output = True
 # rszvb_SetChoppedPulseProfileDelayIncrement ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 delayIncrement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'delayIncrement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'delayIncrement'),)
 rszvb_SetChoppedPulseProfileDelayIncrement  = prototype(('rszvb_SetChoppedPulseProfileDelayIncrement', rszvbDLL), paramflags)
 rszvb_SetChoppedPulseProfileDelayIncrement.name = 'rszvb_SetChoppedPulseProfileDelayIncrement'
 rszvb_SetChoppedPulseProfileDelayIncrement.errcheck = __errorcheck__
 rszvb_SetChoppedPulseProfileDelayIncrement.output = False
 # rszvb_GetChoppedPulseProfileDelayIncrement ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* delayIncrement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'delayIncrement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'delayIncrement'),)
 rszvb_GetChoppedPulseProfileDelayIncrement  = prototype(('rszvb_GetChoppedPulseProfileDelayIncrement', rszvbDLL), paramflags)
 rszvb_GetChoppedPulseProfileDelayIncrement.name = 'rszvb_GetChoppedPulseProfileDelayIncrement'
 rszvb_GetChoppedPulseProfileDelayIncrement.errcheck = __errorcheck__
 rszvb_GetChoppedPulseProfileDelayIncrement.output = True
 # rszvb_ConfigureZVAXPath ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean internalCombiner', 'ViBoolean harmonicFilter', 'ViBoolean pulseModulator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool,c_bool,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'internalCombiner'),(1, 'harmonicFilter'),(1, 'pulseModulator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'internalCombiner'),(1, 'harmonicFilter'),(1, 'pulseModulator'),)
 rszvb_ConfigureZVAXPath  = prototype(('rszvb_ConfigureZVAXPath', rszvbDLL), paramflags)
 rszvb_ConfigureZVAXPath.name = 'rszvb_ConfigureZVAXPath'
 rszvb_ConfigureZVAXPath.errcheck = __errorcheck__
 rszvb_ConfigureZVAXPath.output = False
 # rszvb_ConfigurePulseGenerators ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean extSignalGeneratorInput', 'ViBoolean extSignalGeneratorOutput', 'ViInt32 assignment']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool,c_bool,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'extSignalGeneratorInput'),(1, 'extSignalGeneratorOutput'),(1, 'assignment'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'extSignalGeneratorInput'),(1, 'extSignalGeneratorOutput'),(1, 'assignment'),)
 rszvb_ConfigurePulseGenerators  = prototype(('rszvb_ConfigurePulseGenerators', rszvbDLL), paramflags)
 rszvb_ConfigurePulseGenerators.name = 'rszvb_ConfigurePulseGenerators'
 rszvb_ConfigurePulseGenerators.errcheck = __errorcheck__
 rszvb_ConfigurePulseGenerators.output = False
 # rszvb_SetInternalCombiner ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean internalCombiner']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'internalCombiner'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'internalCombiner'),)
 rszvb_SetInternalCombiner  = prototype(('rszvb_SetInternalCombiner', rszvbDLL), paramflags)
 rszvb_SetInternalCombiner.name = 'rszvb_SetInternalCombiner'
 rszvb_SetInternalCombiner.errcheck = __errorcheck__
 rszvb_SetInternalCombiner.output = False
 # rszvb_GetInternalCombiner ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* internalCombiner']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'internalCombiner'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'internalCombiner'),)
 rszvb_GetInternalCombiner  = prototype(('rszvb_GetInternalCombiner', rszvbDLL), paramflags)
 rszvb_GetInternalCombiner.name = 'rszvb_GetInternalCombiner'
 rszvb_GetInternalCombiner.errcheck = __errorcheck__
 rszvb_GetInternalCombiner.output = True
 # rszvb_SetHarmonicFilter ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean harmonicFilter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'harmonicFilter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'harmonicFilter'),)
 rszvb_SetHarmonicFilter  = prototype(('rszvb_SetHarmonicFilter', rszvbDLL), paramflags)
 rszvb_SetHarmonicFilter.name = 'rszvb_SetHarmonicFilter'
 rszvb_SetHarmonicFilter.errcheck = __errorcheck__
 rszvb_SetHarmonicFilter.output = False
 # rszvb_GetHarmonicFilter ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean* harmonicFilter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'harmonicFilter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'harmonicFilter'),)
 rszvb_GetHarmonicFilter  = prototype(('rszvb_GetHarmonicFilter', rszvbDLL), paramflags)
 rszvb_GetHarmonicFilter.name = 'rszvb_GetHarmonicFilter'
 rszvb_GetHarmonicFilter.errcheck = __errorcheck__
 rszvb_GetHarmonicFilter.output = True
 # rszvb_SetLNPreamplifier ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetLNPreamplifier  = prototype(('rszvb_SetLNPreamplifier', rszvbDLL), paramflags)
 rszvb_SetLNPreamplifier.name = 'rszvb_SetLNPreamplifier'
 rszvb_SetLNPreamplifier.errcheck = __errorcheck__
 rszvb_SetLNPreamplifier.output = False
 # rszvb_GetLNPreamplifier ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetLNPreamplifier  = prototype(('rszvb_GetLNPreamplifier', rszvbDLL), paramflags)
 rszvb_GetLNPreamplifier.name = 'rszvb_GetLNPreamplifier'
 rszvb_GetLNPreamplifier.errcheck = __errorcheck__
 rszvb_GetLNPreamplifier.output = True
 # rszvb_SetPulseModulator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean pulseModulator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'pulseModulator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'pulseModulator'),)
 rszvb_SetPulseModulator  = prototype(('rszvb_SetPulseModulator', rszvbDLL), paramflags)
 rszvb_SetPulseModulator.name = 'rszvb_SetPulseModulator'
 rszvb_SetPulseModulator.errcheck = __errorcheck__
 rszvb_SetPulseModulator.output = False
 # rszvb_GetPulseModulator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean* pulseModulator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'pulseModulator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'pulseModulator'),)
 rszvb_GetPulseModulator  = prototype(('rszvb_GetPulseModulator', rszvbDLL), paramflags)
 rszvb_GetPulseModulator.name = 'rszvb_GetPulseModulator'
 rszvb_GetPulseModulator.errcheck = __errorcheck__
 rszvb_GetPulseModulator.output = True
 # rszvb_SetExternalSignalGeneratorInput ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean extSignalGeneratorInput']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'extSignalGeneratorInput'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'extSignalGeneratorInput'),)
 rszvb_SetExternalSignalGeneratorInput  = prototype(('rszvb_SetExternalSignalGeneratorInput', rszvbDLL), paramflags)
 rszvb_SetExternalSignalGeneratorInput.name = 'rszvb_SetExternalSignalGeneratorInput'
 rszvb_SetExternalSignalGeneratorInput.errcheck = __errorcheck__
 rszvb_SetExternalSignalGeneratorInput.output = False
 # rszvb_GetExternalSignalGeneratorInput ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* extSignalGeneratorInput']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'extSignalGeneratorInput'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'extSignalGeneratorInput'),)
 rszvb_GetExternalSignalGeneratorInput  = prototype(('rszvb_GetExternalSignalGeneratorInput', rszvbDLL), paramflags)
 rszvb_GetExternalSignalGeneratorInput.name = 'rszvb_GetExternalSignalGeneratorInput'
 rszvb_GetExternalSignalGeneratorInput.errcheck = __errorcheck__
 rszvb_GetExternalSignalGeneratorInput.output = True
 # rszvb_SetPulseGeneratorAssignment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 assignment']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'assignment'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'assignment'),)
 rszvb_SetPulseGeneratorAssignment  = prototype(('rszvb_SetPulseGeneratorAssignment', rszvbDLL), paramflags)
 rszvb_SetPulseGeneratorAssignment.name = 'rszvb_SetPulseGeneratorAssignment'
 rszvb_SetPulseGeneratorAssignment.errcheck = __errorcheck__
 rszvb_SetPulseGeneratorAssignment.output = False
 # rszvb_GetPulseGeneratorAssignment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* assignment']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'assignment'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'assignment'),)
 rszvb_GetPulseGeneratorAssignment  = prototype(('rszvb_GetPulseGeneratorAssignment', rszvbDLL), paramflags)
 rszvb_GetPulseGeneratorAssignment.name = 'rszvb_GetPulseGeneratorAssignment'
 rszvb_GetPulseGeneratorAssignment.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorAssignment.output = True
 # rszvb_SetExternalSignalGeneratorOutput ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean extSignalGeneratorOutput']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'extSignalGeneratorOutput'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'extSignalGeneratorOutput'),)
 rszvb_SetExternalSignalGeneratorOutput  = prototype(('rszvb_SetExternalSignalGeneratorOutput', rszvbDLL), paramflags)
 rszvb_SetExternalSignalGeneratorOutput.name = 'rszvb_SetExternalSignalGeneratorOutput'
 rszvb_SetExternalSignalGeneratorOutput.errcheck = __errorcheck__
 rszvb_SetExternalSignalGeneratorOutput.output = False
 # rszvb_GetExternalSignalGeneratorOutput ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* extSignalGeneratorOutput']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'extSignalGeneratorOutput'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'extSignalGeneratorOutput'),)
 rszvb_GetExternalSignalGeneratorOutput  = prototype(('rszvb_GetExternalSignalGeneratorOutput', rszvbDLL), paramflags)
 rszvb_GetExternalSignalGeneratorOutput.name = 'rszvb_GetExternalSignalGeneratorOutput'
 rszvb_GetExternalSignalGeneratorOutput.errcheck = __errorcheck__
 rszvb_GetExternalSignalGeneratorOutput.output = True
 # rszvb_SetTRMMeasureInput ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViInt32 input']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'input'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'input'),)
 rszvb_SetTRMMeasureInput  = prototype(('rszvb_SetTRMMeasureInput', rszvbDLL), paramflags)
 rszvb_SetTRMMeasureInput.name = 'rszvb_SetTRMMeasureInput'
 rszvb_SetTRMMeasureInput.errcheck = __errorcheck__
 rszvb_SetTRMMeasureInput.output = False
 # rszvb_GetTRMMeasureInput ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViInt32* input']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'input'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'input'),)
 rszvb_GetTRMMeasureInput  = prototype(('rszvb_GetTRMMeasureInput', rszvbDLL), paramflags)
 rszvb_GetTRMMeasureInput.name = 'rszvb_GetTRMMeasureInput'
 rszvb_GetTRMMeasureInput.errcheck = __errorcheck__
 rszvb_GetTRMMeasureInput.output = True
 # rszvb_SetTRMCombinerState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean combinerState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'combinerState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'combinerState'),)
 rszvb_SetTRMCombinerState  = prototype(('rszvb_SetTRMCombinerState', rszvbDLL), paramflags)
 rszvb_SetTRMCombinerState.name = 'rszvb_SetTRMCombinerState'
 rszvb_SetTRMCombinerState.errcheck = __errorcheck__
 rszvb_SetTRMCombinerState.output = False
 # rszvb_GetTRMCombinerState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean* combinerState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'combinerState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'combinerState'),)
 rszvb_GetTRMCombinerState  = prototype(('rszvb_GetTRMCombinerState', rszvbDLL), paramflags)
 rszvb_GetTRMCombinerState.name = 'rszvb_GetTRMCombinerState'
 rszvb_GetTRMCombinerState.errcheck = __errorcheck__
 rszvb_GetTRMCombinerState.output = True
 # rszvb_SetTRMPowerAmplifierState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean powerAmplifierState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'powerAmplifierState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'powerAmplifierState'),)
 rszvb_SetTRMPowerAmplifierState  = prototype(('rszvb_SetTRMPowerAmplifierState', rszvbDLL), paramflags)
 rszvb_SetTRMPowerAmplifierState.name = 'rszvb_SetTRMPowerAmplifierState'
 rszvb_SetTRMPowerAmplifierState.errcheck = __errorcheck__
 rszvb_SetTRMPowerAmplifierState.output = False
 # rszvb_GetTRMPowerAmplifierState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean* powerAmplifierState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'powerAmplifierState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'powerAmplifierState'),)
 rszvb_GetTRMPowerAmplifierState  = prototype(('rszvb_GetTRMPowerAmplifierState', rszvbDLL), paramflags)
 rszvb_GetTRMPowerAmplifierState.name = 'rszvb_GetTRMPowerAmplifierState'
 rszvb_GetTRMPowerAmplifierState.errcheck = __errorcheck__
 rszvb_GetTRMPowerAmplifierState.output = True
 # rszvb_SetTRMPulseModulatorState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean pulseModulatorState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'pulseModulatorState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'pulseModulatorState'),)
 rszvb_SetTRMPulseModulatorState  = prototype(('rszvb_SetTRMPulseModulatorState', rszvbDLL), paramflags)
 rszvb_SetTRMPulseModulatorState.name = 'rszvb_SetTRMPulseModulatorState'
 rszvb_SetTRMPulseModulatorState.errcheck = __errorcheck__
 rszvb_SetTRMPulseModulatorState.output = False
 # rszvb_GetTRMPulseModulatorState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean* pulseModulatorState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'pulseModulatorState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'pulseModulatorState'),)
 rszvb_GetTRMPulseModulatorState  = prototype(('rszvb_GetTRMPulseModulatorState', rszvbDLL), paramflags)
 rszvb_GetTRMPulseModulatorState.name = 'rszvb_GetTRMPulseModulatorState'
 rszvb_GetTRMPulseModulatorState.errcheck = __errorcheck__
 rszvb_GetTRMPulseModulatorState.output = True
 # rszvb_SetTRMUserSourcePathExtensionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean userSourcePathExtension']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'userSourcePathExtension'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'userSourcePathExtension'),)
 rszvb_SetTRMUserSourcePathExtensionState  = prototype(('rszvb_SetTRMUserSourcePathExtensionState', rszvbDLL), paramflags)
 rszvb_SetTRMUserSourcePathExtensionState.name = 'rszvb_SetTRMUserSourcePathExtensionState'
 rszvb_SetTRMUserSourcePathExtensionState.errcheck = __errorcheck__
 rszvb_SetTRMUserSourcePathExtensionState.output = False
 # rszvb_GetTRMUserSourcePathExtensionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean* userSourcePathExtension']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'userSourcePathExtension'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'userSourcePathExtension'),)
 rszvb_GetTRMUserSourcePathExtensionState  = prototype(('rszvb_GetTRMUserSourcePathExtensionState', rszvbDLL), paramflags)
 rszvb_GetTRMUserSourcePathExtensionState.name = 'rszvb_GetTRMUserSourcePathExtensionState'
 rszvb_GetTRMUserSourcePathExtensionState.errcheck = __errorcheck__
 rszvb_GetTRMUserSourcePathExtensionState.output = True
 # rszvb_SetTRMUserMeasurementPathExtensionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean userMeasurementPathExtension']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'userMeasurementPathExtension'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'userMeasurementPathExtension'),)
 rszvb_SetTRMUserMeasurementPathExtensionState  = prototype(('rszvb_SetTRMUserMeasurementPathExtensionState', rszvbDLL), paramflags)
 rszvb_SetTRMUserMeasurementPathExtensionState.name = 'rszvb_SetTRMUserMeasurementPathExtensionState'
 rszvb_SetTRMUserMeasurementPathExtensionState.errcheck = __errorcheck__
 rszvb_SetTRMUserMeasurementPathExtensionState.output = False
 # rszvb_GetTRMUserMeasurementPathExtensionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViBoolean* userMeasurementPathExtension']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'userMeasurementPathExtension'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'userMeasurementPathExtension'),)
 rszvb_GetTRMUserMeasurementPathExtensionState  = prototype(('rszvb_GetTRMUserMeasurementPathExtensionState', rszvbDLL), paramflags)
 rszvb_GetTRMUserMeasurementPathExtensionState.name = 'rszvb_GetTRMUserMeasurementPathExtensionState'
 rszvb_GetTRMUserMeasurementPathExtensionState.errcheck = __errorcheck__
 rszvb_GetTRMUserMeasurementPathExtensionState.output = True
 # rszvb_SetTRMPulseModulatorSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViInt32 pulseModulatorSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(1, 'pulseModulatorSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(1, 'pulseModulatorSource'),)
 rszvb_SetTRMPulseModulatorSource  = prototype(('rszvb_SetTRMPulseModulatorSource', rszvbDLL), paramflags)
 rszvb_SetTRMPulseModulatorSource.name = 'rszvb_SetTRMPulseModulatorSource'
 rszvb_SetTRMPulseModulatorSource.errcheck = __errorcheck__
 rszvb_SetTRMPulseModulatorSource.output = False
 # rszvb_GetTRMPulseModulatorSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 path', 'ViInt32* pulseModulatorSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'path'),(2, 'pulseModulatorSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'path'),(2, 'pulseModulatorSource'),)
 rszvb_GetTRMPulseModulatorSource  = prototype(('rszvb_GetTRMPulseModulatorSource', rszvbDLL), paramflags)
 rszvb_GetTRMPulseModulatorSource.name = 'rszvb_GetTRMPulseModulatorSource'
 rszvb_GetTRMPulseModulatorSource.errcheck = __errorcheck__
 rszvb_GetTRMPulseModulatorSource.output = True
 # rszvb_SetTRMPulseGeneratorSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 extOut', 'ViInt32 pulseGeneratorSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'extOut'),(1, 'pulseGeneratorSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'extOut'),(1, 'pulseGeneratorSource'),)
 rszvb_SetTRMPulseGeneratorSource  = prototype(('rszvb_SetTRMPulseGeneratorSource', rszvbDLL), paramflags)
 rszvb_SetTRMPulseGeneratorSource.name = 'rszvb_SetTRMPulseGeneratorSource'
 rszvb_SetTRMPulseGeneratorSource.errcheck = __errorcheck__
 rszvb_SetTRMPulseGeneratorSource.output = False
 # rszvb_GetTRMPulseGeneratorSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 extOut', 'ViInt32* pulseGeneratorSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'extOut'),(2, 'pulseGeneratorSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'extOut'),(2, 'pulseGeneratorSource'),)
 rszvb_GetTRMPulseGeneratorSource  = prototype(('rszvb_GetTRMPulseGeneratorSource', rszvbDLL), paramflags)
 rszvb_GetTRMPulseGeneratorSource.name = 'rszvb_GetTRMPulseGeneratorSource'
 rszvb_GetTRMPulseGeneratorSource.errcheck = __errorcheck__
 rszvb_GetTRMPulseGeneratorSource.output = True
 # rszvb_SetTRMPulseGeneratorInvertSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 extOut', 'ViBoolean invertSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'extOut'),(1, 'invertSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'extOut'),(1, 'invertSource'),)
 rszvb_SetTRMPulseGeneratorInvertSource  = prototype(('rszvb_SetTRMPulseGeneratorInvertSource', rszvbDLL), paramflags)
 rszvb_SetTRMPulseGeneratorInvertSource.name = 'rszvb_SetTRMPulseGeneratorInvertSource'
 rszvb_SetTRMPulseGeneratorInvertSource.errcheck = __errorcheck__
 rszvb_SetTRMPulseGeneratorInvertSource.output = False
 # rszvb_GetTRMPulseGeneratorInvertSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 extOut', 'ViBoolean* invertSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'extOut'),(2, 'invertSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'extOut'),(2, 'invertSource'),)
 rszvb_GetTRMPulseGeneratorInvertSource  = prototype(('rszvb_GetTRMPulseGeneratorInvertSource', rszvbDLL), paramflags)
 rszvb_GetTRMPulseGeneratorInvertSource.name = 'rszvb_GetTRMPulseGeneratorInvertSource'
 rszvb_GetTRMPulseGeneratorInvertSource.errcheck = __errorcheck__
@@ -5248,469 +5248,469 @@ rszvb_GetTRMUnitHardwareOptions.errcheck = __errorcheck__
 rszvb_GetTRMUnitHardwareOptions.output = False
 # rszvb_ConfigureHarmonicMeasurement ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 harmonicMeasurement', 'ViBoolean relativeHarmonicMeasurement', 'ViInt32 source', 'ViInt32 harmonicMeasuredAt', 'ViInt32 harmonicOrder']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'harmonicMeasurement'),(1, 'relativeHarmonicMeasurement'),(1, 'source'),(1, 'harmonicMeasuredAt'),(1, 'harmonicOrder'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'harmonicMeasurement'),(1, 'relativeHarmonicMeasurement'),(1, 'source'),(1, 'harmonicMeasuredAt'),(1, 'harmonicOrder'),)
 rszvb_ConfigureHarmonicMeasurement  = prototype(('rszvb_ConfigureHarmonicMeasurement', rszvbDLL), paramflags)
 rszvb_ConfigureHarmonicMeasurement.name = 'rszvb_ConfigureHarmonicMeasurement'
 rszvb_ConfigureHarmonicMeasurement.errcheck = __errorcheck__
 rszvb_ConfigureHarmonicMeasurement.output = False
 # rszvb_SetHarmonicMeasurementState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 harmonicMeasurement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'harmonicMeasurement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'harmonicMeasurement'),)
 rszvb_SetHarmonicMeasurementState  = prototype(('rszvb_SetHarmonicMeasurementState', rszvbDLL), paramflags)
 rszvb_SetHarmonicMeasurementState.name = 'rszvb_SetHarmonicMeasurementState'
 rszvb_SetHarmonicMeasurementState.errcheck = __errorcheck__
 rszvb_SetHarmonicMeasurementState.output = False
 # rszvb_GetHarmonicMeasurementState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* harmonicMeasurement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'harmonicMeasurement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'harmonicMeasurement'),)
 rszvb_GetHarmonicMeasurementState  = prototype(('rszvb_GetHarmonicMeasurementState', rszvbDLL), paramflags)
 rszvb_GetHarmonicMeasurementState.name = 'rszvb_GetHarmonicMeasurementState'
 rszvb_GetHarmonicMeasurementState.errcheck = __errorcheck__
 rszvb_GetHarmonicMeasurementState.output = True
 # rszvb_SetHarmonicOrder ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 harmonicOrder']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'harmonicOrder'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'harmonicOrder'),)
 rszvb_SetHarmonicOrder  = prototype(('rszvb_SetHarmonicOrder', rszvbDLL), paramflags)
 rszvb_SetHarmonicOrder.name = 'rszvb_SetHarmonicOrder'
 rszvb_SetHarmonicOrder.errcheck = __errorcheck__
 rszvb_SetHarmonicOrder.output = False
 # rszvb_GetHarmonicOrder ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* harmonicOrder']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'harmonicOrder'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'harmonicOrder'),)
 rszvb_GetHarmonicOrder  = prototype(('rszvb_GetHarmonicOrder', rszvbDLL), paramflags)
 rszvb_GetHarmonicOrder.name = 'rszvb_GetHarmonicOrder'
 rszvb_GetHarmonicOrder.errcheck = __errorcheck__
 rszvb_GetHarmonicOrder.output = True
 # rszvb_SetHarmonicSourcePort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),)
 rszvb_SetHarmonicSourcePort  = prototype(('rszvb_SetHarmonicSourcePort', rszvbDLL), paramflags)
 rszvb_SetHarmonicSourcePort.name = 'rszvb_SetHarmonicSourcePort'
 rszvb_SetHarmonicSourcePort.errcheck = __errorcheck__
 rszvb_SetHarmonicSourcePort.output = False
 # rszvb_GetHarmonicSourcePort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'port'),)
 rszvb_GetHarmonicSourcePort  = prototype(('rszvb_GetHarmonicSourcePort', rszvbDLL), paramflags)
 rszvb_GetHarmonicSourcePort.name = 'rszvb_GetHarmonicSourcePort'
 rszvb_GetHarmonicSourcePort.errcheck = __errorcheck__
 rszvb_GetHarmonicSourcePort.output = True
 # rszvb_SetHarmonicReceivePort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),)
 rszvb_SetHarmonicReceivePort  = prototype(('rszvb_SetHarmonicReceivePort', rszvbDLL), paramflags)
 rszvb_SetHarmonicReceivePort.name = 'rszvb_SetHarmonicReceivePort'
 rszvb_SetHarmonicReceivePort.errcheck = __errorcheck__
 rszvb_SetHarmonicReceivePort.output = False
 # rszvb_GetHarmonicReceivePort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'port'),)
 rszvb_GetHarmonicReceivePort  = prototype(('rszvb_GetHarmonicReceivePort', rszvbDLL), paramflags)
 rszvb_GetHarmonicReceivePort.name = 'rszvb_GetHarmonicReceivePort'
 rszvb_GetHarmonicReceivePort.errcheck = __errorcheck__
 rszvb_GetHarmonicReceivePort.output = True
 # rszvb_SetHarmonicRelativeState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean relativeHarmonicMeasurement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'relativeHarmonicMeasurement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'relativeHarmonicMeasurement'),)
 rszvb_SetHarmonicRelativeState  = prototype(('rszvb_SetHarmonicRelativeState', rszvbDLL), paramflags)
 rszvb_SetHarmonicRelativeState.name = 'rszvb_SetHarmonicRelativeState'
 rszvb_SetHarmonicRelativeState.errcheck = __errorcheck__
 rszvb_SetHarmonicRelativeState.output = False
 # rszvb_GetHarmonicRelativeState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* relativeHarmonicMeasurement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'relativeHarmonicMeasurement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'relativeHarmonicMeasurement'),)
 rszvb_GetHarmonicRelativeState  = prototype(('rszvb_GetHarmonicRelativeState', rszvbDLL), paramflags)
 rszvb_GetHarmonicRelativeState.name = 'rszvb_GetHarmonicRelativeState'
 rszvb_GetHarmonicRelativeState.errcheck = __errorcheck__
 rszvb_GetHarmonicRelativeState.output = True
 # rszvb_SetMixerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 mixerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'mixerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'mixerMode'),)
 rszvb_SetMixerMode  = prototype(('rszvb_SetMixerMode', rszvbDLL), paramflags)
 rszvb_SetMixerMode.name = 'rszvb_SetMixerMode'
 rszvb_SetMixerMode.errcheck = __errorcheck__
 rszvb_SetMixerMode.output = False
 # rszvb_GetMixerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* mixerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'mixerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'mixerMode'),)
 rszvb_GetMixerMode  = prototype(('rszvb_GetMixerMode', rszvbDLL), paramflags)
 rszvb_GetMixerMode.name = 'rszvb_GetMixerMode'
 rszvb_GetMixerMode.errcheck = __errorcheck__
 rszvb_GetMixerMode.output = True
 # rszvb_SetNumberOfStages ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 numberOfStages']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'numberOfStages'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'numberOfStages'),)
 rszvb_SetNumberOfStages  = prototype(('rszvb_SetNumberOfStages', rszvbDLL), paramflags)
 rszvb_SetNumberOfStages.name = 'rszvb_SetNumberOfStages'
 rszvb_SetNumberOfStages.errcheck = __errorcheck__
 rszvb_SetNumberOfStages.output = False
 # rszvb_GetNumberOfStages ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* numberOfStages']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'numberOfStages'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'numberOfStages'),)
 rszvb_GetNumberOfStages  = prototype(('rszvb_GetNumberOfStages', rszvbDLL), paramflags)
 rszvb_GetNumberOfStages.name = 'rszvb_GetNumberOfStages'
 rszvb_GetNumberOfStages.errcheck = __errorcheck__
 rszvb_GetNumberOfStages.output = True
 # rszvb_SetSignalSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 stage', 'ViInt32 source', 'ViInt32 portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stage'),(1, 'source'),(1, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stage'),(1, 'source'),(1, 'portNumber'),)
 rszvb_SetSignalSource  = prototype(('rszvb_SetSignalSource', rszvbDLL), paramflags)
 rszvb_SetSignalSource.name = 'rszvb_SetSignalSource'
 rszvb_SetSignalSource.errcheck = __errorcheck__
 rszvb_SetSignalSource.output = False
 # rszvb_GetSignalSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 stage', 'ViInt32* source', 'ViInt32* portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stage'),(2, 'source'),(2, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stage'),(2, 'source'),(2, 'portNumber'),)
 rszvb_GetSignalSource  = prototype(('rszvb_GetSignalSource', rszvbDLL), paramflags)
 rszvb_GetSignalSource.name = 'rszvb_GetSignalSource'
 rszvb_GetSignalSource.errcheck = __errorcheck__
 rszvb_GetSignalSource.output = True
 # rszvb_SetIFSignalPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),)
 rszvb_SetIFSignalPort  = prototype(('rszvb_SetIFSignalPort', rszvbDLL), paramflags)
 rszvb_SetIFSignalPort.name = 'rszvb_SetIFSignalPort'
 rszvb_SetIFSignalPort.errcheck = __errorcheck__
 rszvb_SetIFSignalPort.output = False
 # rszvb_GetIFSignalPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'portNumber'),)
 rszvb_GetIFSignalPort  = prototype(('rszvb_GetIFSignalPort', rszvbDLL), paramflags)
 rszvb_GetIFSignalPort.name = 'rszvb_GetIFSignalPort'
 rszvb_GetIFSignalPort.errcheck = __errorcheck__
 rszvb_GetIFSignalPort.output = True
 # rszvb_SetRFSignalPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),)
 rszvb_SetRFSignalPort  = prototype(('rszvb_SetRFSignalPort', rszvbDLL), paramflags)
 rszvb_SetRFSignalPort.name = 'rszvb_SetRFSignalPort'
 rszvb_SetRFSignalPort.errcheck = __errorcheck__
 rszvb_SetRFSignalPort.output = False
 # rszvb_GetRFSignalPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'portNumber'),)
 rszvb_GetRFSignalPort  = prototype(('rszvb_GetRFSignalPort', rszvbDLL), paramflags)
 rszvb_GetRFSignalPort.name = 'rszvb_GetRFSignalPort'
 rszvb_GetRFSignalPort.errcheck = __errorcheck__
 rszvb_GetRFSignalPort.output = True
 # rszvb_SetInternalSignalSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 internalSignalSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'internalSignalSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'internalSignalSource'),)
 rszvb_SetInternalSignalSource  = prototype(('rszvb_SetInternalSignalSource', rszvbDLL), paramflags)
 rszvb_SetInternalSignalSource.name = 'rszvb_SetInternalSignalSource'
 rszvb_SetInternalSignalSource.errcheck = __errorcheck__
 rszvb_SetInternalSignalSource.output = False
 # rszvb_GetInternalSignalSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* internalSignalSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'internalSignalSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'internalSignalSource'),)
 rszvb_GetInternalSignalSource  = prototype(('rszvb_GetInternalSignalSource', rszvbDLL), paramflags)
 rszvb_GetInternalSignalSource.name = 'rszvb_GetInternalSignalSource'
 rszvb_GetInternalSignalSource.errcheck = __errorcheck__
 rszvb_GetInternalSignalSource.output = True
 # rszvb_SetExternalSignalSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 externalSignalSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'externalSignalSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'externalSignalSource'),)
 rszvb_SetExternalSignalSource  = prototype(('rszvb_SetExternalSignalSource', rszvbDLL), paramflags)
 rszvb_SetExternalSignalSource.name = 'rszvb_SetExternalSignalSource'
 rszvb_SetExternalSignalSource.errcheck = __errorcheck__
 rszvb_SetExternalSignalSource.output = False
 # rszvb_GetExternalSignalSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* externalSignalSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'externalSignalSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'externalSignalSource'),)
 rszvb_GetExternalSignalSource  = prototype(('rszvb_GetExternalSignalSource', rszvbDLL), paramflags)
 rszvb_GetExternalSignalSource.name = 'rszvb_GetExternalSignalSource'
 rszvb_GetExternalSignalSource.errcheck = __errorcheck__
 rszvb_GetExternalSignalSource.output = True
 # rszvb_ConfigurePowerSettings ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 fundamentalPower', 'ViReal64 fixedPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fundamentalPower'),(1, 'fixedPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fundamentalPower'),(1, 'fixedPower'),)
 rszvb_ConfigurePowerSettings  = prototype(('rszvb_ConfigurePowerSettings', rszvbDLL), paramflags)
 rszvb_ConfigurePowerSettings.name = 'rszvb_ConfigurePowerSettings'
 rszvb_ConfigurePowerSettings.errcheck = __errorcheck__
 rszvb_ConfigurePowerSettings.output = False
 # rszvb_SetFundamentalPowerSignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 fundamentalPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fundamentalPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fundamentalPower'),)
 rszvb_SetFundamentalPowerSignal  = prototype(('rszvb_SetFundamentalPowerSignal', rszvbDLL), paramflags)
 rszvb_SetFundamentalPowerSignal.name = 'rszvb_SetFundamentalPowerSignal'
 rszvb_SetFundamentalPowerSignal.errcheck = __errorcheck__
 rszvb_SetFundamentalPowerSignal.output = False
 # rszvb_GetFundamentalPowerSignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* fundamentalPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'fundamentalPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'fundamentalPower'),)
 rszvb_GetFundamentalPowerSignal  = prototype(('rszvb_GetFundamentalPowerSignal', rszvbDLL), paramflags)
 rszvb_GetFundamentalPowerSignal.name = 'rszvb_GetFundamentalPowerSignal'
 rszvb_GetFundamentalPowerSignal.errcheck = __errorcheck__
 rszvb_GetFundamentalPowerSignal.output = True
 # rszvb_SetFixedPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 fixedPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fixedPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fixedPower'),)
 rszvb_SetFixedPower  = prototype(('rszvb_SetFixedPower', rszvbDLL), paramflags)
 rszvb_SetFixedPower.name = 'rszvb_SetFixedPower'
 rszvb_SetFixedPower.errcheck = __errorcheck__
 rszvb_SetFixedPower.output = False
 # rszvb_GetFixedPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* fixedPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'fixedPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'fixedPower'),)
 rszvb_GetFixedPower  = prototype(('rszvb_GetFixedPower', rszvbDLL), paramflags)
 rszvb_GetFixedPower.name = 'rszvb_GetFixedPower'
 rszvb_GetFixedPower.errcheck = __errorcheck__
 rszvb_GetFixedPower.output = True
 # rszvb_SetFixedPowerToSignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 signal', 'ViReal64 fixedPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'signal'),(1, 'fixedPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'signal'),(1, 'fixedPower'),)
 rszvb_SetFixedPowerToSignal  = prototype(('rszvb_SetFixedPowerToSignal', rszvbDLL), paramflags)
 rszvb_SetFixedPowerToSignal.name = 'rszvb_SetFixedPowerToSignal'
 rszvb_SetFixedPowerToSignal.errcheck = __errorcheck__
 rszvb_SetFixedPowerToSignal.output = False
 # rszvb_GetFixedPowerToSignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 signal', 'ViReal64* fixedPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'signal'),(2, 'fixedPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'signal'),(2, 'fixedPower'),)
 rszvb_GetFixedPowerToSignal  = prototype(('rszvb_GetFixedPowerToSignal', rszvbDLL), paramflags)
 rszvb_GetFixedPowerToSignal.name = 'rszvb_GetFixedPowerToSignal'
 rszvb_GetFixedPowerToSignal.errcheck = __errorcheck__
 rszvb_GetFixedPowerToSignal.output = True
 # rszvb_SetSignalPowerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 signal', 'ViInt32 mode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'signal'),(1, 'mode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'signal'),(1, 'mode'),)
 rszvb_SetSignalPowerMode  = prototype(('rszvb_SetSignalPowerMode', rszvbDLL), paramflags)
 rszvb_SetSignalPowerMode.name = 'rszvb_SetSignalPowerMode'
 rszvb_SetSignalPowerMode.errcheck = __errorcheck__
 rszvb_SetSignalPowerMode.output = False
 # rszvb_GetSignalPowerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 signal', 'ViInt32* mode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'signal'),(2, 'mode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'signal'),(2, 'mode'),)
 rszvb_GetSignalPowerMode  = prototype(('rszvb_GetSignalPowerMode', rszvbDLL), paramflags)
 rszvb_GetSignalPowerMode.name = 'rszvb_GetSignalPowerMode'
 rszvb_GetSignalPowerMode.errcheck = __errorcheck__
 rszvb_GetSignalPowerMode.output = True
 # rszvb_ConfigureFrequencySettings ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 fundamentalFrequencySignal', 'ViInt32 fixedFrequencySignal', 'ViReal64 fixedFrequency', 'ViInt32 frequencyConversionMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_double,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fundamentalFrequencySignal'),(1, 'fixedFrequencySignal'),(1, 'fixedFrequency'),(1, 'frequencyConversionMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fundamentalFrequencySignal'),(1, 'fixedFrequencySignal'),(1, 'fixedFrequency'),(1, 'frequencyConversionMode'),)
 rszvb_ConfigureFrequencySettings  = prototype(('rszvb_ConfigureFrequencySettings', rszvbDLL), paramflags)
 rszvb_ConfigureFrequencySettings.name = 'rszvb_ConfigureFrequencySettings'
 rszvb_ConfigureFrequencySettings.errcheck = __errorcheck__
 rszvb_ConfigureFrequencySettings.output = False
 # rszvb_SetFundamentalFrequencySignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 fundamentalFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fundamentalFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fundamentalFrequency'),)
 rszvb_SetFundamentalFrequencySignal  = prototype(('rszvb_SetFundamentalFrequencySignal', rszvbDLL), paramflags)
 rszvb_SetFundamentalFrequencySignal.name = 'rszvb_SetFundamentalFrequencySignal'
 rszvb_SetFundamentalFrequencySignal.errcheck = __errorcheck__
 rszvb_SetFundamentalFrequencySignal.output = False
 # rszvb_GetFundamentalFrequencySignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* fundamentalFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'fundamentalFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'fundamentalFrequency'),)
 rszvb_GetFundamentalFrequencySignal  = prototype(('rszvb_GetFundamentalFrequencySignal', rszvbDLL), paramflags)
 rszvb_GetFundamentalFrequencySignal.name = 'rszvb_GetFundamentalFrequencySignal'
 rszvb_GetFundamentalFrequencySignal.errcheck = __errorcheck__
 rszvb_GetFundamentalFrequencySignal.output = True
 # rszvb_SetFixedFrequencySignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 fixedFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fixedFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fixedFrequency'),)
 rszvb_SetFixedFrequencySignal  = prototype(('rszvb_SetFixedFrequencySignal', rszvbDLL), paramflags)
 rszvb_SetFixedFrequencySignal.name = 'rszvb_SetFixedFrequencySignal'
 rszvb_SetFixedFrequencySignal.errcheck = __errorcheck__
 rszvb_SetFixedFrequencySignal.output = False
 # rszvb_GetFixedFrequencySignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* fixedFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'fixedFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'fixedFrequency'),)
 rszvb_GetFixedFrequencySignal  = prototype(('rszvb_GetFixedFrequencySignal', rszvbDLL), paramflags)
 rszvb_GetFixedFrequencySignal.name = 'rszvb_GetFixedFrequencySignal'
 rszvb_GetFixedFrequencySignal.errcheck = __errorcheck__
 rszvb_GetFixedFrequencySignal.output = True
 # rszvb_SetFixedFrequencySignalStage2 ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 fixedFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fixedFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fixedFrequency'),)
 rszvb_SetFixedFrequencySignalStage2  = prototype(('rszvb_SetFixedFrequencySignalStage2', rszvbDLL), paramflags)
 rszvb_SetFixedFrequencySignalStage2.name = 'rszvb_SetFixedFrequencySignalStage2'
 rszvb_SetFixedFrequencySignalStage2.errcheck = __errorcheck__
 rszvb_SetFixedFrequencySignalStage2.output = False
 # rszvb_GetFixedFrequencySignalStage2 ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* fixedFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'fixedFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'fixedFrequency'),)
 rszvb_GetFixedFrequencySignalStage2  = prototype(('rszvb_GetFixedFrequencySignalStage2', rszvbDLL), paramflags)
 rszvb_GetFixedFrequencySignalStage2.name = 'rszvb_GetFixedFrequencySignalStage2'
 rszvb_GetFixedFrequencySignalStage2.errcheck = __errorcheck__
 rszvb_GetFixedFrequencySignalStage2.output = True
 # rszvb_SetFixedFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 fixedFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fixedFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fixedFrequency'),)
 rszvb_SetFixedFrequency  = prototype(('rszvb_SetFixedFrequency', rszvbDLL), paramflags)
 rszvb_SetFixedFrequency.name = 'rszvb_SetFixedFrequency'
 rszvb_SetFixedFrequency.errcheck = __errorcheck__
 rszvb_SetFixedFrequency.output = False
 # rszvb_GetFixedFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* fixedFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'fixedFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'fixedFrequency'),)
 rszvb_GetFixedFrequency  = prototype(('rszvb_GetFixedFrequency', rszvbDLL), paramflags)
 rszvb_GetFixedFrequency.name = 'rszvb_GetFixedFrequency'
 rszvb_GetFixedFrequency.errcheck = __errorcheck__
 rszvb_GetFixedFrequency.output = True
 # rszvb_SetFixedFrequencyToSignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 signal', 'ViReal64 fixedFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'signal'),(1, 'fixedFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'signal'),(1, 'fixedFrequency'),)
 rszvb_SetFixedFrequencyToSignal  = prototype(('rszvb_SetFixedFrequencyToSignal', rszvbDLL), paramflags)
 rszvb_SetFixedFrequencyToSignal.name = 'rszvb_SetFixedFrequencyToSignal'
 rszvb_SetFixedFrequencyToSignal.errcheck = __errorcheck__
 rszvb_SetFixedFrequencyToSignal.output = False
 # rszvb_GetFixedFrequencyToSignal ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 signal', 'ViReal64* fixedFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'signal'),(2, 'fixedFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'signal'),(2, 'fixedFrequency'),)
 rszvb_GetFixedFrequencyToSignal  = prototype(('rszvb_GetFixedFrequencyToSignal', rszvbDLL), paramflags)
 rszvb_GetFixedFrequencyToSignal.name = 'rszvb_GetFixedFrequencyToSignal'
 rszvb_GetFixedFrequencyToSignal.errcheck = __errorcheck__
 rszvb_GetFixedFrequencyToSignal.output = True
 # rszvb_SetFrequencyConversionMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 frequencyConversionMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'frequencyConversionMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'frequencyConversionMode'),)
 rszvb_SetFrequencyConversionMode  = prototype(('rszvb_SetFrequencyConversionMode', rszvbDLL), paramflags)
 rszvb_SetFrequencyConversionMode.name = 'rszvb_SetFrequencyConversionMode'
 rszvb_SetFrequencyConversionMode.errcheck = __errorcheck__
 rszvb_SetFrequencyConversionMode.output = False
 # rszvb_GetFrequencyConversionMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* frequencyConversionMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'frequencyConversionMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'frequencyConversionMode'),)
 rszvb_GetFrequencyConversionMode  = prototype(('rszvb_GetFrequencyConversionMode', rszvbDLL), paramflags)
 rszvb_GetFrequencyConversionMode.name = 'rszvb_GetFrequencyConversionMode'
 rszvb_GetFrequencyConversionMode.errcheck = __errorcheck__
 rszvb_GetFrequencyConversionMode.output = True
 # rszvb_SetFrequencyConversionModeStage2 ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 frequencyConversionMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'frequencyConversionMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'frequencyConversionMode'),)
 rszvb_SetFrequencyConversionModeStage2  = prototype(('rszvb_SetFrequencyConversionModeStage2', rszvbDLL), paramflags)
 rszvb_SetFrequencyConversionModeStage2.name = 'rszvb_SetFrequencyConversionModeStage2'
 rszvb_SetFrequencyConversionModeStage2.errcheck = __errorcheck__
 rszvb_SetFrequencyConversionModeStage2.output = False
 # rszvb_GetFrequencyConversionModeStage2 ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* frequencyConversionMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'frequencyConversionMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'frequencyConversionMode'),)
 rszvb_GetFrequencyConversionModeStage2  = prototype(('rszvb_GetFrequencyConversionModeStage2', rszvbDLL), paramflags)
 rszvb_GetFrequencyConversionModeStage2.name = 'rszvb_GetFrequencyConversionModeStage2'
 rszvb_GetFrequencyConversionModeStage2.errcheck = __errorcheck__
 rszvb_GetFrequencyConversionModeStage2.output = True
 # rszvb_SetFrequencyHighAccuracy ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean highAccuracy']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'highAccuracy'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'highAccuracy'),)
 rszvb_SetFrequencyHighAccuracy  = prototype(('rszvb_SetFrequencyHighAccuracy', rszvbDLL), paramflags)
 rszvb_SetFrequencyHighAccuracy.name = 'rszvb_SetFrequencyHighAccuracy'
 rszvb_SetFrequencyHighAccuracy.errcheck = __errorcheck__
 rszvb_SetFrequencyHighAccuracy.output = False
 # rszvb_GetFrequencyHighAccuracy ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* highAccuracy']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'highAccuracy'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'highAccuracy'),)
 rszvb_GetFrequencyHighAccuracy  = prototype(('rszvb_GetFrequencyHighAccuracy', rszvbDLL), paramflags)
 rszvb_GetFrequencyHighAccuracy.name = 'rszvb_GetFrequencyHighAccuracy'
 rszvb_GetFrequencyHighAccuracy.errcheck = __errorcheck__
 rszvb_GetFrequencyHighAccuracy.output = True
 # rszvb_SetFrequencyLOConversionFactor ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 stage', 'ViInt32 numerator', 'ViInt32 denominator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stage'),(1, 'numerator'),(1, 'denominator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stage'),(1, 'numerator'),(1, 'denominator'),)
 rszvb_SetFrequencyLOConversionFactor  = prototype(('rszvb_SetFrequencyLOConversionFactor', rszvbDLL), paramflags)
 rszvb_SetFrequencyLOConversionFactor.name = 'rszvb_SetFrequencyLOConversionFactor'
 rszvb_SetFrequencyLOConversionFactor.errcheck = __errorcheck__
 rszvb_SetFrequencyLOConversionFactor.output = False
 # rszvb_GetFrequencyLOConversionFactor ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 stage', 'ViInt32* numerator', 'ViInt32* denominator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'stage'),(2, 'numerator'),(2, 'denominator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'stage'),(2, 'numerator'),(2, 'denominator'),)
 rszvb_GetFrequencyLOConversionFactor  = prototype(('rszvb_GetFrequencyLOConversionFactor', rszvbDLL), paramflags)
 rszvb_GetFrequencyLOConversionFactor.name = 'rszvb_GetFrequencyLOConversionFactor'
 rszvb_GetFrequencyLOConversionFactor.errcheck = __errorcheck__
 rszvb_GetFrequencyLOConversionFactor.output = True
 # rszvb_SetFrequencyRFConversionFactor ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 numerator', 'ViInt32 denominator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'numerator'),(1, 'denominator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'numerator'),(1, 'denominator'),)
 rszvb_SetFrequencyRFConversionFactor  = prototype(('rszvb_SetFrequencyRFConversionFactor', rszvbDLL), paramflags)
 rszvb_SetFrequencyRFConversionFactor.name = 'rszvb_SetFrequencyRFConversionFactor'
 rszvb_SetFrequencyRFConversionFactor.errcheck = __errorcheck__
 rszvb_SetFrequencyRFConversionFactor.output = False
 # rszvb_GetFrequencyRFConversionFactor ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* numerator', 'ViInt32* denominator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'numerator'),(2, 'denominator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'numerator'),(2, 'denominator'),)
 rszvb_GetFrequencyRFConversionFactor  = prototype(('rszvb_GetFrequencyRFConversionFactor', rszvbDLL), paramflags)
 rszvb_GetFrequencyRFConversionFactor.name = 'rszvb_GetFrequencyRFConversionFactor'
 rszvb_GetFrequencyRFConversionFactor.errcheck = __errorcheck__
 rszvb_GetFrequencyRFConversionFactor.output = True
 # rszvb_SetRFImageFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean RFImageFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'RFImageFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'RFImageFrequency'),)
 rszvb_SetRFImageFrequency  = prototype(('rszvb_SetRFImageFrequency', rszvbDLL), paramflags)
 rszvb_SetRFImageFrequency.name = 'rszvb_SetRFImageFrequency'
 rszvb_SetRFImageFrequency.errcheck = __errorcheck__
 rszvb_SetRFImageFrequency.output = False
 # rszvb_GetRFImageFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* RFImageFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'RFImageFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'RFImageFrequency'),)
 rszvb_GetRFImageFrequency  = prototype(('rszvb_GetRFImageFrequency', rszvbDLL), paramflags)
 rszvb_GetRFImageFrequency.name = 'rszvb_GetRFImageFrequency'
 rszvb_GetRFImageFrequency.errcheck = __errorcheck__
 rszvb_GetRFImageFrequency.output = True
 # rszvb_SetExternalPowerMeter ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 numberOfExternalPowerMeter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'numberOfExternalPowerMeter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'numberOfExternalPowerMeter'),)
 rszvb_SetExternalPowerMeter  = prototype(('rszvb_SetExternalPowerMeter', rszvbDLL), paramflags)
 rszvb_SetExternalPowerMeter.name = 'rszvb_SetExternalPowerMeter'
 rszvb_SetExternalPowerMeter.errcheck = __errorcheck__
 rszvb_SetExternalPowerMeter.output = False
 # rszvb_GetExternalPowerMeter ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* numberOfExternalPowerMeter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'numberOfExternalPowerMeter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'numberOfExternalPowerMeter'),)
 rszvb_GetExternalPowerMeter  = prototype(('rszvb_GetExternalPowerMeter', rszvbDLL), paramflags)
 rszvb_GetExternalPowerMeter.name = 'rszvb_GetExternalPowerMeter'
 rszvb_GetExternalPowerMeter.errcheck = __errorcheck__
 rszvb_GetExternalPowerMeter.output = True
 # rszvb_RFSourceCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_RFSourceCalibration  = prototype(('rszvb_RFSourceCalibration', rszvbDLL), paramflags)
 rszvb_RFSourceCalibration.name = 'rszvb_RFSourceCalibration'
 rszvb_RFSourceCalibration.errcheck = __errorcheck__
 rszvb_RFSourceCalibration.output = False
 # rszvb_IFReceiverCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_IFReceiverCalibration  = prototype(('rszvb_IFReceiverCalibration', rszvbDLL), paramflags)
 rszvb_IFReceiverCalibration.name = 'rszvb_IFReceiverCalibration'
 rszvb_IFReceiverCalibration.errcheck = __errorcheck__
 rszvb_IFReceiverCalibration.output = False
 # rszvb_LOSourceCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_LOSourceCalibration  = prototype(('rszvb_LOSourceCalibration', rszvbDLL), paramflags)
 rszvb_LOSourceCalibration.name = 'rszvb_LOSourceCalibration'
 rszvb_LOSourceCalibration.errcheck = __errorcheck__
 rszvb_LOSourceCalibration.output = False
 # rszvb_LOSourceCalibrationStage2 ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_LOSourceCalibrationStage2  = prototype(('rszvb_LOSourceCalibrationStage2', rszvbDLL), paramflags)
 rszvb_LOSourceCalibrationStage2.name = 'rszvb_LOSourceCalibrationStage2'
 rszvb_LOSourceCalibrationStage2.errcheck = __errorcheck__
 rszvb_LOSourceCalibrationStage2.output = False
 # rszvb_SetMixerDelayMeasurementSetup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 measurementSetup']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'measurementSetup'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'measurementSetup'),)
 rszvb_SetMixerDelayMeasurementSetup  = prototype(('rszvb_SetMixerDelayMeasurementSetup', rszvbDLL), paramflags)
 rszvb_SetMixerDelayMeasurementSetup.name = 'rszvb_SetMixerDelayMeasurementSetup'
 rszvb_SetMixerDelayMeasurementSetup.errcheck = __errorcheck__
 rszvb_SetMixerDelayMeasurementSetup.output = False
 # rszvb_GetMixerDelayMeasurementSetup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* measurementSetup']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'measurementSetup'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'measurementSetup'),)
 rszvb_GetMixerDelayMeasurementSetup  = prototype(('rszvb_GetMixerDelayMeasurementSetup', rszvbDLL), paramflags)
 rszvb_GetMixerDelayMeasurementSetup.name = 'rszvb_GetMixerDelayMeasurementSetup'
 rszvb_GetMixerDelayMeasurementSetup.errcheck = __errorcheck__
 rszvb_GetMixerDelayMeasurementSetup.output = True
 # rszvb_SetMixerDelayLANConnection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 LANConnection']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'LANConnection'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'LANConnection'),)
 rszvb_SetMixerDelayLANConnection  = prototype(('rszvb_SetMixerDelayLANConnection', rszvbDLL), paramflags)
 rszvb_SetMixerDelayLANConnection.name = 'rszvb_SetMixerDelayLANConnection'
 rszvb_SetMixerDelayLANConnection.errcheck = __errorcheck__
 rszvb_SetMixerDelayLANConnection.output = False
 # rszvb_GetMixerDelayLANConnection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* LANConnection']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'LANConnection'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'LANConnection'),)
 rszvb_GetMixerDelayLANConnection  = prototype(('rszvb_GetMixerDelayLANConnection', rszvbDLL), paramflags)
 rszvb_GetMixerDelayLANConnection.name = 'rszvb_GetMixerDelayLANConnection'
 rszvb_GetMixerDelayLANConnection.errcheck = __errorcheck__
@@ -5731,826 +5731,826 @@ rszvb_ClearMixerDelayReceiverList.errcheck = __errorcheck__
 rszvb_ClearMixerDelayReceiverList.output = False
 # rszvb_StartMixerDelayCalibrationSweep ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_StartMixerDelayCalibrationSweep  = prototype(('rszvb_StartMixerDelayCalibrationSweep', rszvbDLL), paramflags)
 rszvb_StartMixerDelayCalibrationSweep.name = 'rszvb_StartMixerDelayCalibrationSweep'
 rszvb_StartMixerDelayCalibrationSweep.errcheck = __errorcheck__
 rszvb_StartMixerDelayCalibrationSweep.output = False
 # rszvb_SetMixerDelayAperture ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 aperture']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'aperture'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'aperture'),)
 rszvb_SetMixerDelayAperture  = prototype(('rszvb_SetMixerDelayAperture', rszvbDLL), paramflags)
 rszvb_SetMixerDelayAperture.name = 'rszvb_SetMixerDelayAperture'
 rszvb_SetMixerDelayAperture.errcheck = __errorcheck__
 rszvb_SetMixerDelayAperture.output = False
 # rszvb_GetMixerDelayAperture ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* aperture']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'aperture'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'aperture'),)
 rszvb_GetMixerDelayAperture  = prototype(('rszvb_GetMixerDelayAperture', rszvbDLL), paramflags)
 rszvb_GetMixerDelayAperture.name = 'rszvb_GetMixerDelayAperture'
 rszvb_GetMixerDelayAperture.errcheck = __errorcheck__
 rszvb_GetMixerDelayAperture.output = True
 # rszvb_SetMixerDelayConstant ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 constantDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'constantDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'constantDelay'),)
 rszvb_SetMixerDelayConstant  = prototype(('rszvb_SetMixerDelayConstant', rszvbDLL), paramflags)
 rszvb_SetMixerDelayConstant.name = 'rszvb_SetMixerDelayConstant'
 rszvb_SetMixerDelayConstant.errcheck = __errorcheck__
 rszvb_SetMixerDelayConstant.output = False
 # rszvb_GetMixerDelayConstant ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* constantDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'constantDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'constantDelay'),)
 rszvb_GetMixerDelayConstant  = prototype(('rszvb_GetMixerDelayConstant', rszvbDLL), paramflags)
 rszvb_GetMixerDelayConstant.name = 'rszvb_GetMixerDelayConstant'
 rszvb_GetMixerDelayConstant.errcheck = __errorcheck__
 rszvb_GetMixerDelayConstant.output = True
 # rszvb_SetMixerDelayCombinerState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean internalCombiner']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'internalCombiner'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'internalCombiner'),)
 rszvb_SetMixerDelayCombinerState  = prototype(('rszvb_SetMixerDelayCombinerState', rszvbDLL), paramflags)
 rszvb_SetMixerDelayCombinerState.name = 'rszvb_SetMixerDelayCombinerState'
 rszvb_SetMixerDelayCombinerState.errcheck = __errorcheck__
 rszvb_SetMixerDelayCombinerState.output = False
 # rszvb_GetMixerDelayCombinerState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* internalCombiner']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'internalCombiner'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'internalCombiner'),)
 rszvb_GetMixerDelayCombinerState  = prototype(('rszvb_GetMixerDelayCombinerState', rszvbDLL), paramflags)
 rszvb_GetMixerDelayCombinerState.name = 'rszvb_GetMixerDelayCombinerState'
 rszvb_GetMixerDelayCombinerState.errcheck = __errorcheck__
 rszvb_GetMixerDelayCombinerState.output = True
 # rszvb_SetMixerDelayDivisionByTwoEnabled ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean divisionByTwo']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'divisionByTwo'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'divisionByTwo'),)
 rszvb_SetMixerDelayDivisionByTwoEnabled  = prototype(('rszvb_SetMixerDelayDivisionByTwoEnabled', rszvbDLL), paramflags)
 rszvb_SetMixerDelayDivisionByTwoEnabled.name = 'rszvb_SetMixerDelayDivisionByTwoEnabled'
 rszvb_SetMixerDelayDivisionByTwoEnabled.errcheck = __errorcheck__
 rszvb_SetMixerDelayDivisionByTwoEnabled.output = False
 # rszvb_GetMixerDelayDivisionByTwoEnabled ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* divisionByTwo']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'divisionByTwo'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'divisionByTwo'),)
 rszvb_GetMixerDelayDivisionByTwoEnabled  = prototype(('rszvb_GetMixerDelayDivisionByTwoEnabled', rszvbDLL), paramflags)
 rszvb_GetMixerDelayDivisionByTwoEnabled.name = 'rszvb_GetMixerDelayDivisionByTwoEnabled'
 rszvb_GetMixerDelayDivisionByTwoEnabled.errcheck = __errorcheck__
 rszvb_GetMixerDelayDivisionByTwoEnabled.output = True
 # rszvb_SetMixerConstantDelayEnabled ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean constantDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'constantDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'constantDelay'),)
 rszvb_SetMixerConstantDelayEnabled  = prototype(('rszvb_SetMixerConstantDelayEnabled', rszvbDLL), paramflags)
 rszvb_SetMixerConstantDelayEnabled.name = 'rszvb_SetMixerConstantDelayEnabled'
 rszvb_SetMixerConstantDelayEnabled.errcheck = __errorcheck__
 rszvb_SetMixerConstantDelayEnabled.output = False
 # rszvb_GetMixerConstantDelayEnabled ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* constantDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'constantDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'constantDelay'),)
 rszvb_GetMixerConstantDelayEnabled  = prototype(('rszvb_GetMixerConstantDelayEnabled', rszvbDLL), paramflags)
 rszvb_GetMixerConstantDelayEnabled.name = 'rszvb_GetMixerConstantDelayEnabled'
 rszvb_GetMixerConstantDelayEnabled.errcheck = __errorcheck__
 rszvb_GetMixerConstantDelayEnabled.output = True
 # rszvb_SetMixerDelayCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean correction']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'correction'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'correction'),)
 rszvb_SetMixerDelayCorrection  = prototype(('rszvb_SetMixerDelayCorrection', rszvbDLL), paramflags)
 rszvb_SetMixerDelayCorrection.name = 'rszvb_SetMixerDelayCorrection'
 rszvb_SetMixerDelayCorrection.errcheck = __errorcheck__
 rszvb_SetMixerDelayCorrection.output = False
 # rszvb_GetMixerDelayCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* correction']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'correction'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'correction'),)
 rszvb_GetMixerDelayCorrection  = prototype(('rszvb_GetMixerDelayCorrection', rszvbDLL), paramflags)
 rszvb_GetMixerDelayCorrection.name = 'rszvb_GetMixerDelayCorrection'
 rszvb_GetMixerDelayCorrection.errcheck = __errorcheck__
 rszvb_GetMixerDelayCorrection.output = True
 # rszvb_SetMixerDelayUpperToneSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 source', 'ViInt32 portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'source'),(1, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'source'),(1, 'portNumber'),)
 rszvb_SetMixerDelayUpperToneSource  = prototype(('rszvb_SetMixerDelayUpperToneSource', rszvbDLL), paramflags)
 rszvb_SetMixerDelayUpperToneSource.name = 'rszvb_SetMixerDelayUpperToneSource'
 rszvb_SetMixerDelayUpperToneSource.errcheck = __errorcheck__
 rszvb_SetMixerDelayUpperToneSource.output = False
 # rszvb_GetMixerDelayUpperToneSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* source', 'ViInt32* portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'source'),(2, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'source'),(2, 'portNumber'),)
 rszvb_GetMixerDelayUpperToneSource  = prototype(('rszvb_GetMixerDelayUpperToneSource', rszvbDLL), paramflags)
 rszvb_GetMixerDelayUpperToneSource.name = 'rszvb_GetMixerDelayUpperToneSource'
 rszvb_GetMixerDelayUpperToneSource.errcheck = __errorcheck__
 rszvb_GetMixerDelayUpperToneSource.output = True
 # rszvb_LoadMixerDelayValues ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 type', 'ViString file']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'type'),(1, 'file'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'type'),(1, 'file'),)
 rszvb_LoadMixerDelayValues  = prototype(('rszvb_LoadMixerDelayValues', rszvbDLL), paramflags)
 rszvb_LoadMixerDelayValues.name = 'rszvb_LoadMixerDelayValues'
 rszvb_LoadMixerDelayValues.errcheck = __errorcheck__
 rszvb_LoadMixerDelayValues.output = False
 # rszvb_LoadMixerDelayCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString file']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'file'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'file'),)
 rszvb_LoadMixerDelayCalibrationData  = prototype(('rszvb_LoadMixerDelayCalibrationData', rszvbDLL), paramflags)
 rszvb_LoadMixerDelayCalibrationData.name = 'rszvb_LoadMixerDelayCalibrationData'
 rszvb_LoadMixerDelayCalibrationData.errcheck = __errorcheck__
 rszvb_LoadMixerDelayCalibrationData.output = False
 # rszvb_StoreMixerDelayCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString file']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'file'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'file'),)
 rszvb_StoreMixerDelayCalibrationData  = prototype(('rszvb_StoreMixerDelayCalibrationData', rszvbDLL), paramflags)
 rszvb_StoreMixerDelayCalibrationData.name = 'rszvb_StoreMixerDelayCalibrationData'
 rszvb_StoreMixerDelayCalibrationData.errcheck = __errorcheck__
 rszvb_StoreMixerDelayCalibrationData.output = False
 # rszvb_SetVectorMixerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 mixerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'mixerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'mixerMode'),)
 rszvb_SetVectorMixerMode  = prototype(('rszvb_SetVectorMixerMode', rszvbDLL), paramflags)
 rszvb_SetVectorMixerMode.name = 'rszvb_SetVectorMixerMode'
 rszvb_SetVectorMixerMode.errcheck = __errorcheck__
 rszvb_SetVectorMixerMode.output = False
 # rszvb_GetVectorMixerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* mixerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'mixerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'mixerMode'),)
 rszvb_GetVectorMixerMode  = prototype(('rszvb_GetVectorMixerMode', rszvbDLL), paramflags)
 rszvb_GetVectorMixerMode.name = 'rszvb_GetVectorMixerMode'
 rszvb_GetVectorMixerMode.errcheck = __errorcheck__
 rszvb_GetVectorMixerMode.output = True
 # rszvb_SetInternalSignalSourceAUX ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 internalSignalSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'internalSignalSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'internalSignalSource'),)
 rszvb_SetInternalSignalSourceAUX  = prototype(('rszvb_SetInternalSignalSourceAUX', rszvbDLL), paramflags)
 rszvb_SetInternalSignalSourceAUX.name = 'rszvb_SetInternalSignalSourceAUX'
 rszvb_SetInternalSignalSourceAUX.errcheck = __errorcheck__
 rszvb_SetInternalSignalSourceAUX.output = False
 # rszvb_GetInternalSignalSourceAUX ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* internalSignalSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'internalSignalSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'internalSignalSource'),)
 rszvb_GetInternalSignalSourceAUX  = prototype(('rszvb_GetInternalSignalSourceAUX', rszvbDLL), paramflags)
 rszvb_GetInternalSignalSourceAUX.name = 'rszvb_GetInternalSignalSourceAUX'
 rszvb_GetInternalSignalSourceAUX.errcheck = __errorcheck__
 rszvb_GetInternalSignalSourceAUX.output = True
 # rszvb_SetExternalSignalSourceAUX ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 externalSignalSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'externalSignalSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'externalSignalSource'),)
 rszvb_SetExternalSignalSourceAUX  = prototype(('rszvb_SetExternalSignalSourceAUX', rszvbDLL), paramflags)
 rszvb_SetExternalSignalSourceAUX.name = 'rszvb_SetExternalSignalSourceAUX'
 rszvb_SetExternalSignalSourceAUX.errcheck = __errorcheck__
 rszvb_SetExternalSignalSourceAUX.output = False
 # rszvb_GetExternalSignalSourceAUX ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* externalSignalSource']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'externalSignalSource'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'externalSignalSource'),)
 rszvb_GetExternalSignalSourceAUX  = prototype(('rszvb_GetExternalSignalSourceAUX', rszvbDLL), paramflags)
 rszvb_GetExternalSignalSourceAUX.name = 'rszvb_GetExternalSignalSourceAUX'
 rszvb_GetExternalSignalSourceAUX.errcheck = __errorcheck__
 rszvb_GetExternalSignalSourceAUX.output = True
 # rszvb_SetAUXMixerPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),)
 rszvb_SetAUXMixerPort  = prototype(('rszvb_SetAUXMixerPort', rszvbDLL), paramflags)
 rszvb_SetAUXMixerPort.name = 'rszvb_SetAUXMixerPort'
 rszvb_SetAUXMixerPort.errcheck = __errorcheck__
 rszvb_SetAUXMixerPort.output = False
 # rszvb_GetAUXMixerPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'portNumber'),)
 rszvb_GetAUXMixerPort  = prototype(('rszvb_GetAUXMixerPort', rszvbDLL), paramflags)
 rszvb_GetAUXMixerPort.name = 'rszvb_GetAUXMixerPort'
 rszvb_GetAUXMixerPort.errcheck = __errorcheck__
 rszvb_GetAUXMixerPort.output = True
 # rszvb_SetAUXFixedPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 fixedPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'fixedPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'fixedPower'),)
 rszvb_SetAUXFixedPower  = prototype(('rszvb_SetAUXFixedPower', rszvbDLL), paramflags)
 rszvb_SetAUXFixedPower.name = 'rszvb_SetAUXFixedPower'
 rszvb_SetAUXFixedPower.errcheck = __errorcheck__
 rszvb_SetAUXFixedPower.output = False
 # rszvb_GetAUXFixedPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* fixedPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'fixedPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'fixedPower'),)
 rszvb_GetAUXFixedPower  = prototype(('rszvb_GetAUXFixedPower', rszvbDLL), paramflags)
 rszvb_GetAUXFixedPower.name = 'rszvb_GetAUXFixedPower'
 rszvb_GetAUXFixedPower.errcheck = __errorcheck__
 rszvb_GetAUXFixedPower.output = True
 # rszvb_AutomaticVectorMixerCalibration ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 mode', 'ViBoolean dispersion', 'ViInt32 mixerParameter', 'ViReal64 delayPhase']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'mode'),(1, 'dispersion'),(1, 'mixerParameter'),(1, 'delayPhase'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'mode'),(1, 'dispersion'),(1, 'mixerParameter'),(1, 'delayPhase'),)
 rszvb_AutomaticVectorMixerCalibration  = prototype(('rszvb_AutomaticVectorMixerCalibration', rszvbDLL), paramflags)
 rszvb_AutomaticVectorMixerCalibration.name = 'rszvb_AutomaticVectorMixerCalibration'
 rszvb_AutomaticVectorMixerCalibration.errcheck = __errorcheck__
 rszvb_AutomaticVectorMixerCalibration.output = False
 # rszvb_SetIMODLowerToneSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 source', 'ViInt32 sourceNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'source'),(1, 'sourceNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'source'),(1, 'sourceNumber'),)
 rszvb_SetIMODLowerToneSource  = prototype(('rszvb_SetIMODLowerToneSource', rszvbDLL), paramflags)
 rszvb_SetIMODLowerToneSource.name = 'rszvb_SetIMODLowerToneSource'
 rszvb_SetIMODLowerToneSource.errcheck = __errorcheck__
 rszvb_SetIMODLowerToneSource.output = False
 # rszvb_GetIMODLowerToneSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* source', 'ViInt32* sourceNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'source'),(2, 'sourceNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'source'),(2, 'sourceNumber'),)
 rszvb_GetIMODLowerToneSource  = prototype(('rszvb_GetIMODLowerToneSource', rszvbDLL), paramflags)
 rszvb_GetIMODLowerToneSource.name = 'rszvb_GetIMODLowerToneSource'
 rszvb_GetIMODLowerToneSource.errcheck = __errorcheck__
 rszvb_GetIMODLowerToneSource.output = True
 # rszvb_SetIMODUpperToneSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 source', 'ViInt32 sourceNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'source'),(1, 'sourceNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'source'),(1, 'sourceNumber'),)
 rszvb_SetIMODUpperToneSource  = prototype(('rszvb_SetIMODUpperToneSource', rszvbDLL), paramflags)
 rszvb_SetIMODUpperToneSource.name = 'rszvb_SetIMODUpperToneSource'
 rszvb_SetIMODUpperToneSource.errcheck = __errorcheck__
 rszvb_SetIMODUpperToneSource.output = False
 # rszvb_GetIMODUpperToneSource ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* source', 'ViInt32* sourceNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'source'),(2, 'sourceNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'source'),(2, 'sourceNumber'),)
 rszvb_GetIMODUpperToneSource  = prototype(('rszvb_GetIMODUpperToneSource', rszvbDLL), paramflags)
 rszvb_GetIMODUpperToneSource.name = 'rszvb_GetIMODUpperToneSource'
 rszvb_GetIMODUpperToneSource.errcheck = __errorcheck__
 rszvb_GetIMODUpperToneSource.output = True
 # rszvb_SetIMODToneDistance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 toneDistance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'toneDistance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'toneDistance'),)
 rszvb_SetIMODToneDistance  = prototype(('rszvb_SetIMODToneDistance', rszvbDLL), paramflags)
 rszvb_SetIMODToneDistance.name = 'rszvb_SetIMODToneDistance'
 rszvb_SetIMODToneDistance.errcheck = __errorcheck__
 rszvb_SetIMODToneDistance.output = False
 # rszvb_GetIMODToneDistance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* toneDistance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'toneDistance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'toneDistance'),)
 rszvb_GetIMODToneDistance  = prototype(('rszvb_GetIMODToneDistance', rszvbDLL), paramflags)
 rszvb_GetIMODToneDistance.name = 'rszvb_GetIMODToneDistance'
 rszvb_GetIMODToneDistance.errcheck = __errorcheck__
 rszvb_GetIMODToneDistance.output = True
 # rszvb_SetIMODReceiverPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 receiverPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'receiverPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'receiverPort'),)
 rszvb_SetIMODReceiverPort  = prototype(('rszvb_SetIMODReceiverPort', rszvbDLL), paramflags)
 rszvb_SetIMODReceiverPort.name = 'rszvb_SetIMODReceiverPort'
 rszvb_SetIMODReceiverPort.errcheck = __errorcheck__
 rszvb_SetIMODReceiverPort.output = False
 # rszvb_GetIMODReceiverPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* receiverPort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'receiverPort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'receiverPort'),)
 rszvb_GetIMODReceiverPort  = prototype(('rszvb_GetIMODReceiverPort', rszvbDLL), paramflags)
 rszvb_GetIMODReceiverPort.name = 'rszvb_GetIMODReceiverPort'
 rszvb_GetIMODReceiverPort.errcheck = __errorcheck__
 rszvb_GetIMODReceiverPort.output = True
 # rszvb_SetIMODMeasurementOrder ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 productOrder', 'ViBoolean measurementState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'productOrder'),(1, 'measurementState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'productOrder'),(1, 'measurementState'),)
 rszvb_SetIMODMeasurementOrder  = prototype(('rszvb_SetIMODMeasurementOrder', rszvbDLL), paramflags)
 rszvb_SetIMODMeasurementOrder.name = 'rszvb_SetIMODMeasurementOrder'
 rszvb_SetIMODMeasurementOrder.errcheck = __errorcheck__
 rszvb_SetIMODMeasurementOrder.output = False
 # rszvb_GetIMODMeasurementOrder ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 productOrder', 'ViBoolean* measurementState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'productOrder'),(2, 'measurementState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'productOrder'),(2, 'measurementState'),)
 rszvb_GetIMODMeasurementOrder  = prototype(('rszvb_GetIMODMeasurementOrder', rszvbDLL), paramflags)
 rszvb_GetIMODMeasurementOrder.name = 'rszvb_GetIMODMeasurementOrder'
 rszvb_GetIMODMeasurementOrder.errcheck = __errorcheck__
 rszvb_GetIMODMeasurementOrder.output = True
 # rszvb_SetIMODEnhancedWaveCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetIMODEnhancedWaveCorrection  = prototype(('rszvb_SetIMODEnhancedWaveCorrection', rszvbDLL), paramflags)
 rszvb_SetIMODEnhancedWaveCorrection.name = 'rszvb_SetIMODEnhancedWaveCorrection'
 rszvb_SetIMODEnhancedWaveCorrection.errcheck = __errorcheck__
 rszvb_SetIMODEnhancedWaveCorrection.output = False
 # rszvb_GetIMODEnhancedWaveCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetIMODEnhancedWaveCorrection  = prototype(('rszvb_GetIMODEnhancedWaveCorrection', rszvbDLL), paramflags)
 rszvb_GetIMODEnhancedWaveCorrection.name = 'rszvb_GetIMODEnhancedWaveCorrection'
 rszvb_GetIMODEnhancedWaveCorrection.errcheck = __errorcheck__
 rszvb_GetIMODEnhancedWaveCorrection.output = True
 # rszvb_SetIMODInternalCombiner ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean internalCombiner']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'internalCombiner'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'internalCombiner'),)
 rszvb_SetIMODInternalCombiner  = prototype(('rszvb_SetIMODInternalCombiner', rszvbDLL), paramflags)
 rszvb_SetIMODInternalCombiner.name = 'rszvb_SetIMODInternalCombiner'
 rszvb_SetIMODInternalCombiner.errcheck = __errorcheck__
 rszvb_SetIMODInternalCombiner.output = False
 # rszvb_GetIMODInternalCombiner ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* internalCombiner']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'internalCombiner'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'internalCombiner'),)
 rszvb_GetIMODInternalCombiner  = prototype(('rszvb_GetIMODInternalCombiner', rszvbDLL), paramflags)
 rszvb_GetIMODInternalCombiner.name = 'rszvb_GetIMODInternalCombiner'
 rszvb_GetIMODInternalCombiner.errcheck = __errorcheck__
 rszvb_GetIMODInternalCombiner.output = True
 # rszvb_SetIMODSpectrumMeasurement ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean spectrumMeasurement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'spectrumMeasurement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'spectrumMeasurement'),)
 rszvb_SetIMODSpectrumMeasurement  = prototype(('rszvb_SetIMODSpectrumMeasurement', rszvbDLL), paramflags)
 rszvb_SetIMODSpectrumMeasurement.name = 'rszvb_SetIMODSpectrumMeasurement'
 rszvb_SetIMODSpectrumMeasurement.errcheck = __errorcheck__
 rszvb_SetIMODSpectrumMeasurement.output = False
 # rszvb_GetIMODSpectrumMeasurement ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* spectrumMeasurement']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'spectrumMeasurement'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'spectrumMeasurement'),)
 rszvb_GetIMODSpectrumMeasurement  = prototype(('rszvb_GetIMODSpectrumMeasurement', rszvbDLL), paramflags)
 rszvb_GetIMODSpectrumMeasurement.name = 'rszvb_GetIMODSpectrumMeasurement'
 rszvb_GetIMODSpectrumMeasurement.errcheck = __errorcheck__
 rszvb_GetIMODSpectrumMeasurement.output = True
 # rszvb_SetIMODMaxOrder ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 maxOrder']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'maxOrder'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'maxOrder'),)
 rszvb_SetIMODMaxOrder  = prototype(('rszvb_SetIMODMaxOrder', rszvbDLL), paramflags)
 rszvb_SetIMODMaxOrder.name = 'rszvb_SetIMODMaxOrder'
 rszvb_SetIMODMaxOrder.errcheck = __errorcheck__
 rszvb_SetIMODMaxOrder.output = False
 # rszvb_GetIMODMaxOrder ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* maxOrder']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'maxOrder'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'maxOrder'),)
 rszvb_GetIMODMaxOrder  = prototype(('rszvb_GetIMODMaxOrder', rszvbDLL), paramflags)
 rszvb_GetIMODMaxOrder.name = 'rszvb_GetIMODMaxOrder'
 rszvb_GetIMODMaxOrder.errcheck = __errorcheck__
 rszvb_GetIMODMaxOrder.output = True
 # rszvb_SetIMODTwoToneOutput ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 twoToneOutput']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'twoToneOutput'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'twoToneOutput'),)
 rszvb_SetIMODTwoToneOutput  = prototype(('rszvb_SetIMODTwoToneOutput', rszvbDLL), paramflags)
 rszvb_SetIMODTwoToneOutput.name = 'rszvb_SetIMODTwoToneOutput'
 rszvb_SetIMODTwoToneOutput.errcheck = __errorcheck__
 rszvb_SetIMODTwoToneOutput.output = False
 # rszvb_GetIMODTwoToneOutput ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* twoToneOutput']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'twoToneOutput'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'twoToneOutput'),)
 rszvb_GetIMODTwoToneOutput  = prototype(('rszvb_GetIMODTwoToneOutput', rszvbDLL), paramflags)
 rszvb_GetIMODTwoToneOutput.name = 'rszvb_GetIMODTwoToneOutput'
 rszvb_GetIMODTwoToneOutput.errcheck = __errorcheck__
 rszvb_GetIMODTwoToneOutput.output = True
 # rszvb_StartIMODLowerToneSourcePowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_StartIMODLowerToneSourcePowerCalibration  = prototype(('rszvb_StartIMODLowerToneSourcePowerCalibration', rszvbDLL), paramflags)
 rszvb_StartIMODLowerToneSourcePowerCalibration.name = 'rszvb_StartIMODLowerToneSourcePowerCalibration'
 rszvb_StartIMODLowerToneSourcePowerCalibration.errcheck = __errorcheck__
 rszvb_StartIMODLowerToneSourcePowerCalibration.output = False
 # rszvb_StartIMODUpperToneSourcePowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_StartIMODUpperToneSourcePowerCalibration  = prototype(('rszvb_StartIMODUpperToneSourcePowerCalibration', rszvbDLL), paramflags)
 rszvb_StartIMODUpperToneSourcePowerCalibration.name = 'rszvb_StartIMODUpperToneSourcePowerCalibration'
 rszvb_StartIMODUpperToneSourcePowerCalibration.errcheck = __errorcheck__
 rszvb_StartIMODUpperToneSourcePowerCalibration.output = False
 # rszvb_StartIMODReceivePortSourcePowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_StartIMODReceivePortSourcePowerCalibration  = prototype(('rszvb_StartIMODReceivePortSourcePowerCalibration', rszvbDLL), paramflags)
 rszvb_StartIMODReceivePortSourcePowerCalibration.name = 'rszvb_StartIMODReceivePortSourcePowerCalibration'
 rszvb_StartIMODReceivePortSourcePowerCalibration.errcheck = __errorcheck__
 rszvb_StartIMODReceivePortSourcePowerCalibration.output = False
 # rszvb_StartIMODLowerUpperTonePortsSourcePowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_StartIMODLowerUpperTonePortsSourcePowerCalibration  = prototype(('rszvb_StartIMODLowerUpperTonePortsSourcePowerCalibration', rszvbDLL), paramflags)
 rszvb_StartIMODLowerUpperTonePortsSourcePowerCalibration.name = 'rszvb_StartIMODLowerUpperTonePortsSourcePowerCalibration'
 rszvb_StartIMODLowerUpperTonePortsSourcePowerCalibration.errcheck = __errorcheck__
 rszvb_StartIMODLowerUpperTonePortsSourcePowerCalibration.output = False
 # rszvb_StartIMODReceiverPortPowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_StartIMODReceiverPortPowerCalibration  = prototype(('rszvb_StartIMODReceiverPortPowerCalibration', rszvbDLL), paramflags)
 rszvb_StartIMODReceiverPortPowerCalibration.name = 'rszvb_StartIMODReceiverPortPowerCalibration'
 rszvb_StartIMODReceiverPortPowerCalibration.errcheck = __errorcheck__
 rszvb_StartIMODReceiverPortPowerCalibration.output = False
 # rszvb_StartIMODReceiverPowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_StartIMODReceiverPowerCalibration  = prototype(('rszvb_StartIMODReceiverPowerCalibration', rszvbDLL), paramflags)
 rszvb_StartIMODReceiverPowerCalibration.name = 'rszvb_StartIMODReceiverPowerCalibration'
 rszvb_StartIMODReceiverPowerCalibration.errcheck = __errorcheck__
 rszvb_StartIMODReceiverPowerCalibration.output = False
 # rszvb_SetIMODDistortionMeasurementCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetIMODDistortionMeasurementCalibrationState  = prototype(('rszvb_SetIMODDistortionMeasurementCalibrationState', rszvbDLL), paramflags)
 rszvb_SetIMODDistortionMeasurementCalibrationState.name = 'rszvb_SetIMODDistortionMeasurementCalibrationState'
 rszvb_SetIMODDistortionMeasurementCalibrationState.errcheck = __errorcheck__
 rszvb_SetIMODDistortionMeasurementCalibrationState.output = False
 # rszvb_GetIMODDistortionMeasurementCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetIMODDistortionMeasurementCalibrationState  = prototype(('rszvb_GetIMODDistortionMeasurementCalibrationState', rszvbDLL), paramflags)
 rszvb_GetIMODDistortionMeasurementCalibrationState.name = 'rszvb_GetIMODDistortionMeasurementCalibrationState'
 rszvb_GetIMODDistortionMeasurementCalibrationState.errcheck = __errorcheck__
 rszvb_GetIMODDistortionMeasurementCalibrationState.output = True
 # rszvb_DisableIMODMeasurement ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_DisableIMODMeasurement  = prototype(('rszvb_DisableIMODMeasurement', rszvbDLL), paramflags)
 rszvb_DisableIMODMeasurement.name = 'rszvb_DisableIMODMeasurement'
 rszvb_DisableIMODMeasurement.errcheck = __errorcheck__
 rszvb_DisableIMODMeasurement.output = False
 # rszvb_SetNoiseFigureDetectorMeasurementTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 detectorTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'detectorTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'detectorTime'),)
 rszvb_SetNoiseFigureDetectorMeasurementTime  = prototype(('rszvb_SetNoiseFigureDetectorMeasurementTime', rszvbDLL), paramflags)
 rszvb_SetNoiseFigureDetectorMeasurementTime.name = 'rszvb_SetNoiseFigureDetectorMeasurementTime'
 rszvb_SetNoiseFigureDetectorMeasurementTime.errcheck = __errorcheck__
 rszvb_SetNoiseFigureDetectorMeasurementTime.output = False
 # rszvb_GetNoiseFigureDetectorMeasurementTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* detectorTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'detectorTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'detectorTime'),)
 rszvb_GetNoiseFigureDetectorMeasurementTime  = prototype(('rszvb_GetNoiseFigureDetectorMeasurementTime', rszvbDLL), paramflags)
 rszvb_GetNoiseFigureDetectorMeasurementTime.name = 'rszvb_GetNoiseFigureDetectorMeasurementTime'
 rszvb_GetNoiseFigureDetectorMeasurementTime.errcheck = __errorcheck__
 rszvb_GetNoiseFigureDetectorMeasurementTime.output = True
 # rszvb_SetNoiseFigureMeasurementMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean measurementMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'measurementMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'measurementMode'),)
 rszvb_SetNoiseFigureMeasurementMode  = prototype(('rszvb_SetNoiseFigureMeasurementMode', rszvbDLL), paramflags)
 rszvb_SetNoiseFigureMeasurementMode.name = 'rszvb_SetNoiseFigureMeasurementMode'
 rszvb_SetNoiseFigureMeasurementMode.errcheck = __errorcheck__
 rszvb_SetNoiseFigureMeasurementMode.output = False
 # rszvb_GetNoiseFigureMeasurementMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* measurementMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'measurementMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'measurementMode'),)
 rszvb_GetNoiseFigureMeasurementMode  = prototype(('rszvb_GetNoiseFigureMeasurementMode', rszvbDLL), paramflags)
 rszvb_GetNoiseFigureMeasurementMode.name = 'rszvb_GetNoiseFigureMeasurementMode'
 rszvb_GetNoiseFigureMeasurementMode.errcheck = __errorcheck__
 rszvb_GetNoiseFigureMeasurementMode.output = True
 # rszvb_SetNoiseFigureLOOscillator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean LOOscillator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'LOOscillator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'LOOscillator'),)
 rszvb_SetNoiseFigureLOOscillator  = prototype(('rszvb_SetNoiseFigureLOOscillator', rszvbDLL), paramflags)
 rszvb_SetNoiseFigureLOOscillator.name = 'rszvb_SetNoiseFigureLOOscillator'
 rszvb_SetNoiseFigureLOOscillator.errcheck = __errorcheck__
 rszvb_SetNoiseFigureLOOscillator.output = False
 # rszvb_GetNoiseFigureLOOscillator ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* LOOscillator']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'LOOscillator'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'LOOscillator'),)
 rszvb_GetNoiseFigureLOOscillator  = prototype(('rszvb_GetNoiseFigureLOOscillator', rszvbDLL), paramflags)
 rszvb_GetNoiseFigureLOOscillator.name = 'rszvb_GetNoiseFigureLOOscillator'
 rszvb_GetNoiseFigureLOOscillator.errcheck = __errorcheck__
 rszvb_GetNoiseFigureLOOscillator.output = True
 # rszvb_SetNoiseFigureNarowbandDUT ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean narowbandDUT']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'narowbandDUT'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'narowbandDUT'),)
 rszvb_SetNoiseFigureNarowbandDUT  = prototype(('rszvb_SetNoiseFigureNarowbandDUT', rszvbDLL), paramflags)
 rszvb_SetNoiseFigureNarowbandDUT.name = 'rszvb_SetNoiseFigureNarowbandDUT'
 rszvb_SetNoiseFigureNarowbandDUT.errcheck = __errorcheck__
 rszvb_SetNoiseFigureNarowbandDUT.output = False
 # rszvb_GetNoiseFigureNarowbandDUT ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* narowbandDUT']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'narowbandDUT'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'narowbandDUT'),)
 rszvb_GetNoiseFigureNarowbandDUT  = prototype(('rszvb_GetNoiseFigureNarowbandDUT', rszvbDLL), paramflags)
 rszvb_GetNoiseFigureNarowbandDUT.name = 'rszvb_GetNoiseFigureNarowbandDUT'
 rszvb_GetNoiseFigureNarowbandDUT.errcheck = __errorcheck__
 rszvb_GetNoiseFigureNarowbandDUT.output = True
 # rszvb_SetNoiseFigureRFImageCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean RFImageCorrection']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'RFImageCorrection'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'RFImageCorrection'),)
 rszvb_SetNoiseFigureRFImageCorrection  = prototype(('rszvb_SetNoiseFigureRFImageCorrection', rszvbDLL), paramflags)
 rszvb_SetNoiseFigureRFImageCorrection.name = 'rszvb_SetNoiseFigureRFImageCorrection'
 rszvb_SetNoiseFigureRFImageCorrection.errcheck = __errorcheck__
 rszvb_SetNoiseFigureRFImageCorrection.output = False
 # rszvb_GetNoiseFigureRFImageCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* RFImageCorrection']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'RFImageCorrection'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'RFImageCorrection'),)
 rszvb_GetNoiseFigureRFImageCorrection  = prototype(('rszvb_GetNoiseFigureRFImageCorrection', rszvbDLL), paramflags)
 rszvb_GetNoiseFigureRFImageCorrection.name = 'rszvb_GetNoiseFigureRFImageCorrection'
 rszvb_GetNoiseFigureRFImageCorrection.errcheck = __errorcheck__
 rszvb_GetNoiseFigureRFImageCorrection.output = True
 # rszvb_SetNoiseFigureCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean calibration']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),)
 rszvb_SetNoiseFigureCalibrationState  = prototype(('rszvb_SetNoiseFigureCalibrationState', rszvbDLL), paramflags)
 rszvb_SetNoiseFigureCalibrationState.name = 'rszvb_SetNoiseFigureCalibrationState'
 rszvb_SetNoiseFigureCalibrationState.errcheck = __errorcheck__
 rszvb_SetNoiseFigureCalibrationState.output = False
 # rszvb_GetNoiseFigureCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* calibration']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'calibration'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'calibration'),)
 rszvb_GetNoiseFigureCalibrationState  = prototype(('rszvb_GetNoiseFigureCalibrationState', rszvbDLL), paramflags)
 rszvb_GetNoiseFigureCalibrationState.name = 'rszvb_GetNoiseFigureCalibrationState'
 rszvb_GetNoiseFigureCalibrationState.errcheck = __errorcheck__
 rszvb_GetNoiseFigureCalibrationState.output = True
 # rszvb_GetNoiseFigureCalibrationStateLabel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR label[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'bufferSize'),(1, 'label[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'label[]'),)
 rszvb_GetNoiseFigureCalibrationStateLabel  = prototype(('rszvb_GetNoiseFigureCalibrationStateLabel', rszvbDLL), paramflags)
 rszvb_GetNoiseFigureCalibrationStateLabel.name = 'rszvb_GetNoiseFigureCalibrationStateLabel'
 rszvb_GetNoiseFigureCalibrationStateLabel.errcheck = __errorcheck__
 rszvb_GetNoiseFigureCalibrationStateLabel.output = False
 # rszvb_DefineNoiseFigureCalibrationSettings ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port1', 'ViInt32 port2', 'ViBoolean externalAttenuator', 'ViReal64 sourceNoiseCalAttenuation', 'ViReal64 DUTMeasurementAttenuation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_bool,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port1'),(1, 'port2'),(1, 'externalAttenuator'),(1, 'sourceNoiseCalAttenuation'),(1, 'DUTMeasurementAttenuation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port1'),(1, 'port2'),(1, 'externalAttenuator'),(1, 'sourceNoiseCalAttenuation'),(1, 'DUTMeasurementAttenuation'),)
 rszvb_DefineNoiseFigureCalibrationSettings  = prototype(('rszvb_DefineNoiseFigureCalibrationSettings', rszvbDLL), paramflags)
 rszvb_DefineNoiseFigureCalibrationSettings.name = 'rszvb_DefineNoiseFigureCalibrationSettings'
 rszvb_DefineNoiseFigureCalibrationSettings.errcheck = __errorcheck__
 rszvb_DefineNoiseFigureCalibrationSettings.output = False
 # rszvb_StartNoiseFigureCalibration ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationStep']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationStep'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationStep'),)
 rszvb_StartNoiseFigureCalibration  = prototype(('rszvb_StartNoiseFigureCalibration', rszvbDLL), paramflags)
 rszvb_StartNoiseFigureCalibration.name = 'rszvb_StartNoiseFigureCalibration'
 rszvb_StartNoiseFigureCalibration.errcheck = __errorcheck__
 rszvb_StartNoiseFigureCalibration.output = False
 # rszvb_TerminateNoiseFigureCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_TerminateNoiseFigureCalibration  = prototype(('rszvb_TerminateNoiseFigureCalibration', rszvbDLL), paramflags)
 rszvb_TerminateNoiseFigureCalibration.name = 'rszvb_TerminateNoiseFigureCalibration'
 rszvb_TerminateNoiseFigureCalibration.errcheck = __errorcheck__
 rszvb_TerminateNoiseFigureCalibration.output = False
 # rszvb_CompleteNoiseFigureCalibration ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_CompleteNoiseFigureCalibration  = prototype(('rszvb_CompleteNoiseFigureCalibration', rszvbDLL), paramflags)
 rszvb_CompleteNoiseFigureCalibration.name = 'rszvb_CompleteNoiseFigureCalibration'
 rszvb_CompleteNoiseFigureCalibration.errcheck = __errorcheck__
 rszvb_CompleteNoiseFigureCalibration.output = False
 # rszvb_OverwriteNoiseFigureChannelSettings ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'traceName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),)
 rszvb_OverwriteNoiseFigureChannelSettings  = prototype(('rszvb_OverwriteNoiseFigureChannelSettings', rszvbDLL), paramflags)
 rszvb_OverwriteNoiseFigureChannelSettings.name = 'rszvb_OverwriteNoiseFigureChannelSettings'
 rszvb_OverwriteNoiseFigureChannelSettings.errcheck = __errorcheck__
 rszvb_OverwriteNoiseFigureChannelSettings.output = False
 # rszvb_SetVirtualTransformBalancedState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 logicalPortNumber', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'state'),)
 rszvb_SetVirtualTransformBalancedState  = prototype(('rszvb_SetVirtualTransformBalancedState', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformBalancedState.name = 'rszvb_SetVirtualTransformBalancedState'
 rszvb_SetVirtualTransformBalancedState.errcheck = __errorcheck__
 rszvb_SetVirtualTransformBalancedState.output = False
 # rszvb_GetVirtualTransformBalancedState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 logicalPortNumber', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'logicalPortNumber'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'logicalPortNumber'),(2, 'state'),)
 rszvb_GetVirtualTransformBalancedState  = prototype(('rszvb_GetVirtualTransformBalancedState', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformBalancedState.name = 'rszvb_GetVirtualTransformBalancedState'
 rszvb_GetVirtualTransformBalancedState.errcheck = __errorcheck__
 rszvb_GetVirtualTransformBalancedState.output = True
 # rszvb_SetVirtualTransformBalancedPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 logicalPortNumber', 'ViInt32 parameterType', 'ViInt32 parameterNumber', 'ViInt32 circuitModel', 'ViReal64 value']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(1, 'value'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(1, 'value'),)
 rszvb_SetVirtualTransformBalancedPort  = prototype(('rszvb_SetVirtualTransformBalancedPort', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformBalancedPort.name = 'rszvb_SetVirtualTransformBalancedPort'
 rszvb_SetVirtualTransformBalancedPort.errcheck = __errorcheck__
 rszvb_SetVirtualTransformBalancedPort.output = False
 # rszvb_GetVirtualTransformBalancedPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 logicalPortNumber', 'ViInt32 parameterType', 'ViInt32 parameterNumber', 'ViInt32 circuitModel', 'ViReal64* value']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(2, 'value'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(2, 'value'),)
 rszvb_GetVirtualTransformBalancedPort  = prototype(('rszvb_GetVirtualTransformBalancedPort', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformBalancedPort.name = 'rszvb_GetVirtualTransformBalancedPort'
 rszvb_GetVirtualTransformBalancedPort.errcheck = __errorcheck__
 rszvb_GetVirtualTransformBalancedPort.output = True
 # rszvb_SetVirtualTransformBalancedCircuitModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 logicalPortNumber', 'ViInt32 circuitModel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'circuitModel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'circuitModel'),)
 rszvb_SetVirtualTransformBalancedCircuitModel  = prototype(('rszvb_SetVirtualTransformBalancedCircuitModel', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformBalancedCircuitModel.name = 'rszvb_SetVirtualTransformBalancedCircuitModel'
 rszvb_SetVirtualTransformBalancedCircuitModel.errcheck = __errorcheck__
 rszvb_SetVirtualTransformBalancedCircuitModel.output = False
 # rszvb_GetVirtualTransformBalancedCircuitModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 logicalPortNumber', 'ViInt32* circuitModel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'logicalPortNumber'),(2, 'circuitModel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'logicalPortNumber'),(2, 'circuitModel'),)
 rszvb_GetVirtualTransformBalancedCircuitModel  = prototype(('rszvb_GetVirtualTransformBalancedCircuitModel', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformBalancedCircuitModel.name = 'rszvb_GetVirtualTransformBalancedCircuitModel'
 rszvb_GetVirtualTransformBalancedCircuitModel.errcheck = __errorcheck__
 rszvb_GetVirtualTransformBalancedCircuitModel.output = True
 # rszvb_LoadBalancedPortCircuitModelData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 logicalPortNumber', 'ViString fileName', 'ViInt32 parameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'fileName'),(1, 'parameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'fileName'),(1, 'parameter'),)
 rszvb_LoadBalancedPortCircuitModelData  = prototype(('rszvb_LoadBalancedPortCircuitModelData', rszvbDLL), paramflags)
 rszvb_LoadBalancedPortCircuitModelData.name = 'rszvb_LoadBalancedPortCircuitModelData'
 rszvb_LoadBalancedPortCircuitModelData.errcheck = __errorcheck__
 rszvb_LoadBalancedPortCircuitModelData.output = False
 # rszvb_LoadAndInterchangeBalancedPortCircuitModelData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 logicalPortNumber', 'ViString fileName', 'ViInt32 parameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'fileName'),(1, 'parameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'logicalPortNumber'),(1, 'fileName'),(1, 'parameter'),)
 rszvb_LoadAndInterchangeBalancedPortCircuitModelData  = prototype(('rszvb_LoadAndInterchangeBalancedPortCircuitModelData', rszvbDLL), paramflags)
 rszvb_LoadAndInterchangeBalancedPortCircuitModelData.name = 'rszvb_LoadAndInterchangeBalancedPortCircuitModelData'
 rszvb_LoadAndInterchangeBalancedPortCircuitModelData.errcheck = __errorcheck__
 rszvb_LoadAndInterchangeBalancedPortCircuitModelData.output = False
 # rszvb_SetVirtualTransformSingleEndedState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 physicalPortNumber', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'state'),)
 rszvb_SetVirtualTransformSingleEndedState  = prototype(('rszvb_SetVirtualTransformSingleEndedState', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformSingleEndedState.name = 'rszvb_SetVirtualTransformSingleEndedState'
 rszvb_SetVirtualTransformSingleEndedState.errcheck = __errorcheck__
 rszvb_SetVirtualTransformSingleEndedState.output = False
 # rszvb_GetVirtualTransformSingleEndedState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 physicalPortNumber', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'physicalPortNumber'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'physicalPortNumber'),(2, 'state'),)
 rszvb_GetVirtualTransformSingleEndedState  = prototype(('rszvb_GetVirtualTransformSingleEndedState', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformSingleEndedState.name = 'rszvb_GetVirtualTransformSingleEndedState'
 rszvb_GetVirtualTransformSingleEndedState.errcheck = __errorcheck__
 rszvb_GetVirtualTransformSingleEndedState.output = True
 # rszvb_SetVirtualTransformSingleEndedPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 physicalPortNumber', 'ViInt32 parameterType', 'ViInt32 parameterNumber', 'ViInt32 circuitModel', 'ViReal64 value']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(1, 'value'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(1, 'value'),)
 rszvb_SetVirtualTransformSingleEndedPort  = prototype(('rszvb_SetVirtualTransformSingleEndedPort', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformSingleEndedPort.name = 'rszvb_SetVirtualTransformSingleEndedPort'
 rszvb_SetVirtualTransformSingleEndedPort.errcheck = __errorcheck__
 rszvb_SetVirtualTransformSingleEndedPort.output = False
 # rszvb_GetVirtualTransformSingleEndedPort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 physicalPortNumber', 'ViInt32 parameterType', 'ViInt32 parameterNumber', 'ViInt32 circuitModel', 'ViReal64* value']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(2, 'value'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(2, 'value'),)
 rszvb_GetVirtualTransformSingleEndedPort  = prototype(('rszvb_GetVirtualTransformSingleEndedPort', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformSingleEndedPort.name = 'rszvb_GetVirtualTransformSingleEndedPort'
 rszvb_GetVirtualTransformSingleEndedPort.errcheck = __errorcheck__
 rszvb_GetVirtualTransformSingleEndedPort.output = True
 # rszvb_SetVirtualTransformSingleEndedCircuitModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 physicalPortNumber', 'ViInt32 circuitModel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'circuitModel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'circuitModel'),)
 rszvb_SetVirtualTransformSingleEndedCircuitModel  = prototype(('rszvb_SetVirtualTransformSingleEndedCircuitModel', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformSingleEndedCircuitModel.name = 'rszvb_SetVirtualTransformSingleEndedCircuitModel'
 rszvb_SetVirtualTransformSingleEndedCircuitModel.errcheck = __errorcheck__
 rszvb_SetVirtualTransformSingleEndedCircuitModel.output = False
 # rszvb_GetVirtualTransformSingleEndedCircuitModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 physicalPortNumber', 'ViInt32* circuitModel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'physicalPortNumber'),(2, 'circuitModel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'physicalPortNumber'),(2, 'circuitModel'),)
 rszvb_GetVirtualTransformSingleEndedCircuitModel  = prototype(('rszvb_GetVirtualTransformSingleEndedCircuitModel', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformSingleEndedCircuitModel.name = 'rszvb_GetVirtualTransformSingleEndedCircuitModel'
 rszvb_GetVirtualTransformSingleEndedCircuitModel.errcheck = __errorcheck__
 rszvb_GetVirtualTransformSingleEndedCircuitModel.output = True
 # rszvb_LoadSingleEndedPortCircuitModelData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 physicalPortNumber', 'ViString fileName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'fileName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'fileName'),)
 rszvb_LoadSingleEndedPortCircuitModelData  = prototype(('rszvb_LoadSingleEndedPortCircuitModelData', rszvbDLL), paramflags)
 rszvb_LoadSingleEndedPortCircuitModelData.name = 'rszvb_LoadSingleEndedPortCircuitModelData'
 rszvb_LoadSingleEndedPortCircuitModelData.errcheck = __errorcheck__
 rszvb_LoadSingleEndedPortCircuitModelData.output = False
 # rszvb_LoadAndInterchangeSingleEndedPortCircuitModelData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 physicalPortNumber', 'ViString fileName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'fileName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'physicalPortNumber'),(1, 'fileName'),)
 rszvb_LoadAndInterchangeSingleEndedPortCircuitModelData  = prototype(('rszvb_LoadAndInterchangeSingleEndedPortCircuitModelData', rszvbDLL), paramflags)
 rszvb_LoadAndInterchangeSingleEndedPortCircuitModelData.name = 'rszvb_LoadAndInterchangeSingleEndedPortCircuitModelData'
 rszvb_LoadAndInterchangeSingleEndedPortCircuitModelData.errcheck = __errorcheck__
 rszvb_LoadAndInterchangeSingleEndedPortCircuitModelData.output = False
 # rszvb_SetVirtualTransformGroundLoopState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'state'),)
 rszvb_SetVirtualTransformGroundLoopState  = prototype(('rszvb_SetVirtualTransformGroundLoopState', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformGroundLoopState.name = 'rszvb_SetVirtualTransformGroundLoopState'
 rszvb_SetVirtualTransformGroundLoopState.errcheck = __errorcheck__
 rszvb_SetVirtualTransformGroundLoopState.output = False
 # rszvb_GetVirtualTransformGroundLoopState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(2, 'state'),)
 rszvb_GetVirtualTransformGroundLoopState  = prototype(('rszvb_GetVirtualTransformGroundLoopState', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformGroundLoopState.name = 'rszvb_GetVirtualTransformGroundLoopState'
 rszvb_GetVirtualTransformGroundLoopState.errcheck = __errorcheck__
 rszvb_GetVirtualTransformGroundLoopState.output = True
 # rszvb_SetVirtualTransformGroundLoop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 parameterType', 'ViInt32 circuitModel', 'ViReal64 groundLoopValue']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'parameterType'),(1, 'circuitModel'),(1, 'groundLoopValue'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'parameterType'),(1, 'circuitModel'),(1, 'groundLoopValue'),)
 rszvb_SetVirtualTransformGroundLoop  = prototype(('rszvb_SetVirtualTransformGroundLoop', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformGroundLoop.name = 'rszvb_SetVirtualTransformGroundLoop'
 rszvb_SetVirtualTransformGroundLoop.errcheck = __errorcheck__
 rszvb_SetVirtualTransformGroundLoop.output = False
 # rszvb_GetVirtualTransformGroundLoop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 parameterType', 'ViInt32 circuitModel', 'ViReal64* groundLoopValue']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'parameterType'),(1, 'circuitModel'),(2, 'groundLoopValue'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'parameterType'),(1, 'circuitModel'),(2, 'groundLoopValue'),)
 rszvb_GetVirtualTransformGroundLoop  = prototype(('rszvb_GetVirtualTransformGroundLoop', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformGroundLoop.name = 'rszvb_GetVirtualTransformGroundLoop'
 rszvb_GetVirtualTransformGroundLoop.errcheck = __errorcheck__
 rszvb_GetVirtualTransformGroundLoop.output = True
 # rszvb_SetVirtualTransformGroundLoopCircuitModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 circuitModel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'circuitModel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'circuitModel'),)
 rszvb_SetVirtualTransformGroundLoopCircuitModel  = prototype(('rszvb_SetVirtualTransformGroundLoopCircuitModel', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformGroundLoopCircuitModel.name = 'rszvb_SetVirtualTransformGroundLoopCircuitModel'
 rszvb_SetVirtualTransformGroundLoopCircuitModel.errcheck = __errorcheck__
 rszvb_SetVirtualTransformGroundLoopCircuitModel.output = False
 # rszvb_GetVirtualTransformGroundLoopCircuitModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32* circuitModel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(2, 'circuitModel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(2, 'circuitModel'),)
 rszvb_GetVirtualTransformGroundLoopCircuitModel  = prototype(('rszvb_GetVirtualTransformGroundLoopCircuitModel', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformGroundLoopCircuitModel.name = 'rszvb_GetVirtualTransformGroundLoopCircuitModel'
 rszvb_GetVirtualTransformGroundLoopCircuitModel.errcheck = __errorcheck__
 rszvb_GetVirtualTransformGroundLoopCircuitModel.output = True
 # rszvb_LoadGroundLoopCircuitModelData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViString fileName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'fileName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'fileName'),)
 rszvb_LoadGroundLoopCircuitModelData  = prototype(('rszvb_LoadGroundLoopCircuitModelData', rszvbDLL), paramflags)
 rszvb_LoadGroundLoopCircuitModelData.name = 'rszvb_LoadGroundLoopCircuitModelData'
 rszvb_LoadGroundLoopCircuitModelData.errcheck = __errorcheck__
 rszvb_LoadGroundLoopCircuitModelData.output = False
 # rszvb_SetVirtualTransformPortPairState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),(1, 'state'),)
 rszvb_SetVirtualTransformPortPairState  = prototype(('rszvb_SetVirtualTransformPortPairState', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformPortPairState.name = 'rszvb_SetVirtualTransformPortPairState'
 rszvb_SetVirtualTransformPortPairState.errcheck = __errorcheck__
 rszvb_SetVirtualTransformPortPairState.output = False
 # rszvb_GetVirtualTransformPortPairState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),(2, 'state'),)
 rszvb_GetVirtualTransformPortPairState  = prototype(('rszvb_GetVirtualTransformPortPairState', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformPortPairState.name = 'rszvb_GetVirtualTransformPortPairState'
 rszvb_GetVirtualTransformPortPairState.errcheck = __errorcheck__
 rszvb_GetVirtualTransformPortPairState.output = True
 # rszvb_SetVirtualTransformPortPair ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair', 'ViInt32 parameterType', 'ViInt32 parameterNumber', 'ViInt32 circuitModel', 'ViReal64 value']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(1, 'value'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(1, 'value'),)
 rszvb_SetVirtualTransformPortPair  = prototype(('rszvb_SetVirtualTransformPortPair', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformPortPair.name = 'rszvb_SetVirtualTransformPortPair'
 rszvb_SetVirtualTransformPortPair.errcheck = __errorcheck__
 rszvb_SetVirtualTransformPortPair.output = False
 # rszvb_GetVirtualTransformPortPair ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair', 'ViInt32 parameterType', 'ViInt32 parameterNumber', 'ViInt32 circuitModel', 'ViReal64* value']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(2, 'value'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),(1, 'parameterType'),(1, 'parameterNumber'),(1, 'circuitModel'),(2, 'value'),)
 rszvb_GetVirtualTransformPortPair  = prototype(('rszvb_GetVirtualTransformPortPair', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformPortPair.name = 'rszvb_GetVirtualTransformPortPair'
 rszvb_GetVirtualTransformPortPair.errcheck = __errorcheck__
 rszvb_GetVirtualTransformPortPair.output = True
 # rszvb_SetVirtualTransformPortPairCircuitModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair', 'ViInt32 circuitModel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),(1, 'circuitModel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),(1, 'circuitModel'),)
 rszvb_SetVirtualTransformPortPairCircuitModel  = prototype(('rszvb_SetVirtualTransformPortPairCircuitModel', rszvbDLL), paramflags)
 rszvb_SetVirtualTransformPortPairCircuitModel.name = 'rszvb_SetVirtualTransformPortPairCircuitModel'
 rszvb_SetVirtualTransformPortPairCircuitModel.errcheck = __errorcheck__
 rszvb_SetVirtualTransformPortPairCircuitModel.output = False
 # rszvb_GetVirtualTransformPortPairCircuitModel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair', 'ViInt32* circuitModel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),(2, 'circuitModel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),(2, 'circuitModel'),)
 rszvb_GetVirtualTransformPortPairCircuitModel  = prototype(('rszvb_GetVirtualTransformPortPairCircuitModel', rszvbDLL), paramflags)
 rszvb_GetVirtualTransformPortPairCircuitModel.name = 'rszvb_GetVirtualTransformPortPairCircuitModel'
 rszvb_GetVirtualTransformPortPairCircuitModel.errcheck = __errorcheck__
 rszvb_GetVirtualTransformPortPairCircuitModel.output = True
 # rszvb_LoadPortPairCircuitModelData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 functionType', 'ViInt32 portPair', 'ViString fileName', 'ViInt32 parameter', 'ViBoolean interchangePortNumbers']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'functionType'),(1, 'portPair'),(1, 'fileName'),(1, 'parameter'),(1, 'interchangePortNumbers'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'functionType'),(1, 'portPair'),(1, 'fileName'),(1, 'parameter'),(1, 'interchangePortNumbers'),)
 rszvb_LoadPortPairCircuitModelData  = prototype(('rszvb_LoadPortPairCircuitModelData', rszvbDLL), paramflags)
 rszvb_LoadPortPairCircuitModelData.name = 'rszvb_LoadPortPairCircuitModelData'
 rszvb_LoadPortPairCircuitModelData.errcheck = __errorcheck__
 rszvb_LoadPortPairCircuitModelData.output = False
 # rszvb_SetCoherentSignalState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean coherentSignal']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'coherentSignal'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'coherentSignal'),)
 rszvb_SetCoherentSignalState  = prototype(('rszvb_SetCoherentSignalState', rszvbDLL), paramflags)
 rszvb_SetCoherentSignalState.name = 'rszvb_SetCoherentSignalState'
 rszvb_SetCoherentSignalState.errcheck = __errorcheck__
 rszvb_SetCoherentSignalState.output = False
 # rszvb_GetCoherentSignalState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* coherentSignal']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'coherentSignal'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'coherentSignal'),)
 rszvb_GetCoherentSignalState  = prototype(('rszvb_GetCoherentSignalState', rszvbDLL), paramflags)
 rszvb_GetCoherentSignalState.name = 'rszvb_GetCoherentSignalState'
 rszvb_GetCoherentSignalState.errcheck = __errorcheck__
 rszvb_GetCoherentSignalState.output = True
 # rszvb_SetCoherentSignalAmplitude ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 amplitude']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'amplitude'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'amplitude'),)
 rszvb_SetCoherentSignalAmplitude  = prototype(('rszvb_SetCoherentSignalAmplitude', rszvbDLL), paramflags)
 rszvb_SetCoherentSignalAmplitude.name = 'rszvb_SetCoherentSignalAmplitude'
 rszvb_SetCoherentSignalAmplitude.errcheck = __errorcheck__
 rszvb_SetCoherentSignalAmplitude.output = False
 # rszvb_GetCoherentSignalAmplitude ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* amplitude']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'amplitude'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'amplitude'),)
 rszvb_GetCoherentSignalAmplitude  = prototype(('rszvb_GetCoherentSignalAmplitude', rszvbDLL), paramflags)
 rszvb_GetCoherentSignalAmplitude.name = 'rszvb_GetCoherentSignalAmplitude'
 rszvb_GetCoherentSignalAmplitude.errcheck = __errorcheck__
 rszvb_GetCoherentSignalAmplitude.output = True
 # rszvb_SetCoherentSignalPhase ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 phase']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'phase'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'phase'),)
 rszvb_SetCoherentSignalPhase  = prototype(('rszvb_SetCoherentSignalPhase', rszvbDLL), paramflags)
 rszvb_SetCoherentSignalPhase.name = 'rszvb_SetCoherentSignalPhase'
 rszvb_SetCoherentSignalPhase.errcheck = __errorcheck__
 rszvb_SetCoherentSignalPhase.output = False
 # rszvb_GetCoherentSignalPhase ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* phase']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'phase'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'phase'),)
 rszvb_GetCoherentSignalPhase  = prototype(('rszvb_GetCoherentSignalPhase', rszvbDLL), paramflags)
 rszvb_GetCoherentSignalPhase.name = 'rszvb_GetCoherentSignalPhase'
 rszvb_GetCoherentSignalPhase.errcheck = __errorcheck__
 rszvb_GetCoherentSignalPhase.output = True
 # rszvb_SetCoherentSignalReferencePort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 referencePort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'referencePort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'referencePort'),)
 rszvb_SetCoherentSignalReferencePort  = prototype(('rszvb_SetCoherentSignalReferencePort', rszvbDLL), paramflags)
 rszvb_SetCoherentSignalReferencePort.name = 'rszvb_SetCoherentSignalReferencePort'
 rszvb_SetCoherentSignalReferencePort.errcheck = __errorcheck__
 rszvb_SetCoherentSignalReferencePort.output = False
 # rszvb_GetCoherentSignalReferencePort ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* referencePort']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'referencePort'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'referencePort'),)
 rszvb_GetCoherentSignalReferencePort  = prototype(('rszvb_GetCoherentSignalReferencePort', rszvbDLL), paramflags)
 rszvb_GetCoherentSignalReferencePort.name = 'rszvb_GetCoherentSignalReferencePort'
 rszvb_GetCoherentSignalReferencePort.errcheck = __errorcheck__
 rszvb_GetCoherentSignalReferencePort.output = True
 # rszvb_SetAlternateSweepMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 alternateSweepMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'alternateSweepMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'alternateSweepMode'),)
 rszvb_SetAlternateSweepMode  = prototype(('rszvb_SetAlternateSweepMode', rszvbDLL), paramflags)
 rszvb_SetAlternateSweepMode.name = 'rszvb_SetAlternateSweepMode'
 rszvb_SetAlternateSweepMode.errcheck = __errorcheck__
 rszvb_SetAlternateSweepMode.output = False
 # rszvb_GetAlternateSweepMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* alternateSweepMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'alternateSweepMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'alternateSweepMode'),)
 rszvb_GetAlternateSweepMode  = prototype(('rszvb_GetAlternateSweepMode', rszvbDLL), paramflags)
 rszvb_GetAlternateSweepMode.name = 'rszvb_GetAlternateSweepMode'
 rszvb_GetAlternateSweepMode.errcheck = __errorcheck__
 rszvb_GetAlternateSweepMode.output = True
 # rszvb_SetSpuriousAvoidance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 spuriousAvoidance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'spuriousAvoidance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'spuriousAvoidance'),)
 rszvb_SetSpuriousAvoidance  = prototype(('rszvb_SetSpuriousAvoidance', rszvbDLL), paramflags)
 rszvb_SetSpuriousAvoidance.name = 'rszvb_SetSpuriousAvoidance'
 rszvb_SetSpuriousAvoidance.errcheck = __errorcheck__
 rszvb_SetSpuriousAvoidance.output = False
 # rszvb_GetSpuriousAvoidance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* spuriousAvoidance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'spuriousAvoidance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'spuriousAvoidance'),)
 rszvb_GetSpuriousAvoidance  = prototype(('rszvb_GetSpuriousAvoidance', rszvbDLL), paramflags)
 rszvb_GetSpuriousAvoidance.name = 'rszvb_GetSpuriousAvoidance'
 rszvb_GetSpuriousAvoidance.errcheck = __errorcheck__
@@ -6571,322 +6571,322 @@ rszvb_GetAutomaticLevelControlState.errcheck = __errorcheck__
 rszvb_GetAutomaticLevelControlState.output = True
 # rszvb_SetIndividualALCPortState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetIndividualALCPortState  = prototype(('rszvb_SetIndividualALCPortState', rszvbDLL), paramflags)
 rszvb_SetIndividualALCPortState.name = 'rszvb_SetIndividualALCPortState'
 rszvb_SetIndividualALCPortState.errcheck = __errorcheck__
 rszvb_SetIndividualALCPortState.output = False
 # rszvb_GetIndividualALCPortState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetIndividualALCPortState  = prototype(('rszvb_GetIndividualALCPortState', rszvbDLL), paramflags)
 rszvb_GetIndividualALCPortState.name = 'rszvb_GetIndividualALCPortState'
 rszvb_GetIndividualALCPortState.errcheck = __errorcheck__
 rszvb_GetIndividualALCPortState.output = True
 # rszvb_SetALCPortState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetALCPortState  = prototype(('rszvb_SetALCPortState', rszvbDLL), paramflags)
 rszvb_SetALCPortState.name = 'rszvb_SetALCPortState'
 rszvb_SetALCPortState.errcheck = __errorcheck__
 rszvb_SetALCPortState.output = False
 # rszvb_GetALCPortState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetALCPortState  = prototype(('rszvb_GetALCPortState', rszvbDLL), paramflags)
 rszvb_GetALCPortState.name = 'rszvb_GetALCPortState'
 rszvb_GetALCPortState.errcheck = __errorcheck__
 rszvb_GetALCPortState.output = True
 # rszvb_SetALCPortClamp ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean clampState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'clampState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'clampState'),)
 rszvb_SetALCPortClamp  = prototype(('rszvb_SetALCPortClamp', rszvbDLL), paramflags)
 rszvb_SetALCPortClamp.name = 'rszvb_SetALCPortClamp'
 rszvb_SetALCPortClamp.errcheck = __errorcheck__
 rszvb_SetALCPortClamp.output = False
 # rszvb_GetALCPortClamp ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* clampState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'clampState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'clampState'),)
 rszvb_GetALCPortClamp  = prototype(('rszvb_GetALCPortClamp', rszvbDLL), paramflags)
 rszvb_GetALCPortClamp.name = 'rszvb_GetALCPortClamp'
 rszvb_GetALCPortClamp.errcheck = __errorcheck__
 rszvb_GetALCPortClamp.output = True
 # rszvb_SetALCPortAUBWState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetALCPortAUBWState  = prototype(('rszvb_SetALCPortAUBWState', rszvbDLL), paramflags)
 rszvb_SetALCPortAUBWState.name = 'rszvb_SetALCPortAUBWState'
 rszvb_SetALCPortAUBWState.errcheck = __errorcheck__
 rszvb_SetALCPortAUBWState.output = False
 # rszvb_GetALCPortAUBWState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetALCPortAUBWState  = prototype(('rszvb_GetALCPortAUBWState', rszvbDLL), paramflags)
 rszvb_GetALCPortAUBWState.name = 'rszvb_GetALCPortAUBWState'
 rszvb_GetALCPortAUBWState.errcheck = __errorcheck__
 rszvb_GetALCPortAUBWState.output = True
 # rszvb_SetALCPortBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 bandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'bandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'bandwidth'),)
 rszvb_SetALCPortBandwidth  = prototype(('rszvb_SetALCPortBandwidth', rszvbDLL), paramflags)
 rszvb_SetALCPortBandwidth.name = 'rszvb_SetALCPortBandwidth'
 rszvb_SetALCPortBandwidth.errcheck = __errorcheck__
 rszvb_SetALCPortBandwidth.output = False
 # rszvb_GetALCPortBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* bandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'bandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'bandwidth'),)
 rszvb_GetALCPortBandwidth  = prototype(('rszvb_GetALCPortBandwidth', rszvbDLL), paramflags)
 rszvb_GetALCPortBandwidth.name = 'rszvb_GetALCPortBandwidth'
 rszvb_GetALCPortBandwidth.errcheck = __errorcheck__
 rszvb_GetALCPortBandwidth.output = True
 # rszvb_SetALCPortCoupling ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetALCPortCoupling  = prototype(('rszvb_SetALCPortCoupling', rszvbDLL), paramflags)
 rszvb_SetALCPortCoupling.name = 'rszvb_SetALCPortCoupling'
 rszvb_SetALCPortCoupling.errcheck = __errorcheck__
 rszvb_SetALCPortCoupling.output = False
 # rszvb_GetALCPortCoupling ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetALCPortCoupling  = prototype(('rszvb_GetALCPortCoupling', rszvbDLL), paramflags)
 rszvb_GetALCPortCoupling.name = 'rszvb_GetALCPortCoupling'
 rszvb_GetALCPortCoupling.errcheck = __errorcheck__
 rszvb_GetALCPortCoupling.output = True
 # rszvb_SetALCChannelState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetALCChannelState  = prototype(('rszvb_SetALCChannelState', rszvbDLL), paramflags)
 rszvb_SetALCChannelState.name = 'rszvb_SetALCChannelState'
 rszvb_SetALCChannelState.errcheck = __errorcheck__
 rszvb_SetALCChannelState.output = False
 # rszvb_GetALCChannelState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetALCChannelState  = prototype(('rszvb_GetALCChannelState', rszvbDLL), paramflags)
 rszvb_GetALCChannelState.name = 'rszvb_GetALCChannelState'
 rszvb_GetALCChannelState.errcheck = __errorcheck__
 rszvb_GetALCChannelState.output = True
 # rszvb_SetALCLowPhaseNoiseMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetALCLowPhaseNoiseMode  = prototype(('rszvb_SetALCLowPhaseNoiseMode', rszvbDLL), paramflags)
 rszvb_SetALCLowPhaseNoiseMode.name = 'rszvb_SetALCLowPhaseNoiseMode'
 rszvb_SetALCLowPhaseNoiseMode.errcheck = __errorcheck__
 rszvb_SetALCLowPhaseNoiseMode.output = False
 # rszvb_GetALCLowPhaseNoiseMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetALCLowPhaseNoiseMode  = prototype(('rszvb_GetALCLowPhaseNoiseMode', rszvbDLL), paramflags)
 rszvb_GetALCLowPhaseNoiseMode.name = 'rszvb_GetALCLowPhaseNoiseMode'
 rszvb_GetALCLowPhaseNoiseMode.errcheck = __errorcheck__
 rszvb_GetALCLowPhaseNoiseMode.output = True
 # rszvb_SetALCPortOffsetState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'state'),)
 rszvb_SetALCPortOffsetState  = prototype(('rszvb_SetALCPortOffsetState', rszvbDLL), paramflags)
 rszvb_SetALCPortOffsetState.name = 'rszvb_SetALCPortOffsetState'
 rszvb_SetALCPortOffsetState.errcheck = __errorcheck__
 rszvb_SetALCPortOffsetState.output = False
 # rszvb_GetALCPortOffsetState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'state'),)
 rszvb_GetALCPortOffsetState  = prototype(('rszvb_GetALCPortOffsetState', rszvbDLL), paramflags)
 rszvb_GetALCPortOffsetState.name = 'rszvb_GetALCPortOffsetState'
 rszvb_GetALCPortOffsetState.errcheck = __errorcheck__
 rszvb_GetALCPortOffsetState.output = True
 # rszvb_SetALCPortControlRange ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 controlRange']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'controlRange'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'controlRange'),)
 rszvb_SetALCPortControlRange  = prototype(('rszvb_SetALCPortControlRange', rszvbDLL), paramflags)
 rszvb_SetALCPortControlRange.name = 'rszvb_SetALCPortControlRange'
 rszvb_SetALCPortControlRange.errcheck = __errorcheck__
 rszvb_SetALCPortControlRange.output = False
 # rszvb_GetALCPortControlRange ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* controlRange']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'controlRange'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'controlRange'),)
 rszvb_GetALCPortControlRange  = prototype(('rszvb_GetALCPortControlRange', rszvbDLL), paramflags)
 rszvb_GetALCPortControlRange.name = 'rszvb_GetALCPortControlRange'
 rszvb_GetALCPortControlRange.errcheck = __errorcheck__
 rszvb_GetALCPortControlRange.output = True
 # rszvb_SetALCPortStartOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 startOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'startOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'startOffset'),)
 rszvb_SetALCPortStartOffset  = prototype(('rszvb_SetALCPortStartOffset', rszvbDLL), paramflags)
 rszvb_SetALCPortStartOffset.name = 'rszvb_SetALCPortStartOffset'
 rszvb_SetALCPortStartOffset.errcheck = __errorcheck__
 rszvb_SetALCPortStartOffset.output = False
 # rszvb_GetALCPortStartOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* startOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'startOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'startOffset'),)
 rszvb_GetALCPortStartOffset  = prototype(('rszvb_GetALCPortStartOffset', rszvbDLL), paramflags)
 rszvb_GetALCPortStartOffset.name = 'rszvb_GetALCPortStartOffset'
 rszvb_GetALCPortStartOffset.errcheck = __errorcheck__
 rszvb_GetALCPortStartOffset.output = True
 # rszvb_SetALCPortSettingTolerance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 settingTolerance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'settingTolerance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'settingTolerance'),)
 rszvb_SetALCPortSettingTolerance  = prototype(('rszvb_SetALCPortSettingTolerance', rszvbDLL), paramflags)
 rszvb_SetALCPortSettingTolerance.name = 'rszvb_SetALCPortSettingTolerance'
 rszvb_SetALCPortSettingTolerance.errcheck = __errorcheck__
 rszvb_SetALCPortSettingTolerance.output = False
 # rszvb_GetALCPortSettingTolerance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* settingTolerance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'settingTolerance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'settingTolerance'),)
 rszvb_GetALCPortSettingTolerance  = prototype(('rszvb_GetALCPortSettingTolerance', rszvbDLL), paramflags)
 rszvb_GetALCPortSettingTolerance.name = 'rszvb_GetALCPortSettingTolerance'
 rszvb_GetALCPortSettingTolerance.errcheck = __errorcheck__
 rszvb_GetALCPortSettingTolerance.output = True
 # rszvb_SetLowPhaseNoiseState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean lowPhaseNoiseState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'lowPhaseNoiseState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'lowPhaseNoiseState'),)
 rszvb_SetLowPhaseNoiseState  = prototype(('rszvb_SetLowPhaseNoiseState', rszvbDLL), paramflags)
 rszvb_SetLowPhaseNoiseState.name = 'rszvb_SetLowPhaseNoiseState'
 rszvb_SetLowPhaseNoiseState.errcheck = __errorcheck__
 rszvb_SetLowPhaseNoiseState.output = False
 # rszvb_GetLowPhaseNoiseState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* lowPhaseNoiseState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'lowPhaseNoiseState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'lowPhaseNoiseState'),)
 rszvb_GetLowPhaseNoiseState  = prototype(('rszvb_GetLowPhaseNoiseState', rszvbDLL), paramflags)
 rszvb_GetLowPhaseNoiseState.name = 'rszvb_GetLowPhaseNoiseState'
 rszvb_GetLowPhaseNoiseState.errcheck = __errorcheck__
 rszvb_GetLowPhaseNoiseState.output = True
 # rszvb_ConfigurePortPIController ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 PIControllerMode', 'ViReal64 gain', 'ViReal64 integrationTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'PIControllerMode'),(1, 'gain'),(1, 'integrationTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'PIControllerMode'),(1, 'gain'),(1, 'integrationTime'),)
 rszvb_ConfigurePortPIController  = prototype(('rszvb_ConfigurePortPIController', rszvbDLL), paramflags)
 rszvb_ConfigurePortPIController.name = 'rszvb_ConfigurePortPIController'
 rszvb_ConfigurePortPIController.errcheck = __errorcheck__
 rszvb_ConfigurePortPIController.output = False
 # rszvb_ConfigureSAWMatchingNetwork ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean apply', 'ViReal64 parallelL', 'ViReal64 serialC', 'ViReal64 differentialModeImpedance', 'ViReal64 commonModeImpedance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool,c_double,c_double,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'apply'),(1, 'parallelL'),(1, 'serialC'),(1, 'differentialModeImpedance'),(1, 'commonModeImpedance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'apply'),(1, 'parallelL'),(1, 'serialC'),(1, 'differentialModeImpedance'),(1, 'commonModeImpedance'),)
 rszvb_ConfigureSAWMatchingNetwork  = prototype(('rszvb_ConfigureSAWMatchingNetwork', rszvbDLL), paramflags)
 rszvb_ConfigureSAWMatchingNetwork.name = 'rszvb_ConfigureSAWMatchingNetwork'
 rszvb_ConfigureSAWMatchingNetwork.errcheck = __errorcheck__
 rszvb_ConfigureSAWMatchingNetwork.output = False
 # rszvb_SetSAWState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean apply']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'apply'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'apply'),)
 rszvb_SetSAWState  = prototype(('rszvb_SetSAWState', rszvbDLL), paramflags)
 rszvb_SetSAWState.name = 'rszvb_SetSAWState'
 rszvb_SetSAWState.errcheck = __errorcheck__
 rszvb_SetSAWState.output = False
 # rszvb_GetSAWState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* apply']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'apply'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'apply'),)
 rszvb_GetSAWState  = prototype(('rszvb_GetSAWState', rszvbDLL), paramflags)
 rszvb_GetSAWState.name = 'rszvb_GetSAWState'
 rszvb_GetSAWState.errcheck = __errorcheck__
 rszvb_GetSAWState.output = True
 # rszvb_SetSAWParallelL ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 parallelL']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'parallelL'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'parallelL'),)
 rszvb_SetSAWParallelL  = prototype(('rszvb_SetSAWParallelL', rszvbDLL), paramflags)
 rszvb_SetSAWParallelL.name = 'rszvb_SetSAWParallelL'
 rszvb_SetSAWParallelL.errcheck = __errorcheck__
 rszvb_SetSAWParallelL.output = False
 # rszvb_GetSAWParallelL ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* parallelL']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'parallelL'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'parallelL'),)
 rszvb_GetSAWParallelL  = prototype(('rszvb_GetSAWParallelL', rszvbDLL), paramflags)
 rszvb_GetSAWParallelL.name = 'rszvb_GetSAWParallelL'
 rszvb_GetSAWParallelL.errcheck = __errorcheck__
 rszvb_GetSAWParallelL.output = True
 # rszvb_SetSAWSerialC ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 serialC']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'serialC'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'serialC'),)
 rszvb_SetSAWSerialC  = prototype(('rszvb_SetSAWSerialC', rszvbDLL), paramflags)
 rszvb_SetSAWSerialC.name = 'rszvb_SetSAWSerialC'
 rszvb_SetSAWSerialC.errcheck = __errorcheck__
 rszvb_SetSAWSerialC.output = False
 # rszvb_GetSAWSerialC ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* serialC']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'serialC'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'serialC'),)
 rszvb_GetSAWSerialC  = prototype(('rszvb_GetSAWSerialC', rszvbDLL), paramflags)
 rszvb_GetSAWSerialC.name = 'rszvb_GetSAWSerialC'
 rszvb_GetSAWSerialC.errcheck = __errorcheck__
 rszvb_GetSAWSerialC.output = True
 # rszvb_SetSAWSimulationType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 type']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'type'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'type'),)
 rszvb_SetSAWSimulationType  = prototype(('rszvb_SetSAWSimulationType', rszvbDLL), paramflags)
 rszvb_SetSAWSimulationType.name = 'rszvb_SetSAWSimulationType'
 rszvb_SetSAWSimulationType.errcheck = __errorcheck__
 rszvb_SetSAWSimulationType.output = False
 # rszvb_GetSAWSimulationType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* type']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'type'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'type'),)
 rszvb_GetSAWSimulationType  = prototype(('rszvb_GetSAWSimulationType', rszvbDLL), paramflags)
 rszvb_GetSAWSimulationType.name = 'rszvb_GetSAWSimulationType'
 rszvb_GetSAWSimulationType.errcheck = __errorcheck__
 rszvb_GetSAWSimulationType.output = True
 # rszvb_SetPIControllerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 PIControllerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'PIControllerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'PIControllerMode'),)
 rszvb_SetPIControllerMode  = prototype(('rszvb_SetPIControllerMode', rszvbDLL), paramflags)
 rszvb_SetPIControllerMode.name = 'rszvb_SetPIControllerMode'
 rszvb_SetPIControllerMode.errcheck = __errorcheck__
 rszvb_SetPIControllerMode.output = False
 # rszvb_GetPIControllerMode ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* PIControllerMode']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'PIControllerMode'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'PIControllerMode'),)
 rszvb_GetPIControllerMode  = prototype(('rszvb_GetPIControllerMode', rszvbDLL), paramflags)
 rszvb_GetPIControllerMode.name = 'rszvb_GetPIControllerMode'
 rszvb_GetPIControllerMode.errcheck = __errorcheck__
 rszvb_GetPIControllerMode.output = True
 # rszvb_SetPIControllerGain ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 gain']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'gain'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'gain'),)
 rszvb_SetPIControllerGain  = prototype(('rszvb_SetPIControllerGain', rszvbDLL), paramflags)
 rszvb_SetPIControllerGain.name = 'rszvb_SetPIControllerGain'
 rszvb_SetPIControllerGain.errcheck = __errorcheck__
 rszvb_SetPIControllerGain.output = False
 # rszvb_GetPIControllerGain ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* gain']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'gain'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'gain'),)
 rszvb_GetPIControllerGain  = prototype(('rszvb_GetPIControllerGain', rszvbDLL), paramflags)
 rszvb_GetPIControllerGain.name = 'rszvb_GetPIControllerGain'
 rszvb_GetPIControllerGain.errcheck = __errorcheck__
 rszvb_GetPIControllerGain.output = True
 # rszvb_SetPIControllerIntegrationTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 integrationTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'integrationTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'integrationTime'),)
 rszvb_SetPIControllerIntegrationTime  = prototype(('rszvb_SetPIControllerIntegrationTime', rszvbDLL), paramflags)
 rszvb_SetPIControllerIntegrationTime.name = 'rszvb_SetPIControllerIntegrationTime'
 rszvb_SetPIControllerIntegrationTime.errcheck = __errorcheck__
 rszvb_SetPIControllerIntegrationTime.output = False
 # rszvb_GetPIControllerIntegrationTime ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* integrationTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'integrationTime'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'integrationTime'),)
 rszvb_GetPIControllerIntegrationTime  = prototype(('rszvb_GetPIControllerIntegrationTime', rszvbDLL), paramflags)
 rszvb_GetPIControllerIntegrationTime.name = 'rszvb_GetPIControllerIntegrationTime'
 rszvb_GetPIControllerIntegrationTime.errcheck = __errorcheck__
 rszvb_GetPIControllerIntegrationTime.output = True
 # rszvb_ChannelAdd ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString channelName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'channelName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'channelName'),)
 rszvb_ChannelAdd  = prototype(('rszvb_ChannelAdd', rszvbDLL), paramflags)
 rszvb_ChannelAdd.name = 'rszvb_ChannelAdd'
 rszvb_ChannelAdd.errcheck = __errorcheck__
 rszvb_ChannelAdd.output = False
 # rszvb_ChannelAddTrace ['ViSession instrumentHandle', 'ViInt32 window', 'ViInt32 window_Trace', 'ViInt32 channel', 'ViString channelName', 'ViString traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'window_Trace'),(1, 'channel'),(1, 'channelName'),(1, 'traceName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'window_Trace'),(1, 'channel',1),(1, 'channelName'),(1, 'traceName'),)
 rszvb_ChannelAddTrace  = prototype(('rszvb_ChannelAddTrace', rszvbDLL), paramflags)
 rszvb_ChannelAddTrace.name = 'rszvb_ChannelAddTrace'
 rszvb_ChannelAddTrace.errcheck = __errorcheck__
 rszvb_ChannelAddTrace.output = False
 # rszvb_ChannelAddTraceDiagramArea ['ViSession instrumentHandle', 'ViInt32 window', 'ViInt32 window_Trace', 'ViInt32 channel', 'ViString channelName', 'ViString traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'window_Trace'),(1, 'channel'),(1, 'channelName'),(1, 'traceName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'window_Trace'),(1, 'channel',1),(1, 'channelName'),(1, 'traceName'),)
 rszvb_ChannelAddTraceDiagramArea  = prototype(('rszvb_ChannelAddTraceDiagramArea', rszvbDLL), paramflags)
 rszvb_ChannelAddTraceDiagramArea.name = 'rszvb_ChannelAddTraceDiagramArea'
 rszvb_ChannelAddTraceDiagramArea.errcheck = __errorcheck__
 rszvb_ChannelAddTraceDiagramArea.output = False
 # rszvb_ChannelDelete ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_ChannelDelete  = prototype(('rszvb_ChannelDelete', rszvbDLL), paramflags)
 rszvb_ChannelDelete.name = 'rszvb_ChannelDelete'
 rszvb_ChannelDelete.errcheck = __errorcheck__
@@ -6900,7 +6900,7 @@ rszvb_ChannelList.errcheck = __errorcheck__
 rszvb_ChannelList.output = False
 # rszvb_ChannelGetChannelName ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR channelName[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'channelName[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'channelName[]'),)
 rszvb_ChannelGetChannelName  = prototype(('rszvb_ChannelGetChannelName', rszvbDLL), paramflags)
 rszvb_ChannelGetChannelName.name = 'rszvb_ChannelGetChannelName'
 rszvb_ChannelGetChannelName.errcheck = __errorcheck__
@@ -6914,7 +6914,7 @@ rszvb_ChannelGetChannelNumber.errcheck = __errorcheck__
 rszvb_ChannelGetChannelNumber.output = True
 # rszvb_ChannelSetActive ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_ChannelSetActive  = prototype(('rszvb_ChannelSetActive', rszvbDLL), paramflags)
 rszvb_ChannelSetActive.name = 'rszvb_ChannelSetActive'
 rszvb_ChannelSetActive.errcheck = __errorcheck__
@@ -6928,231 +6928,231 @@ rszvb_ChannelGetActive.errcheck = __errorcheck__
 rszvb_ChannelGetActive.output = True
 # rszvb_ChannelRename ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString channelName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'channelName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'channelName'),)
 rszvb_ChannelRename  = prototype(('rszvb_ChannelRename', rszvbDLL), paramflags)
 rszvb_ChannelRename.name = 'rszvb_ChannelRename'
 rszvb_ChannelRename.errcheck = __errorcheck__
 rszvb_ChannelRename.output = False
 # rszvb_SetConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32 connector']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'connector'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'connector'),)
 rszvb_SetConnector  = prototype(('rszvb_SetConnector', rszvbDLL), paramflags)
 rszvb_SetConnector.name = 'rszvb_SetConnector'
 rszvb_SetConnector.errcheck = __errorcheck__
 rszvb_SetConnector.output = False
 # rszvb_GetConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViInt32* connector']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'connector'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'connector'),)
 rszvb_GetConnector  = prototype(('rszvb_GetConnector', rszvbDLL), paramflags)
 rszvb_GetConnector.name = 'rszvb_GetConnector'
 rszvb_GetConnector.errcheck = __errorcheck__
 rszvb_GetConnector.output = True
 # rszvb_SetSameConnectorTypeAtAllPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean sameConnectorAtAllPorts']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sameConnectorAtAllPorts'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sameConnectorAtAllPorts'),)
 rszvb_SetSameConnectorTypeAtAllPorts  = prototype(('rszvb_SetSameConnectorTypeAtAllPorts', rszvbDLL), paramflags)
 rszvb_SetSameConnectorTypeAtAllPorts.name = 'rszvb_SetSameConnectorTypeAtAllPorts'
 rszvb_SetSameConnectorTypeAtAllPorts.errcheck = __errorcheck__
 rszvb_SetSameConnectorTypeAtAllPorts.output = False
 # rszvb_GetSameConnectorTypeAtAllPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* sameConnectorAtAllPorts']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sameConnectorAtAllPorts'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sameConnectorAtAllPorts'),)
 rszvb_GetSameConnectorTypeAtAllPorts  = prototype(('rszvb_GetSameConnectorTypeAtAllPorts', rszvbDLL), paramflags)
 rszvb_GetSameConnectorTypeAtAllPorts.name = 'rszvb_GetSameConnectorTypeAtAllPorts'
 rszvb_GetSameConnectorTypeAtAllPorts.errcheck = __errorcheck__
 rszvb_GetSameConnectorTypeAtAllPorts.output = True
 # rszvb_SetSameConnectorGenderAtAllPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean sameGenderAtAllPorts']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sameGenderAtAllPorts'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sameGenderAtAllPorts'),)
 rszvb_SetSameConnectorGenderAtAllPorts  = prototype(('rszvb_SetSameConnectorGenderAtAllPorts', rszvbDLL), paramflags)
 rszvb_SetSameConnectorGenderAtAllPorts.name = 'rszvb_SetSameConnectorGenderAtAllPorts'
 rszvb_SetSameConnectorGenderAtAllPorts.errcheck = __errorcheck__
 rszvb_SetSameConnectorGenderAtAllPorts.output = False
 # rszvb_GetSameConnectorGenderAtAllPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* sameGenderAtAllPorts']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sameGenderAtAllPorts'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sameGenderAtAllPorts'),)
 rszvb_GetSameConnectorGenderAtAllPorts  = prototype(('rszvb_GetSameConnectorGenderAtAllPorts', rszvbDLL), paramflags)
 rszvb_GetSameConnectorGenderAtAllPorts.name = 'rszvb_GetSameConnectorGenderAtAllPorts'
 rszvb_GetSameConnectorGenderAtAllPorts.errcheck = __errorcheck__
 rszvb_GetSameConnectorGenderAtAllPorts.output = True
 # rszvb_SetUserConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViString connector', 'ViInt32 connectorGender']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'connector'),(1, 'connectorGender'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'connector'),(1, 'connectorGender'),)
 rszvb_SetUserConnector  = prototype(('rszvb_SetUserConnector', rszvbDLL), paramflags)
 rszvb_SetUserConnector.name = 'rszvb_SetUserConnector'
 rszvb_SetUserConnector.errcheck = __errorcheck__
 rszvb_SetUserConnector.output = False
 # rszvb_GetUserConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViChar _VI_FAR connector[]', 'ViInt32* connectorGender']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'connector[]'),(2, 'connectorGender'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'connector[]'),(2, 'connectorGender'),)
 rszvb_GetUserConnector  = prototype(('rszvb_GetUserConnector', rszvbDLL), paramflags)
 rszvb_GetUserConnector.name = 'rszvb_GetUserConnector'
 rszvb_GetUserConnector.errcheck = __errorcheck__
 rszvb_GetUserConnector.output = True
 # rszvb_SetSameSweepSetup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean sameSweepSetup']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sameSweepSetup'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sameSweepSetup'),)
 rszvb_SetSameSweepSetup  = prototype(('rszvb_SetSameSweepSetup', rszvbDLL), paramflags)
 rszvb_SetSameSweepSetup.name = 'rszvb_SetSameSweepSetup'
 rszvb_SetSameSweepSetup.errcheck = __errorcheck__
 rszvb_SetSameSweepSetup.output = False
 # rszvb_GetSameSweepSetup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* sameSweepSetup']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sameSweepSetup'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sameSweepSetup'),)
 rszvb_GetSameSweepSetup  = prototype(('rszvb_GetSameSweepSetup', rszvbDLL), paramflags)
 rszvb_GetSameSweepSetup.name = 'rszvb_GetSameSweepSetup'
 rszvb_GetSameSweepSetup.errcheck = __errorcheck__
 rszvb_GetSameSweepSetup.output = True
 # rszvb_SetSParameterDetector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 sParameterDetector']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'sParameterDetector'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'sParameterDetector'),)
 rszvb_SetSParameterDetector  = prototype(('rszvb_SetSParameterDetector', rszvbDLL), paramflags)
 rszvb_SetSParameterDetector.name = 'rszvb_SetSParameterDetector'
 rszvb_SetSParameterDetector.errcheck = __errorcheck__
 rszvb_SetSParameterDetector.output = False
 # rszvb_GetSParameterDetector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* sParameterDetector']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'sParameterDetector'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'sParameterDetector'),)
 rszvb_GetSParameterDetector  = prototype(('rszvb_GetSParameterDetector', rszvbDLL), paramflags)
 rszvb_GetSParameterDetector.name = 'rszvb_GetSParameterDetector'
 rszvb_GetSParameterDetector.errcheck = __errorcheck__
 rszvb_GetSParameterDetector.output = True
 # rszvb_SelectCalibrationType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString calibrationName', 'ViInt32 parameters', 'ViInt32 port1', 'ViInt32 port2', 'ViInt32 port3', 'ViInt32 port4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationName'),(1, 'parameters'),(1, 'port1'),(1, 'port2'),(1, 'port3'),(1, 'port4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationName'),(1, 'parameters'),(1, 'port1'),(1, 'port2'),(1, 'port3'),(1, 'port4'),)
 rszvb_SelectCalibrationType  = prototype(('rszvb_SelectCalibrationType', rszvbDLL), paramflags)
 rszvb_SelectCalibrationType.name = 'rszvb_SelectCalibrationType'
 rszvb_SelectCalibrationType.errcheck = __errorcheck__
 rszvb_SelectCalibrationType.output = False
 # rszvb_GetCalibrationType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* calibrationType', 'ViInt32* port1', 'ViInt32* port2', 'ViInt32* port3', 'ViInt32* port4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'calibrationType'),(2, 'port1'),(2, 'port2'),(2, 'port3'),(2, 'port4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'calibrationType'),(2, 'port1'),(2, 'port2'),(2, 'port3'),(2, 'port4'),)
 rszvb_GetCalibrationType  = prototype(('rszvb_GetCalibrationType', rszvbDLL), paramflags)
 rszvb_GetCalibrationType.name = 'rszvb_GetCalibrationType'
 rszvb_GetCalibrationType.errcheck = __errorcheck__
 rszvb_GetCalibrationType.output = True
 # rszvb_StartCalibration ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 standard', 'ViInt32 port1', 'ViInt32 port2']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'standard'),(1, 'port1'),(1, 'port2'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'standard'),(1, 'port1'),(1, 'port2'),)
 rszvb_StartCalibration  = prototype(('rszvb_StartCalibration', rszvbDLL), paramflags)
 rszvb_StartCalibration.name = 'rszvb_StartCalibration'
 rszvb_StartCalibration.errcheck = __errorcheck__
 rszvb_StartCalibration.output = False
 # rszvb_StartCalibrationLine ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 line', 'ViInt32 port1', 'ViInt32 port2']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'line'),(1, 'port1'),(1, 'port2'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'line'),(1, 'port1'),(1, 'port2'),)
 rszvb_StartCalibrationLine  = prototype(('rszvb_StartCalibrationLine', rszvbDLL), paramflags)
 rszvb_StartCalibrationLine.name = 'rszvb_StartCalibrationLine'
 rszvb_StartCalibrationLine.errcheck = __errorcheck__
 rszvb_StartCalibrationLine.output = False
 # rszvb_StartCalibrationWithOptions ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 standard', 'ViInt32 port1', 'ViInt32 port2', 'ViBoolean dispersion', 'ViInt32 delayPhase', 'ViReal64 delayPhaseValue']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_bool,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'standard'),(1, 'port1'),(1, 'port2'),(1, 'dispersion'),(1, 'delayPhase'),(1, 'delayPhaseValue'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'standard'),(1, 'port1'),(1, 'port2'),(1, 'dispersion'),(1, 'delayPhase'),(1, 'delayPhaseValue'),)
 rszvb_StartCalibrationWithOptions  = prototype(('rszvb_StartCalibrationWithOptions', rszvbDLL), paramflags)
 rszvb_StartCalibrationWithOptions.name = 'rszvb_StartCalibrationWithOptions'
 rszvb_StartCalibrationWithOptions.errcheck = __errorcheck__
 rszvb_StartCalibrationWithOptions.output = False
 # rszvb_SetCalibrationReferencePlaneShift ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 referencePlaneShift']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'referencePlaneShift'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'referencePlaneShift'),)
 rszvb_SetCalibrationReferencePlaneShift  = prototype(('rszvb_SetCalibrationReferencePlaneShift', rszvbDLL), paramflags)
 rszvb_SetCalibrationReferencePlaneShift.name = 'rszvb_SetCalibrationReferencePlaneShift'
 rszvb_SetCalibrationReferencePlaneShift.errcheck = __errorcheck__
 rszvb_SetCalibrationReferencePlaneShift.output = False
 # rszvb_GetCalibrationReferencePlaneShift ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* referencePlaneShift']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'referencePlaneShift'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'referencePlaneShift'),)
 rszvb_GetCalibrationReferencePlaneShift  = prototype(('rszvb_GetCalibrationReferencePlaneShift', rszvbDLL), paramflags)
 rszvb_GetCalibrationReferencePlaneShift.name = 'rszvb_GetCalibrationReferencePlaneShift'
 rszvb_GetCalibrationReferencePlaneShift.errcheck = __errorcheck__
 rszvb_GetCalibrationReferencePlaneShift.output = True
 # rszvb_SetCalibrationReferencePlaneShiftSpecific ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 referencePlaneShift', 'ViString calibrationName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'referencePlaneShift'),(1, 'calibrationName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'referencePlaneShift'),(1, 'calibrationName'),)
 rszvb_SetCalibrationReferencePlaneShiftSpecific  = prototype(('rszvb_SetCalibrationReferencePlaneShiftSpecific', rszvbDLL), paramflags)
 rszvb_SetCalibrationReferencePlaneShiftSpecific.name = 'rszvb_SetCalibrationReferencePlaneShiftSpecific'
 rszvb_SetCalibrationReferencePlaneShiftSpecific.errcheck = __errorcheck__
 rszvb_SetCalibrationReferencePlaneShiftSpecific.output = False
 # rszvb_GetCalibrationReferencePlaneShiftSpecific ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString calibrationName', 'ViReal64* referencePlaneShift']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationName'),(2, 'referencePlaneShift'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationName'),(2, 'referencePlaneShift'),)
 rszvb_GetCalibrationReferencePlaneShiftSpecific  = prototype(('rszvb_GetCalibrationReferencePlaneShiftSpecific', rszvbDLL), paramflags)
 rszvb_GetCalibrationReferencePlaneShiftSpecific.name = 'rszvb_GetCalibrationReferencePlaneShiftSpecific'
 rszvb_GetCalibrationReferencePlaneShiftSpecific.errcheck = __errorcheck__
 rszvb_GetCalibrationReferencePlaneShiftSpecific.output = True
 # rszvb_QueryCalibrationReferencePlaneShift ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViReal64* referencePlaneShift']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(2, 'referencePlaneShift'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(2, 'referencePlaneShift'),)
 rszvb_QueryCalibrationReferencePlaneShift  = prototype(('rszvb_QueryCalibrationReferencePlaneShift', rszvbDLL), paramflags)
 rszvb_QueryCalibrationReferencePlaneShift.name = 'rszvb_QueryCalibrationReferencePlaneShift'
 rszvb_QueryCalibrationReferencePlaneShift.errcheck = __errorcheck__
 rszvb_QueryCalibrationReferencePlaneShift.output = True
 # rszvb_SaveCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_SaveCalibrationData  = prototype(('rszvb_SaveCalibrationData', rszvbDLL), paramflags)
 rszvb_SaveCalibrationData.name = 'rszvb_SaveCalibrationData'
 rszvb_SaveCalibrationData.errcheck = __errorcheck__
 rszvb_SaveCalibrationData.output = False
 # rszvb_GenerateDefaultCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_GenerateDefaultCalibrationData  = prototype(('rszvb_GenerateDefaultCalibrationData', rszvbDLL), paramflags)
 rszvb_GenerateDefaultCalibrationData.name = 'rszvb_GenerateDefaultCalibrationData'
 rszvb_GenerateDefaultCalibrationData.errcheck = __errorcheck__
 rszvb_GenerateDefaultCalibrationData.output = False
 # rszvb_DeleteCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString calibrationName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationName'),)
 rszvb_DeleteCalibrationData  = prototype(('rszvb_DeleteCalibrationData', rszvbDLL), paramflags)
 rszvb_DeleteCalibrationData.name = 'rszvb_DeleteCalibrationData'
 rszvb_DeleteCalibrationData.errcheck = __errorcheck__
 rszvb_DeleteCalibrationData.output = False
 # rszvb_DeleteAllCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_DeleteAllCalibrationData  = prototype(('rszvb_DeleteAllCalibrationData', rszvbDLL), paramflags)
 rszvb_DeleteAllCalibrationData.name = 'rszvb_DeleteAllCalibrationData'
 rszvb_DeleteAllCalibrationData.errcheck = __errorcheck__
 rszvb_DeleteAllCalibrationData.output = False
 # rszvb_ReadCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 errorTermParameters', 'ViInt32 port1', 'ViInt32 port2', 'ViReal64 _VI_FAR calibrationData[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'errorTermParameters'),(1, 'port1'),(1, 'port2'),(1, 'calibrationData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'errorTermParameters'),(1, 'port1'),(1, 'port2'),(1, 'calibrationData[]'),)
 rszvb_ReadCalibrationData  = prototype(('rszvb_ReadCalibrationData', rszvbDLL), paramflags)
 rszvb_ReadCalibrationData.name = 'rszvb_ReadCalibrationData'
 rszvb_ReadCalibrationData.errcheck = __errorcheck__
 rszvb_ReadCalibrationData.output = False
 # rszvb_WriteCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 errorTermParameters', 'ViInt32 port1', 'ViInt32 port2', 'ViReal64 _VI_FAR calibrationData[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'errorTermParameters'),(1, 'port1'),(1, 'port2'),(1, 'calibrationData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'errorTermParameters'),(1, 'port1'),(1, 'port2'),(1, 'calibrationData[]'),)
 rszvb_WriteCalibrationData  = prototype(('rszvb_WriteCalibrationData', rszvbDLL), paramflags)
 rszvb_WriteCalibrationData.name = 'rszvb_WriteCalibrationData'
 rszvb_WriteCalibrationData.errcheck = __errorcheck__
 rszvb_WriteCalibrationData.output = False
 # rszvb_SetCorrectionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean correctionState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'correctionState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'correctionState'),)
 rszvb_SetCorrectionState  = prototype(('rszvb_SetCorrectionState', rszvbDLL), paramflags)
 rszvb_SetCorrectionState.name = 'rszvb_SetCorrectionState'
 rszvb_SetCorrectionState.errcheck = __errorcheck__
 rszvb_SetCorrectionState.output = False
 # rszvb_GetCorrectionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* correctionState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'correctionState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'correctionState'),)
 rszvb_GetCorrectionState  = prototype(('rszvb_GetCorrectionState', rszvbDLL), paramflags)
 rszvb_GetCorrectionState.name = 'rszvb_GetCorrectionState'
 rszvb_GetCorrectionState.errcheck = __errorcheck__
 rszvb_GetCorrectionState.output = True
 # rszvb_AcquireSourcePowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 source', 'ViInt32 portNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'source'),(1, 'portNumber'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'source'),(1, 'portNumber'),)
 rszvb_AcquireSourcePowerCalibration  = prototype(('rszvb_AcquireSourcePowerCalibration', rszvbDLL), paramflags)
 rszvb_AcquireSourcePowerCalibration.name = 'rszvb_AcquireSourcePowerCalibration'
 rszvb_AcquireSourcePowerCalibration.errcheck = __errorcheck__
 rszvb_AcquireSourcePowerCalibration.output = False
 # rszvb_InitiateSourcePowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViInt32 externalPowerMeter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'externalPowerMeter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'externalPowerMeter'),)
 rszvb_InitiateSourcePowerCalibration  = prototype(('rszvb_InitiateSourcePowerCalibration', rszvbDLL), paramflags)
 rszvb_InitiateSourcePowerCalibration.name = 'rszvb_InitiateSourcePowerCalibration'
 rszvb_InitiateSourcePowerCalibration.errcheck = __errorcheck__
@@ -7173,42 +7173,42 @@ rszvb_GetDummySourcePowerCalibrationState.errcheck = __errorcheck__
 rszvb_GetDummySourcePowerCalibrationState.output = True
 # rszvb_SetSourcePowerCalibrationPortState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean portState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'portState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'portState'),)
 rszvb_SetSourcePowerCalibrationPortState  = prototype(('rszvb_SetSourcePowerCalibrationPortState', rszvbDLL), paramflags)
 rszvb_SetSourcePowerCalibrationPortState.name = 'rszvb_SetSourcePowerCalibrationPortState'
 rszvb_SetSourcePowerCalibrationPortState.errcheck = __errorcheck__
 rszvb_SetSourcePowerCalibrationPortState.output = False
 # rszvb_GetSourcePowerCalibrationPortState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean* portState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'portState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'portState'),)
 rszvb_GetSourcePowerCalibrationPortState  = prototype(('rszvb_GetSourcePowerCalibrationPortState', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationPortState.name = 'rszvb_GetSourcePowerCalibrationPortState'
 rszvb_GetSourcePowerCalibrationPortState.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationPortState.output = True
 # rszvb_SetSourcePowerCalibrationGeneratorState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean generatorState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'generatorState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'generatorState'),)
 rszvb_SetSourcePowerCalibrationGeneratorState  = prototype(('rszvb_SetSourcePowerCalibrationGeneratorState', rszvbDLL), paramflags)
 rszvb_SetSourcePowerCalibrationGeneratorState.name = 'rszvb_SetSourcePowerCalibrationGeneratorState'
 rszvb_SetSourcePowerCalibrationGeneratorState.errcheck = __errorcheck__
 rszvb_SetSourcePowerCalibrationGeneratorState.output = False
 # rszvb_GetSourcePowerCalibrationGeneratorState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean* generatorState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'generatorState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'generatorState'),)
 rszvb_GetSourcePowerCalibrationGeneratorState  = prototype(('rszvb_GetSourcePowerCalibrationGeneratorState', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationGeneratorState.name = 'rszvb_GetSourcePowerCalibrationGeneratorState'
 rszvb_GetSourcePowerCalibrationGeneratorState.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationGeneratorState.output = True
 # rszvb_SetVerificationSweepState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean verificationSweep']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'verificationSweep'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'verificationSweep'),)
 rszvb_SetVerificationSweepState  = prototype(('rszvb_SetVerificationSweepState', rszvbDLL), paramflags)
 rszvb_SetVerificationSweepState.name = 'rszvb_SetVerificationSweepState'
 rszvb_SetVerificationSweepState.errcheck = __errorcheck__
 rszvb_SetVerificationSweepState.output = False
 # rszvb_GetVerificationSweepState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* verificationSweep']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'verificationSweep'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'verificationSweep'),)
 rszvb_GetVerificationSweepState  = prototype(('rszvb_GetVerificationSweepState', rszvbDLL), paramflags)
 rszvb_GetVerificationSweepState.name = 'rszvb_GetVerificationSweepState'
 rszvb_GetVerificationSweepState.errcheck = __errorcheck__
@@ -7222,7 +7222,7 @@ rszvb_QueryVerificationSweepResults.errcheck = __errorcheck__
 rszvb_QueryVerificationSweepResults.output = True
 # rszvb_GeneratorPowerCalibrationHarmonic ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_GeneratorPowerCalibrationHarmonic  = prototype(('rszvb_GeneratorPowerCalibrationHarmonic', rszvbDLL), paramflags)
 rszvb_GeneratorPowerCalibrationHarmonic.name = 'rszvb_GeneratorPowerCalibrationHarmonic'
 rszvb_GeneratorPowerCalibrationHarmonic.errcheck = __errorcheck__
@@ -7257,91 +7257,91 @@ rszvb_GetReferenceReceiverCalibrationState.errcheck = __errorcheck__
 rszvb_GetReferenceReceiverCalibrationState.output = True
 # rszvb_ModifySourcePowerCalibrationSettings ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViInt32 numberOfReadings', 'ViReal64 tolerance', 'ViBoolean otherSourcesState', 'ViReal64 portPowerOffset', 'ViInt32 offsetParameter', 'ViReal64 calibrationPowerOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_double,c_bool,c_double,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'numberOfReadings'),(1, 'tolerance'),(1, 'otherSourcesState'),(1, 'portPowerOffset'),(1, 'offsetParameter'),(1, 'calibrationPowerOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'numberOfReadings'),(1, 'tolerance'),(1, 'otherSourcesState'),(1, 'portPowerOffset'),(1, 'offsetParameter'),(1, 'calibrationPowerOffset'),)
 rszvb_ModifySourcePowerCalibrationSettings  = prototype(('rszvb_ModifySourcePowerCalibrationSettings', rszvbDLL), paramflags)
 rszvb_ModifySourcePowerCalibrationSettings.name = 'rszvb_ModifySourcePowerCalibrationSettings'
 rszvb_ModifySourcePowerCalibrationSettings.errcheck = __errorcheck__
 rszvb_ModifySourcePowerCalibrationSettings.output = False
 # rszvb_SetNumberOfReadings ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 numberOfReadings']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'numberOfReadings'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'numberOfReadings'),)
 rszvb_SetNumberOfReadings  = prototype(('rszvb_SetNumberOfReadings', rszvbDLL), paramflags)
 rszvb_SetNumberOfReadings.name = 'rszvb_SetNumberOfReadings'
 rszvb_SetNumberOfReadings.errcheck = __errorcheck__
 rszvb_SetNumberOfReadings.output = False
 # rszvb_GetNumberOfReadings ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* numberOfReadings']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'numberOfReadings'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'numberOfReadings'),)
 rszvb_GetNumberOfReadings  = prototype(('rszvb_GetNumberOfReadings', rszvbDLL), paramflags)
 rszvb_GetNumberOfReadings.name = 'rszvb_GetNumberOfReadings'
 rszvb_GetNumberOfReadings.errcheck = __errorcheck__
 rszvb_GetNumberOfReadings.output = True
 # rszvb_SetTolerance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 tolerance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'tolerance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'tolerance'),)
 rszvb_SetTolerance  = prototype(('rszvb_SetTolerance', rszvbDLL), paramflags)
 rszvb_SetTolerance.name = 'rszvb_SetTolerance'
 rszvb_SetTolerance.errcheck = __errorcheck__
 rszvb_SetTolerance.output = False
 # rszvb_GetTolerance ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* tolerance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'tolerance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'tolerance'),)
 rszvb_GetTolerance  = prototype(('rszvb_GetTolerance', rszvbDLL), paramflags)
 rszvb_GetTolerance.name = 'rszvb_GetTolerance'
 rszvb_GetTolerance.errcheck = __errorcheck__
 rszvb_GetTolerance.output = True
 # rszvb_SetOtherSourcesState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean otherSources']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'otherSources'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'otherSources'),)
 rszvb_SetOtherSourcesState  = prototype(('rszvb_SetOtherSourcesState', rszvbDLL), paramflags)
 rszvb_SetOtherSourcesState.name = 'rszvb_SetOtherSourcesState'
 rszvb_SetOtherSourcesState.errcheck = __errorcheck__
 rszvb_SetOtherSourcesState.output = False
 # rszvb_GetOtherSourcesState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* otherSources']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'otherSources'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'otherSources'),)
 rszvb_GetOtherSourcesState  = prototype(('rszvb_GetOtherSourcesState', rszvbDLL), paramflags)
 rszvb_GetOtherSourcesState.name = 'rszvb_GetOtherSourcesState'
 rszvb_GetOtherSourcesState.errcheck = __errorcheck__
 rszvb_GetOtherSourcesState.output = True
 # rszvb_SetPortPowerOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViReal64 portPowerOffset', 'ViInt32 offsetParameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'portPowerOffset'),(1, 'offsetParameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'portPowerOffset'),(1, 'offsetParameter'),)
 rszvb_SetPortPowerOffset  = prototype(('rszvb_SetPortPowerOffset', rszvbDLL), paramflags)
 rszvb_SetPortPowerOffset.name = 'rszvb_SetPortPowerOffset'
 rszvb_SetPortPowerOffset.errcheck = __errorcheck__
 rszvb_SetPortPowerOffset.output = False
 # rszvb_GetPortPowerOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViReal64* portPowerOffset', 'ViInt32* offsetParameter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'portPowerOffset'),(2, 'offsetParameter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'portPowerOffset'),(2, 'offsetParameter'),)
 rszvb_GetPortPowerOffset  = prototype(('rszvb_GetPortPowerOffset', rszvbDLL), paramflags)
 rszvb_GetPortPowerOffset.name = 'rszvb_GetPortPowerOffset'
 rszvb_GetPortPowerOffset.errcheck = __errorcheck__
 rszvb_GetPortPowerOffset.output = True
 # rszvb_SetCalibrationPowerOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViReal64 calibrationPowerOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'calibrationPowerOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibrationPowerOffset'),)
 rszvb_SetCalibrationPowerOffset  = prototype(('rszvb_SetCalibrationPowerOffset', rszvbDLL), paramflags)
 rszvb_SetCalibrationPowerOffset.name = 'rszvb_SetCalibrationPowerOffset'
 rszvb_SetCalibrationPowerOffset.errcheck = __errorcheck__
 rszvb_SetCalibrationPowerOffset.output = False
 # rszvb_GetCalibrationPowerOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViReal64* calibrationPowerOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'calibrationPowerOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'calibrationPowerOffset'),)
 rszvb_GetCalibrationPowerOffset  = prototype(('rszvb_GetCalibrationPowerOffset', rszvbDLL), paramflags)
 rszvb_GetCalibrationPowerOffset.name = 'rszvb_GetCalibrationPowerOffset'
 rszvb_GetCalibrationPowerOffset.errcheck = __errorcheck__
 rszvb_GetCalibrationPowerOffset.output = True
 # rszvb_SetCalibrationPowerGeneratorOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViInt32 generatorNumber', 'ViReal64 calPowerGeneratorOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'generatorNumber'),(1, 'calPowerGeneratorOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'generatorNumber'),(1, 'calPowerGeneratorOffset'),)
 rszvb_SetCalibrationPowerGeneratorOffset  = prototype(('rszvb_SetCalibrationPowerGeneratorOffset', rszvbDLL), paramflags)
 rszvb_SetCalibrationPowerGeneratorOffset.name = 'rszvb_SetCalibrationPowerGeneratorOffset'
 rszvb_SetCalibrationPowerGeneratorOffset.errcheck = __errorcheck__
 rszvb_SetCalibrationPowerGeneratorOffset.output = False
 # rszvb_GetCalibrationPowerGeneratorOffset ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViInt32 generatorNumber', 'ViReal64* calPowerGeneratorOffset']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'generatorNumber'),(2, 'calPowerGeneratorOffset'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'generatorNumber'),(2, 'calPowerGeneratorOffset'),)
 rszvb_GetCalibrationPowerGeneratorOffset  = prototype(('rszvb_GetCalibrationPowerGeneratorOffset', rszvbDLL), paramflags)
 rszvb_GetCalibrationPowerGeneratorOffset.name = 'rszvb_GetCalibrationPowerGeneratorOffset'
 rszvb_GetCalibrationPowerGeneratorOffset.errcheck = __errorcheck__
@@ -7390,84 +7390,84 @@ rszvb_GetCalibrationPowerMeterReadings.errcheck = __errorcheck__
 rszvb_GetCalibrationPowerMeterReadings.output = True
 # rszvb_ReadSourcePowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32* numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'calibratedWave'),(2, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(2, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
 rszvb_ReadSourcePowerCorrectionData  = prototype(('rszvb_ReadSourcePowerCorrectionData', rszvbDLL), paramflags)
 rszvb_ReadSourcePowerCorrectionData.name = 'rszvb_ReadSourcePowerCorrectionData'
 rszvb_ReadSourcePowerCorrectionData.errcheck = __errorcheck__
 rszvb_ReadSourcePowerCorrectionData.output = True
 # rszvb_WriteSourcePowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32 numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'calibratedWave'),(1, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(1, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
 rszvb_WriteSourcePowerCorrectionData  = prototype(('rszvb_WriteSourcePowerCorrectionData', rszvbDLL), paramflags)
 rszvb_WriteSourcePowerCorrectionData.name = 'rszvb_WriteSourcePowerCorrectionData'
 rszvb_WriteSourcePowerCorrectionData.errcheck = __errorcheck__
 rszvb_WriteSourcePowerCorrectionData.output = False
 # rszvb_GetSourcePowerCalibrationNumberOfWaves ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* numberOfWaves']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'numberOfWaves'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'numberOfWaves'),)
 rszvb_GetSourcePowerCalibrationNumberOfWaves  = prototype(('rszvb_GetSourcePowerCalibrationNumberOfWaves', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationNumberOfWaves.name = 'rszvb_GetSourcePowerCalibrationNumberOfWaves'
 rszvb_GetSourcePowerCalibrationNumberOfWaves.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationNumberOfWaves.output = True
 # rszvb_GetSourcePowerCalibrationParamaterWave ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibratedWave[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(1, 'bufferSize'),(1, 'calibratedWave[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(1, 'bufferSize'),(1, 'calibratedWave[]'),)
 rszvb_GetSourcePowerCalibrationParamaterWave  = prototype(('rszvb_GetSourcePowerCalibrationParamaterWave', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterWave.name = 'rszvb_GetSourcePowerCalibrationParamaterWave'
 rszvb_GetSourcePowerCalibrationParamaterWave.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterWave.output = False
 # rszvb_GetSourcePowerCalibrationParamaterStart ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViReal64* start']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(2, 'start'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(2, 'start'),)
 rszvb_GetSourcePowerCalibrationParamaterStart  = prototype(('rszvb_GetSourcePowerCalibrationParamaterStart', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterStart.name = 'rszvb_GetSourcePowerCalibrationParamaterStart'
 rszvb_GetSourcePowerCalibrationParamaterStart.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterStart.output = True
 # rszvb_GetSourcePowerCalibrationParamaterStop ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViReal64* stop']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(2, 'stop'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(2, 'stop'),)
 rszvb_GetSourcePowerCalibrationParamaterStop  = prototype(('rszvb_GetSourcePowerCalibrationParamaterStop', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterStop.name = 'rszvb_GetSourcePowerCalibrationParamaterStop'
 rszvb_GetSourcePowerCalibrationParamaterStop.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterStop.output = True
 # rszvb_GetSourcePowerCalibrationParamaterPoints ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViInt32* points']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(2, 'points'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(2, 'points'),)
 rszvb_GetSourcePowerCalibrationParamaterPoints  = prototype(('rszvb_GetSourcePowerCalibrationParamaterPoints', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterPoints.name = 'rszvb_GetSourcePowerCalibrationParamaterPoints'
 rszvb_GetSourcePowerCalibrationParamaterPoints.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterPoints.output = True
 # rszvb_GetSourcePowerCalibrationParamaterType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViInt32* type']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(2, 'type'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(2, 'type'),)
 rszvb_GetSourcePowerCalibrationParamaterType  = prototype(('rszvb_GetSourcePowerCalibrationParamaterType', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterType.name = 'rszvb_GetSourcePowerCalibrationParamaterType'
 rszvb_GetSourcePowerCalibrationParamaterType.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterType.output = True
 # rszvb_GetSourcePowerCalibrationParamaterAttenuation ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViReal64* attenuation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(2, 'attenuation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(2, 'attenuation'),)
 rszvb_GetSourcePowerCalibrationParamaterAttenuation  = prototype(('rszvb_GetSourcePowerCalibrationParamaterAttenuation', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterAttenuation.name = 'rszvb_GetSourcePowerCalibrationParamaterAttenuation'
 rszvb_GetSourcePowerCalibrationParamaterAttenuation.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterAttenuation.output = True
 # rszvb_GetSourcePowerCalibrationParamaterCWPower ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViReal64* CWPower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(2, 'CWPower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(2, 'CWPower'),)
 rszvb_GetSourcePowerCalibrationParamaterCWPower  = prototype(('rszvb_GetSourcePowerCalibrationParamaterCWPower', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterCWPower.name = 'rszvb_GetSourcePowerCalibrationParamaterCWPower'
 rszvb_GetSourcePowerCalibrationParamaterCWPower.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterCWPower.output = True
 # rszvb_GetSourcePowerCalibrationParamaterCWFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViReal64* CWFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(2, 'CWFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(2, 'CWFrequency'),)
 rszvb_GetSourcePowerCalibrationParamaterCWFrequency  = prototype(('rszvb_GetSourcePowerCalibrationParamaterCWFrequency', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterCWFrequency.name = 'rszvb_GetSourcePowerCalibrationParamaterCWFrequency'
 rszvb_GetSourcePowerCalibrationParamaterCWFrequency.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterCWFrequency.output = True
 # rszvb_GetSourcePowerCalibrationParamaterTimestamp ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViInt32 bufferSize', 'ViChar _VI_FAR timestamp[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationIndex'),(1, 'bufferSize'),(1, 'timestamp[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(1, 'bufferSize'),(1, 'timestamp[]'),)
 rszvb_GetSourcePowerCalibrationParamaterTimestamp  = prototype(('rszvb_GetSourcePowerCalibrationParamaterTimestamp', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterTimestamp.name = 'rszvb_GetSourcePowerCalibrationParamaterTimestamp'
 rszvb_GetSourcePowerCalibrationParamaterTimestamp.errcheck = __errorcheck__
@@ -7488,84 +7488,84 @@ rszvb_GetSourcePowerCalibrationConvergenceFactor.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationConvergenceFactor.output = True
 # rszvb_SetSourcePowerCalibrationConverterState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 converter', 'ViBoolean calibrationConverter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'converter'),(1, 'calibrationConverter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'converter'),(1, 'calibrationConverter'),)
 rszvb_SetSourcePowerCalibrationConverterState  = prototype(('rszvb_SetSourcePowerCalibrationConverterState', rszvbDLL), paramflags)
 rszvb_SetSourcePowerCalibrationConverterState.name = 'rszvb_SetSourcePowerCalibrationConverterState'
 rszvb_SetSourcePowerCalibrationConverterState.errcheck = __errorcheck__
 rszvb_SetSourcePowerCalibrationConverterState.output = False
 # rszvb_GetSourcePowerCalibrationConverterState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 converter', 'ViBoolean* calibrationConverter']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'converter'),(2, 'calibrationConverter'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'converter'),(2, 'calibrationConverter'),)
 rszvb_GetSourcePowerCalibrationConverterState  = prototype(('rszvb_GetSourcePowerCalibrationConverterState', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationConverterState.name = 'rszvb_GetSourcePowerCalibrationConverterState'
 rszvb_GetSourcePowerCalibrationConverterState.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationConverterState.output = True
 # rszvb_AcquireReceiverPowerCalibration ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 wave', 'ViInt32 portNumber', 'ViInt32 source', 'ViInt32 sourceNumber', 'ViInt32 referencePower']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'wave'),(1, 'portNumber'),(1, 'source'),(1, 'sourceNumber'),(1, 'referencePower'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'wave'),(1, 'portNumber'),(1, 'source'),(1, 'sourceNumber'),(1, 'referencePower'),)
 rszvb_AcquireReceiverPowerCalibration  = prototype(('rszvb_AcquireReceiverPowerCalibration', rszvbDLL), paramflags)
 rszvb_AcquireReceiverPowerCalibration.name = 'rszvb_AcquireReceiverPowerCalibration'
 rszvb_AcquireReceiverPowerCalibration.errcheck = __errorcheck__
 rszvb_AcquireReceiverPowerCalibration.output = False
 # rszvb_SetAWaveReceiverPowerCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean receiverPowerCalibration']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'receiverPowerCalibration'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'receiverPowerCalibration'),)
 rszvb_SetAWaveReceiverPowerCalibrationState  = prototype(('rszvb_SetAWaveReceiverPowerCalibrationState', rszvbDLL), paramflags)
 rszvb_SetAWaveReceiverPowerCalibrationState.name = 'rszvb_SetAWaveReceiverPowerCalibrationState'
 rszvb_SetAWaveReceiverPowerCalibrationState.errcheck = __errorcheck__
 rszvb_SetAWaveReceiverPowerCalibrationState.output = False
 # rszvb_GetAWaveReceiverPowerCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean* receiverPowerCalibration']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'receiverPowerCalibration'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'receiverPowerCalibration'),)
 rszvb_GetAWaveReceiverPowerCalibrationState  = prototype(('rszvb_GetAWaveReceiverPowerCalibrationState', rszvbDLL), paramflags)
 rszvb_GetAWaveReceiverPowerCalibrationState.name = 'rszvb_GetAWaveReceiverPowerCalibrationState'
 rszvb_GetAWaveReceiverPowerCalibrationState.errcheck = __errorcheck__
 rszvb_GetAWaveReceiverPowerCalibrationState.output = True
 # rszvb_SetAWaveIdealPowerMeterMatchState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'state'),)
 rszvb_SetAWaveIdealPowerMeterMatchState  = prototype(('rszvb_SetAWaveIdealPowerMeterMatchState', rszvbDLL), paramflags)
 rszvb_SetAWaveIdealPowerMeterMatchState.name = 'rszvb_SetAWaveIdealPowerMeterMatchState'
 rszvb_SetAWaveIdealPowerMeterMatchState.errcheck = __errorcheck__
 rszvb_SetAWaveIdealPowerMeterMatchState.output = False
 # rszvb_GetAWaveIdealPowerMeterMatchState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'state'),)
 rszvb_GetAWaveIdealPowerMeterMatchState  = prototype(('rszvb_GetAWaveIdealPowerMeterMatchState', rszvbDLL), paramflags)
 rszvb_GetAWaveIdealPowerMeterMatchState.name = 'rszvb_GetAWaveIdealPowerMeterMatchState'
 rszvb_GetAWaveIdealPowerMeterMatchState.errcheck = __errorcheck__
 rszvb_GetAWaveIdealPowerMeterMatchState.output = True
 # rszvb_SetBWaveReceiverPowerCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean receiverPowerCalibration']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'receiverPowerCalibration'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'receiverPowerCalibration'),)
 rszvb_SetBWaveReceiverPowerCalibrationState  = prototype(('rszvb_SetBWaveReceiverPowerCalibrationState', rszvbDLL), paramflags)
 rszvb_SetBWaveReceiverPowerCalibrationState.name = 'rszvb_SetBWaveReceiverPowerCalibrationState'
 rszvb_SetBWaveReceiverPowerCalibrationState.errcheck = __errorcheck__
 rszvb_SetBWaveReceiverPowerCalibrationState.output = False
 # rszvb_GetBWaveReceiverPowerCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean* receiverPowerCalibration']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'receiverPowerCalibration'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'receiverPowerCalibration'),)
 rszvb_GetBWaveReceiverPowerCalibrationState  = prototype(('rszvb_GetBWaveReceiverPowerCalibrationState', rszvbDLL), paramflags)
 rszvb_GetBWaveReceiverPowerCalibrationState.name = 'rszvb_GetBWaveReceiverPowerCalibrationState'
 rszvb_GetBWaveReceiverPowerCalibrationState.errcheck = __errorcheck__
 rszvb_GetBWaveReceiverPowerCalibrationState.output = True
 # rszvb_ReadReceiverPowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32* numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'calibratedWave'),(2, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(2, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
 rszvb_ReadReceiverPowerCorrectionData  = prototype(('rszvb_ReadReceiverPowerCorrectionData', rszvbDLL), paramflags)
 rszvb_ReadReceiverPowerCorrectionData.name = 'rszvb_ReadReceiverPowerCorrectionData'
 rszvb_ReadReceiverPowerCorrectionData.errcheck = __errorcheck__
 rszvb_ReadReceiverPowerCorrectionData.output = True
 # rszvb_WriteReceiverPowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32 numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'calibratedWave'),(1, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(1, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
 rszvb_WriteReceiverPowerCorrectionData  = prototype(('rszvb_WriteReceiverPowerCorrectionData', rszvbDLL), paramflags)
 rszvb_WriteReceiverPowerCorrectionData.name = 'rszvb_WriteReceiverPowerCorrectionData'
 rszvb_WriteReceiverPowerCorrectionData.errcheck = __errorcheck__
 rszvb_WriteReceiverPowerCorrectionData.output = False
 # rszvb_ReceiverPowerCalibrationHarmonic ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_ReceiverPowerCalibrationHarmonic  = prototype(('rszvb_ReceiverPowerCalibrationHarmonic', rszvbDLL), paramflags)
 rszvb_ReceiverPowerCalibrationHarmonic.name = 'rszvb_ReceiverPowerCalibrationHarmonic'
 rszvb_ReceiverPowerCalibrationHarmonic.errcheck = __errorcheck__
@@ -7649,63 +7649,63 @@ rszvb_SetPowerLossListTrace.errcheck = __errorcheck__
 rszvb_SetPowerLossListTrace.output = False
 # rszvb_SetSourcePowerCorrectionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean sourcePowerCorrectionState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'sourcePowerCorrectionState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'sourcePowerCorrectionState'),)
 rszvb_SetSourcePowerCorrectionState  = prototype(('rszvb_SetSourcePowerCorrectionState', rszvbDLL), paramflags)
 rszvb_SetSourcePowerCorrectionState.name = 'rszvb_SetSourcePowerCorrectionState'
 rszvb_SetSourcePowerCorrectionState.errcheck = __errorcheck__
 rszvb_SetSourcePowerCorrectionState.output = False
 # rszvb_GetSourcePowerCorrectionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean* sourcePowerCorrectionState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'sourcePowerCorrectionState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'sourcePowerCorrectionState'),)
 rszvb_GetSourcePowerCorrectionState  = prototype(('rszvb_GetSourcePowerCorrectionState', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCorrectionState.name = 'rszvb_GetSourcePowerCorrectionState'
 rszvb_GetSourcePowerCorrectionState.errcheck = __errorcheck__
 rszvb_GetSourcePowerCorrectionState.output = True
 # rszvb_SetReceiverPowerCorrectionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean receiverPowerCorrectionState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(1, 'receiverPowerCorrectionState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'receiverPowerCorrectionState'),)
 rszvb_SetReceiverPowerCorrectionState  = prototype(('rszvb_SetReceiverPowerCorrectionState', rszvbDLL), paramflags)
 rszvb_SetReceiverPowerCorrectionState.name = 'rszvb_SetReceiverPowerCorrectionState'
 rszvb_SetReceiverPowerCorrectionState.errcheck = __errorcheck__
 rszvb_SetReceiverPowerCorrectionState.output = False
 # rszvb_GetReceiverPowerCorrectionState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViBoolean* receiverPowerCorrectionState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'portNumber'),(2, 'receiverPowerCorrectionState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(2, 'receiverPowerCorrectionState'),)
 rszvb_GetReceiverPowerCorrectionState  = prototype(('rszvb_GetReceiverPowerCorrectionState', rszvbDLL), paramflags)
 rszvb_GetReceiverPowerCorrectionState.name = 'rszvb_GetReceiverPowerCorrectionState'
 rszvb_GetReceiverPowerCorrectionState.errcheck = __errorcheck__
 rszvb_GetReceiverPowerCorrectionState.output = True
 # rszvb_CalibrationManager ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 operationToBePerformed', 'ViString fileName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'operationToBePerformed'),(1, 'fileName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'operationToBePerformed'),(1, 'fileName'),)
 rszvb_CalibrationManager  = prototype(('rszvb_CalibrationManager', rszvbDLL), paramflags)
 rszvb_CalibrationManager.name = 'rszvb_CalibrationManager'
 rszvb_CalibrationManager.errcheck = __errorcheck__
 rszvb_CalibrationManager.output = False
 # rszvb_CalibrationAuto ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString calibrationKitName', 'ViInt32 analyzerPort1', 'ViInt32 analyzerPort2', 'ViInt32 analyzerPort3', 'ViInt32 analyzerPort4', 'ViInt32 calUnitPort1', 'ViInt32 calUnitPort2', 'ViInt32 calUnitPort3', 'ViInt32 calUnitPort4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),(1, 'calUnitPort1'),(1, 'calUnitPort2'),(1, 'calUnitPort3'),(1, 'calUnitPort4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),(1, 'calUnitPort1'),(1, 'calUnitPort2'),(1, 'calUnitPort3'),(1, 'calUnitPort4'),)
 rszvb_CalibrationAuto  = prototype(('rszvb_CalibrationAuto', rszvbDLL), paramflags)
 rszvb_CalibrationAuto.name = 'rszvb_CalibrationAuto'
 rszvb_CalibrationAuto.errcheck = __errorcheck__
 rszvb_CalibrationAuto.output = False
 # rszvb_CalibrationAutoSimplified ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString calibrationKitName', 'ViInt32 analyzerPort1', 'ViInt32 analyzerPort2', 'ViInt32 analyzerPort3', 'ViInt32 analyzerPort4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),)
 rszvb_CalibrationAutoSimplified  = prototype(('rszvb_CalibrationAutoSimplified', rszvbDLL), paramflags)
 rszvb_CalibrationAutoSimplified.name = 'rszvb_CalibrationAutoSimplified'
 rszvb_CalibrationAutoSimplified.errcheck = __errorcheck__
 rszvb_CalibrationAutoSimplified.output = False
 # rszvb_CalibrationAutoType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 parameters', 'ViString calibrationKitName', 'ViInt32 analyzerPort1', 'ViInt32 analyzerPort2', 'ViInt32 analyzerPort3', 'ViInt32 analyzerPort4', 'ViInt32 calUnitPort1', 'ViInt32 calUnitPort2', 'ViInt32 calUnitPort3', 'ViInt32 calUnitPort4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'parameters'),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),(1, 'calUnitPort1'),(1, 'calUnitPort2'),(1, 'calUnitPort3'),(1, 'calUnitPort4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'parameters'),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),(1, 'calUnitPort1'),(1, 'calUnitPort2'),(1, 'calUnitPort3'),(1, 'calUnitPort4'),)
 rszvb_CalibrationAutoType  = prototype(('rszvb_CalibrationAutoType', rszvbDLL), paramflags)
 rszvb_CalibrationAutoType.name = 'rszvb_CalibrationAutoType'
 rszvb_CalibrationAutoType.errcheck = __errorcheck__
 rszvb_CalibrationAutoType.output = False
 # rszvb_CalibrationAutoTypeSimplified ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 parameters', 'ViString calibrationKitName', 'ViInt32 analyzerPort1', 'ViInt32 analyzerPort2', 'ViInt32 analyzerPort3', 'ViInt32 analyzerPort4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'parameters'),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'parameters'),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),)
 rszvb_CalibrationAutoTypeSimplified  = prototype(('rszvb_CalibrationAutoTypeSimplified', rszvbDLL), paramflags)
 rszvb_CalibrationAutoTypeSimplified.name = 'rszvb_CalibrationAutoTypeSimplified'
 rszvb_CalibrationAutoTypeSimplified.errcheck = __errorcheck__
@@ -7719,84 +7719,84 @@ rszvb_CalibrationRetainPortGroups.errcheck = __errorcheck__
 rszvb_CalibrationRetainPortGroups.output = False
 # rszvb_GetCalibrationConnection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* analyzerPort1', 'ViInt32* analyzerPort2', 'ViInt32* analyzerPort3', 'ViInt32* analyzerPort4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'analyzerPort1'),(2, 'analyzerPort2'),(2, 'analyzerPort3'),(2, 'analyzerPort4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'analyzerPort1'),(2, 'analyzerPort2'),(2, 'analyzerPort3'),(2, 'analyzerPort4'),)
 rszvb_GetCalibrationConnection  = prototype(('rszvb_GetCalibrationConnection', rszvbDLL), paramflags)
 rszvb_GetCalibrationConnection.name = 'rszvb_GetCalibrationConnection'
 rszvb_GetCalibrationConnection.errcheck = __errorcheck__
 rszvb_GetCalibrationConnection.output = True
 # rszvb_CalibrationAutoEx ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString calibrationKitName', 'ViInt32 analyzerPort1', 'ViInt32 analyzerPort2', 'ViInt32 analyzerPort3', 'ViInt32 analyzerPort4', 'ViInt32 calUnitPort1', 'ViInt32 calUnitPort2', 'ViInt32 calUnitPort3', 'ViInt32 calUnitPort4', 'ViInt32 timeout']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),(1, 'calUnitPort1'),(1, 'calUnitPort2'),(1, 'calUnitPort3'),(1, 'calUnitPort4'),(1, 'timeout'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationKitName'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),(1, 'calUnitPort1'),(1, 'calUnitPort2'),(1, 'calUnitPort3'),(1, 'calUnitPort4'),(1, 'timeout'),)
 rszvb_CalibrationAutoEx  = prototype(('rszvb_CalibrationAutoEx', rszvbDLL), paramflags)
 rszvb_CalibrationAutoEx.name = 'rszvb_CalibrationAutoEx'
 rszvb_CalibrationAutoEx.errcheck = __errorcheck__
 rszvb_CalibrationAutoEx.output = False
 # rszvb_CalibrationAutoAssignmentType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 parameters', 'ViString calibrationKitName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'parameters'),(1, 'calibrationKitName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'parameters'),(1, 'calibrationKitName'),)
 rszvb_CalibrationAutoAssignmentType  = prototype(('rszvb_CalibrationAutoAssignmentType', rszvbDLL), paramflags)
 rszvb_CalibrationAutoAssignmentType.name = 'rszvb_CalibrationAutoAssignmentType'
 rszvb_CalibrationAutoAssignmentType.errcheck = __errorcheck__
 rszvb_CalibrationAutoAssignmentType.output = False
 # rszvb_CalibrationAutoAssignmentDefinition ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 assignment', 'ViInt32 analyzerPort1', 'ViInt32 analyzerPort2', 'ViInt32 analyzerPort3', 'ViInt32 analyzerPort4', 'ViInt32 calUnitPort1', 'ViInt32 calUnitPort2', 'ViInt32 calUnitPort3', 'ViInt32 calUnitPort4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'assignment'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),(1, 'calUnitPort1'),(1, 'calUnitPort2'),(1, 'calUnitPort3'),(1, 'calUnitPort4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'assignment'),(1, 'analyzerPort1'),(1, 'analyzerPort2'),(1, 'analyzerPort3'),(1, 'analyzerPort4'),(1, 'calUnitPort1'),(1, 'calUnitPort2'),(1, 'calUnitPort3'),(1, 'calUnitPort4'),)
 rszvb_CalibrationAutoAssignmentDefinition  = prototype(('rszvb_CalibrationAutoAssignmentDefinition', rszvbDLL), paramflags)
 rszvb_CalibrationAutoAssignmentDefinition.name = 'rszvb_CalibrationAutoAssignmentDefinition'
 rszvb_CalibrationAutoAssignmentDefinition.errcheck = __errorcheck__
 rszvb_CalibrationAutoAssignmentDefinition.output = False
 # rszvb_GetCalibrationAutoAssingnmentDefinition ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 assignment', 'ViInt32* analyzerPort1', 'ViInt32* analyzerPort2', 'ViInt32* analyzerPort3', 'ViInt32* analyzerPort4', 'ViInt32* calUnitPort1', 'ViInt32* calUnitPort2', 'ViInt32* calUnitPort3', 'ViInt32* calUnitPort4']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'assignment'),(2, 'analyzerPort1'),(2, 'analyzerPort2'),(2, 'analyzerPort3'),(2, 'analyzerPort4'),(2, 'calUnitPort1'),(2, 'calUnitPort2'),(2, 'calUnitPort3'),(2, 'calUnitPort4'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'assignment'),(2, 'analyzerPort1'),(2, 'analyzerPort2'),(2, 'analyzerPort3'),(2, 'analyzerPort4'),(2, 'calUnitPort1'),(2, 'calUnitPort2'),(2, 'calUnitPort3'),(2, 'calUnitPort4'),)
 rszvb_GetCalibrationAutoAssingnmentDefinition  = prototype(('rszvb_GetCalibrationAutoAssingnmentDefinition', rszvbDLL), paramflags)
 rszvb_GetCalibrationAutoAssingnmentDefinition.name = 'rszvb_GetCalibrationAutoAssingnmentDefinition'
 rszvb_GetCalibrationAutoAssingnmentDefinition.errcheck = __errorcheck__
 rszvb_GetCalibrationAutoAssingnmentDefinition.output = True
 # rszvb_InitiateCalibrationAutoAssignment ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 assignment']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'assignment'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'assignment'),)
 rszvb_InitiateCalibrationAutoAssignment  = prototype(('rszvb_InitiateCalibrationAutoAssignment', rszvbDLL), paramflags)
 rszvb_InitiateCalibrationAutoAssignment.name = 'rszvb_InitiateCalibrationAutoAssignment'
 rszvb_InitiateCalibrationAutoAssignment.errcheck = __errorcheck__
 rszvb_InitiateCalibrationAutoAssignment.output = False
 # rszvb_CalibrationAutoAssignmentSave ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_CalibrationAutoAssignmentSave  = prototype(('rszvb_CalibrationAutoAssignmentSave', rszvbDLL), paramflags)
 rszvb_CalibrationAutoAssignmentSave.name = 'rszvb_CalibrationAutoAssignmentSave'
 rszvb_CalibrationAutoAssignmentSave.errcheck = __errorcheck__
 rszvb_CalibrationAutoAssignmentSave.output = False
 # rszvb_CalibrationAutoAssingnmentDeleteAll ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_CalibrationAutoAssingnmentDeleteAll  = prototype(('rszvb_CalibrationAutoAssingnmentDeleteAll', rszvbDLL), paramflags)
 rszvb_CalibrationAutoAssingnmentDeleteAll.name = 'rszvb_CalibrationAutoAssingnmentDeleteAll'
 rszvb_CalibrationAutoAssingnmentDeleteAll.errcheck = __errorcheck__
 rszvb_CalibrationAutoAssingnmentDeleteAll.output = False
 # rszvb_SetCalibrationDataCurrentState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean keepMeasData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'keepMeasData'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'keepMeasData'),)
 rszvb_SetCalibrationDataCurrentState  = prototype(('rszvb_SetCalibrationDataCurrentState', rszvbDLL), paramflags)
 rszvb_SetCalibrationDataCurrentState.name = 'rszvb_SetCalibrationDataCurrentState'
 rszvb_SetCalibrationDataCurrentState.errcheck = __errorcheck__
 rszvb_SetCalibrationDataCurrentState.output = False
 # rszvb_GetCalibrationDataCurrentState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* keepMeasData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'keepMeasData'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'keepMeasData'),)
 rszvb_GetCalibrationDataCurrentState  = prototype(('rszvb_GetCalibrationDataCurrentState', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataCurrentState.name = 'rszvb_GetCalibrationDataCurrentState'
 rszvb_GetCalibrationDataCurrentState.errcheck = __errorcheck__
 rszvb_GetCalibrationDataCurrentState.output = True
 # rszvb_SetCalibrationDataDefaultState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean keepMeasData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'keepMeasData'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'keepMeasData'),)
 rszvb_SetCalibrationDataDefaultState  = prototype(('rszvb_SetCalibrationDataDefaultState', rszvbDLL), paramflags)
 rszvb_SetCalibrationDataDefaultState.name = 'rszvb_SetCalibrationDataDefaultState'
 rszvb_SetCalibrationDataDefaultState.errcheck = __errorcheck__
 rszvb_SetCalibrationDataDefaultState.output = False
 # rszvb_GetCalibrationDataDefaultState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* keepMeasData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'keepMeasData'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'keepMeasData'),)
 rszvb_GetCalibrationDataDefaultState  = prototype(('rszvb_GetCalibrationDataDefaultState', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataDefaultState.name = 'rszvb_GetCalibrationDataDefaultState'
 rszvb_GetCalibrationDataDefaultState.errcheck = __errorcheck__
@@ -7817,14 +7817,14 @@ rszvb_ExportUserCharacterizationDataTouchstoneFile.errcheck = __errorcheck__
 rszvb_ExportUserCharacterizationDataTouchstoneFile.output = False
 # rszvb_SetCalibrationConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString connectorName', 'ViInt32 propagationMode', 'ViInt32 connectorType', 'ViReal64 relativePermittivity', 'ViReal64 impedance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_int32,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'connectorName'),(1, 'propagationMode'),(1, 'connectorType'),(1, 'relativePermittivity'),(1, 'impedance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'connectorName'),(1, 'propagationMode'),(1, 'connectorType'),(1, 'relativePermittivity'),(1, 'impedance'),)
 rszvb_SetCalibrationConnector  = prototype(('rszvb_SetCalibrationConnector', rszvbDLL), paramflags)
 rszvb_SetCalibrationConnector.name = 'rszvb_SetCalibrationConnector'
 rszvb_SetCalibrationConnector.errcheck = __errorcheck__
 rszvb_SetCalibrationConnector.output = False
 # rszvb_GetCalibrationConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString connectorName', 'ViInt32* propagationMode', 'ViInt32* connectorType', 'ViReal64* relativePermittivity', 'ViReal64* impedance']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,POINTER(c_int32),POINTER(c_int32),POINTER(c_double),POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'connectorName'),(2, 'propagationMode'),(2, 'connectorType'),(2, 'relativePermittivity'),(2, 'impedance'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'connectorName'),(2, 'propagationMode'),(2, 'connectorType'),(2, 'relativePermittivity'),(2, 'impedance'),)
 rszvb_GetCalibrationConnector  = prototype(('rszvb_GetCalibrationConnector', rszvbDLL), paramflags)
 rszvb_GetCalibrationConnector.name = 'rszvb_GetCalibrationConnector'
 rszvb_GetCalibrationConnector.errcheck = __errorcheck__
@@ -7838,98 +7838,98 @@ rszvb_CalibrationConnectorCatalog.errcheck = __errorcheck__
 rszvb_CalibrationConnectorCatalog.output = False
 # rszvb_DeleteCalibrationConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString connectorName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'connectorName'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'connectorName'),)
 rszvb_DeleteCalibrationConnector  = prototype(('rszvb_DeleteCalibrationConnector', rszvbDLL), paramflags)
 rszvb_DeleteCalibrationConnector.name = 'rszvb_DeleteCalibrationConnector'
 rszvb_DeleteCalibrationConnector.errcheck = __errorcheck__
 rszvb_DeleteCalibrationConnector.output = False
 # rszvb_GetCalibrationDate ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationDate[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'bufferSize'),(1, 'calibrationDate[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'calibrationDate[]'),)
 rszvb_GetCalibrationDate  = prototype(('rszvb_GetCalibrationDate', rszvbDLL), paramflags)
 rszvb_GetCalibrationDate.name = 'rszvb_GetCalibrationDate'
 rszvb_GetCalibrationDate.errcheck = __errorcheck__
 rszvb_GetCalibrationDate.output = False
 # rszvb_GetCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* calibrationState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'calibrationState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'calibrationState'),)
 rszvb_GetCalibrationState  = prototype(('rszvb_GetCalibrationState', rszvbDLL), paramflags)
 rszvb_GetCalibrationState.name = 'rszvb_GetCalibrationState'
 rszvb_GetCalibrationState.errcheck = __errorcheck__
 rszvb_GetCalibrationState.output = True
 # rszvb_GetCalibrationLabel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR label[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'bufferSize'),(1, 'label[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'label[]'),)
 rszvb_GetCalibrationLabel  = prototype(('rszvb_GetCalibrationLabel', rszvbDLL), paramflags)
 rszvb_GetCalibrationLabel.name = 'rszvb_GetCalibrationLabel'
 rszvb_GetCalibrationLabel.errcheck = __errorcheck__
 rszvb_GetCalibrationLabel.output = False
 # rszvb_GetCalibrationDataParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64* frequencyStart', 'ViReal64* frequencyStop', 'ViInt32* numberOfPoints', 'ViReal64* internalSignalSourcePower', 'ViInt32* sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_double),POINTER(c_double),POINTER(c_int32),POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'frequencyStart'),(2, 'frequencyStop'),(2, 'numberOfPoints'),(2, 'internalSignalSourcePower'),(2, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'frequencyStart'),(2, 'frequencyStop'),(2, 'numberOfPoints'),(2, 'internalSignalSourcePower'),(2, 'sweepType'),)
 rszvb_GetCalibrationDataParameters  = prototype(('rszvb_GetCalibrationDataParameters', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataParameters.name = 'rszvb_GetCalibrationDataParameters'
 rszvb_GetCalibrationDataParameters.errcheck = __errorcheck__
 rszvb_GetCalibrationDataParameters.output = True
 # rszvb_GetCalibrationsNumber ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* numberOfCalibrations']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'numberOfCalibrations'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'numberOfCalibrations'),)
 rszvb_GetCalibrationsNumber  = prototype(('rszvb_GetCalibrationsNumber', rszvbDLL), paramflags)
 rszvb_GetCalibrationsNumber.name = 'rszvb_GetCalibrationsNumber'
 rszvb_GetCalibrationsNumber.errcheck = __errorcheck__
 rszvb_GetCalibrationsNumber.output = True
 # rszvb_GetCalibrationDataParametersMoreCalibrations ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViReal64* frequencyStart', 'ViReal64* frequencyStop', 'ViInt32* numberOfPoints', 'ViReal64* internalSignalSourcePower', 'ViInt32* sweepType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double),POINTER(c_double),POINTER(c_int32),POINTER(c_double),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),(2, 'frequencyStart'),(2, 'frequencyStop'),(2, 'numberOfPoints'),(2, 'internalSignalSourcePower'),(2, 'sweepType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(2, 'frequencyStart'),(2, 'frequencyStop'),(2, 'numberOfPoints'),(2, 'internalSignalSourcePower'),(2, 'sweepType'),)
 rszvb_GetCalibrationDataParametersMoreCalibrations  = prototype(('rszvb_GetCalibrationDataParametersMoreCalibrations', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataParametersMoreCalibrations.name = 'rszvb_GetCalibrationDataParametersMoreCalibrations'
 rszvb_GetCalibrationDataParametersMoreCalibrations.errcheck = __errorcheck__
 rszvb_GetCalibrationDataParametersMoreCalibrations.output = True
 # rszvb_GetCalibrationDataBandwidth ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViReal64* bandwidth']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),(2, 'bandwidth'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(2, 'bandwidth'),)
 rszvb_GetCalibrationDataBandwidth  = prototype(('rszvb_GetCalibrationDataBandwidth', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataBandwidth.name = 'rszvb_GetCalibrationDataBandwidth'
 rszvb_GetCalibrationDataBandwidth.errcheck = __errorcheck__
 rszvb_GetCalibrationDataBandwidth.output = True
 # rszvb_GetCalibrationDataPointDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViReal64* pointDelay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),(2, 'pointDelay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(2, 'pointDelay'),)
 rszvb_GetCalibrationDataPointDelay  = prototype(('rszvb_GetCalibrationDataPointDelay', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataPointDelay.name = 'rszvb_GetCalibrationDataPointDelay'
 rszvb_GetCalibrationDataPointDelay.errcheck = __errorcheck__
 rszvb_GetCalibrationDataPointDelay.output = True
 # rszvb_GetCalibrationDataReceiverAttenuation ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 arraySize', 'ViInt32 _VI_FAR calibrationPort[]', 'ViReal64 _VI_FAR attenuation[]', 'ViInt32* returnedValues']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),(1, 'arraySize'),(1, 'calibrationPort[]'),(1, 'attenuation[]'),(2, 'returnedValues'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'arraySize'),(1, 'calibrationPort[]'),(1, 'attenuation[]'),(2, 'returnedValues'),)
 rszvb_GetCalibrationDataReceiverAttenuation  = prototype(('rszvb_GetCalibrationDataReceiverAttenuation', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataReceiverAttenuation.name = 'rszvb_GetCalibrationDataReceiverAttenuation'
 rszvb_GetCalibrationDataReceiverAttenuation.errcheck = __errorcheck__
 rszvb_GetCalibrationDataReceiverAttenuation.output = True
 # rszvb_GetCalibrationDataType ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32* calibrationType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),(2, 'calibrationType'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(2, 'calibrationType'),)
 rszvb_GetCalibrationDataType  = prototype(('rszvb_GetCalibrationDataType', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataType.name = 'rszvb_GetCalibrationDataType'
 rszvb_GetCalibrationDataType.errcheck = __errorcheck__
 rszvb_GetCalibrationDataType.output = True
 # rszvb_GetCalibrationDataPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 arraySize', 'ViInt32* calibrationPorts', 'ViInt32* returnedValues']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_int32),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),(1, 'arraySize'),(2, 'calibrationPorts'),(2, 'returnedValues'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'arraySize'),(2, 'calibrationPorts'),(2, 'returnedValues'),)
 rszvb_GetCalibrationDataPorts  = prototype(('rszvb_GetCalibrationDataPorts', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataPorts.name = 'rszvb_GetCalibrationDataPorts'
 rszvb_GetCalibrationDataPorts.errcheck = __errorcheck__
 rszvb_GetCalibrationDataPorts.output = True
 # rszvb_GetCalibrationDataThroughs ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 bufferSize', 'ViChar _VI_FAR throughs[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),(1, 'bufferSize'),(1, 'throughs[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'bufferSize'),(1, 'throughs[]'),)
 rszvb_GetCalibrationDataThroughs  = prototype(('rszvb_GetCalibrationDataThroughs', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataThroughs.name = 'rszvb_GetCalibrationDataThroughs'
 rszvb_GetCalibrationDataThroughs.errcheck = __errorcheck__
 rszvb_GetCalibrationDataThroughs.output = False
 # rszvb_GetCalibrationDataTimestamp ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 bufferSize', 'ViChar _VI_FAR timestamp[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'calibration'),(1, 'bufferSize'),(1, 'timestamp[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'bufferSize'),(1, 'timestamp[]'),)
 rszvb_GetCalibrationDataTimestamp  = prototype(('rszvb_GetCalibrationDataTimestamp', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataTimestamp.name = 'rszvb_GetCalibrationDataTimestamp'
 rszvb_GetCalibrationDataTimestamp.errcheck = __errorcheck__
@@ -7978,56 +7978,56 @@ rszvb_ConfigureCalibrationUnitStandard.errcheck = __errorcheck__
 rszvb_ConfigureCalibrationUnitStandard.output = False
 # rszvb_SetFactoryCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean factoryCalibration']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'factoryCalibration'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'factoryCalibration'),)
 rszvb_SetFactoryCalibrationState  = prototype(('rszvb_SetFactoryCalibrationState', rszvbDLL), paramflags)
 rszvb_SetFactoryCalibrationState.name = 'rszvb_SetFactoryCalibrationState'
 rszvb_SetFactoryCalibrationState.errcheck = __errorcheck__
 rszvb_SetFactoryCalibrationState.output = False
 # rszvb_GetFactoryCalibrationState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* factoryCalibration']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'factoryCalibration'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'factoryCalibration'),)
 rszvb_GetFactoryCalibrationState  = prototype(('rszvb_GetFactoryCalibrationState', rszvbDLL), paramflags)
 rszvb_GetFactoryCalibrationState.name = 'rszvb_GetFactoryCalibrationState'
 rszvb_GetFactoryCalibrationState.errcheck = __errorcheck__
 rszvb_GetFactoryCalibrationState.output = True
 # rszvb_SetEnhancedWaveCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean errorCorrection']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'errorCorrection'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'errorCorrection'),)
 rszvb_SetEnhancedWaveCorrection  = prototype(('rszvb_SetEnhancedWaveCorrection', rszvbDLL), paramflags)
 rszvb_SetEnhancedWaveCorrection.name = 'rszvb_SetEnhancedWaveCorrection'
 rszvb_SetEnhancedWaveCorrection.errcheck = __errorcheck__
 rszvb_SetEnhancedWaveCorrection.output = False
 # rszvb_GetEnhancedWaveCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* errorCorrection']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'errorCorrection'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'errorCorrection'),)
 rszvb_GetEnhancedWaveCorrection  = prototype(('rszvb_GetEnhancedWaveCorrection', rszvbDLL), paramflags)
 rszvb_GetEnhancedWaveCorrection.name = 'rszvb_GetEnhancedWaveCorrection'
 rszvb_GetEnhancedWaveCorrection.errcheck = __errorcheck__
 rszvb_GetEnhancedWaveCorrection.output = True
 # rszvb_SetLoadMatchingCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean loadMatchingCorrection']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'loadMatchingCorrection'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'loadMatchingCorrection'),)
 rszvb_SetLoadMatchingCorrection  = prototype(('rszvb_SetLoadMatchingCorrection', rszvbDLL), paramflags)
 rszvb_SetLoadMatchingCorrection.name = 'rszvb_SetLoadMatchingCorrection'
 rszvb_SetLoadMatchingCorrection.errcheck = __errorcheck__
 rszvb_SetLoadMatchingCorrection.output = False
 # rszvb_GetLoadMatchingCorrection ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* loadMatchingCorrection']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'loadMatchingCorrection'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'loadMatchingCorrection'),)
 rszvb_GetLoadMatchingCorrection  = prototype(('rszvb_GetLoadMatchingCorrection', rszvbDLL), paramflags)
 rszvb_GetLoadMatchingCorrection.name = 'rszvb_GetLoadMatchingCorrection'
 rszvb_GetLoadMatchingCorrection.errcheck = __errorcheck__
 rszvb_GetLoadMatchingCorrection.output = True
 # rszvb_SetCalibrationCorrectionBaseFrequencyState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'state'),)
 rszvb_SetCalibrationCorrectionBaseFrequencyState  = prototype(('rszvb_SetCalibrationCorrectionBaseFrequencyState', rszvbDLL), paramflags)
 rszvb_SetCalibrationCorrectionBaseFrequencyState.name = 'rszvb_SetCalibrationCorrectionBaseFrequencyState'
 rszvb_SetCalibrationCorrectionBaseFrequencyState.errcheck = __errorcheck__
 rszvb_SetCalibrationCorrectionBaseFrequencyState.output = False
 # rszvb_GetCalibrationCorrectionBaseFrequencyState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViBoolean* state']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'state'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'state'),)
 rszvb_GetCalibrationCorrectionBaseFrequencyState  = prototype(('rszvb_GetCalibrationCorrectionBaseFrequencyState', rszvbDLL), paramflags)
 rszvb_GetCalibrationCorrectionBaseFrequencyState.name = 'rszvb_GetCalibrationCorrectionBaseFrequencyState'
 rszvb_GetCalibrationCorrectionBaseFrequencyState.errcheck = __errorcheck__
@@ -8216,168 +8216,168 @@ rszvb_ExportKitWithLabel.errcheck = __errorcheck__
 rszvb_ExportKitWithLabel.output = False
 # rszvb_ResetOffsets ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_ResetOffsets  = prototype(('rszvb_ResetOffsets', rszvbDLL), paramflags)
 rszvb_ResetOffsets.name = 'rszvb_ResetOffsets'
 rszvb_ResetOffsets.errcheck = __errorcheck__
 rszvb_ResetOffsets.output = False
 # rszvb_QueryResetOffsets ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32* offsets']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(2, 'offsets'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(2, 'offsets'),)
 rszvb_QueryResetOffsets  = prototype(('rszvb_QueryResetOffsets', rszvbDLL), paramflags)
 rszvb_QueryResetOffsets.name = 'rszvb_QueryResetOffsets'
 rszvb_QueryResetOffsets.errcheck = __errorcheck__
 rszvb_QueryResetOffsets.output = True
 # rszvb_SetElectricalLength ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 electricalLength']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'electricalLength'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'electricalLength'),)
 rszvb_SetElectricalLength  = prototype(('rszvb_SetElectricalLength', rszvbDLL), paramflags)
 rszvb_SetElectricalLength.name = 'rszvb_SetElectricalLength'
 rszvb_SetElectricalLength.errcheck = __errorcheck__
 rszvb_SetElectricalLength.output = False
 # rszvb_GetElectricalLength ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* electricalLength']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'electricalLength'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'electricalLength'),)
 rszvb_GetElectricalLength  = prototype(('rszvb_GetElectricalLength', rszvbDLL), paramflags)
 rszvb_GetElectricalLength.name = 'rszvb_GetElectricalLength'
 rszvb_GetElectricalLength.errcheck = __errorcheck__
 rszvb_GetElectricalLength.output = True
 # rszvb_ConfigureMechanicalLength ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 mechanicalLength', 'ViReal64 permittivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'mechanicalLength'),(1, 'permittivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'mechanicalLength'),(1, 'permittivity'),)
 rszvb_ConfigureMechanicalLength  = prototype(('rszvb_ConfigureMechanicalLength', rszvbDLL), paramflags)
 rszvb_ConfigureMechanicalLength.name = 'rszvb_ConfigureMechanicalLength'
 rszvb_ConfigureMechanicalLength.errcheck = __errorcheck__
 rszvb_ConfigureMechanicalLength.output = False
 # rszvb_SetMechanicalLength ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 mechanicalLength']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'mechanicalLength'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'mechanicalLength'),)
 rszvb_SetMechanicalLength  = prototype(('rszvb_SetMechanicalLength', rszvbDLL), paramflags)
 rszvb_SetMechanicalLength.name = 'rszvb_SetMechanicalLength'
 rszvb_SetMechanicalLength.errcheck = __errorcheck__
 rszvb_SetMechanicalLength.output = False
 # rszvb_GetMechanicalLength ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* mechanicalLength']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'mechanicalLength'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'mechanicalLength'),)
 rszvb_GetMechanicalLength  = prototype(('rszvb_GetMechanicalLength', rszvbDLL), paramflags)
 rszvb_GetMechanicalLength.name = 'rszvb_GetMechanicalLength'
 rszvb_GetMechanicalLength.errcheck = __errorcheck__
 rszvb_GetMechanicalLength.output = True
 # rszvb_SetPermittivity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 permittivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'permittivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'permittivity'),)
 rszvb_SetPermittivity  = prototype(('rszvb_SetPermittivity', rszvbDLL), paramflags)
 rszvb_SetPermittivity.name = 'rszvb_SetPermittivity'
 rszvb_SetPermittivity.errcheck = __errorcheck__
 rszvb_SetPermittivity.output = False
 # rszvb_GetPermittivity ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* permittivity']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'permittivity'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'permittivity'),)
 rszvb_GetPermittivity  = prototype(('rszvb_GetPermittivity', rszvbDLL), paramflags)
 rszvb_GetPermittivity.name = 'rszvb_GetPermittivity'
 rszvb_GetPermittivity.errcheck = __errorcheck__
 rszvb_GetPermittivity.output = True
 # rszvb_ConfigureLoss ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 lossAtDC', 'ViReal64 lossAtFrequency', 'ViReal64 lossReferenceFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double,c_double,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'lossAtDC'),(1, 'lossAtFrequency'),(1, 'lossReferenceFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'lossAtDC'),(1, 'lossAtFrequency'),(1, 'lossReferenceFrequency'),)
 rszvb_ConfigureLoss  = prototype(('rszvb_ConfigureLoss', rszvbDLL), paramflags)
 rszvb_ConfigureLoss.name = 'rszvb_ConfigureLoss'
 rszvb_ConfigureLoss.errcheck = __errorcheck__
 rszvb_ConfigureLoss.output = False
 # rszvb_SetLossAtDC ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 lossAtDC']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'lossAtDC'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'lossAtDC'),)
 rszvb_SetLossAtDC  = prototype(('rszvb_SetLossAtDC', rszvbDLL), paramflags)
 rszvb_SetLossAtDC.name = 'rszvb_SetLossAtDC'
 rszvb_SetLossAtDC.errcheck = __errorcheck__
 rszvb_SetLossAtDC.output = False
 # rszvb_GetLossAtDC ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* lossAtDC']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'lossAtDC'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'lossAtDC'),)
 rszvb_GetLossAtDC  = prototype(('rszvb_GetLossAtDC', rszvbDLL), paramflags)
 rszvb_GetLossAtDC.name = 'rszvb_GetLossAtDC'
 rszvb_GetLossAtDC.errcheck = __errorcheck__
 rszvb_GetLossAtDC.output = True
 # rszvb_SetLossAtFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 lossAtFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'lossAtFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'lossAtFrequency'),)
 rszvb_SetLossAtFrequency  = prototype(('rszvb_SetLossAtFrequency', rszvbDLL), paramflags)
 rszvb_SetLossAtFrequency.name = 'rszvb_SetLossAtFrequency'
 rszvb_SetLossAtFrequency.errcheck = __errorcheck__
 rszvb_SetLossAtFrequency.output = False
 # rszvb_GetLossAtFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* lossAtFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'lossAtFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'lossAtFrequency'),)
 rszvb_GetLossAtFrequency  = prototype(('rszvb_GetLossAtFrequency', rszvbDLL), paramflags)
 rszvb_GetLossAtFrequency.name = 'rszvb_GetLossAtFrequency'
 rszvb_GetLossAtFrequency.errcheck = __errorcheck__
 rszvb_GetLossAtFrequency.output = True
 # rszvb_SetLossReferenceFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 lossReferenceFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'lossReferenceFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'lossReferenceFrequency'),)
 rszvb_SetLossReferenceFrequency  = prototype(('rszvb_SetLossReferenceFrequency', rszvbDLL), paramflags)
 rszvb_SetLossReferenceFrequency.name = 'rszvb_SetLossReferenceFrequency'
 rszvb_SetLossReferenceFrequency.errcheck = __errorcheck__
 rszvb_SetLossReferenceFrequency.output = False
 # rszvb_GetLossReferenceFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* lossReferenceFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'lossReferenceFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'lossReferenceFrequency'),)
 rszvb_GetLossReferenceFrequency  = prototype(('rszvb_GetLossReferenceFrequency', rszvbDLL), paramflags)
 rszvb_GetLossReferenceFrequency.name = 'rszvb_GetLossReferenceFrequency'
 rszvb_GetLossReferenceFrequency.errcheck = __errorcheck__
 rszvb_GetLossReferenceFrequency.output = True
 # rszvb_SetDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 delay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'delay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'delay'),)
 rszvb_SetDelay  = prototype(('rszvb_SetDelay', rszvbDLL), paramflags)
 rszvb_SetDelay.name = 'rszvb_SetDelay'
 rszvb_SetDelay.errcheck = __errorcheck__
 rszvb_SetDelay.output = False
 # rszvb_GetDelay ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* delay']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'delay'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'delay'),)
 rszvb_GetDelay  = prototype(('rszvb_GetDelay', rszvbDLL), paramflags)
 rszvb_GetDelay.name = 'rszvb_GetDelay'
 rszvb_GetDelay.errcheck = __errorcheck__
 rszvb_GetDelay.output = True
 # rszvb_QueryDirectFixtureCompensation ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* directFixtureCompensation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'directFixtureCompensation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'directFixtureCompensation'),)
 rszvb_QueryDirectFixtureCompensation  = prototype(('rszvb_QueryDirectFixtureCompensation', rszvbDLL), paramflags)
 rszvb_QueryDirectFixtureCompensation.name = 'rszvb_QueryDirectFixtureCompensation'
 rszvb_QueryDirectFixtureCompensation.errcheck = __errorcheck__
 rszvb_QueryDirectFixtureCompensation.output = True
 # rszvb_AutoLength ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),)
 rszvb_AutoLength  = prototype(('rszvb_AutoLength', rszvbDLL), paramflags)
 rszvb_AutoLength.name = 'rszvb_AutoLength'
 rszvb_AutoLength.errcheck = __errorcheck__
 rszvb_AutoLength.output = False
 # rszvb_AutoLengthAndLoss ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),)
 rszvb_AutoLengthAndLoss  = prototype(('rszvb_AutoLengthAndLoss', rszvbDLL), paramflags)
 rszvb_AutoLengthAndLoss.name = 'rszvb_AutoLengthAndLoss'
 rszvb_AutoLengthAndLoss.errcheck = __errorcheck__
 rszvb_AutoLengthAndLoss.output = False
 # rszvb_AcquireFixtureCompensationSweep ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 standardType', 'ViInt32 arraySize', 'ViInt32 _VI_FAR ports[]']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'standardType'),(1, 'arraySize'),(1, 'ports[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'standardType'),(1, 'arraySize'),(1, 'ports[]'),)
 rszvb_AcquireFixtureCompensationSweep  = prototype(('rszvb_AcquireFixtureCompensationSweep', rszvbDLL), paramflags)
 rszvb_AcquireFixtureCompensationSweep.name = 'rszvb_AcquireFixtureCompensationSweep'
 rszvb_AcquireFixtureCompensationSweep.errcheck = __errorcheck__
 rszvb_AcquireFixtureCompensationSweep.output = False
 # rszvb_StartFixtureCompensationSweep ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_StartFixtureCompensationSweep  = prototype(('rszvb_StartFixtureCompensationSweep', rszvbDLL), paramflags)
 rszvb_StartFixtureCompensationSweep.name = 'rszvb_StartFixtureCompensationSweep'
 rszvb_StartFixtureCompensationSweep.errcheck = __errorcheck__
 rszvb_StartFixtureCompensationSweep.output = False
 # rszvb_SaveFixtureCompensationData ['ViSession instrumentHandle', 'ViInt32 channel']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),)
 rszvb_SaveFixtureCompensationData  = prototype(('rszvb_SaveFixtureCompensationData', rszvbDLL), paramflags)
 rszvb_SaveFixtureCompensationData.name = 'rszvb_SaveFixtureCompensationData'
 rszvb_SaveFixtureCompensationData.errcheck = __errorcheck__
@@ -8587,42 +8587,42 @@ rszvb_TraceGetRGBColor.errcheck = __errorcheck__
 rszvb_TraceGetRGBColor.output = True
 # rszvb_SetPowerPortLimitState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean limitState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'limitState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'limitState'),)
 rszvb_SetPowerPortLimitState  = prototype(('rszvb_SetPowerPortLimitState', rszvbDLL), paramflags)
 rszvb_SetPowerPortLimitState.name = 'rszvb_SetPowerPortLimitState'
 rszvb_SetPowerPortLimitState.errcheck = __errorcheck__
 rszvb_SetPowerPortLimitState.output = False
 # rszvb_GetPowerPortLimitState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* limitState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'limitState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'limitState'),)
 rszvb_GetPowerPortLimitState  = prototype(('rszvb_GetPowerPortLimitState', rszvbDLL), paramflags)
 rszvb_GetPowerPortLimitState.name = 'rszvb_GetPowerPortLimitState'
 rszvb_GetPowerPortLimitState.errcheck = __errorcheck__
 rszvb_GetPowerPortLimitState.output = True
 # rszvb_SetPowerPortLimitValue ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64 limitValue']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_double)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'limitValue'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'limitValue'),)
 rszvb_SetPowerPortLimitValue  = prototype(('rszvb_SetPowerPortLimitValue', rszvbDLL), paramflags)
 rszvb_SetPowerPortLimitValue.name = 'rszvb_SetPowerPortLimitValue'
 rszvb_SetPowerPortLimitValue.errcheck = __errorcheck__
 rszvb_SetPowerPortLimitValue.output = False
 # rszvb_GetPowerPortLimitValue ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViReal64* limitValue']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'limitValue'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'limitValue'),)
 rszvb_GetPowerPortLimitValue  = prototype(('rszvb_GetPowerPortLimitValue', rszvbDLL), paramflags)
 rszvb_GetPowerPortLimitValue.name = 'rszvb_GetPowerPortLimitValue'
 rszvb_GetPowerPortLimitValue.errcheck = __errorcheck__
 rszvb_GetPowerPortLimitValue.output = True
 # rszvb_SetPowerPortLimitDirectGeneratorAndReceiverState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean DRGAccessState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(1, 'DRGAccessState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'DRGAccessState'),)
 rszvb_SetPowerPortLimitDirectGeneratorAndReceiverState  = prototype(('rszvb_SetPowerPortLimitDirectGeneratorAndReceiverState', rszvbDLL), paramflags)
 rszvb_SetPowerPortLimitDirectGeneratorAndReceiverState.name = 'rszvb_SetPowerPortLimitDirectGeneratorAndReceiverState'
 rszvb_SetPowerPortLimitDirectGeneratorAndReceiverState.errcheck = __errorcheck__
 rszvb_SetPowerPortLimitDirectGeneratorAndReceiverState.output = False
 # rszvb_GetPowerPortLimitDirectGeneratorAndReceiverState ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViBoolean* DRGAccessState']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'port'),(2, 'DRGAccessState'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(2, 'DRGAccessState'),)
 rszvb_GetPowerPortLimitDirectGeneratorAndReceiverState  = prototype(('rszvb_GetPowerPortLimitDirectGeneratorAndReceiverState', rszvbDLL), paramflags)
 rszvb_GetPowerPortLimitDirectGeneratorAndReceiverState.name = 'rszvb_GetPowerPortLimitDirectGeneratorAndReceiverState'
 rszvb_GetPowerPortLimitDirectGeneratorAndReceiverState.errcheck = __errorcheck__
@@ -9007,14 +9007,14 @@ rszvb_GenerateSystemReport.errcheck = __errorcheck__
 rszvb_GenerateSystemReport.output = False
 # rszvb_SetCalculationOfBandfilterCenterFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 marker', 'ViInt32 centerFrequencyCalculation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'marker'),(1, 'centerFrequencyCalculation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'marker'),(1, 'centerFrequencyCalculation'),)
 rszvb_SetCalculationOfBandfilterCenterFrequency  = prototype(('rszvb_SetCalculationOfBandfilterCenterFrequency', rszvbDLL), paramflags)
 rszvb_SetCalculationOfBandfilterCenterFrequency.name = 'rszvb_SetCalculationOfBandfilterCenterFrequency'
 rszvb_SetCalculationOfBandfilterCenterFrequency.errcheck = __errorcheck__
 rszvb_SetCalculationOfBandfilterCenterFrequency.output = False
 # rszvb_GetCalculationOfBandfilterCenterFrequency ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 marker', 'ViInt32* centerFrequencyCalculation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel'),(1, 'marker'),(2, 'centerFrequencyCalculation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'marker'),(2, 'centerFrequencyCalculation'),)
 rszvb_GetCalculationOfBandfilterCenterFrequency  = prototype(('rszvb_GetCalculationOfBandfilterCenterFrequency', rszvbDLL), paramflags)
 rszvb_GetCalculationOfBandfilterCenterFrequency.name = 'rszvb_GetCalculationOfBandfilterCenterFrequency'
 rszvb_GetCalculationOfBandfilterCenterFrequency.errcheck = __errorcheck__

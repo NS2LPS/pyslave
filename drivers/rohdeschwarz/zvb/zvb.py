@@ -17,8 +17,8 @@ class zvb:
         if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
         return data
     def wait_for_average(self, channel=1, sleep_time=0.1):
-        n_average = zva.GetAverageFactor()
-        while zva.GetCurrentSweep(channel)<n_average :
+        n_average = self.GetAverageFactor(channel)
+        while self.GetCurrentSweep(channel)<n_average :
             time.sleep(sleep_time)
     def freq(self, channel=1):
         start = self.GetStartFrequency(channel)

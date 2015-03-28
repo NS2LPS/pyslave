@@ -1,11 +1,10 @@
 # Register IPython magic functions
 from IPython.core.magic import register_line_magic, needs_local_scope
+from pyslave import instruments
 
 data_directory = 'Z:\\Data\\'
 
 # Instruments loading and listing
-import instruments
-
 @register_line_magic
 @needs_local_scope
 def openall(line, local_ns):
@@ -49,6 +48,8 @@ def window(line):
 del call, window, pause, resume, abort
 
 # Miscellaneous
+import time, os
+
 @register_line_magic
 def today(line):
     now = time.localtime()
@@ -59,5 +60,6 @@ def today(line):
     path = os.path.join(data_directory, year, year+'_'+month+'_'+day)
     if not os.path.exists(path): os.makedirs(path)
     os.chdir(path)
+    print 'Directory set to',path
 
 del today
