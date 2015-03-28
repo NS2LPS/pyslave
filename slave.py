@@ -38,16 +38,18 @@ class ScriptThread(QtCore.QThread):
         except:
             self.error = True
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            self.display(''.join(error_msgs))
+            for e in error_msgs : print e
     def pause(self):
         disp = True
         while self.pauseflag :
             if disp :
                 self.display('Script paused.')
+                print 'Script paused.'
                 disp = False
             time.sleep(0.1)
         if not disp:
             self.display('Script is running...')
+            print 'Script is running...'
 
 class SlaveWindow(QtGui.QMainWindow):
     def __init__(self):
@@ -72,8 +74,8 @@ class SlaveWindow(QtGui.QMainWindow):
                 convert(filename)
             except :
                 error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-                print error_msgs
-                print 'Error while converting {0}.'.format(filename)
+                for e in error_msgs : print e
+                self.display('Error while converting {0}.'.format(filename))
                 return
         filename = filename[:-3] + '_converted.py'
         try:
@@ -82,7 +84,7 @@ class SlaveWindow(QtGui.QMainWindow):
         except :
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
             for e in error_msgs : print e
-            print 'Error while loading {0}.'.format(filename)
+            self.display('Error while loading {0}.'.format(filename))
             return
         # Setup the thread and starts it
         self.thread = ScriptThread(self, local_ns['script_main'])
@@ -93,7 +95,6 @@ class SlaveWindow(QtGui.QMainWindow):
         self.thread.start()
         self.ui.textEdit.clear()
         self.display('Script is running...')
-        print 'Script is running...'
 
     @QtCore.pyqtSignature("")
     def on_pushButton_Abort_clicked(self):
@@ -117,12 +118,13 @@ class SlaveWindow(QtGui.QMainWindow):
         if self.thread is None : return
         self.thread.pauseflag = False
 
-    def display(self, text):
+    def display(self, text, echo=True):
         self.ui.textEdit.append(text)
-
+        if echo : print text
+        
     def thread_display(self):
         while self.thread.message:
-            self.display(self.thread.message.pop(0))
+            self.display(self.thread.message.pop(0), False)
 
     def thread_finished(self):
         if not self.thread.error:
