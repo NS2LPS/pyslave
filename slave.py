@@ -141,7 +141,7 @@ slave_window = SlaveWindow()
 slave_window.show()
 
 def __replace__(line):
-    line = line.replace('#import','from pylab import *\nimport time\nimport h5py\nfrom pyslave.instruments import __loaded__\nglobals().update(__loaded__)')
+    line = line.replace('#import','from pyslave.instruments import __loaded__\nglobals().update(__loaded__)')
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause?','thread.pause()')
     line = line.replace('#break?','if thread.stopflag : break')

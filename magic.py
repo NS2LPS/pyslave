@@ -62,4 +62,12 @@ def today(line):
     os.chdir(path)
     print 'Directory set to',path
 
-del today
+@register_line_magic
+def lastday(line):
+    lastyear = sorted(os.listdir(data_directory))[-1]
+    lastday = sorted(os.listdir(os.path.join(data_directory,lastyear)))[-1]
+    path = os.path.join(data_directory, lastyear, lastday)
+    os.chdir(path)
+    print 'Directory set to',path
+
+del today, lastday
