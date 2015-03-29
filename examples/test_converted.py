@@ -1,15 +1,16 @@
 # Auto generated script file
 
-#from matplotlib.pyplot import subplots
 import time
-#import numpy as np
 
-fig,ax = subplots()
-#x = np.linspace(0,1,1000)
+fig = figure(1)
+fig.clf()
+ax = fig.add_subplot(111)
+
+x = np.linspace(0,1,1000)
 
 # Main script function
 def script_main(thread):
-    for i in range(10):
+    for i in range(100):
         time.sleep(1)
         thread.display('Step #{0}'.format(i))
         ax.clear()

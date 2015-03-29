@@ -1,8 +1,10 @@
-# Script helping functions
+"""Helping functions to write slave scripts."""
 
 import os, glob
 
 def increment(filename, ndigits=3):
+    """Return a filename with an auto incremented number at the end of the name.
+    The number is zero padded to have n digits."""
     basename = filename.rsplit('.',1)[0] if '.' in filename else filename
     ext = '.'+filename.rsplit('.',1)[1] if '.' in filename else ''
     files = sorted(glob.glob( basename+'*'+ext ))

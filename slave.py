@@ -1,3 +1,6 @@
+"""Create the GUI to handle script execution.
+The module also defines the way scripts are converted before being run."""
+
 from PyQt4 import QtCore, QtGui, Qt, Qwt5
 from IPython.core.magic import register_line_magic
 import sys, traceback, time, imp, os
@@ -17,8 +20,8 @@ class ScriptThread(QtCore.QThread):
         self.pauseflag = False
         self.parent = parent
         self.message = []
-    def display(self, msg):
-        self.message.append(msg)
+    def display(self, msg, echo=False):
+        self.message.append( (msg, echo) )
         self.display_signal.emit()
     def draw(self):
         if not self.stopflag:
@@ -43,13 +46,11 @@ class ScriptThread(QtCore.QThread):
         disp = True
         while self.pauseflag :
             if disp :
-                self.display('Script paused.')
-                print 'Script paused.'
+                self.display('Script paused.',True)
                 disp = False
             time.sleep(0.1)
         if not disp:
-            self.display('Script is running...')
-            print 'Script is running...'
+            self.display('Script is running...',True)
 
 class SlaveWindow(QtGui.QMainWindow):
     def __init__(self):
@@ -62,12 +63,6 @@ class SlaveWindow(QtGui.QMainWindow):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, False)
         self.thread = None
 
-    #@QtCore.pyqtSignature("")
-    #def on_pushButton_Call_clicked(self):
-    #    filename = QtGui.QFileDialog.getOpenFileName(self, "Choose a script file", filter="Python (*.py)")
-    #    if filename:
-    #        self.call(filename)
-
     def call(self, filename, local_ns):
         if not filename.endswith('_converted.py'):
             try:
@@ -79,7 +74,6 @@ class SlaveWindow(QtGui.QMainWindow):
                 return
         filename = filename[:-3] + '_converted.py'
         try:
-            #current_script = imp.load_source('current_script', filename)
             execfile(filename, local_ns)
         except :
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
@@ -101,6 +95,7 @@ class SlaveWindow(QtGui.QMainWindow):
         if self.thread is None : return
         self.thread.stopflag = True
         self.thread.pauseflag = False
+        self.display('Aborting...')
         ret = self.thread.wait(self.timeout*1000)
         if not ret:
             ret = QtGui.QMessageBox.warning(self, "Script", "Script is not answering. Abort Anyway ?",
@@ -121,10 +116,11 @@ class SlaveWindow(QtGui.QMainWindow):
     def display(self, text, echo=True):
         self.ui.textEdit.append(text)
         if echo : print text
-        
+        sys.stdout.flush()
+
     def thread_display(self):
         while self.thread.message:
-            self.display(self.thread.message.pop(0), False)
+            self.display(*self.thread.message.pop(0))
 
     def thread_finished(self):
         if not self.thread.error:
@@ -134,7 +130,7 @@ class SlaveWindow(QtGui.QMainWindow):
         draw()
 
     def thread_terminated(self):
-        self.display('Script aborted.')
+        self.display('Script forced to terminate.')
 
     def draw(self):
         draw()
@@ -153,6 +149,8 @@ def __replace__(line):
     return line
 
 def convert(filename):
+    """Convert a python script so that it can be called by slave.
+    The converted file is named by appending '_converted' to the filename."""
     with open(filename,'r') as f:
         script = f.read()
     if '#main' not in script:

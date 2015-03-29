@@ -1,10 +1,13 @@
 import time
 
-fig,ax = subplots()
+fig = figure(1)
+fig.clf()
+ax = fig.add_subplot(111)
+
 x = np.linspace(0,1,1000)
 
 #main
-for i in range(10):
+for i in range(100):
     time.sleep(1)
     #disp('Step #{0}'.format(i))
     ax.clear()

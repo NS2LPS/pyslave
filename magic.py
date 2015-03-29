@@ -1,4 +1,5 @@
-# Register IPython magic functions
+"""Define magic functions to load instruments and run scripts into slave."""
+
 from IPython.core.magic import register_line_magic, needs_local_scope
 from pyslave import instruments
 
@@ -8,6 +9,7 @@ data_directory = 'Z:\\Data\\'
 @register_line_magic
 @needs_local_scope
 def openall(line, local_ns):
+    """Load all GPIB instruments."""
     res = instruments.openall('GPIB')
     for app in res:
         local_ns[app.shortname] = app
@@ -15,35 +17,42 @@ def openall(line, local_ns):
 
 @register_line_magic
 def listall(line):
+    """List all loaded instruments."""
     print "Loaded instruments :",' '.join(instruments.__loaded__.iterkeys())
 
 del listall, openall
 
-
 # Scripts launching, pausing
+
 from pyslave import slave
 
 @register_line_magic
 @needs_local_scope
 def call(filename, local_ns):
+    """Convert and launch a script."""
     if not filename.endswith('.py'):
         filename += '.py'
     slave.slave_window.call(filename, local_ns)
 
 @register_line_magic
 def pause(line):
+    """Pause the running script."""
     slave.slave_window.on_pushButton_Pause_clicked()
 
 @register_line_magic
 def resume(line):
+    """Resume the paused script."""
     slave.slave_window.on_pushButton_Resume_clicked()
 
 @register_line_magic
 def abort(line):
+    """Abort the running script. If the script does not finish within 10 s,
+    a dialog appears to eventually force the script to terminate."""
     slave.slave_window.on_pushButton_Abort_clicked()
 
 @register_line_magic
 def window(line):
+    """Show the slave window."""
     slave.slave_window.show()
 
 del call, window, pause, resume, abort
@@ -53,6 +62,7 @@ import time, os
 
 @register_line_magic
 def today(line):
+    """Change directory to today's data directory, create it if it does not exist."""
     now = time.localtime()
     year = str(now.tm_year)
     month = '{0:02d}'.format(now.tm_mon)
@@ -65,6 +75,7 @@ def today(line):
 
 @register_line_magic
 def lastday(line):
+    """Change directory to the last day of data"""
     lastyear = sorted(os.listdir(data_directory))[-1]
     lastday = sorted(os.listdir(os.path.join(data_directory,lastyear)))[-1]
     path = os.path.join(data_directory, lastyear, lastday)
