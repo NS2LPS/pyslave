@@ -1,4 +1,4 @@
-from .__zvb__ import rszvb as dll
+from __zvb__ import rszvb as dll
 import numpy as np
 
 class zvb:
