@@ -8,7 +8,7 @@ rszvbDLL = windll.rszvb_32
 
 class ZVBDLLERROR(Exception):
 	pass
-        
+
 iStringBufferLen = 1024
 sStringBuffer = create_string_buffer(iStringBufferLen)
 

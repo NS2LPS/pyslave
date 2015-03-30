@@ -12,8 +12,8 @@ rm = visa.ResourceManager()
 # Known devices with their driver and category
 known_devices   = {'HEWLETT-PACKARD 34401A': (ivi.agilent.agilent34401A, 'dmm'),
                    'HEWLETT-PACKARD E3631A': (ivi.agilent.agilentE3641A,  'dcpwr'),
-                   'Rohde&Schwarz ZVA40-2Port' : (drivers.zvb, 'vna'),
-                   'Rohde&Schwarz ZVB8-2Port' : (drivers.zvb, 'vna'),
+                   'Rohde&Schwarz ZVA40-2Port' : (drivers.rohdeschwarz.zvb, 'vna'),
+                   'Rohde&Schwarz ZVB8-2Port' : (drivers.rohdeschwarz.zvb, 'vna'),
                    }
 
 # Keep track of loaded instruments

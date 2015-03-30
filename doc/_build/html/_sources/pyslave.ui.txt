@@ -1,0 +1,11 @@
+ui Package
+==========
+
+:mod:`SlaveWindow` Module
+-------------------------
+
+.. automodule:: pyslave.ui.SlaveWindow
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
