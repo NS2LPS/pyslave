@@ -1,10 +1,9 @@
-"""Pyslave contains :
+"""Pyslave is a package to script experiment in Python. It contains :
 
-* Instruments functions to load VISA instruments
+* "Magic" functions to be used in the IPython shell. These functions allow to easily load instruments and launch scripts.
 
-* Instrument drivers
+* A GUI to monitor the running script and interact with it.
 
-* Magic IPython functions to run python scripts in slave
+* Python Instrument drivers
 
-* Helper functions to write scripts for slave
 """

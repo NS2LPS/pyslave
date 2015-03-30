@@ -6,17 +6,24 @@
 Welcome to pyslave's documentation!
 ===================================
 
-Contents:
+.. automodule:: pyslave
+
+Contents
+========
 
 .. toctree::
    :maxdepth: 2
-
-
+   
+   magic.rst
+   scripting_language.rst
+   instruments.rst
+   script.rst
+   drivers.rst
+   
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 

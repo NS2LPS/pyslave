@@ -1,4 +1,4 @@
-"""Helping functions to write slave scripts."""
+"""This module contains helper functions to write slave scripts."""
 
 import os, glob
 
