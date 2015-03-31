@@ -1,5 +1,5 @@
-Yokogawa instrument drivers
-================================
+Lecroy instrument drivers
+=========================
 
 .. automodule:: pyslave.drivers.lecroy
 

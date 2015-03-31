@@ -12,8 +12,8 @@ class LecroyScope:
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
 
     def fetchwaveform(self, channel):
-        """Fetch the waveform from the specified channel. Returns two numpy vectors."""
-        ret = self.write('C{0}:WF?'.format(channel))
+        """Fetch the waveform from the specified channel ('C1','C2,'TA', ...). Returns two numpy vectors."""
+        ret = self.write('{0}:WF?'.format(channel))
         trc = self.read_raw()
         return lecroy_decode(trc)
        
