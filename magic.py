@@ -1,5 +1,4 @@
-"""This module defines magic IPython functions to run pyslave from the IPython shell.
-The slave window is created when the module is loaded."""
+"""This module defines magic IPython functions to run pyslave from the IPython shell."""
 
 from IPython.core.magic import register_line_magic, needs_local_scope
 from pyslave import instruments
