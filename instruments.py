@@ -3,7 +3,7 @@ It keeps track of all the instruments that are loaded and attributes them unique
 
 import traceback, sys
 import visa
-from pyslave.drivers import * 
+from pyslave.drivers import *
 
 # VISA resource manager
 rm = visa.ResourceManager()
@@ -44,10 +44,11 @@ def openinst(address):
         shortname = __shortname__(typ)
     else:
         app = rm.open_resource(address)
-        shortname = __shortname__('instr')
-    app.shortname = shortname
-    app.fullname = id + ' ' + address
-    __loaded__[shortname] = app
+        typ = 'instr'
+    fullname = id + ' ' + address
+    app.shortname =  __loaded__[fullname] if fullname in __loaded__ else __shortname__('typ')
+    app.fullname = fullname
+    __loaded__[fullname] = app
     return app
 
 
@@ -66,8 +67,9 @@ def openall(match):
                 print 'Error while opening instrument at {0}.'.format(address)
     return res
 
-
 def closeinst(shortname):
-    """Close the instrument specified by its shortname."""
-    __loaded__[shortname].close()
-    del __loaded__[shortname]
+    """Close the instrument specified by its shortname and remove it from the instrument list."""
+    d = dict( [ (v.shortname, k) for k,v in __loaded__.iteritems() ] )
+    fullname = d[shortname]
+    __loaded__[fullname].close()
+    del __loaded__[fullname]

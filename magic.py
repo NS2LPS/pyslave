@@ -12,14 +12,17 @@ data_directory = 'Z:\\Data\\'
 def openall(line, local_ns):
     """Load all GPIB instruments."""
     res = instruments.openall('GPIB')
+    if res : print 'Loaded instruments :'
     for app in res:
         local_ns[app.shortname] = app
-        print '{0} loaded as {1}'.format(app.fullname, app.shortname)
+        print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 
 @register_line_magic
 def listall(line):
     """List all loaded instruments."""
-    print "Loaded instruments :",' '.join(instruments.__loaded__.iterkeys())
+    print "Loaded instruments :"
+    for app in instruments.__loaded__:
+        print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 
 del listall, openall
 
