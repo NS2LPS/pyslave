@@ -167,3 +167,6 @@ class yokogawa7651:
 
     def query(self, str):
         return self.instrument.query(str)
+        
+    def close(self):
+        self.instrument.close()

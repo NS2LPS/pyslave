@@ -1,4 +1,4 @@
-"""rszvb DLL Python interface."""
+"""The rszvb module exposes to Python the functions of the rszvd DLL."""
 import numpy as numpy
 from ctypes import *
 

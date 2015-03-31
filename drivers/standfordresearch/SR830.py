@@ -468,3 +468,7 @@ class SR830:
 
     def query(self, str):
         return self.instrument.query(str)
+
+    def close(self):
+        self.instrument.close()
+        
