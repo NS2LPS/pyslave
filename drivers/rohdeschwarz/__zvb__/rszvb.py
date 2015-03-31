@@ -1,3 +1,4 @@
+"""rszvb DLL Python interface."""
 import numpy as numpy
 from ctypes import *
 
