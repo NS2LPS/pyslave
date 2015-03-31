@@ -11,10 +11,10 @@ Attribution requirements can be found in license/ATTRIBUTION.TXT"""
 import visa
 
 # VISA resource manager
-rm = visa.ResourceManager()
+visa_rm = visa.ResourceManager()
 
 
-class SRS830:
+class SR830:
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.write('OUTX 1') # Set the device responce port to GPIB

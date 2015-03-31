@@ -13,6 +13,7 @@ known_devices   = {'HEWLETT-PACKARD 34401A': (agilent.agilent34401A, 'dmm'),
                    'HEWLETT-PACKARD E3631A': (agilent.agilentE3641A,  'dcpwr'),
                    'Rohde&Schwarz ZVA40-2Port' : (rohdeschwarz.zvb, 'vna'),
                    'Rohde&Schwarz ZVB8-2Port' : (rohdeschwarz.zvb, 'vna'),
+                   'Stanford_Research_Systems SR830': (standfordresearch.SR830, 'lockin'),
                    }
 
 # Keep track of loaded instruments

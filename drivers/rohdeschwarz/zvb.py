@@ -3,7 +3,7 @@ import numpy as np
 
 class zvb:
     """Rohde&Schwarz Vector Network Analyzer (ZVA,ZVB) driver. All the functions from the rszvb DLL are available.
-    See the DLL help in the ./__zvb__ directory.
+    See the DLL help for more details.
     
         Example : zvb.SetPower(channel=1, power=-10)
     

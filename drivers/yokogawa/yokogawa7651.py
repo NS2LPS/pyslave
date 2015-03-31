@@ -11,10 +11,10 @@ Attribution requirements can be found in license/ATTRIBUTION.TXT"""
 import visa
 
 # VISA resource manager
-rm = visa.ResourceManager()
+visa_rm = visa.ResourceManager()
 
 
-class yokagawa7651:
+class yokogawa7651:
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.outputtng = 0

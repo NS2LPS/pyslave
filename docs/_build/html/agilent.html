@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="pyslave 0.8 documentation" href="index.html" />
     <link rel="up" title="Instrument Drivers" href="drivers.html" />
+    <link rel="next" title="Yokogawa instrument drivers" href="yokogawa.html" />
     <link rel="prev" title="Rohde Schwarz instrument drivers" href="rohdeschwarz.html" /> 
   </head>
   <body>
@@ -37,6 +38,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="yokogawa.html" title="Yokogawa instrument drivers"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="rohdeschwarz.html" title="Rohde Schwarz instrument drivers"
              accesskey="P">previous</a> |</li>
@@ -52,7 +56,45 @@
             
   <div class="section" id="module-pyslave.drivers.agilent">
 <span id="agilent-instrument-drivers"></span><h1>Agilent instrument drivers<a class="headerlink" href="#module-pyslave.drivers.agilent" title="Permalink to this headline">¶</a></h1>
-<p>Agilent devices are suppported via their IVI drivers.</p>
+<p>Agilent devices are suppported via their IVI drivers. See the Python IVI documentation.</p>
+<dl class="class">
+<dt id="ivi.agilent.agilent34401A">
+<em class="property">class </em><tt class="descclassname">ivi.agilent.</tt><tt class="descname">agilent34401A</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilent34401A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">ivi.scpi.dmm.Base</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">ivi.scpi.dmm.MultiPoint</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">ivi.scpi.dmm.SoftwareTrigger</span></tt></p>
+<p>Agilent 34401A IVI DMM driver</p>
+<dl class="method">
+<dt id="ivi.agilent.agilent34401A.doc">
+<tt class="descname">doc</tt><big>(</big><em>obj=None</em>, <em>itm=None</em>, <em>docs=None</em>, <em>prefix=None</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilent34401A.doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python IVI documentation generator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ivi.agilent.agilent34401A.help">
+<tt class="descname">help</tt><big>(</big><em>itm=None</em>, <em>complete=False</em>, <em>indent=0</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilent34401A.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python IVI help system</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ivi.agilent.agilentE3641A">
+<em class="property">class </em><tt class="descclassname">ivi.agilent.</tt><tt class="descname">agilentE3641A</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilentE3641A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">ivi.agilent.agilentE3600A.agilentE3600A</span></tt></p>
+<p>Agilent E3641A IVI DC power supply driver</p>
+<dl class="method">
+<dt id="ivi.agilent.agilentE3641A.doc">
+<tt class="descname">doc</tt><big>(</big><em>obj=None</em>, <em>itm=None</em>, <em>docs=None</em>, <em>prefix=None</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilentE3641A.doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python IVI documentation generator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ivi.agilent.agilentE3641A.help">
+<tt class="descname">help</tt><big>(</big><em>itm=None</em>, <em>complete=False</em>, <em>indent=0</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilentE3641A.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python IVI help system</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -64,6 +106,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="rohdeschwarz.html"
                         title="previous chapter">Rohde Schwarz instrument drivers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="yokogawa.html"
+                        title="next chapter">Yokogawa instrument drivers</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/agilent.txt"
@@ -95,6 +140,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="yokogawa.html" title="Yokogawa instrument drivers"
+             >next</a> |</li>
         <li class="right" >
           <a href="rohdeschwarz.html" title="Rohde Schwarz instrument drivers"
              >previous</a> |</li>

@@ -15,6 +15,7 @@ Contents
    :maxdepth: 2
    
    magic.rst
+   scripting_language.rst
    instruments.rst
    script.rst
    drivers.rst
