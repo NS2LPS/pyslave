@@ -9,50 +9,51 @@ and also creates the slave window to monitor running scripts.
 The magic functions can be automatically loaded by including the following line in the startup configuration of IPython:
 
 ::
+
     from pyslave.magic import *
 
 Instrument functions (shortcuts to the instruments module)
-----------------------------------------------------------       
+----------------------------------------------------------
 
-.. function:: %openall
+**%openall**
 
     Load all GPIB instruments.
 
-.. function:: %listall
+**%listall**
 
     List all loaded instruments.
 
 Slave functions (run and interact with scripts )
 ------------------------------------------------
 
-.. function:: %call *filename*
+**%call** *filename*
 
-    Convert and launch a script. If *filename* ends with converted or converted.py, conversion is skipped.
+    Convert and launch a script. If *filename* ends with *converted* or *converted.py*, conversion is skipped.
 
-.. function:: %pause
+**%pause**
 
     Pause the running script.
 
-.. function:: %resume
+**%resume**
 
     Resume the paused script.
 
-.. function:: %abort
+**%abort**
 
     Abort the running script. If the script does not finish within 10 s, a dialog appears to eventually force the script to terminate.
 
-.. function:: %window
+**%window**
 
     Show the slave window if it was closed.
 
 Miscellaneous functions
 -----------------------
 
-.. function:: %today
+**%today**
 
     Change directory to today's data directory, create it if it does not exist.
     The root data directory is defined in magic.py.
 
-.. function:: %lastday
+**%lastday**
 
-    Change directory to the last day of data. 
+    Change directory to the last day of data.

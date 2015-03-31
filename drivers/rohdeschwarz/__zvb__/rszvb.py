@@ -697,9 +697,9 @@ rszvb_init  = prototype(('rszvb_init', rszvbDLL), paramflags)
 rszvb_init.name = 'rszvb_init'
 rszvb_init.errcheck = __errorcheck__
 rszvb_init.output = True
-# rszvb_ApplicationExample ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 startFrequency', 'ViReal64 stopFrequency', 'ViReal64 power', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR stimulusData[]', 'ViReal64 _VI_FAR responseData[]']
+# rszvb_ApplicationExample ['ViSession instrumentHandle', 'ViInt32 channel', 'ViReal64 startFrequency', 'ViReal64 stopFrequency', 'ViReal64 power', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR stimulusData', 'ViReal64 _VI_FAR responseData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_double,c_double,c_double,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'startFrequency'),(1, 'stopFrequency'),(1, 'power'),(2, 'noOfValues'),(1, 'stimulusData[]'),(1, 'responseData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'startFrequency'),(1, 'stopFrequency'),(1, 'power'),(2, 'noOfValues'),(1, 'stimulusData'),(1, 'responseData'),)
 rszvb_ApplicationExample  = prototype(('rszvb_ApplicationExample', rszvbDLL), paramflags)
 rszvb_ApplicationExample.name = 'rszvb_ApplicationExample'
 rszvb_ApplicationExample.errcheck = __errorcheck__
@@ -725,9 +725,9 @@ rszvb_WindowClose  = prototype(('rszvb_WindowClose', rszvbDLL), paramflags)
 rszvb_WindowClose.name = 'rszvb_WindowClose'
 rszvb_WindowClose.errcheck = __errorcheck__
 rszvb_WindowClose.output = False
-# rszvb_WindowList ['ViSession instrumentHandle', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_WindowList ['ViSession instrumentHandle', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_WindowList  = prototype(('rszvb_WindowList', rszvbDLL), paramflags)
 rszvb_WindowList.name = 'rszvb_WindowList'
 rszvb_WindowList.errcheck = __errorcheck__
@@ -760,9 +760,9 @@ rszvb_FileManager  = prototype(('rszvb_FileManager', rszvbDLL), paramflags)
 rszvb_FileManager.name = 'rszvb_FileManager'
 rszvb_FileManager.errcheck = __errorcheck__
 rszvb_FileManager.output = False
-# rszvb_GetCurrentDirectory ['ViSession instrumentHandle', 'ViChar _VI_FAR currentDirectory[]']
+# rszvb_GetCurrentDirectory ['ViSession instrumentHandle', 'ViChar _VI_FAR currentDirectory']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'currentDirectory[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'currentDirectory'),)
 rszvb_GetCurrentDirectory  = prototype(('rszvb_GetCurrentDirectory', rszvbDLL), paramflags)
 rszvb_GetCurrentDirectory.name = 'rszvb_GetCurrentDirectory'
 rszvb_GetCurrentDirectory.errcheck = __errorcheck__
@@ -963,9 +963,9 @@ rszvb_ConfigureMesurementParameters  = prototype(('rszvb_ConfigureMesurementPara
 rszvb_ConfigureMesurementParameters.name = 'rszvb_ConfigureMesurementParameters'
 rszvb_ConfigureMesurementParameters.errcheck = __errorcheck__
 rszvb_ConfigureMesurementParameters.output = False
-# rszvb_QueryMesurementParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 bufferSize', 'ViChar _VI_FAR parameters[]']
+# rszvb_QueryMesurementParameters ['ViSession instrumentHandle', 'ViInt32 channel', 'ViString traceName', 'ViInt32 bufferSize', 'ViChar _VI_FAR parameters']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'bufferSize'),(1, 'parameters[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'traceName'),(1, 'bufferSize'),(1, 'parameters'),)
 rszvb_QueryMesurementParameters  = prototype(('rszvb_QueryMesurementParameters', rszvbDLL), paramflags)
 rszvb_QueryMesurementParameters.name = 'rszvb_QueryMesurementParameters'
 rszvb_QueryMesurementParameters.errcheck = __errorcheck__
@@ -1145,16 +1145,16 @@ rszvb_GetTraceDisplayState  = prototype(('rszvb_GetTraceDisplayState', rszvbDLL)
 rszvb_GetTraceDisplayState.name = 'rszvb_GetTraceDisplayState'
 rszvb_GetTraceDisplayState.errcheck = __errorcheck__
 rszvb_GetTraceDisplayState.output = True
-# rszvb_TraceAddSParameterGroup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 numberOfLogicalPortNumbers', 'ViInt32 _VI_FAR logicalPortNumber_s[]']
+# rszvb_TraceAddSParameterGroup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 numberOfLogicalPortNumbers', 'ViInt32 _VI_FAR logicalPortNumber_s']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'numberOfLogicalPortNumbers'),(1, 'logicalPortNumber_s[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'numberOfLogicalPortNumbers'),(1, 'logicalPortNumber_s'),)
 rszvb_TraceAddSParameterGroup  = prototype(('rszvb_TraceAddSParameterGroup', rszvbDLL), paramflags)
 rszvb_TraceAddSParameterGroup.name = 'rszvb_TraceAddSParameterGroup'
 rszvb_TraceAddSParameterGroup.errcheck = __errorcheck__
 rszvb_TraceAddSParameterGroup.output = False
-# rszvb_QueryTraceAddSParameterGroup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 _VI_FAR logicalPortNumber_s[]']
+# rszvb_QueryTraceAddSParameterGroup ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 _VI_FAR logicalPortNumber_s']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPortNumber_s[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'logicalPortNumber_s'),)
 rszvb_QueryTraceAddSParameterGroup  = prototype(('rszvb_QueryTraceAddSParameterGroup', rszvbDLL), paramflags)
 rszvb_QueryTraceAddSParameterGroup.name = 'rszvb_QueryTraceAddSParameterGroup'
 rszvb_QueryTraceAddSParameterGroup.errcheck = __errorcheck__
@@ -1215,9 +1215,9 @@ rszvb_TraceDeleteAllChannels  = prototype(('rszvb_TraceDeleteAllChannels', rszvb
 rszvb_TraceDeleteAllChannels.name = 'rszvb_TraceDeleteAllChannels'
 rszvb_TraceDeleteAllChannels.errcheck = __errorcheck__
 rszvb_TraceDeleteAllChannels.output = False
-# rszvb_TraceList ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_TraceList ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_TraceList  = prototype(('rszvb_TraceList', rszvbDLL), paramflags)
 rszvb_TraceList.name = 'rszvb_TraceList'
 rszvb_TraceList.errcheck = __errorcheck__
@@ -1236,16 +1236,16 @@ rszvb_ChannelTraceRename  = prototype(('rszvb_ChannelTraceRename', rszvbDLL), pa
 rszvb_ChannelTraceRename.name = 'rszvb_ChannelTraceRename'
 rszvb_ChannelTraceRename.errcheck = __errorcheck__
 rszvb_ChannelTraceRename.output = False
-# rszvb_TraceListCatalog ['ViSession instrumentHandle', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_TraceListCatalog ['ViSession instrumentHandle', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_TraceListCatalog  = prototype(('rszvb_TraceListCatalog', rszvbDLL), paramflags)
 rszvb_TraceListCatalog.name = 'rszvb_TraceListCatalog'
 rszvb_TraceListCatalog.errcheck = __errorcheck__
 rszvb_TraceListCatalog.output = False
-# rszvb_TraceGetTraceName ['ViSession instrumentHandle', 'ViInt32 traceNumber', 'ViChar _VI_FAR traceName[]']
+# rszvb_TraceGetTraceName ['ViSession instrumentHandle', 'ViInt32 traceNumber', 'ViChar _VI_FAR traceName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'traceNumber'),(1, 'traceName[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'traceNumber'),(1, 'traceName'),)
 rszvb_TraceGetTraceName  = prototype(('rszvb_TraceGetTraceName', rszvbDLL), paramflags)
 rszvb_TraceGetTraceName.name = 'rszvb_TraceGetTraceName'
 rszvb_TraceGetTraceName.errcheck = __errorcheck__
@@ -1257,9 +1257,9 @@ rszvb_TraceGetTraceNumber  = prototype(('rszvb_TraceGetTraceNumber', rszvbDLL), 
 rszvb_TraceGetTraceNumber.name = 'rszvb_TraceGetTraceNumber'
 rszvb_TraceGetTraceNumber.errcheck = __errorcheck__
 rszvb_TraceGetTraceNumber.output = True
-# rszvb_TraceGetChannelName ['ViSession instrumentHandle', 'ViString traceName', 'ViChar _VI_FAR channelName[]']
+# rszvb_TraceGetChannelName ['ViSession instrumentHandle', 'ViString traceName', 'ViChar _VI_FAR channelName']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'traceName'),(1, 'channelName[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'traceName'),(1, 'channelName'),)
 rszvb_TraceGetChannelName  = prototype(('rszvb_TraceGetChannelName', rszvbDLL), paramflags)
 rszvb_TraceGetChannelName.name = 'rszvb_TraceGetChannelName'
 rszvb_TraceGetChannelName.errcheck = __errorcheck__
@@ -1698,9 +1698,9 @@ rszvb_TraceEvaluationRange  = prototype(('rszvb_TraceEvaluationRange', rszvbDLL)
 rszvb_TraceEvaluationRange.name = 'rszvb_TraceEvaluationRange'
 rszvb_TraceEvaluationRange.errcheck = __errorcheck__
 rszvb_TraceEvaluationRange.output = False
-# rszvb_TraceStatisticalEvaluation ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 statisticalParameter', 'ViBoolean infoField', 'ViReal64 _VI_FAR responseValue_s[]']
+# rszvb_TraceStatisticalEvaluation ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 statisticalParameter', 'ViBoolean infoField', 'ViReal64 _VI_FAR responseValue_s']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_bool,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'statisticalParameter'),(1, 'infoField'),(1, 'responseValue_s[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'statisticalParameter'),(1, 'infoField'),(1, 'responseValue_s'),)
 rszvb_TraceStatisticalEvaluation  = prototype(('rszvb_TraceStatisticalEvaluation', rszvbDLL), paramflags)
 rszvb_TraceStatisticalEvaluation.name = 'rszvb_TraceStatisticalEvaluation'
 rszvb_TraceStatisticalEvaluation.errcheck = __errorcheck__
@@ -1768,51 +1768,51 @@ rszvb_GetTraceSmoothing  = prototype(('rszvb_GetTraceSmoothing', rszvbDLL), para
 rszvb_GetTraceSmoothing.name = 'rszvb_GetTraceSmoothing'
 rszvb_GetTraceSmoothing.errcheck = __errorcheck__
 rszvb_GetTraceSmoothing.output = True
-# rszvb_TraceResponseData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceResponseData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceResponseData  = prototype(('rszvb_TraceResponseData', rszvbDLL), paramflags)
 rszvb_TraceResponseData.name = 'rszvb_TraceResponseData'
 rszvb_TraceResponseData.errcheck = __errorcheck__
 rszvb_TraceResponseData.output = True
-# rszvb_TraceResponseDataError ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 errorTerm', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceResponseDataError ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 errorTerm', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'errorTerm'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'errorTerm'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceResponseDataError  = prototype(('rszvb_TraceResponseDataError', rszvbDLL), paramflags)
 rszvb_TraceResponseDataError.name = 'rszvb_TraceResponseDataError'
 rszvb_TraceResponseDataError.errcheck = __errorcheck__
 rszvb_TraceResponseDataError.output = True
-# rszvb_TraceResponseDataAll ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceResponseDataAll ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceResponseDataAll  = prototype(('rszvb_TraceResponseDataAll', rszvbDLL), paramflags)
 rszvb_TraceResponseDataAll.name = 'rszvb_TraceResponseDataAll'
 rszvb_TraceResponseDataAll.errcheck = __errorcheck__
 rszvb_TraceResponseDataAll.output = True
-# rszvb_TraceComplexResponseData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceComplexResponseData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceComplexResponseData  = prototype(('rszvb_TraceComplexResponseData', rszvbDLL), paramflags)
 rszvb_TraceComplexResponseData.name = 'rszvb_TraceComplexResponseData'
 rszvb_TraceComplexResponseData.errcheck = __errorcheck__
 rszvb_TraceComplexResponseData.output = True
-# rszvb_TraceComplexResponseCatalog ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 bufferSize', 'ViChar _VI_FAR catalog[]']
+# rszvb_TraceComplexResponseCatalog ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 bufferSize', 'ViChar _VI_FAR catalog']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'bufferSize'),(1, 'catalog[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'bufferSize'),(1, 'catalog'),)
 rszvb_TraceComplexResponseCatalog  = prototype(('rszvb_TraceComplexResponseCatalog', rszvbDLL), paramflags)
 rszvb_TraceComplexResponseCatalog.name = 'rszvb_TraceComplexResponseCatalog'
 rszvb_TraceComplexResponseCatalog.errcheck = __errorcheck__
 rszvb_TraceComplexResponseCatalog.output = False
-# rszvb_TraceResponseDataAllData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceResponseDataAllData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceResponseDataAllData  = prototype(('rszvb_TraceResponseDataAllData', rszvbDLL), paramflags)
 rszvb_TraceResponseDataAllData.name = 'rszvb_TraceResponseDataAllData'
 rszvb_TraceResponseDataAllData.errcheck = __errorcheck__
 rszvb_TraceResponseDataAllData.output = True
-# rszvb_TraceResponseSingleSweepData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 sweepNumber', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceResponseSingleSweepData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 sweepNumber', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'sweepNumber'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'sweepNumber'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceResponseSingleSweepData  = prototype(('rszvb_TraceResponseSingleSweepData', rszvbDLL), paramflags)
 rszvb_TraceResponseSingleSweepData.name = 'rszvb_TraceResponseSingleSweepData'
 rszvb_TraceResponseSingleSweepData.errcheck = __errorcheck__
@@ -1824,30 +1824,30 @@ rszvb_TraceResponseSingleSweepDataCount  = prototype(('rszvb_TraceResponseSingle
 rszvb_TraceResponseSingleSweepDataCount.name = 'rszvb_TraceResponseSingleSweepDataCount'
 rszvb_TraceResponseSingleSweepDataCount.errcheck = __errorcheck__
 rszvb_TraceResponseSingleSweepDataCount.output = True
-# rszvb_TraceResponseSingleSweepDataForward ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 sweepNumber', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceResponseSingleSweepDataForward ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 sweepNumber', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'sweepNumber'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'sweepNumber'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceResponseSingleSweepDataForward  = prototype(('rszvb_TraceResponseSingleSweepDataForward', rszvbDLL), paramflags)
 rszvb_TraceResponseSingleSweepDataForward.name = 'rszvb_TraceResponseSingleSweepDataForward'
 rszvb_TraceResponseSingleSweepDataForward.errcheck = __errorcheck__
 rszvb_TraceResponseSingleSweepDataForward.output = True
-# rszvb_TraceStimulusData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceStimulusData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceStimulusData  = prototype(('rszvb_TraceStimulusData', rszvbDLL), paramflags)
 rszvb_TraceStimulusData.name = 'rszvb_TraceStimulusData'
 rszvb_TraceStimulusData.errcheck = __errorcheck__
 rszvb_TraceStimulusData.output = True
-# rszvb_WriteMemoryTraceData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 noOfPoints', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_WriteMemoryTraceData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 noOfPoints', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'noOfPoints'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'noOfPoints'),(1, 'traceData'),)
 rszvb_WriteMemoryTraceData  = prototype(('rszvb_WriteMemoryTraceData', rszvbDLL), paramflags)
 rszvb_WriteMemoryTraceData.name = 'rszvb_WriteMemoryTraceData'
 rszvb_WriteMemoryTraceData.errcheck = __errorcheck__
 rszvb_WriteMemoryTraceData.output = False
-# rszvb_WriteMemoryTraceDataExt ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32 noOfPoints', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_WriteMemoryTraceDataExt ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32 noOfPoints', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(1, 'noOfPoints'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(1, 'noOfPoints'),(1, 'traceData'),)
 rszvb_WriteMemoryTraceDataExt  = prototype(('rszvb_WriteMemoryTraceDataExt', rszvbDLL), paramflags)
 rszvb_WriteMemoryTraceDataExt.name = 'rszvb_WriteMemoryTraceDataExt'
 rszvb_WriteMemoryTraceDataExt.errcheck = __errorcheck__
@@ -1866,23 +1866,23 @@ rszvb_GetTraceFormatZVR  = prototype(('rszvb_GetTraceFormatZVR', rszvbDLL), para
 rszvb_GetTraceFormatZVR.name = 'rszvb_GetTraceFormatZVR'
 rszvb_GetTraceFormatZVR.errcheck = __errorcheck__
 rszvb_GetTraceFormatZVR.output = True
-# rszvb_TraceResponseDataZVR ['ViSession instrumentHandle', 'ViInt32 dataFormat', 'ViInt32 valuesToReturn', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceResponseDataZVR ['ViSession instrumentHandle', 'ViInt32 dataFormat', 'ViInt32 valuesToReturn', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'dataFormat'),(1, 'valuesToReturn'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'dataFormat'),(1, 'valuesToReturn'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceResponseDataZVR  = prototype(('rszvb_TraceResponseDataZVR', rszvbDLL), paramflags)
 rszvb_TraceResponseDataZVR.name = 'rszvb_TraceResponseDataZVR'
 rszvb_TraceResponseDataZVR.errcheck = __errorcheck__
 rszvb_TraceResponseDataZVR.output = True
-# rszvb_TraceStimulusDataZVR ['ViSession instrumentHandle', 'ViInt32 dataFormat', 'ViInt32 valuesToReturn', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceStimulusDataZVR ['ViSession instrumentHandle', 'ViInt32 dataFormat', 'ViInt32 valuesToReturn', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'dataFormat'),(1, 'valuesToReturn'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'dataFormat'),(1, 'valuesToReturn'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceStimulusDataZVR  = prototype(('rszvb_TraceStimulusDataZVR', rszvbDLL), paramflags)
 rszvb_TraceStimulusDataZVR.name = 'rszvb_TraceStimulusDataZVR'
 rszvb_TraceStimulusDataZVR.errcheck = __errorcheck__
 rszvb_TraceStimulusDataZVR.output = True
-# rszvb_TraceResponseDataSParameterGroup ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32 valuesToReturn', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_TraceResponseDataSParameterGroup ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 dataFormat', 'ViInt32 valuesToReturn', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(1, 'valuesToReturn'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'dataFormat'),(1, 'valuesToReturn'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_TraceResponseDataSParameterGroup  = prototype(('rszvb_TraceResponseDataSParameterGroup', rszvbDLL), paramflags)
 rszvb_TraceResponseDataSParameterGroup.name = 'rszvb_TraceResponseDataSParameterGroup'
 rszvb_TraceResponseDataSParameterGroup.errcheck = __errorcheck__
@@ -2118,9 +2118,9 @@ rszvb_GetMarkerStimulus  = prototype(('rszvb_GetMarkerStimulus', rszvbDLL), para
 rszvb_GetMarkerStimulus.name = 'rszvb_GetMarkerStimulus'
 rszvb_GetMarkerStimulus.errcheck = __errorcheck__
 rszvb_GetMarkerStimulus.output = True
-# rszvb_GetMarkerResponse ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 marker', 'ViReal64 _VI_FAR markerResponse[]']
+# rszvb_GetMarkerResponse ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 marker', 'ViReal64 _VI_FAR markerResponse']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'marker'),(1, 'markerResponse[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'marker'),(1, 'markerResponse'),)
 rszvb_GetMarkerResponse  = prototype(('rszvb_GetMarkerResponse', rszvbDLL), paramflags)
 rszvb_GetMarkerResponse.name = 'rszvb_GetMarkerResponse'
 rszvb_GetMarkerResponse.errcheck = __errorcheck__
@@ -2412,9 +2412,9 @@ rszvb_GetMarkerSearchRangeShow  = prototype(('rszvb_GetMarkerSearchRangeShow', r
 rszvb_GetMarkerSearchRangeShow.name = 'rszvb_GetMarkerSearchRangeShow'
 rszvb_GetMarkerSearchRangeShow.errcheck = __errorcheck__
 rszvb_GetMarkerSearchRangeShow.output = True
-# rszvb_MarkerSearchResults ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 marker', 'ViReal64* markerStimulus', 'ViReal64 _VI_FAR markerResponse[]']
+# rszvb_MarkerSearchResults ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 marker', 'ViReal64* markerStimulus', 'ViReal64 _VI_FAR markerResponse']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_double),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'marker'),(2, 'markerStimulus'),(1, 'markerResponse[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'marker'),(2, 'markerStimulus'),(1, 'markerResponse'),)
 rszvb_MarkerSearchResults  = prototype(('rszvb_MarkerSearchResults', rszvbDLL), paramflags)
 rszvb_MarkerSearchResults.name = 'rszvb_MarkerSearchResults'
 rszvb_MarkerSearchResults.errcheck = __errorcheck__
@@ -2496,16 +2496,16 @@ rszvb_EditLimitLineSegment  = prototype(('rszvb_EditLimitLineSegment', rszvbDLL)
 rszvb_EditLimitLineSegment.name = 'rszvb_EditLimitLineSegment'
 rszvb_EditLimitLineSegment.errcheck = __errorcheck__
 rszvb_EditLimitLineSegment.output = False
-# rszvb_ReadLimitLineSegmentList ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 listSize', 'ViInt32* segmentsCount', 'ViInt32 _VI_FAR type[]', 'ViReal64 _VI_FAR startStimulus[]', 'ViReal64 _VI_FAR stopStimulus[]', 'ViReal64 _VI_FAR startResponse[]', 'ViReal64 _VI_FAR stopResponse[]']
+# rszvb_ReadLimitLineSegmentList ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 listSize', 'ViInt32* segmentsCount', 'ViInt32 _VI_FAR type', 'ViReal64 _VI_FAR startStimulus', 'ViReal64 _VI_FAR stopStimulus', 'ViReal64 _VI_FAR startResponse', 'ViReal64 _VI_FAR stopResponse']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'listSize'),(2, 'segmentsCount'),(1, 'type[]'),(1, 'startStimulus[]'),(1, 'stopStimulus[]'),(1, 'startResponse[]'),(1, 'stopResponse[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'listSize'),(2, 'segmentsCount'),(1, 'type'),(1, 'startStimulus'),(1, 'stopStimulus'),(1, 'startResponse'),(1, 'stopResponse'),)
 rszvb_ReadLimitLineSegmentList  = prototype(('rszvb_ReadLimitLineSegmentList', rszvbDLL), paramflags)
 rszvb_ReadLimitLineSegmentList.name = 'rszvb_ReadLimitLineSegmentList'
 rszvb_ReadLimitLineSegmentList.errcheck = __errorcheck__
 rszvb_ReadLimitLineSegmentList.output = True
-# rszvb_WriteLimitLineSegmentList ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 listSize', 'ViInt32 type', 'ViReal64 _VI_FAR startStimulus[]', 'ViReal64 _VI_FAR stopStimulus[]', 'ViReal64 _VI_FAR startResponse[]', 'ViReal64 _VI_FAR stopResponse[]']
+# rszvb_WriteLimitLineSegmentList ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 listSize', 'ViInt32 type', 'ViReal64 _VI_FAR startStimulus', 'ViReal64 _VI_FAR stopStimulus', 'ViReal64 _VI_FAR startResponse', 'ViReal64 _VI_FAR stopResponse']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'listSize'),(1, 'type'),(1, 'startStimulus[]'),(1, 'stopStimulus[]'),(1, 'startResponse[]'),(1, 'stopResponse[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'listSize'),(1, 'type'),(1, 'startStimulus'),(1, 'stopStimulus'),(1, 'startResponse'),(1, 'stopResponse'),)
 rszvb_WriteLimitLineSegmentList  = prototype(('rszvb_WriteLimitLineSegmentList', rszvbDLL), paramflags)
 rszvb_WriteLimitLineSegmentList.name = 'rszvb_WriteLimitLineSegmentList'
 rszvb_WriteLimitLineSegmentList.errcheck = __errorcheck__
@@ -2678,9 +2678,9 @@ rszvb_GetRippleFailBeepOn  = prototype(('rszvb_GetRippleFailBeepOn', rszvbDLL), 
 rszvb_GetRippleFailBeepOn.name = 'rszvb_GetRippleFailBeepOn'
 rszvb_GetRippleFailBeepOn.errcheck = __errorcheck__
 rszvb_GetRippleFailBeepOn.output = True
-# rszvb_AddRippleLimitLineRangesSegment ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 noOfValues', 'ViInt32 _VI_FAR type[]', 'ViReal64 _VI_FAR startStimulus[]', 'ViReal64 _VI_FAR stopStimulus[]', 'ViReal64 _VI_FAR limit[]']
+# rszvb_AddRippleLimitLineRangesSegment ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32 noOfValues', 'ViInt32 _VI_FAR type', 'ViReal64 _VI_FAR startStimulus', 'ViReal64 _VI_FAR stopStimulus', 'ViReal64 _VI_FAR limit']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'noOfValues'),(1, 'type[]'),(1, 'startStimulus[]'),(1, 'stopStimulus[]'),(1, 'limit[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(1, 'noOfValues'),(1, 'type'),(1, 'startStimulus'),(1, 'stopStimulus'),(1, 'limit'),)
 rszvb_AddRippleLimitLineRangesSegment  = prototype(('rszvb_AddRippleLimitLineRangesSegment', rszvbDLL), paramflags)
 rszvb_AddRippleLimitLineRangesSegment.name = 'rszvb_AddRippleLimitLineRangesSegment'
 rszvb_AddRippleLimitLineRangesSegment.errcheck = __errorcheck__
@@ -3196,9 +3196,9 @@ rszvb_SetSweepSegmentName  = prototype(('rszvb_SetSweepSegmentName', rszvbDLL), 
 rszvb_SetSweepSegmentName.name = 'rszvb_SetSweepSegmentName'
 rszvb_SetSweepSegmentName.errcheck = __errorcheck__
 rszvb_SetSweepSegmentName.output = False
-# rszvb_GetSweepSegmentName ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32 bufferSize', 'ViChar _VI_FAR name[]']
+# rszvb_GetSweepSegmentName ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 segment', 'ViInt32 bufferSize', 'ViChar _VI_FAR name']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'bufferSize'),(1, 'name[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'segment'),(1, 'bufferSize'),(1, 'name'),)
 rszvb_GetSweepSegmentName  = prototype(('rszvb_GetSweepSegmentName', rszvbDLL), paramflags)
 rszvb_GetSweepSegmentName.name = 'rszvb_GetSweepSegmentName'
 rszvb_GetSweepSegmentName.errcheck = __errorcheck__
@@ -3595,9 +3595,9 @@ rszvb_GetPulseShiftStimulus  = prototype(('rszvb_GetPulseShiftStimulus', rszvbDL
 rszvb_GetPulseShiftStimulus.name = 'rszvb_GetPulseShiftStimulus'
 rszvb_GetPulseShiftStimulus.errcheck = __errorcheck__
 rszvb_GetPulseShiftStimulus.output = True
-# rszvb_ReadTimeSamplesData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData[]']
+# rszvb_ReadTimeSamplesData ['ViSession instrumentHandle', 'ViInt32 channel_Trace', 'ViInt32* noOfValues', 'ViReal64 _VI_FAR traceData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(2, 'noOfValues'),(1, 'traceData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel_Trace'),(2, 'noOfValues'),(1, 'traceData'),)
 rszvb_ReadTimeSamplesData  = prototype(('rszvb_ReadTimeSamplesData', rszvbDLL), paramflags)
 rszvb_ReadTimeSamplesData.name = 'rszvb_ReadTimeSamplesData'
 rszvb_ReadTimeSamplesData.errcheck = __errorcheck__
@@ -3924,16 +3924,16 @@ rszvb_GetGroupOfMeasuredPorts  = prototype(('rszvb_GetGroupOfMeasuredPorts', rsz
 rszvb_GetGroupOfMeasuredPorts.name = 'rszvb_GetGroupOfMeasuredPorts'
 rszvb_GetGroupOfMeasuredPorts.errcheck = __errorcheck__
 rszvb_GetGroupOfMeasuredPorts.output = True
-# rszvb_DefineGroupOfAllMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group', 'ViInt32 numberOfPortsInGroup', 'ViInt32 _VI_FAR ports[]']
+# rszvb_DefineGroupOfAllMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group', 'ViInt32 numberOfPortsInGroup', 'ViInt32 _VI_FAR ports']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),(1, 'numberOfPortsInGroup'),(1, 'ports[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),(1, 'numberOfPortsInGroup'),(1, 'ports'),)
 rszvb_DefineGroupOfAllMeasuredPorts  = prototype(('rszvb_DefineGroupOfAllMeasuredPorts', rszvbDLL), paramflags)
 rszvb_DefineGroupOfAllMeasuredPorts.name = 'rszvb_DefineGroupOfAllMeasuredPorts'
 rszvb_DefineGroupOfAllMeasuredPorts.errcheck = __errorcheck__
 rszvb_DefineGroupOfAllMeasuredPorts.output = False
-# rszvb_GetGroupOfAllMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group', 'ViInt32* numberOfPortsInGroup', 'ViInt32 _VI_FAR ports[]']
+# rszvb_GetGroupOfAllMeasuredPorts ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 group', 'ViInt32* numberOfPortsInGroup', 'ViInt32 _VI_FAR ports']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),(2, 'numberOfPortsInGroup'),(1, 'ports[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'group'),(2, 'numberOfPortsInGroup'),(1, 'ports'),)
 rszvb_GetGroupOfAllMeasuredPorts  = prototype(('rszvb_GetGroupOfAllMeasuredPorts', rszvbDLL), paramflags)
 rszvb_GetGroupOfAllMeasuredPorts.name = 'rszvb_GetGroupOfAllMeasuredPorts'
 rszvb_GetGroupOfAllMeasuredPorts.errcheck = __errorcheck__
@@ -4148,9 +4148,9 @@ rszvb_SetConverterUserDataSetDirectory  = prototype(('rszvb_SetConverterUserData
 rszvb_SetConverterUserDataSetDirectory.name = 'rszvb_SetConverterUserDataSetDirectory'
 rszvb_SetConverterUserDataSetDirectory.errcheck = __errorcheck__
 rszvb_SetConverterUserDataSetDirectory.output = False
-# rszvb_GetConverterUserDataSetDirectory ['ViSession instrumentHandle', 'ViInt32 port', 'ViInt32 bufferSize', 'ViChar _VI_FAR directory[]']
+# rszvb_GetConverterUserDataSetDirectory ['ViSession instrumentHandle', 'ViInt32 port', 'ViInt32 bufferSize', 'ViChar _VI_FAR directory']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'port'),(1, 'bufferSize'),(1, 'directory[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'port'),(1, 'bufferSize'),(1, 'directory'),)
 rszvb_GetConverterUserDataSetDirectory  = prototype(('rszvb_GetConverterUserDataSetDirectory', rszvbDLL), paramflags)
 rszvb_GetConverterUserDataSetDirectory.name = 'rszvb_GetConverterUserDataSetDirectory'
 rszvb_GetConverterUserDataSetDirectory.errcheck = __errorcheck__
@@ -4162,9 +4162,9 @@ rszvb_SetConverterPortAssignment  = prototype(('rszvb_SetConverterPortAssignment
 rszvb_SetConverterPortAssignment.name = 'rszvb_SetConverterPortAssignment'
 rszvb_SetConverterPortAssignment.errcheck = __errorcheck__
 rszvb_SetConverterPortAssignment.output = False
-# rszvb_GetConverterPortAssignment ['ViSession instrumentHandle', 'ViInt32 port', 'ViInt32 bufferSize', 'ViChar _VI_FAR serialNumber[]']
+# rszvb_GetConverterPortAssignment ['ViSession instrumentHandle', 'ViInt32 port', 'ViInt32 bufferSize', 'ViChar _VI_FAR serialNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'port'),(1, 'bufferSize'),(1, 'serialNumber[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'port'),(1, 'bufferSize'),(1, 'serialNumber'),)
 rszvb_GetConverterPortAssignment  = prototype(('rszvb_GetConverterPortAssignment', rszvbDLL), paramflags)
 rszvb_GetConverterPortAssignment.name = 'rszvb_GetConverterPortAssignment'
 rszvb_GetConverterPortAssignment.errcheck = __errorcheck__
@@ -4575,9 +4575,9 @@ rszvb_SetFrequencyStimulus  = prototype(('rszvb_SetFrequencyStimulus', rszvbDLL)
 rszvb_SetFrequencyStimulus.name = 'rszvb_SetFrequencyStimulus'
 rszvb_SetFrequencyStimulus.errcheck = __errorcheck__
 rszvb_SetFrequencyStimulus.output = False
-# rszvb_GetFrequencyStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR frequencyStimulus[]']
+# rszvb_GetFrequencyStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR frequencyStimulus']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'frequencyStimulus[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'frequencyStimulus'),)
 rszvb_GetFrequencyStimulus  = prototype(('rszvb_GetFrequencyStimulus', rszvbDLL), paramflags)
 rszvb_GetFrequencyStimulus.name = 'rszvb_GetFrequencyStimulus'
 rszvb_GetFrequencyStimulus.errcheck = __errorcheck__
@@ -4589,9 +4589,9 @@ rszvb_SetPowerStimulus  = prototype(('rszvb_SetPowerStimulus', rszvbDLL), paramf
 rszvb_SetPowerStimulus.name = 'rszvb_SetPowerStimulus'
 rszvb_SetPowerStimulus.errcheck = __errorcheck__
 rszvb_SetPowerStimulus.output = False
-# rszvb_GetPowerStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR powerStimulus[]']
+# rszvb_GetPowerStimulus ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR powerStimulus']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'powerStimulus[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'powerStimulus'),)
 rszvb_GetPowerStimulus  = prototype(('rszvb_GetPowerStimulus', rszvbDLL), paramflags)
 rszvb_GetPowerStimulus.name = 'rszvb_GetPowerStimulus'
 rszvb_GetPowerStimulus.errcheck = __errorcheck__
@@ -4757,9 +4757,9 @@ rszvb_DefinePulseGenerator  = prototype(('rszvb_DefinePulseGenerator', rszvbDLL)
 rszvb_DefinePulseGenerator.name = 'rszvb_DefinePulseGenerator'
 rszvb_DefinePulseGenerator.errcheck = __errorcheck__
 rszvb_DefinePulseGenerator.output = False
-# rszvb_DefinePulseTrainSegments ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViInt32 _VI_FAR pulseTrainActive[]', 'ViReal64 _VI_FAR startTime[]', 'ViReal64 _VI_FAR stopTime[]']
+# rszvb_DefinePulseTrainSegments ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViInt32 _VI_FAR pulseTrainActive', 'ViReal64 _VI_FAR startTime', 'ViReal64 _VI_FAR stopTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'pulseTrainActive[]'),(1, 'startTime[]'),(1, 'stopTime[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'pulseTrainActive'),(1, 'startTime'),(1, 'stopTime'),)
 rszvb_DefinePulseTrainSegments  = prototype(('rszvb_DefinePulseTrainSegments', rszvbDLL), paramflags)
 rszvb_DefinePulseTrainSegments.name = 'rszvb_DefinePulseTrainSegments'
 rszvb_DefinePulseTrainSegments.errcheck = __errorcheck__
@@ -4869,9 +4869,9 @@ rszvb_GetPulseGeneratorMasterChannel  = prototype(('rszvb_GetPulseGeneratorMaste
 rszvb_GetPulseGeneratorMasterChannel.name = 'rszvb_GetPulseGeneratorMasterChannel'
 rszvb_GetPulseGeneratorMasterChannel.errcheck = __errorcheck__
 rszvb_GetPulseGeneratorMasterChannel.output = True
-# rszvb_GetPulseTrainSegments ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViInt32 _VI_FAR pulseTrainActive[]', 'ViReal64 _VI_FAR startTime[]', 'ViReal64 _VI_FAR stopTime[]']
+# rszvb_GetPulseTrainSegments ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViInt32 _VI_FAR pulseTrainActive', 'ViReal64 _VI_FAR startTime', 'ViReal64 _VI_FAR stopTime']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'pulseTrainActive[]'),(1, 'startTime[]'),(1, 'stopTime[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'pulseTrainActive'),(1, 'startTime'),(1, 'stopTime'),)
 rszvb_GetPulseTrainSegments  = prototype(('rszvb_GetPulseTrainSegments', rszvbDLL), paramflags)
 rszvb_GetPulseTrainSegments.name = 'rszvb_GetPulseTrainSegments'
 rszvb_GetPulseTrainSegments.errcheck = __errorcheck__
@@ -5233,16 +5233,16 @@ rszvb_GetTRMNumberOfUnits  = prototype(('rszvb_GetTRMNumberOfUnits', rszvbDLL), 
 rszvb_GetTRMNumberOfUnits.name = 'rszvb_GetTRMNumberOfUnits'
 rszvb_GetTRMNumberOfUnits.errcheck = __errorcheck__
 rszvb_GetTRMNumberOfUnits.output = True
-# rszvb_GetTRMUnitDeviceID ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR deviceID[]']
+# rszvb_GetTRMUnitDeviceID ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR deviceID']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'deviceID[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'deviceID'),)
 rszvb_GetTRMUnitDeviceID  = prototype(('rszvb_GetTRMUnitDeviceID', rszvbDLL), paramflags)
 rszvb_GetTRMUnitDeviceID.name = 'rszvb_GetTRMUnitDeviceID'
 rszvb_GetTRMUnitDeviceID.errcheck = __errorcheck__
 rszvb_GetTRMUnitDeviceID.output = False
-# rszvb_GetTRMUnitHardwareOptions ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR optionList[]']
+# rszvb_GetTRMUnitHardwareOptions ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR optionList']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'optionList[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'optionList'),)
 rszvb_GetTRMUnitHardwareOptions  = prototype(('rszvb_GetTRMUnitHardwareOptions', rszvbDLL), paramflags)
 rszvb_GetTRMUnitHardwareOptions.name = 'rszvb_GetTRMUnitHardwareOptions'
 rszvb_GetTRMUnitHardwareOptions.errcheck = __errorcheck__
@@ -6220,9 +6220,9 @@ rszvb_GetNoiseFigureCalibrationState  = prototype(('rszvb_GetNoiseFigureCalibrat
 rszvb_GetNoiseFigureCalibrationState.name = 'rszvb_GetNoiseFigureCalibrationState'
 rszvb_GetNoiseFigureCalibrationState.errcheck = __errorcheck__
 rszvb_GetNoiseFigureCalibrationState.output = True
-# rszvb_GetNoiseFigureCalibrationStateLabel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR label[]']
+# rszvb_GetNoiseFigureCalibrationStateLabel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR label']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'label[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'label'),)
 rszvb_GetNoiseFigureCalibrationStateLabel  = prototype(('rszvb_GetNoiseFigureCalibrationStateLabel', rszvbDLL), paramflags)
 rszvb_GetNoiseFigureCalibrationStateLabel.name = 'rszvb_GetNoiseFigureCalibrationStateLabel'
 rszvb_GetNoiseFigureCalibrationStateLabel.errcheck = __errorcheck__
@@ -6892,16 +6892,16 @@ rszvb_ChannelDelete  = prototype(('rszvb_ChannelDelete', rszvbDLL), paramflags)
 rszvb_ChannelDelete.name = 'rszvb_ChannelDelete'
 rszvb_ChannelDelete.errcheck = __errorcheck__
 rszvb_ChannelDelete.output = False
-# rszvb_ChannelList ['ViSession instrumentHandle', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_ChannelList ['ViSession instrumentHandle', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_ChannelList  = prototype(('rszvb_ChannelList', rszvbDLL), paramflags)
 rszvb_ChannelList.name = 'rszvb_ChannelList'
 rszvb_ChannelList.errcheck = __errorcheck__
 rszvb_ChannelList.output = False
-# rszvb_ChannelGetChannelName ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR channelName[]']
+# rszvb_ChannelGetChannelName ['ViSession instrumentHandle', 'ViInt32 channel', 'ViChar _VI_FAR channelName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'channelName[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'channelName'),)
 rszvb_ChannelGetChannelName  = prototype(('rszvb_ChannelGetChannelName', rszvbDLL), paramflags)
 rszvb_ChannelGetChannelName.name = 'rszvb_ChannelGetChannelName'
 rszvb_ChannelGetChannelName.errcheck = __errorcheck__
@@ -6983,9 +6983,9 @@ rszvb_SetUserConnector  = prototype(('rszvb_SetUserConnector', rszvbDLL), paramf
 rszvb_SetUserConnector.name = 'rszvb_SetUserConnector'
 rszvb_SetUserConnector.errcheck = __errorcheck__
 rszvb_SetUserConnector.output = False
-# rszvb_GetUserConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViChar _VI_FAR connector[]', 'ViInt32* connectorGender']
+# rszvb_GetUserConnector ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 port', 'ViChar _VI_FAR connector', 'ViInt32* connectorGender']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'connector[]'),(2, 'connectorGender'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'port'),(1, 'connector'),(2, 'connectorGender'),)
 rszvb_GetUserConnector  = prototype(('rszvb_GetUserConnector', rszvbDLL), paramflags)
 rszvb_GetUserConnector.name = 'rszvb_GetUserConnector'
 rszvb_GetUserConnector.errcheck = __errorcheck__
@@ -7116,16 +7116,16 @@ rszvb_DeleteAllCalibrationData  = prototype(('rszvb_DeleteAllCalibrationData', r
 rszvb_DeleteAllCalibrationData.name = 'rszvb_DeleteAllCalibrationData'
 rszvb_DeleteAllCalibrationData.errcheck = __errorcheck__
 rszvb_DeleteAllCalibrationData.output = False
-# rszvb_ReadCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 errorTermParameters', 'ViInt32 port1', 'ViInt32 port2', 'ViReal64 _VI_FAR calibrationData[]']
+# rszvb_ReadCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 errorTermParameters', 'ViInt32 port1', 'ViInt32 port2', 'ViReal64 _VI_FAR calibrationData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'errorTermParameters'),(1, 'port1'),(1, 'port2'),(1, 'calibrationData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'errorTermParameters'),(1, 'port1'),(1, 'port2'),(1, 'calibrationData'),)
 rszvb_ReadCalibrationData  = prototype(('rszvb_ReadCalibrationData', rszvbDLL), paramflags)
 rszvb_ReadCalibrationData.name = 'rszvb_ReadCalibrationData'
 rszvb_ReadCalibrationData.errcheck = __errorcheck__
 rszvb_ReadCalibrationData.output = False
-# rszvb_WriteCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 errorTermParameters', 'ViInt32 port1', 'ViInt32 port2', 'ViReal64 _VI_FAR calibrationData[]']
+# rszvb_WriteCalibrationData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 errorTermParameters', 'ViInt32 port1', 'ViInt32 port2', 'ViReal64 _VI_FAR calibrationData']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'errorTermParameters'),(1, 'port1'),(1, 'port2'),(1, 'calibrationData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'errorTermParameters'),(1, 'port1'),(1, 'port2'),(1, 'calibrationData'),)
 rszvb_WriteCalibrationData  = prototype(('rszvb_WriteCalibrationData', rszvbDLL), paramflags)
 rszvb_WriteCalibrationData.name = 'rszvb_WriteCalibrationData'
 rszvb_WriteCalibrationData.errcheck = __errorcheck__
@@ -7389,16 +7389,16 @@ rszvb_GetCalibrationPowerMeterReadings  = prototype(('rszvb_GetCalibrationPowerM
 rszvb_GetCalibrationPowerMeterReadings.name = 'rszvb_GetCalibrationPowerMeterReadings'
 rszvb_GetCalibrationPowerMeterReadings.errcheck = __errorcheck__
 rszvb_GetCalibrationPowerMeterReadings.output = True
-# rszvb_ReadSourcePowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32* numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues[]']
+# rszvb_ReadSourcePowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32* numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(2, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(2, 'numberOfValues'),(1, 'powerCorrectionValues'),)
 rszvb_ReadSourcePowerCorrectionData  = prototype(('rszvb_ReadSourcePowerCorrectionData', rszvbDLL), paramflags)
 rszvb_ReadSourcePowerCorrectionData.name = 'rszvb_ReadSourcePowerCorrectionData'
 rszvb_ReadSourcePowerCorrectionData.errcheck = __errorcheck__
 rszvb_ReadSourcePowerCorrectionData.output = True
-# rszvb_WriteSourcePowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32 numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues[]']
+# rszvb_WriteSourcePowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32 numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(1, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(1, 'numberOfValues'),(1, 'powerCorrectionValues'),)
 rszvb_WriteSourcePowerCorrectionData  = prototype(('rszvb_WriteSourcePowerCorrectionData', rszvbDLL), paramflags)
 rszvb_WriteSourcePowerCorrectionData.name = 'rszvb_WriteSourcePowerCorrectionData'
 rszvb_WriteSourcePowerCorrectionData.errcheck = __errorcheck__
@@ -7410,9 +7410,9 @@ rszvb_GetSourcePowerCalibrationNumberOfWaves  = prototype(('rszvb_GetSourcePower
 rszvb_GetSourcePowerCalibrationNumberOfWaves.name = 'rszvb_GetSourcePowerCalibrationNumberOfWaves'
 rszvb_GetSourcePowerCalibrationNumberOfWaves.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationNumberOfWaves.output = True
-# rszvb_GetSourcePowerCalibrationParamaterWave ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibratedWave[]']
+# rszvb_GetSourcePowerCalibrationParamaterWave ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibratedWave']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(1, 'bufferSize'),(1, 'calibratedWave[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(1, 'bufferSize'),(1, 'calibratedWave'),)
 rszvb_GetSourcePowerCalibrationParamaterWave  = prototype(('rszvb_GetSourcePowerCalibrationParamaterWave', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterWave.name = 'rszvb_GetSourcePowerCalibrationParamaterWave'
 rszvb_GetSourcePowerCalibrationParamaterWave.errcheck = __errorcheck__
@@ -7466,9 +7466,9 @@ rszvb_GetSourcePowerCalibrationParamaterCWFrequency  = prototype(('rszvb_GetSour
 rszvb_GetSourcePowerCalibrationParamaterCWFrequency.name = 'rszvb_GetSourcePowerCalibrationParamaterCWFrequency'
 rszvb_GetSourcePowerCalibrationParamaterCWFrequency.errcheck = __errorcheck__
 rszvb_GetSourcePowerCalibrationParamaterCWFrequency.output = True
-# rszvb_GetSourcePowerCalibrationParamaterTimestamp ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViInt32 bufferSize', 'ViChar _VI_FAR timestamp[]']
+# rszvb_GetSourcePowerCalibrationParamaterTimestamp ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibrationIndex', 'ViInt32 bufferSize', 'ViChar _VI_FAR timestamp']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(1, 'bufferSize'),(1, 'timestamp[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibrationIndex'),(1, 'bufferSize'),(1, 'timestamp'),)
 rszvb_GetSourcePowerCalibrationParamaterTimestamp  = prototype(('rszvb_GetSourcePowerCalibrationParamaterTimestamp', rszvbDLL), paramflags)
 rszvb_GetSourcePowerCalibrationParamaterTimestamp.name = 'rszvb_GetSourcePowerCalibrationParamaterTimestamp'
 rszvb_GetSourcePowerCalibrationParamaterTimestamp.errcheck = __errorcheck__
@@ -7550,16 +7550,16 @@ rszvb_GetBWaveReceiverPowerCalibrationState  = prototype(('rszvb_GetBWaveReceive
 rszvb_GetBWaveReceiverPowerCalibrationState.name = 'rszvb_GetBWaveReceiverPowerCalibrationState'
 rszvb_GetBWaveReceiverPowerCalibrationState.errcheck = __errorcheck__
 rszvb_GetBWaveReceiverPowerCalibrationState.output = True
-# rszvb_ReadReceiverPowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32* numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues[]']
+# rszvb_ReadReceiverPowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32* numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,POINTER(c_int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(2, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(2, 'numberOfValues'),(1, 'powerCorrectionValues'),)
 rszvb_ReadReceiverPowerCorrectionData  = prototype(('rszvb_ReadReceiverPowerCorrectionData', rszvbDLL), paramflags)
 rszvb_ReadReceiverPowerCorrectionData.name = 'rszvb_ReadReceiverPowerCorrectionData'
 rszvb_ReadReceiverPowerCorrectionData.errcheck = __errorcheck__
 rszvb_ReadReceiverPowerCorrectionData.output = True
-# rszvb_WriteReceiverPowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32 numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues[]']
+# rszvb_WriteReceiverPowerCorrectionData ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 portNumber', 'ViString calibratedWave', 'ViInt32 numberOfValues', 'ViReal64 _VI_FAR powerCorrectionValues']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(1, 'numberOfValues'),(1, 'powerCorrectionValues[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'portNumber'),(1, 'calibratedWave'),(1, 'numberOfValues'),(1, 'powerCorrectionValues'),)
 rszvb_WriteReceiverPowerCorrectionData  = prototype(('rszvb_WriteReceiverPowerCorrectionData', rszvbDLL), paramflags)
 rszvb_WriteReceiverPowerCorrectionData.name = 'rszvb_WriteReceiverPowerCorrectionData'
 rszvb_WriteReceiverPowerCorrectionData.errcheck = __errorcheck__
@@ -7830,9 +7830,9 @@ rszvb_GetCalibrationConnector  = prototype(('rszvb_GetCalibrationConnector', rsz
 rszvb_GetCalibrationConnector.name = 'rszvb_GetCalibrationConnector'
 rszvb_GetCalibrationConnector.errcheck = __errorcheck__
 rszvb_GetCalibrationConnector.output = True
-# rszvb_CalibrationConnectorCatalog ['ViSession instrumentHandle', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_CalibrationConnectorCatalog ['ViSession instrumentHandle', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_CalibrationConnectorCatalog  = prototype(('rszvb_CalibrationConnectorCatalog', rszvbDLL), paramflags)
 rszvb_CalibrationConnectorCatalog.name = 'rszvb_CalibrationConnectorCatalog'
 rszvb_CalibrationConnectorCatalog.errcheck = __errorcheck__
@@ -7844,9 +7844,9 @@ rszvb_DeleteCalibrationConnector  = prototype(('rszvb_DeleteCalibrationConnector
 rszvb_DeleteCalibrationConnector.name = 'rszvb_DeleteCalibrationConnector'
 rszvb_DeleteCalibrationConnector.errcheck = __errorcheck__
 rszvb_DeleteCalibrationConnector.output = False
-# rszvb_GetCalibrationDate ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationDate[]']
+# rszvb_GetCalibrationDate ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationDate']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'calibrationDate[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'calibrationDate'),)
 rszvb_GetCalibrationDate  = prototype(('rszvb_GetCalibrationDate', rszvbDLL), paramflags)
 rszvb_GetCalibrationDate.name = 'rszvb_GetCalibrationDate'
 rszvb_GetCalibrationDate.errcheck = __errorcheck__
@@ -7858,9 +7858,9 @@ rszvb_GetCalibrationState  = prototype(('rszvb_GetCalibrationState', rszvbDLL), 
 rszvb_GetCalibrationState.name = 'rszvb_GetCalibrationState'
 rszvb_GetCalibrationState.errcheck = __errorcheck__
 rszvb_GetCalibrationState.output = True
-# rszvb_GetCalibrationLabel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR label[]']
+# rszvb_GetCalibrationLabel ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 bufferSize', 'ViChar _VI_FAR label']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'label[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'bufferSize'),(1, 'label'),)
 rszvb_GetCalibrationLabel  = prototype(('rszvb_GetCalibrationLabel', rszvbDLL), paramflags)
 rszvb_GetCalibrationLabel.name = 'rszvb_GetCalibrationLabel'
 rszvb_GetCalibrationLabel.errcheck = __errorcheck__
@@ -7900,9 +7900,9 @@ rszvb_GetCalibrationDataPointDelay  = prototype(('rszvb_GetCalibrationDataPointD
 rszvb_GetCalibrationDataPointDelay.name = 'rszvb_GetCalibrationDataPointDelay'
 rszvb_GetCalibrationDataPointDelay.errcheck = __errorcheck__
 rszvb_GetCalibrationDataPointDelay.output = True
-# rszvb_GetCalibrationDataReceiverAttenuation ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 arraySize', 'ViInt32 _VI_FAR calibrationPort[]', 'ViReal64 _VI_FAR attenuation[]', 'ViInt32* returnedValues']
+# rszvb_GetCalibrationDataReceiverAttenuation ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 arraySize', 'ViInt32 _VI_FAR calibrationPort', 'ViReal64 _VI_FAR attenuation', 'ViInt32* returnedValues']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.float64),POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'arraySize'),(1, 'calibrationPort[]'),(1, 'attenuation[]'),(2, 'returnedValues'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'arraySize'),(1, 'calibrationPort'),(1, 'attenuation'),(2, 'returnedValues'),)
 rszvb_GetCalibrationDataReceiverAttenuation  = prototype(('rszvb_GetCalibrationDataReceiverAttenuation', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataReceiverAttenuation.name = 'rszvb_GetCalibrationDataReceiverAttenuation'
 rszvb_GetCalibrationDataReceiverAttenuation.errcheck = __errorcheck__
@@ -7921,16 +7921,16 @@ rszvb_GetCalibrationDataPorts  = prototype(('rszvb_GetCalibrationDataPorts', rsz
 rszvb_GetCalibrationDataPorts.name = 'rszvb_GetCalibrationDataPorts'
 rszvb_GetCalibrationDataPorts.errcheck = __errorcheck__
 rszvb_GetCalibrationDataPorts.output = True
-# rszvb_GetCalibrationDataThroughs ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 bufferSize', 'ViChar _VI_FAR throughs[]']
+# rszvb_GetCalibrationDataThroughs ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 bufferSize', 'ViChar _VI_FAR throughs']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'bufferSize'),(1, 'throughs[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'bufferSize'),(1, 'throughs'),)
 rszvb_GetCalibrationDataThroughs  = prototype(('rszvb_GetCalibrationDataThroughs', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataThroughs.name = 'rszvb_GetCalibrationDataThroughs'
 rszvb_GetCalibrationDataThroughs.errcheck = __errorcheck__
 rszvb_GetCalibrationDataThroughs.output = False
-# rszvb_GetCalibrationDataTimestamp ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 bufferSize', 'ViChar _VI_FAR timestamp[]']
+# rszvb_GetCalibrationDataTimestamp ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 calibration', 'ViInt32 bufferSize', 'ViChar _VI_FAR timestamp']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'bufferSize'),(1, 'timestamp[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'calibration'),(1, 'bufferSize'),(1, 'timestamp'),)
 rszvb_GetCalibrationDataTimestamp  = prototype(('rszvb_GetCalibrationDataTimestamp', rszvbDLL), paramflags)
 rszvb_GetCalibrationDataTimestamp.name = 'rszvb_GetCalibrationDataTimestamp'
 rszvb_GetCalibrationDataTimestamp.errcheck = __errorcheck__
@@ -7942,9 +7942,9 @@ rszvb_SetActiveCalibrationUnit  = prototype(('rszvb_SetActiveCalibrationUnit', r
 rszvb_SetActiveCalibrationUnit.name = 'rszvb_SetActiveCalibrationUnit'
 rszvb_SetActiveCalibrationUnit.errcheck = __errorcheck__
 rszvb_SetActiveCalibrationUnit.output = False
-# rszvb_GetActiveCalibrationUnit ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationUnit[]']
+# rszvb_GetActiveCalibrationUnit ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationUnit']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'calibrationUnit[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'calibrationUnit'),)
 rszvb_GetActiveCalibrationUnit  = prototype(('rszvb_GetActiveCalibrationUnit', rszvbDLL), paramflags)
 rszvb_GetActiveCalibrationUnit.name = 'rszvb_GetActiveCalibrationUnit'
 rszvb_GetActiveCalibrationUnit.errcheck = __errorcheck__
@@ -7963,9 +7963,9 @@ rszvb_GetAutomaticPowerReductionState  = prototype(('rszvb_GetAutomaticPowerRedu
 rszvb_GetAutomaticPowerReductionState.name = 'rszvb_GetAutomaticPowerReductionState'
 rszvb_GetAutomaticPowerReductionState.errcheck = __errorcheck__
 rszvb_GetAutomaticPowerReductionState.output = True
-# rszvb_GetAllCalibrationUnits ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationUnit[]']
+# rszvb_GetAllCalibrationUnits ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationUnit']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'calibrationUnit[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'calibrationUnit'),)
 rszvb_GetAllCalibrationUnits  = prototype(('rszvb_GetAllCalibrationUnits', rszvbDLL), paramflags)
 rszvb_GetAllCalibrationUnits.name = 'rszvb_GetAllCalibrationUnits'
 rszvb_GetAllCalibrationUnits.errcheck = __errorcheck__
@@ -8040,9 +8040,9 @@ rszvb_SetCalibrationKit  = prototype(('rszvb_SetCalibrationKit', rszvbDLL), para
 rszvb_SetCalibrationKit.name = 'rszvb_SetCalibrationKit'
 rszvb_SetCalibrationKit.errcheck = __errorcheck__
 rszvb_SetCalibrationKit.output = False
-# rszvb_GetCalibrationKit ['ViSession instrumentHandle', 'ViInt32 connector', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationKitName[]']
+# rszvb_GetCalibrationKit ['ViSession instrumentHandle', 'ViInt32 connector', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationKitName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'connector'),(1, 'bufferSize'),(1, 'calibrationKitName[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'connector'),(1, 'bufferSize'),(1, 'calibrationKitName'),)
 rszvb_GetCalibrationKit  = prototype(('rszvb_GetCalibrationKit', rszvbDLL), paramflags)
 rszvb_GetCalibrationKit.name = 'rszvb_GetCalibrationKit'
 rszvb_GetCalibrationKit.errcheck = __errorcheck__
@@ -8061,9 +8061,9 @@ rszvb_SetCalibrationKitUserConnectorType  = prototype(('rszvb_SetCalibrationKitU
 rszvb_SetCalibrationKitUserConnectorType.name = 'rszvb_SetCalibrationKitUserConnectorType'
 rszvb_SetCalibrationKitUserConnectorType.errcheck = __errorcheck__
 rszvb_SetCalibrationKitUserConnectorType.output = False
-# rszvb_GetCalibrationKitUserConnectorType ['ViSession instrumentHandle', 'ViString connector', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationKitName[]']
+# rszvb_GetCalibrationKitUserConnectorType ['ViSession instrumentHandle', 'ViString connector', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationKitName']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'connector'),(1, 'bufferSize'),(1, 'calibrationKitName[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'connector'),(1, 'bufferSize'),(1, 'calibrationKitName'),)
 rszvb_GetCalibrationKitUserConnectorType  = prototype(('rszvb_GetCalibrationKitUserConnectorType', rszvbDLL), paramflags)
 rszvb_GetCalibrationKitUserConnectorType.name = 'rszvb_GetCalibrationKitUserConnectorType'
 rszvb_GetCalibrationKitUserConnectorType.errcheck = __errorcheck__
@@ -8075,23 +8075,23 @@ rszvb_SetCalibrationKitUserConnectorTypeWithLabel  = prototype(('rszvb_SetCalibr
 rszvb_SetCalibrationKitUserConnectorTypeWithLabel.name = 'rszvb_SetCalibrationKitUserConnectorTypeWithLabel'
 rszvb_SetCalibrationKitUserConnectorTypeWithLabel.errcheck = __errorcheck__
 rszvb_SetCalibrationKitUserConnectorTypeWithLabel.output = False
-# rszvb_GetCalibrationKitUserConnectorTypeWithLabel ['ViSession instrumentHandle', 'ViString connectionType', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationKitData[]']
+# rszvb_GetCalibrationKitUserConnectorTypeWithLabel ['ViSession instrumentHandle', 'ViString connectionType', 'ViInt32 bufferSize', 'ViChar _VI_FAR calibrationKitData']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'connectionType'),(1, 'bufferSize'),(1, 'calibrationKitData[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'connectionType'),(1, 'bufferSize'),(1, 'calibrationKitData'),)
 rszvb_GetCalibrationKitUserConnectorTypeWithLabel  = prototype(('rszvb_GetCalibrationKitUserConnectorTypeWithLabel', rszvbDLL), paramflags)
 rszvb_GetCalibrationKitUserConnectorTypeWithLabel.name = 'rszvb_GetCalibrationKitUserConnectorTypeWithLabel'
 rszvb_GetCalibrationKitUserConnectorTypeWithLabel.errcheck = __errorcheck__
 rszvb_GetCalibrationKitUserConnectorTypeWithLabel.output = False
-# rszvb_CalibrationKitCatalog ['ViSession instrumentHandle', 'ViString connectorName', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_CalibrationKitCatalog ['ViSession instrumentHandle', 'ViString connectorName', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'connectorName'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'connectorName'),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_CalibrationKitCatalog  = prototype(('rszvb_CalibrationKitCatalog', rszvbDLL), paramflags)
 rszvb_CalibrationKitCatalog.name = 'rszvb_CalibrationKitCatalog'
 rszvb_CalibrationKitCatalog.errcheck = __errorcheck__
 rszvb_CalibrationKitCatalog.output = False
-# rszvb_CalibrationKitCatalogWithLabel ['ViSession instrumentHandle', 'ViString connectorName', 'ViInt32 bufferSize', 'ViChar _VI_FAR catalog[]']
+# rszvb_CalibrationKitCatalogWithLabel ['ViSession instrumentHandle', 'ViString connectorName', 'ViInt32 bufferSize', 'ViChar _VI_FAR catalog']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'connectorName'),(1, 'bufferSize'),(1, 'catalog[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'connectorName'),(1, 'bufferSize'),(1, 'catalog'),)
 rszvb_CalibrationKitCatalogWithLabel  = prototype(('rszvb_CalibrationKitCatalogWithLabel', rszvbDLL), paramflags)
 rszvb_CalibrationKitCatalogWithLabel.name = 'rszvb_CalibrationKitCatalogWithLabel'
 rszvb_CalibrationKitCatalogWithLabel.errcheck = __errorcheck__
@@ -8110,23 +8110,23 @@ rszvb_ConfigureCalibrationStandard  = prototype(('rszvb_ConfigureCalibrationStan
 rszvb_ConfigureCalibrationStandard.name = 'rszvb_ConfigureCalibrationStandard'
 rszvb_ConfigureCalibrationStandard.errcheck = __errorcheck__
 rszvb_ConfigureCalibrationStandard.output = False
-# rszvb_ConfigureCalibrationStandardWithLabel ['ViSession instrumentHandle', 'ViInt32 standard', 'ViString connector', 'ViString calkitName', 'ViString calkitLabel', 'ViString standardLabel', 'ViReal64 minFreqHz', 'ViReal64 maxFreqHz', 'ViReal64 electricalLength', 'ViReal64 loss', 'ViReal64 z0', 'ViReal64 _VI_FAR capacitances[]', 'ViReal64 _VI_FAR residualInductances[]', 'ViInt32 approximation']
+# rszvb_ConfigureCalibrationStandardWithLabel ['ViSession instrumentHandle', 'ViInt32 standard', 'ViString connector', 'ViString calkitName', 'ViString calkitLabel', 'ViString standardLabel', 'ViReal64 minFreqHz', 'ViReal64 maxFreqHz', 'ViReal64 electricalLength', 'ViReal64 loss', 'ViReal64 z0', 'ViReal64 _VI_FAR capacitances', 'ViReal64 _VI_FAR residualInductances', 'ViInt32 approximation']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_char_p,c_char_p,c_char_p,c_double,c_double,c_double,c_double,c_double,numpy.ctypeslib.ndpointer(dtype=numpy.float64),numpy.ctypeslib.ndpointer(dtype=numpy.float64),c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'standard'),(1, 'connector'),(1, 'calkitName'),(1, 'calkitLabel'),(1, 'standardLabel'),(1, 'minFreqHz'),(1, 'maxFreqHz'),(1, 'electricalLength'),(1, 'loss'),(1, 'z0'),(1, 'capacitances[]'),(1, 'residualInductances[]'),(1, 'approximation'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'standard'),(1, 'connector'),(1, 'calkitName'),(1, 'calkitLabel'),(1, 'standardLabel'),(1, 'minFreqHz'),(1, 'maxFreqHz'),(1, 'electricalLength'),(1, 'loss'),(1, 'z0'),(1, 'capacitances'),(1, 'residualInductances'),(1, 'approximation'),)
 rszvb_ConfigureCalibrationStandardWithLabel  = prototype(('rszvb_ConfigureCalibrationStandardWithLabel', rszvbDLL), paramflags)
 rszvb_ConfigureCalibrationStandardWithLabel.name = 'rszvb_ConfigureCalibrationStandardWithLabel'
 rszvb_ConfigureCalibrationStandardWithLabel.errcheck = __errorcheck__
 rszvb_ConfigureCalibrationStandardWithLabel.output = False
-# rszvb_CalibrationStandardsCatalog ['ViSession instrumentHandle', 'ViString calibrationKitName', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_CalibrationStandardsCatalog ['ViSession instrumentHandle', 'ViString calibrationKitName', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'calibrationKitName'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'calibrationKitName'),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_CalibrationStandardsCatalog  = prototype(('rszvb_CalibrationStandardsCatalog', rszvbDLL), paramflags)
 rszvb_CalibrationStandardsCatalog.name = 'rszvb_CalibrationStandardsCatalog'
 rszvb_CalibrationStandardsCatalog.errcheck = __errorcheck__
 rszvb_CalibrationStandardsCatalog.output = False
-# rszvb_CalibrationStandardsCatalogWithLabel ['ViSession instrumentHandle', 'ViString calibrationKitName', 'ViString calibrationKitLabel', 'ViInt32 bufferSize', 'ViChar _VI_FAR catalog[]']
+# rszvb_CalibrationStandardsCatalogWithLabel ['ViSession instrumentHandle', 'ViString calibrationKitName', 'ViString calibrationKitLabel', 'ViInt32 bufferSize', 'ViChar _VI_FAR catalog']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_char_p,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'calibrationKitName'),(1, 'calibrationKitLabel'),(1, 'bufferSize'),(1, 'catalog[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'calibrationKitName'),(1, 'calibrationKitLabel'),(1, 'bufferSize'),(1, 'catalog'),)
 rszvb_CalibrationStandardsCatalogWithLabel  = prototype(('rszvb_CalibrationStandardsCatalogWithLabel', rszvbDLL), paramflags)
 rszvb_CalibrationStandardsCatalogWithLabel.name = 'rszvb_CalibrationStandardsCatalogWithLabel'
 rszvb_CalibrationStandardsCatalogWithLabel.errcheck = __errorcheck__
@@ -8138,9 +8138,9 @@ rszvb_SaveCalibrationKit  = prototype(('rszvb_SaveCalibrationKit', rszvbDLL), pa
 rszvb_SaveCalibrationKit.name = 'rszvb_SaveCalibrationKit'
 rszvb_SaveCalibrationKit.errcheck = __errorcheck__
 rszvb_SaveCalibrationKit.output = False
-# rszvb_SaveCalibrationKitPorts ['ViSession instrumentHandle', 'ViString fileName', 'ViInt32 parameters', 'ViInt32 arraySize', 'ViInt32 _VI_FAR VNAPorts[]', 'ViInt32 _VI_FAR calUnitPorts[]']
+# rszvb_SaveCalibrationKitPorts ['ViSession instrumentHandle', 'ViString fileName', 'ViInt32 parameters', 'ViInt32 arraySize', 'ViInt32 _VI_FAR VNAPorts', 'ViInt32 _VI_FAR calUnitPorts']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32),numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'fileName'),(1, 'parameters'),(1, 'arraySize'),(1, 'VNAPorts[]'),(1, 'calUnitPorts[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'fileName'),(1, 'parameters'),(1, 'arraySize'),(1, 'VNAPorts'),(1, 'calUnitPorts'),)
 rszvb_SaveCalibrationKitPorts  = prototype(('rszvb_SaveCalibrationKitPorts', rszvbDLL), paramflags)
 rszvb_SaveCalibrationKitPorts.name = 'rszvb_SaveCalibrationKitPorts'
 rszvb_SaveCalibrationKitPorts.errcheck = __errorcheck__
@@ -8166,9 +8166,9 @@ rszvb_RenameCalibrationKit  = prototype(('rszvb_RenameCalibrationKit', rszvbDLL)
 rszvb_RenameCalibrationKit.name = 'rszvb_RenameCalibrationKit'
 rszvb_RenameCalibrationKit.errcheck = __errorcheck__
 rszvb_RenameCalibrationKit.output = False
-# rszvb_GetCalibrationKitLabel ['ViSession instrumentHandle', 'ViString calibrationKitName', 'ViChar _VI_FAR label[]']
+# rszvb_GetCalibrationKitLabel ['ViSession instrumentHandle', 'ViString calibrationKitName', 'ViChar _VI_FAR label']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'calibrationKitName'),(1, 'label[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'calibrationKitName'),(1, 'label'),)
 rszvb_GetCalibrationKitLabel  = prototype(('rszvb_GetCalibrationKitLabel', rszvbDLL), paramflags)
 rszvb_GetCalibrationKitLabel.name = 'rszvb_GetCalibrationKitLabel'
 rszvb_GetCalibrationKitLabel.errcheck = __errorcheck__
@@ -8362,9 +8362,9 @@ rszvb_AutoLengthAndLoss  = prototype(('rszvb_AutoLengthAndLoss', rszvbDLL), para
 rszvb_AutoLengthAndLoss.name = 'rszvb_AutoLengthAndLoss'
 rszvb_AutoLengthAndLoss.errcheck = __errorcheck__
 rszvb_AutoLengthAndLoss.output = False
-# rszvb_AcquireFixtureCompensationSweep ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 standardType', 'ViInt32 arraySize', 'ViInt32 _VI_FAR ports[]']
+# rszvb_AcquireFixtureCompensationSweep ['ViSession instrumentHandle', 'ViInt32 channel', 'ViInt32 standardType', 'ViInt32 arraySize', 'ViInt32 _VI_FAR ports']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_int32,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'standardType'),(1, 'arraySize'),(1, 'ports[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'channel',1),(1, 'standardType'),(1, 'arraySize'),(1, 'ports'),)
 rszvb_AcquireFixtureCompensationSweep  = prototype(('rszvb_AcquireFixtureCompensationSweep', rszvbDLL), paramflags)
 rszvb_AcquireFixtureCompensationSweep.name = 'rszvb_AcquireFixtureCompensationSweep'
 rszvb_AcquireFixtureCompensationSweep.errcheck = __errorcheck__
@@ -8446,16 +8446,16 @@ rszvb_DiagramAreaName  = prototype(('rszvb_DiagramAreaName', rszvbDLL), paramfla
 rszvb_DiagramAreaName.name = 'rszvb_DiagramAreaName'
 rszvb_DiagramAreaName.errcheck = __errorcheck__
 rszvb_DiagramAreaName.output = False
-# rszvb_DiagramAreaCatalog ['ViSession instrumentHandle', 'ViInt32 window', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_DiagramAreaCatalog ['ViSession instrumentHandle', 'ViInt32 window', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_DiagramAreaCatalog  = prototype(('rszvb_DiagramAreaCatalog', rszvbDLL), paramflags)
 rszvb_DiagramAreaCatalog.name = 'rszvb_DiagramAreaCatalog'
 rszvb_DiagramAreaCatalog.errcheck = __errorcheck__
 rszvb_DiagramAreaCatalog.output = False
-# rszvb_TraceDiagramAreaCatalog ['ViSession instrumentHandle', 'ViInt32 window', 'ViChar _VI_FAR catalog[]', 'ViInt32 bufferSize']
+# rszvb_TraceDiagramAreaCatalog ['ViSession instrumentHandle', 'ViInt32 window', 'ViChar _VI_FAR catalog', 'ViInt32 bufferSize']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_int32)
-paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'catalog[]'),(1, 'bufferSize'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'window'),(1, 'catalog'),(1, 'bufferSize'),)
 rszvb_TraceDiagramAreaCatalog  = prototype(('rszvb_TraceDiagramAreaCatalog', rszvbDLL), paramflags)
 rszvb_TraceDiagramAreaCatalog.name = 'rszvb_TraceDiagramAreaCatalog'
 rszvb_TraceDiagramAreaCatalog.errcheck = __errorcheck__
@@ -8677,9 +8677,9 @@ rszvb_SetUserDefinedPresetFile  = prototype(('rszvb_SetUserDefinedPresetFile', r
 rszvb_SetUserDefinedPresetFile.name = 'rszvb_SetUserDefinedPresetFile'
 rszvb_SetUserDefinedPresetFile.errcheck = __errorcheck__
 rszvb_SetUserDefinedPresetFile.output = False
-# rszvb_GetUserDefinedPresetFile ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR userDefinedPresetFile[]']
+# rszvb_GetUserDefinedPresetFile ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR userDefinedPresetFile']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'userDefinedPresetFile[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'userDefinedPresetFile'),)
 rszvb_GetUserDefinedPresetFile  = prototype(('rszvb_GetUserDefinedPresetFile', rszvbDLL), paramflags)
 rszvb_GetUserDefinedPresetFile.name = 'rszvb_GetUserDefinedPresetFile'
 rszvb_GetUserDefinedPresetFile.errcheck = __errorcheck__
@@ -8740,9 +8740,9 @@ rszvb_ConfigureExternalGenerator  = prototype(('rszvb_ConfigureExternalGenerator
 rszvb_ConfigureExternalGenerator.name = 'rszvb_ConfigureExternalGenerator'
 rszvb_ConfigureExternalGenerator.errcheck = __errorcheck__
 rszvb_ConfigureExternalGenerator.output = False
-# rszvb_QueryExternalGenerator ['ViSession instrumentHandle', 'ViInt32 generatorNumber', 'ViChar _VI_FAR generatorName[]', 'ViChar _VI_FAR generatorType[]', 'ViChar _VI_FAR interfaceType[]', 'ViChar _VI_FAR interfaceAddress[]', 'ViBoolean* fastSweepMode', 'ViBoolean* _10MHzReferenceFrequency']
+# rszvb_QueryExternalGenerator ['ViSession instrumentHandle', 'ViInt32 generatorNumber', 'ViChar _VI_FAR generatorName', 'ViChar _VI_FAR generatorType', 'ViChar _VI_FAR interfaceType', 'ViChar _VI_FAR interfaceAddress', 'ViBoolean* fastSweepMode', 'ViBoolean* _10MHzReferenceFrequency']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_char_p,c_char_p,c_char_p,POINTER(c_bool),POINTER(c_bool))
-paramflags = ((1, 'instrumentHandle'),(1, 'generatorNumber'),(1, 'generatorName[]'),(1, 'generatorType[]'),(1, 'interfaceType[]'),(1, 'interfaceAddress[]'),(2, 'fastSweepMode'),(2, '_10MHzReferenceFrequency'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'generatorNumber'),(1, 'generatorName'),(1, 'generatorType'),(1, 'interfaceType'),(1, 'interfaceAddress'),(2, 'fastSweepMode'),(2, '_10MHzReferenceFrequency'),)
 rszvb_QueryExternalGenerator  = prototype(('rszvb_QueryExternalGenerator', rszvbDLL), paramflags)
 rszvb_QueryExternalGenerator.name = 'rszvb_QueryExternalGenerator'
 rszvb_QueryExternalGenerator.errcheck = __errorcheck__
@@ -8754,9 +8754,9 @@ rszvb_QueryExternalGeneratorCount  = prototype(('rszvb_QueryExternalGeneratorCou
 rszvb_QueryExternalGeneratorCount.name = 'rszvb_QueryExternalGeneratorCount'
 rszvb_QueryExternalGeneratorCount.errcheck = __errorcheck__
 rszvb_QueryExternalGeneratorCount.output = True
-# rszvb_QueryExternalGeneratorNumbers ['ViSession instrumentHandle', 'ViInt32 arraySize', 'ViChar _VI_FAR generatorNumbers[]']
+# rszvb_QueryExternalGeneratorNumbers ['ViSession instrumentHandle', 'ViInt32 arraySize', 'ViChar _VI_FAR generatorNumbers']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'arraySize'),(1, 'generatorNumbers[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'arraySize'),(1, 'generatorNumbers'),)
 rszvb_QueryExternalGeneratorNumbers  = prototype(('rszvb_QueryExternalGeneratorNumbers', rszvbDLL), paramflags)
 rszvb_QueryExternalGeneratorNumbers.name = 'rszvb_QueryExternalGeneratorNumbers'
 rszvb_QueryExternalGeneratorNumbers.errcheck = __errorcheck__
@@ -8775,9 +8775,9 @@ rszvb_ConfigureExternalPowerMeter  = prototype(('rszvb_ConfigureExternalPowerMet
 rszvb_ConfigureExternalPowerMeter.name = 'rszvb_ConfigureExternalPowerMeter'
 rszvb_ConfigureExternalPowerMeter.errcheck = __errorcheck__
 rszvb_ConfigureExternalPowerMeter.output = False
-# rszvb_QueryExternalPowerMeter ['ViSession instrumentHandle', 'ViInt32 powerMeterNumber', 'ViChar _VI_FAR powerMeterName[]', 'ViChar _VI_FAR powerMeterType[]', 'ViChar _VI_FAR interfaceType[]', 'ViChar _VI_FAR interfaceAddress[]']
+# rszvb_QueryExternalPowerMeter ['ViSession instrumentHandle', 'ViInt32 powerMeterNumber', 'ViChar _VI_FAR powerMeterName', 'ViChar _VI_FAR powerMeterType', 'ViChar _VI_FAR interfaceType', 'ViChar _VI_FAR interfaceAddress']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,c_char_p,c_char_p,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'powerMeterNumber'),(1, 'powerMeterName[]'),(1, 'powerMeterType[]'),(1, 'interfaceType[]'),(1, 'interfaceAddress[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'powerMeterNumber'),(1, 'powerMeterName'),(1, 'powerMeterType'),(1, 'interfaceType'),(1, 'interfaceAddress'),)
 rszvb_QueryExternalPowerMeter  = prototype(('rszvb_QueryExternalPowerMeter', rszvbDLL), paramflags)
 rszvb_QueryExternalPowerMeter.name = 'rszvb_QueryExternalPowerMeter'
 rszvb_QueryExternalPowerMeter.errcheck = __errorcheck__
@@ -8789,9 +8789,9 @@ rszvb_QueryExternalPowerMeterCount  = prototype(('rszvb_QueryExternalPowerMeterC
 rszvb_QueryExternalPowerMeterCount.name = 'rszvb_QueryExternalPowerMeterCount'
 rszvb_QueryExternalPowerMeterCount.errcheck = __errorcheck__
 rszvb_QueryExternalPowerMeterCount.output = True
-# rszvb_QueryExternalPowerMeterNumbers ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR powerMeterNumber[]']
+# rszvb_QueryExternalPowerMeterNumbers ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR powerMeterNumber']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'powerMeterNumber[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'powerMeterNumber'),)
 rszvb_QueryExternalPowerMeterNumbers  = prototype(('rszvb_QueryExternalPowerMeterNumbers', rszvbDLL), paramflags)
 rszvb_QueryExternalPowerMeterNumbers.name = 'rszvb_QueryExternalPowerMeterNumbers'
 rszvb_QueryExternalPowerMeterNumbers.errcheck = __errorcheck__
@@ -8901,9 +8901,9 @@ rszvb_SetFrequencyConversionType  = prototype(('rszvb_SetFrequencyConversionType
 rszvb_SetFrequencyConversionType.name = 'rszvb_SetFrequencyConversionType'
 rszvb_SetFrequencyConversionType.errcheck = __errorcheck__
 rszvb_SetFrequencyConversionType.output = False
-# rszvb_GetFrequencyConversionType ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR converterType[]']
+# rszvb_GetFrequencyConversionType ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR converterType']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'converterType[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'converterType'),)
 rszvb_GetFrequencyConversionType  = prototype(('rszvb_GetFrequencyConversionType', rszvbDLL), paramflags)
 rszvb_GetFrequencyConversionType.name = 'rszvb_GetFrequencyConversionType'
 rszvb_GetFrequencyConversionType.errcheck = __errorcheck__
@@ -8936,16 +8936,16 @@ rszvb_GetFastMultiportCorrection  = prototype(('rszvb_GetFastMultiportCorrection
 rszvb_GetFastMultiportCorrection.name = 'rszvb_GetFastMultiportCorrection'
 rszvb_GetFastMultiportCorrection.errcheck = __errorcheck__
 rszvb_GetFastMultiportCorrection.output = True
-# rszvb_SetPowerCoeficients ['ViSession instrumentHandle', 'ViInt32 port', 'ViReal64 _VI_FAR coeficient[]']
+# rszvb_SetPowerCoeficients ['ViSession instrumentHandle', 'ViInt32 port', 'ViReal64 _VI_FAR coeficient']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'port'),(1, 'coeficient[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'port'),(1, 'coeficient'),)
 rszvb_SetPowerCoeficients  = prototype(('rszvb_SetPowerCoeficients', rszvbDLL), paramflags)
 rszvb_SetPowerCoeficients.name = 'rszvb_SetPowerCoeficients'
 rszvb_SetPowerCoeficients.errcheck = __errorcheck__
 rszvb_SetPowerCoeficients.output = False
-# rszvb_GetPowerCoeficients ['ViSession instrumentHandle', 'ViInt32 port', 'ViReal64 _VI_FAR coeficients[]']
+# rszvb_GetPowerCoeficients ['ViSession instrumentHandle', 'ViInt32 port', 'ViReal64 _VI_FAR coeficients']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,numpy.ctypeslib.ndpointer(dtype=numpy.float64))
-paramflags = ((1, 'instrumentHandle'),(1, 'port'),(1, 'coeficients[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'port'),(1, 'coeficients'),)
 rszvb_GetPowerCoeficients  = prototype(('rszvb_GetPowerCoeficients', rszvbDLL), paramflags)
 rszvb_GetPowerCoeficients.name = 'rszvb_GetPowerCoeficients'
 rszvb_GetPowerCoeficients.errcheck = __errorcheck__
@@ -8964,16 +8964,16 @@ rszvb_GetPowerCoeficientsDefault  = prototype(('rszvb_GetPowerCoeficientsDefault
 rszvb_GetPowerCoeficientsDefault.name = 'rszvb_GetPowerCoeficientsDefault'
 rszvb_GetPowerCoeficientsDefault.errcheck = __errorcheck__
 rszvb_GetPowerCoeficientsDefault.output = True
-# rszvb_QueryExtensionUnitDeviceID ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR deviceID[]']
+# rszvb_QueryExtensionUnitDeviceID ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR deviceID']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'deviceID[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'deviceID'),)
 rszvb_QueryExtensionUnitDeviceID  = prototype(('rszvb_QueryExtensionUnitDeviceID', rszvbDLL), paramflags)
 rszvb_QueryExtensionUnitDeviceID.name = 'rszvb_QueryExtensionUnitDeviceID'
 rszvb_QueryExtensionUnitDeviceID.errcheck = __errorcheck__
 rszvb_QueryExtensionUnitDeviceID.output = False
-# rszvb_QueryExtensionUnitHardwareOptions ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR options[]']
+# rszvb_QueryExtensionUnitHardwareOptions ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR options']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'options[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'options'),)
 rszvb_QueryExtensionUnitHardwareOptions  = prototype(('rszvb_QueryExtensionUnitHardwareOptions', rszvbDLL), paramflags)
 rszvb_QueryExtensionUnitHardwareOptions.name = 'rszvb_QueryExtensionUnitHardwareOptions'
 rszvb_QueryExtensionUnitHardwareOptions.errcheck = __errorcheck__
@@ -9041,9 +9041,9 @@ rszvb_SetRemoteDisplayTitle  = prototype(('rszvb_SetRemoteDisplayTitle', rszvbDL
 rszvb_SetRemoteDisplayTitle.name = 'rszvb_SetRemoteDisplayTitle'
 rszvb_SetRemoteDisplayTitle.errcheck = __errorcheck__
 rszvb_SetRemoteDisplayTitle.output = False
-# rszvb_GetRemoteDisplayTitle ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR title[]']
+# rszvb_GetRemoteDisplayTitle ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR title']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'title[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'title'),)
 rszvb_GetRemoteDisplayTitle  = prototype(('rszvb_GetRemoteDisplayTitle', rszvbDLL), paramflags)
 rszvb_GetRemoteDisplayTitle.name = 'rszvb_GetRemoteDisplayTitle'
 rszvb_GetRemoteDisplayTitle.errcheck = __errorcheck__
@@ -9055,9 +9055,9 @@ rszvb_SetAnalyzerHostname  = prototype(('rszvb_SetAnalyzerHostname', rszvbDLL), 
 rszvb_SetAnalyzerHostname.name = 'rszvb_SetAnalyzerHostname'
 rszvb_SetAnalyzerHostname.errcheck = __errorcheck__
 rszvb_SetAnalyzerHostname.output = False
-# rszvb_GetAnalyzerHostname ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR hostName[]']
+# rszvb_GetAnalyzerHostname ['ViSession instrumentHandle', 'ViInt32 bufferSize', 'ViChar _VI_FAR hostName']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'hostName[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'bufferSize'),(1, 'hostName'),)
 rszvb_GetAnalyzerHostname  = prototype(('rszvb_GetAnalyzerHostname', rszvbDLL), paramflags)
 rszvb_GetAnalyzerHostname.name = 'rszvb_GetAnalyzerHostname'
 rszvb_GetAnalyzerHostname.errcheck = __errorcheck__
@@ -9069,9 +9069,9 @@ rszvb_SetSoftKeyLabel  = prototype(('rszvb_SetSoftKeyLabel', rszvbDLL), paramfla
 rszvb_SetSoftKeyLabel.name = 'rszvb_SetSoftKeyLabel'
 rszvb_SetSoftKeyLabel.errcheck = __errorcheck__
 rszvb_SetSoftKeyLabel.output = False
-# rszvb_GetPressedSoftKey ['ViSession instrumentHandle', 'ViInt32* keyNumber', 'ViInt32 bufferSize', 'ViChar _VI_FAR label[]']
+# rszvb_GetPressedSoftKey ['ViSession instrumentHandle', 'ViInt32* keyNumber', 'ViInt32 bufferSize', 'ViChar _VI_FAR label']
 prototype = WINFUNCTYPE(c_int, c_int,POINTER(c_int32),c_int32,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(2, 'keyNumber'),(1, 'bufferSize'),(1, 'label[]'),)
+paramflags = ((1, 'instrumentHandle'),(2, 'keyNumber'),(1, 'bufferSize'),(1, 'label'),)
 rszvb_GetPressedSoftKey  = prototype(('rszvb_GetPressedSoftKey', rszvbDLL), paramflags)
 rszvb_GetPressedSoftKey.name = 'rszvb_GetPressedSoftKey'
 rszvb_GetPressedSoftKey.errcheck = __errorcheck__
@@ -9251,9 +9251,9 @@ rszvb_writeInstrData  = prototype(('rszvb_writeInstrData', rszvbDLL), paramflags
 rszvb_writeInstrData.name = 'rszvb_writeInstrData'
 rszvb_writeInstrData.errcheck = __errorcheck__
 rszvb_writeInstrData.output = False
-# rszvb_readInstrData ['ViSession instrumentHandle', 'ViInt32 numberBytesToRead', 'ViChar _VI_FAR readBuffer[]', 'ViInt32* numBytesRead']
+# rszvb_readInstrData ['ViSession instrumentHandle', 'ViInt32 numberBytesToRead', 'ViChar _VI_FAR readBuffer', 'ViInt32* numBytesRead']
 prototype = WINFUNCTYPE(c_int, c_int,c_int32,c_char_p,POINTER(c_int32))
-paramflags = ((1, 'instrumentHandle'),(1, 'numberBytesToRead'),(1, 'readBuffer[]'),(2, 'numBytesRead'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'numberBytesToRead'),(1, 'readBuffer'),(2, 'numBytesRead'),)
 rszvb_readInstrData  = prototype(('rszvb_readInstrData', rszvbDLL), paramflags)
 rszvb_readInstrData.name = 'rszvb_readInstrData'
 rszvb_readInstrData.errcheck = __errorcheck__
@@ -9265,30 +9265,30 @@ rszvb_reset  = prototype(('rszvb_reset', rszvbDLL), paramflags)
 rszvb_reset.name = 'rszvb_reset'
 rszvb_reset.errcheck = __errorcheck__
 rszvb_reset.output = False
-# rszvb_self_test ['ViSession instrumentHandle', 'ViInt16* selfTestResult', 'ViChar _VI_FAR selfTestMessage[]']
+# rszvb_self_test ['ViSession instrumentHandle', 'ViInt16* selfTestResult', 'ViChar _VI_FAR selfTestMessage']
 prototype = WINFUNCTYPE(c_int, c_int,POINTER(c_int16),c_char_p)
-paramflags = ((1, 'instrumentHandle'),(2, 'selfTestResult'),(1, 'selfTestMessage[]'),)
+paramflags = ((1, 'instrumentHandle'),(2, 'selfTestResult'),(1, 'selfTestMessage'),)
 rszvb_self_test  = prototype(('rszvb_self_test', rszvbDLL), paramflags)
 rszvb_self_test.name = 'rszvb_self_test'
 rszvb_self_test.errcheck = __errorcheck__
 rszvb_self_test.output = True
-# rszvb_error_query ['ViSession instrumentHandle', 'ViInt32* errorCode', 'ViChar _VI_FAR errorMessage[]']
+# rszvb_error_query ['ViSession instrumentHandle', 'ViInt32* errorCode', 'ViChar _VI_FAR errorMessage']
 prototype = WINFUNCTYPE(c_int, c_int,POINTER(c_int32),c_char_p)
-paramflags = ((1, 'instrumentHandle'),(2, 'errorCode'),(1, 'errorMessage[]'),)
+paramflags = ((1, 'instrumentHandle'),(2, 'errorCode'),(1, 'errorMessage'),)
 rszvb_error_query  = prototype(('rszvb_error_query', rszvbDLL), paramflags)
 rszvb_error_query.name = 'rszvb_error_query'
 rszvb_error_query.errcheck = __errorcheck__
 rszvb_error_query.output = True
-# rszvb_error_message ['ViSession instrumentHandle', 'ViStatus statusCode', 'ViChar _VI_FAR message[]']
+# rszvb_error_message ['ViSession instrumentHandle', 'ViStatus statusCode', 'ViChar _VI_FAR message']
 prototype = WINFUNCTYPE(c_int, c_int,c_int,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'statusCode'),(1, 'message[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'statusCode'),(1, 'message'),)
 rszvb_error_message  = prototype(('rszvb_error_message', rszvbDLL), paramflags)
 rszvb_error_message.name = 'rszvb_error_message'
 rszvb_error_message.errcheck = __errorcheck__
 rszvb_error_message.output = False
-# rszvb_revision_query ['ViSession instrumentHandle', 'ViChar _VI_FAR instrumentDriverRevision[]', 'ViChar _VI_FAR firmwareRevision[]']
+# rszvb_revision_query ['ViSession instrumentHandle', 'ViChar _VI_FAR instrumentDriverRevision', 'ViChar _VI_FAR firmwareRevision']
 prototype = WINFUNCTYPE(c_int, c_int,c_char_p,c_char_p)
-paramflags = ((1, 'instrumentHandle'),(1, 'instrumentDriverRevision[]'),(1, 'firmwareRevision[]'),)
+paramflags = ((1, 'instrumentHandle'),(1, 'instrumentDriverRevision'),(1, 'firmwareRevision'),)
 rszvb_revision_query  = prototype(('rszvb_revision_query', rszvbDLL), paramflags)
 rszvb_revision_query.name = 'rszvb_revision_query'
 rszvb_revision_query.errcheck = __errorcheck__

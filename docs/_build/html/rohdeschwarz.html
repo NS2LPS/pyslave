@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -13,7 +15,7 @@
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
+        URL_ROOT:    '',
         VERSION:     '0.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -54,54 +56,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-pyslave.drivers.rohdeschwarz">
-<span id="rohde-schwarz-instrument-drivers"></span><h1>Rohde Schwarz instrument drivers<a class="headerlink" href="#module-pyslave.drivers.rohdeschwarz" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
-<dt id="pyslave.drivers.rohdeschwarz.zvb.zvb">
-<em class="property">class </em><tt class="descclassname">pyslave.drivers.rohdeschwarz.zvb.</tt><tt class="descname">zvb</tt><big>(</big><em>address</em><big>)</big><a class="headerlink" href="#pyslave.drivers.rohdeschwarz.zvb.zvb" title="Permalink to this definition">¶</a></dt>
-<dd><p>Rohde&amp;Schwarz Vector Network Analyzer (ZVA,ZVB) driver. All the functions from the rszvb DLL are available.
-See the DLL help for more details.</p>
-<blockquote>
-<div>Example : zvb.SetPower(channel=1, power=-10)</div></blockquote>
-<p>The channel keyword argument is set to 1 by default.</p>
-<dl class="method">
-<dt id="pyslave.drivers.rohdeschwarz.zvb.zvb.copy_sweep_parameters">
-<tt class="descname">copy_sweep_parameters</tt><big>(</big><em>dic</em>, <em>channel=1</em><big>)</big><a class="headerlink" href="#pyslave.drivers.rohdeschwarz.zvb.zvb.copy_sweep_parameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Copy the sweep parameters (see get_sweep_parameters) to the dictionary dic (e.g. hd5 attributes).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyslave.drivers.rohdeschwarz.zvb.zvb.fetch">
-<tt class="descname">fetch</tt><big>(</big><em>channel=1</em><big>)</big><a class="headerlink" href="#pyslave.drivers.rohdeschwarz.zvb.zvb.fetch" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve data from the specified channel. Data are returned as a numpy two column vector.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyslave.drivers.rohdeschwarz.zvb.zvb.freq">
-<tt class="descname">freq</tt><big>(</big><em>channel=1</em><big>)</big><a class="headerlink" href="#pyslave.drivers.rohdeschwarz.zvb.zvb.freq" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the start,stop frequency and number of points and generate the corresponding frequency vector.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyslave.drivers.rohdeschwarz.zvb.zvb.get_sweep_parameters">
-<tt class="descname">get_sweep_parameters</tt><big>(</big><em>channel=1</em><big>)</big><a class="headerlink" href="#pyslave.drivers.rohdeschwarz.zvb.zvb.get_sweep_parameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return the start,stop frequency and number of points for the specified channel.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="pyslave.drivers.rohdeschwarz.zvb.zvb.wait_for_average">
-<tt class="descname">wait_for_average</tt><big>(</big><em>channel=1</em>, <em>sleep_time=0.1</em><big>)</big><a class="headerlink" href="#pyslave.drivers.rohdeschwarz.zvb.zvb.wait_for_average" title="Permalink to this definition">¶</a></dt>
-<dd><p>Broken function.</p>
-</dd></dl>
-
-</dd></dl>
-
-<span class="target" id="module-pyslave.drivers.rohdeschwarz.__zvb__.rszvb"></span><p>rszvb DLL Python interface.</p>
-<dl class="exception">
-<dt id="pyslave.drivers.rohdeschwarz.__zvb__.rszvb.ZVBDLLERROR">
-<em class="property">exception </em><tt class="descclassname">pyslave.drivers.rohdeschwarz.__zvb__.rszvb.</tt><tt class="descname">ZVBDLLERROR</tt><a class="headerlink" href="#pyslave.drivers.rohdeschwarz.__zvb__.rszvb.ZVBDLLERROR" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+  <div class="section" id="rohde-schwarz-instrument-drivers">
+<h1>Rohde Schwarz instrument drivers<a class="headerlink" href="#rohde-schwarz-instrument-drivers" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -159,7 +115,7 @@ See the DLL help for more details.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2015, Jérôme Estève.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>

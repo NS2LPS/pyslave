@@ -7,6 +7,7 @@ Everything after the ``#main`` comment is executed in a separate thread.
 
 Here is a simple script example that scans the power of a vna and record the average transmission :
 ::
+
     fig = figure(1)
     fig.clf()
     ax = fig.add_subplot(111)
@@ -22,7 +23,7 @@ Here is a simple script example that scans the power of a vna and record the ave
         # Acquire data
         time.sleep(1)
         data = vna1.fetch()
-        out[index] = mean(data[:,0]**2+data[:,1]**2)
+        out[index] = mean(data[:,0]2+data[:,1]2)
         # Display data
         ax.clear()
         ax.plot(power,out)
@@ -36,4 +37,29 @@ Comments interpreted by slave
 
 .. function:: #main
 
+    This comment signals the start of the cript main body. Everything after this comment is wrapped in a function
+    that will be run in a separate thread. This comment is mandatory and must appear before the other comments listed below.
 
+.. function:: #pause?
+
+    This line checks if the user asked for a pause. If yes it will wait until the user resumes or aborts the script.
+
+.. function:: #break?
+
+    This line inserts a Python break statement if the user aborts the script. Multiple ``#break?`` can be used to exit nested loops.
+
+.. function:: #abort?
+
+    This line inserts a Python return statement if the user aborts the script. This causes the script function to finish.
+
+.. function:: #disp(string)
+
+    Displays the given string in the slave window.
+
+.. function:: #looptime?
+
+    Displays the time ellapsed between two calls to the function.
+
+.. function:: #draw
+
+    Tell Matplotlib to redraw figures.
