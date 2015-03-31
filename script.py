@@ -11,7 +11,7 @@ def increment(filename, ndigits=3):
     if files :
         lastfile = files[-1]
         counter = lastfile[len(basename):-len(ext)]
-        counter = int(counter) if counter else 0
+        counter = int(counter)+1 if counter else 0
     else :
         counter = 0
     return basename + str(counter).zfill(ndigits) + ext

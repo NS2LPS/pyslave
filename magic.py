@@ -3,6 +3,9 @@ The slave window is created when the module is loaded."""
 
 from IPython.core.magic import register_line_magic, needs_local_scope
 from pyslave import instruments
+from pyslave import __slave__
+
+slave = None
 
 data_directory = 'Z:\\Data\\'
 
@@ -36,24 +39,16 @@ def openall(line, local_ns):
 def listall(line):
     """List all loaded instruments."""
     print "Loaded instruments :"
-    for app in instruments.__loaded__:
+    for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 
 del listall, openall, openinst, closeinst
 
 # Scripts launching, pausing
-
-from pyslave import __slave__
-slave = __slave__.SlaveWindow()
-slave.show()
-
-@register_line_magic
-@needs_local_scope
-def start(filename, local_ns):
-    """Convert and launch a script in slave."""
-    if not filename.endswith('.py'):
-        filename += '.py'
-    slave.call(filename, local_ns)
+def __start_slave__():
+    global slave
+    slave = __slave__.SlaveWindow()
+    slave.show()
 
 @register_line_magic
 @needs_local_scope
@@ -61,27 +56,32 @@ def call(filename, local_ns):
     """Convert and launch a script in slave."""
     if not filename.endswith('.py'):
         filename += '.py'
+    if slave is None : __start_slave__()
     slave.call(filename, local_ns)
 
 @register_line_magic
 def pause(line):
     """Pause the running script."""
+    if slave is None : return
     slave.on_pushButton_Pause_clicked()
 
 @register_line_magic
 def resume(line):
     """Resume the paused script."""
+    if slave is None : return
     slave.on_pushButton_Resume_clicked()
 
 @register_line_magic
 def abort(line):
     """Abort the running script. If the script does not finish within 10 s,
     a dialog appears to eventually force the script to terminate."""
+    if slave is None : return
     slave.on_pushButton_Abort_clicked()
 
 @register_line_magic
 def window(line):
     """Show the slave window."""
+    if slave is None : __start_slave__()
     slave.show()
 
 del call, window, pause, resume, abort

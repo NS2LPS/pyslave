@@ -22,7 +22,7 @@ __loaded__ = dict()
 
 # Naming scheme
 def __shortname__(prefix):
-    prev = [ int(k[len(prefix):]) for k in __loaded__.iterkeys() if k.startswith(prefix) ]
+    prev = [ int(k.shortname[len(prefix):]) for k in __loaded__.itervalues() if k.shortname.startswith(prefix) ]
     next = max(prev)+1 if prev else 1
     return prefix + str( next )
 
@@ -42,12 +42,11 @@ def openinst(address):
     if id in known_devices:
         driver, typ = known_devices[id]
         app = driver(address)
-        shortname = __shortname__(typ)
     else:
         app = rm.open_resource(address)
         typ = 'instr'
     fullname = id + ' ' + address
-    app.shortname =  __loaded__[fullname] if fullname in __loaded__ else __shortname__('typ')
+    app.shortname =  __loaded__[fullname].shortname if fullname in __loaded__ else __shortname__(typ)
     app.fullname = fullname
     __loaded__[fullname] = app
     return app
