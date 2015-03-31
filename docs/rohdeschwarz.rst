@@ -7,4 +7,5 @@ Rohde Schwarz instrument drivers
     :members:
 
 .. automodule:: pyslave.drivers.rohdeschwarz.__zvb__.rszvb
-    include:: rszvb
+
+    .. include:: rszvb.rst

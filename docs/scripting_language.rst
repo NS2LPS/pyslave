@@ -6,7 +6,8 @@ The only mandatory comment is ``#main``. It separates the script initialization 
 Everything after the ``#main`` comment is executed in a separate thread.
 
 Here is a simple script example that scans the power of a vna and record the average transmission :
-::
+
+.. code-block:: python
 
     fig = figure(1)
     fig.clf()
