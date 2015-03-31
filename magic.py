@@ -1,4 +1,5 @@
-"""Define magic functions to load instruments and run scripts into slave."""
+"""This module defines magic IPython functions to run pyslave from the IPython shell.
+The slave window is created when the module is loaded."""
 
 from IPython.core.magic import register_line_magic, needs_local_scope
 from pyslave import instruments
@@ -24,36 +25,46 @@ del listall, openall
 
 # Scripts launching, pausing
 
-from pyslave import slave
+from pyslave import __slave__
+slave = __slave__.SlaveWindow()
+slave.show()
+
+@register_line_magic
+@needs_local_scope
+def start(filename, local_ns):
+    """Convert and launch a script in slave."""
+    if not filename.endswith('.py'):
+        filename += '.py'
+    slave.call(filename, local_ns)
 
 @register_line_magic
 @needs_local_scope
 def call(filename, local_ns):
-    """Convert and launch a script."""
+    """Convert and launch a script in slave."""
     if not filename.endswith('.py'):
         filename += '.py'
-    slave.slave_window.call(filename, local_ns)
+    slave.call(filename, local_ns)
 
 @register_line_magic
 def pause(line):
     """Pause the running script."""
-    slave.slave_window.on_pushButton_Pause_clicked()
+    slave.on_pushButton_Pause_clicked()
 
 @register_line_magic
 def resume(line):
     """Resume the paused script."""
-    slave.slave_window.on_pushButton_Resume_clicked()
+    slave.on_pushButton_Resume_clicked()
 
 @register_line_magic
 def abort(line):
     """Abort the running script. If the script does not finish within 10 s,
     a dialog appears to eventually force the script to terminate."""
-    slave.slave_window.on_pushButton_Abort_clicked()
+    slave.on_pushButton_Abort_clicked()
 
 @register_line_magic
 def window(line):
     """Show the slave window."""
-    slave.slave_window.show()
+    slave.show()
 
 del call, window, pause, resume, abort
 
@@ -75,7 +86,7 @@ def today(line):
 
 @register_line_magic
 def lastday(line):
-    """Change directory to the last day of data"""
+    """Change directory to the last day of data."""
     lastyear = sorted(os.listdir(data_directory))[-1]
     lastday = sorted(os.listdir(os.path.join(data_directory,lastyear)))[-1]
     path = os.path.join(data_directory, lastyear, lastday)

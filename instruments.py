@@ -3,16 +3,16 @@ It keeps track of all the instruments that are loaded and attributes them unique
 
 import traceback, sys
 import visa
-from pyslave import drivers
+from pyslave.drivers import * 
 
 # VISA resource manager
 rm = visa.ResourceManager()
 
 # Known devices with their driver and category
-known_devices   = {'HEWLETT-PACKARD 34401A': (drivers.agilent.agilent34401A, 'dmm'),
-                   'HEWLETT-PACKARD E3631A': (drivers.agilent.agilentE3641A,  'dcpwr'),
-                   'Rohde&Schwarz ZVA40-2Port' : (drivers.rohdeschwarz.zvb, 'vna'),
-                   'Rohde&Schwarz ZVB8-2Port' : (drivers.rohdeschwarz.zvb, 'vna'),
+known_devices   = {'HEWLETT-PACKARD 34401A': (agilent.agilent34401A, 'dmm'),
+                   'HEWLETT-PACKARD E3631A': (agilent.agilentE3641A,  'dcpwr'),
+                   'Rohde&Schwarz ZVA40-2Port' : (rohdeschwarz.zvb, 'vna'),
+                   'Rohde&Schwarz ZVB8-2Port' : (rohdeschwarz.zvb, 'vna'),
                    }
 
 # Keep track of loaded instruments
