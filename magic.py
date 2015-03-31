@@ -9,6 +9,21 @@ data_directory = 'Z:\\Data\\'
 # Instruments loading and listing
 @register_line_magic
 @needs_local_scope
+def openinst(line, local_ns):
+    """Load the VISA instrument at the specified resource."""
+    res = instruments.openinst(line)
+    local_ns[app.shortname] = app
+    print '{0} loaded as {1}'.format(app.fullname, app.shortname)
+
+@register_line_magic
+@needs_local_scope
+def closeinst(line, local_ns):
+    """Close the specified instrument."""
+    res = instruments.closeinst(line)
+    del local_ns[line]
+        
+@register_line_magic
+@needs_local_scope
 def openall(line, local_ns):
     """Load all GPIB instruments."""
     res = instruments.openall('GPIB')
@@ -24,7 +39,7 @@ def listall(line):
     for app in instruments.__loaded__:
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 
-del listall, openall
+del listall, openall, openinst, closeinst
 
 # Scripts launching, pausing
 

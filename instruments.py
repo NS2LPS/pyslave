@@ -14,6 +14,7 @@ known_devices   = {'HEWLETT-PACKARD 34401A': (agilent.agilent34401A, 'dmm'),
                    'Rohde&Schwarz ZVA40-2Port' : (rohdeschwarz.zvb, 'vna'),
                    'Rohde&Schwarz ZVB8-2Port' : (rohdeschwarz.zvb, 'vna'),
                    'Stanford_Research_Systems SR830': (standfordresearch.SR830, 'lockin'),
+                   '*IDN LECROY LT322': (lecroy.LecroyScope, 'scope'),
                    }
 
 # Keep track of loaded instruments
@@ -37,7 +38,7 @@ def openinst(address):
     except :
         raise InstrumentError('Could not id intrument at {0}.'.format(address))
     id = id.split(',')[:2]
-    id = ' '.join(id)
+    id = str(' '.join(id)).strip()
     if id in known_devices:
         driver, typ = known_devices[id]
         app = driver(address)

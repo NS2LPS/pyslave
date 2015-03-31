@@ -7,4 +7,5 @@ Instrument Drivers
     agilent
     yokogawa
     standfordresearch
+    lecroy
     

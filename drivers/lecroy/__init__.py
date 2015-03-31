@@ -1,0 +1,1 @@
+from lecroyscope import LecroyScope

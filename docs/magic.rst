@@ -15,6 +15,10 @@ The magic functions can be automatically loaded by including the following line 
 Instrument functions (shortcuts to the instruments module)
 ----------------------------------------------------------
 
+**%openinst** *resource*
+
+    Load the VISA instrument at the specified resource.
+
 **%openall**
 
     Load all GPIB instruments.
@@ -23,6 +27,11 @@ Instrument functions (shortcuts to the instruments module)
 
     List all loaded instruments.
 
+**%closeinst** *instrument_short_name*
+
+    Close the specified instrument.
+    
+    
 Slave functions (run and interact with scripts )
 ------------------------------------------------
 
