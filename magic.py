@@ -29,9 +29,10 @@ def closeinst(line, local_ns):
 def openall(line, local_ns):
     """Load all GPIB instruments."""
     res = instruments.openall('GPIB')
-    if res : print 'Loaded instruments :'
     for app in res:
         local_ns[app.shortname] = app
+    print "Loaded instruments :"
+    for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 
 @register_line_magic

@@ -1,5 +1,6 @@
 import numpy as np
 import struct
+import h5py
 
 import visa
 
@@ -10,13 +11,28 @@ class LecroyScope:
     """Basic class for lecroy oscilloscopes."""
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
+        self.lastvar = None
 
-    def fetchwaveform(self, channel):
-        """Fetch the waveform from the specified channel ('C1','C2,'TA', ...). Returns two numpy vectors."""
+    def fetch(self, channel='C1'):
+        """Fetch the waveform from the specified channel ('C1','C2,'TA', ...) and return it as a numpy vector array."""
         ret = self.write('{0}:WF?'.format(channel))
         trc = self.read_raw()
-        return lecroy_decode(trc)
-       
+        self.last_wave = lecroy_decode(trc)
+        return self.last_wave['vertical_data']
+            
+    def horiz(self):
+        """Return the horizontal axis vector corresponding to the last acquired waveform."""
+        p = self.last_wave
+        x = np.arange( len(p['vertical_data']) )*p['horiz_interval']
+        x += p['horiz_offset']
+        return x
+            
+    def __save_txt__(self):
+        return np.c_[self.horiz(), self.last_wave['vertical_data']]
+        
+    def __save_h5__(self):
+        return self.last_wave['vertical_data'], self.acquisition_parameters()
+            
     def write(self, str):
         self.instrument.write(str)
 
@@ -26,12 +42,16 @@ class LecroyScope:
     def close(self):
         self.instrument.close()
 
+    def acquisition_parameters(self):
+        """Return the acquisition parameters of the last acquired waveform."""
+        params_to_save = ['horiz_interval', 'horiz_offset', 'sweeps_per_acq','bandwidth_limit',
+                          'vertical_gain', 'vertical_offset', 'vert_coupling', 'acq_vert_offset','probe_att']
+        return dict([ (k, self.last_wave[k]) for k in params_to_save])
+
         
-def lecroy_decode(trc, full_output=False):
+def lecroy_decode(trc):
     """ Decode the string `trc` returned by a Lecroy scope or read from a Lecroy TRC file.
-    Return two numpy arrays x and y corresponding to time in s and voltage in V.
-    If `full_output` is True then a dictionnary with all the additional
-    parameters contained in the string is returned.
+    Return a dictionary containing the data and the parameters included in the WAVEDESC descriptor.
     
     This Lecroy waveform interpreter is adapted from :
     LeCrunch
@@ -39,35 +59,28 @@ def lecroy_decode(trc, full_output=False):
     
     # Parse the WAVEDESC block
     startpos = trc.find('WAVEDESC')
-    var = dict(endian = '>')
+    param = dict(endian = '>')
     for name, pos, datatype in wavedesc:
         pos += startpos
         raw = trc[pos : pos + datatype.length]
         if datatype in (String, UnitDefinition):
-            var[name] = raw.rstrip('\x00')
+            param[name] = raw.rstrip('\x00')
         elif datatype in (TimeStamp,):
-            var[name] = struct.unpack( var['endian'] + datatype.packfmt, raw)
+            param[name] = struct.unpack( param['endian'] + datatype.packfmt, raw)
         else:
-            var[name] = struct.unpack( var['endian'] + datatype.packfmt, raw)[0]
+            param[name] = struct.unpack( param['endian'] + datatype.packfmt, raw)[0]
 
     # Read binary data block
-    datatype = Word if var['comm_type'] else Byte
-    y = np.fromstring(trc[startpos + var['wave_descriptor'] + var['user_text'] : ],
-                      dtype = var['endian'] + datatype.packfmt,
-                      count = var['wave_array_count'] ).astype(np.float)
+    datatype = Word if param['comm_type'] else Byte
+    y = np.fromstring(trc[startpos + param['wave_descriptor'] + param['user_text'] : ],
+                      dtype = param['endian'] + datatype.packfmt,
+                      count = param['wave_array_count'] ).astype(np.float)
 
     # Convert to volt
-    y *= var['vertical_gain']
-    y -= var['vertical_offset']
-
-    # Create horizontal scale
-    x = np.arange( len(y) )*var['horiz_interval']
-    x += var['horiz_offset']
-
-    if full_output:
-        return x, y, var
-    else:
-        return x, y        
+    y *= param['vertical_gain']
+    y -= param['vertical_offset']
+    param['vertical_data'] = y
+    return param        
         
 
 # data types in lecroy binary blocks, where:

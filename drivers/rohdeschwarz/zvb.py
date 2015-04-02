@@ -1,5 +1,6 @@
 from __zvb__ import rszvb as dll
 import numpy as np
+import h5py
 
 class zvb:
     """Rohde&Schwarz Vector Network Analyzer (ZVA,ZVB) driver. All the functions from the rszvb DLL are available.
@@ -17,33 +18,35 @@ class zvb:
             if dll_fun.output : return res
         return fun
     def fetch(self, channel=1):
-        """Retrieve data from the specified channel. Data are returned as a numpy two column vector."""
+        """Fetch the trace from the specified channel and return it as a numpy array with two columns (real and imaginary parts)."""
         n = self.GetSweepNumberOfPoints(channel)
         data = np.empty((n, 2), np.float64)
         r = self.TraceResponseData(channel,0,data)
         if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
+        self.last_data = data
+        self.last_acquisition_parameters = self.acquisition_parameters(channel)
         return data
+    def __save_txt__(self):
+        return np.c_[self.freq(), self.last_data]
+    def __save_h5__(self):
+        return self.last_data, self.last_acquisition_parameters
     def wait_for_average(self, channel=1, sleep_time=0.1):
         """Broken function."""
         n_average = self.GetAverageFactor(channel)
         while self.GetCurrentSweep(channel)<n_average :
             time.sleep(sleep_time)
-    def freq(self, channel=1):
-        """Get the start,stop frequency and number of points and generate the corresponding frequency vector."""
-        start = self.GetStartFrequency(channel)
-        stop = self.GetStopFrequency(channel)
-        npoints = self.GetSweepNumberOfPoints(channel)
+    def freq(self):
+        """Return the frequency vector corresponding to the last acquired trace."""
+        start = self.last_acquisition_parameters['start_frequency']
+        stop = self.last_acquisition_parameters['stop_frequency']
+        npoints = self.last_acquisition_parameters['number_of_points']
         return np.linspace(start, stop, npoints)
-    def get_sweep_parameters(self, channel = 1):
-        """Return the start,stop frequency and number of points for the specified channel."""
+    def acquisition_parameters(self, channel = 1):
+        """Return the acquisition parameters for the specified channel."""
         start = self.GetStartFrequency(channel)
         stop = self.GetStopFrequency(channel)
         npoints = self.GetSweepNumberOfPoints(channel)
         power = self.GetPower(channel)
         return dict( start_frequency = start, stop_frequency = stop, number_of_points = npoints, power = power)
-    def copy_sweep_parameters(self, dic, channel = 1):
-        """Copy the sweep parameters (see get_sweep_parameters) to the dictionary dic (e.g. hd5 attributes)."""
-        for k,v in self.get_sweep_parameters(channel).iteritems() :
-            dic[k] = v
     def __del__(self):
         self.close()
