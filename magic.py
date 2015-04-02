@@ -23,7 +23,7 @@ def closeinst(line, local_ns):
     """Close the specified instrument."""
     res = instruments.closeinst(line)
     del local_ns[line]
-        
+
 @register_line_magic
 @needs_local_scope
 def openall(line, local_ns):
@@ -60,6 +60,35 @@ def call(filename, local_ns):
     slave.call(filename, local_ns)
 
 @register_line_magic
+@needs_local_scope
+def monitor(line, local_ns):
+    """Monitor the output of an instrument and plot it."""
+    args = line.split(' ')
+    func = args[0]
+    time = float(args[1]) if len(args)>1 else 1
+    script = """
+    import time
+    ax, fig = subplots(111)
+    monitor_out = dict(values=[], times=[])
+    t0 = time.time()
+    def script_monitor(thread):
+        while True:
+            val = {0}
+            thread.display('Monitored value '+str(val))
+            monitor_out['values'].append(val)
+            monitor_out['times'].append(time.time()-t0)
+            ax.cla()
+            ax.plot(monitor_out['times'], monitor_out['values'])
+            thread.draw()
+            time.sleep({1})
+            thread.pause()
+            if thread.stopflag : break
+    """.format(func, time)
+    exec script in local_ns
+    if slave is None : __start_slave__()
+    slave.thread_start(local_ns['script_monitor'])
+
+@register_line_magic
 def pause(line):
     """Pause the running script."""
     if slave is None : return
@@ -88,6 +117,7 @@ del call, window, pause, resume, abort
 
 # Miscellaneous
 import time, os
+from pyslave import script
 
 @register_line_magic
 def today(line):
@@ -111,4 +141,30 @@ def lastday(line):
     os.chdir(path)
     print 'Directory set to',path
 
-del today, lastday
+@register_line_magic
+@needs_local_scope
+def fetch_txt(line, local_ns):
+    """Fetch data from an instrument and save them as text file."""
+    args = line.split(' ')
+    func = args[0] if '(' in args[0] else '{0}.fetch()'.format(args[0])
+    exec func in local_ns
+    filename = script.increment(args[1])
+    instr = local_ns[func.lsplit('.',1)]
+    script.save_txt(instr, filename)
+    print "Data saved to",filename
+
+@register_line_magic
+@needs_local_scope
+def fetch_h5(line, local_ns):
+    """Fetch data from an instrument and save them as HDF5 file."""
+    args = line.split(' ')
+    func = args[0] if '(' in args[0] else '{0}.fetch()'.format(args[0])
+    exec func in local_ns
+    filename = script.increment(args[1])
+    instr = local_ns[func.lsplit('.',1)]
+    exec 'save_param = dict( {0} )'.format(','.join(args[2:]))
+    script.save_h5(instr, filename, **save_param)
+    print "Data saved to",filename
+
+
+del today, lastday, fetch_txt, fetch_h5

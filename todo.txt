@@ -1,0 +1,9 @@
+To do:
+- fix the getaverage state method for the zvb, use writeInstrData
+- finish zvb class doc (cf rszvb.rst)
+- suck the doc from the windows help file and put it in function prototyping
+- agilent doc from the help method
+- TOC tree for each instrument on the manufacturer doc page
+- script saving
+- logging of all errors, script actions ?
+- use __getattr__ to expose all visa instrument method to SR830, LecroyScope and Yokogawa7651 ?

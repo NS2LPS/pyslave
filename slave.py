@@ -80,8 +80,11 @@ class SlaveWindow(QtGui.QMainWindow):
             for e in error_msgs : print e
             self.display('Error while loading {0}.'.format(filename))
             return
+        self.thread_start(local_ns['script_main'])
+
+    def thread_start(self, func):
         # Setup the thread and starts it
-        self.thread = ScriptThread(self, local_ns['script_main'])
+        self.thread = ScriptThread(self, func)
         self.thread.finished.connect(self.thread_finished)
         self.thread.terminated.connect(self.thread_terminated)
         self.thread.display_signal.connect(self.thread_display)
