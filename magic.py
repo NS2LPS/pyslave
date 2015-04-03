@@ -64,8 +64,6 @@ def call(filename, local_ns):
 def monitor(line, local_ns):
     """Monitor the output of an instrument and plot it."""
     args = line.split(' ')
-    func = args[0]
-    time = float(args[1]) if len(args)>1 else 1
     script = """
     import time
     ax, fig = subplots(111)
@@ -83,10 +81,70 @@ def monitor(line, local_ns):
             time.sleep({1})
             thread.pause()
             if thread.stopflag : break
-    """.format(func, time)
+    """.format(args[0], args[1] if len(args)>1 else 1)
     exec script in local_ns
     if slave is None : __start_slave__()
     slave.thread_start(local_ns['script_monitor'])
+
+measure_parameters = {'iterable' : '',
+                      'set_function' : '',
+                      'set_sleep' : '',
+                      'read_function' : '',
+                      'read_sleep' : '',
+                      'plot':'y',
+                      'filename':'',
+                      }
+
+def __update_measure_parameter__():
+    text_input = {'iterable' : 'Variable to iterate over',
+                  'set_function' : 'Set instrument value (looping variable is x)',
+                  'set_sleep' : 'Sleep',
+                  'read_function' : 'Read instrument',
+                  'read_sleep' : 'Sleep',
+                  'plot':'Plot',
+                  'filename':'Save to',
+                  }
+
+@register_line_magic
+@needs_local_scope
+def measure(line, local_ns):
+    """Measure the output of an instrument and plot it while scanning a parameter."""
+    if line :
+        exec 'args=dict({0})'.format(','.join(args))
+        measure_parameters.update(args)
+    else :
+        for k,v in text_input.iteritems():
+            inp = input('{0} [{1}] '.format(v, measure_parameters[k]))
+            if inp : measure_parameters[k] = inp
+    script = """
+    import time
+    from pyslave.script import increment
+    if {plot}=='y': ax, fig = subplots(111)
+    measure_out = dict(values=[], parameters=[])
+    filename = increment({filename})
+    def script_measure(thread):
+        for x in {iterable}:
+            {set_function}
+            time.sleep({set_sleep})
+            val = {read_function}
+            thread.display('Measured value '+str(val))
+            measure_out['values'].append(val)
+            measure_out['parameters'].append(x)
+            ax.cla()
+            if {plot}=='y':
+                ax.plot(measure_out['parameters'], measure_out['values'])
+                thread.draw()
+            with open(filename, 'a') as f:
+                f.write('{0}    {1}\n'.format(x, val))
+            time.sleep({read_sleep})
+            thread.pause()
+            if thread.stopflag : break
+    """.format(measure_parameters)
+    exec script in local_ns
+    if slave is None : __start_slave__()
+    print 'To quickly start the same measurement, copy paste this line : '
+    print 'measure {0}'.format(' '.join(["{0}='{1}'" for k,v in measure_parameters]))
+    slave.thread_start(local_ns['script_measure'])
 
 @register_line_magic
 def pause(line):
