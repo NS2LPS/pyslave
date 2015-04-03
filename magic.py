@@ -149,7 +149,7 @@ def fetch_txt(line, local_ns):
     func = args[0] if '(' in args[0] else '{0}.fetch()'.format(args[0])
     exec func in local_ns
     filename = script.increment(args[1])
-    instr = local_ns[func.lsplit('.',1)]
+    instr = local_ns[func.split('.',1)[0]]
     script.save_txt(instr, filename)
     print "Data saved to",filename
 
@@ -161,9 +161,9 @@ def fetch_h5(line, local_ns):
     func = args[0] if '(' in args[0] else '{0}.fetch()'.format(args[0])
     exec func in local_ns
     filename = script.increment(args[1])
-    instr = local_ns[func.lsplit('.',1)]
+    instr = local_ns[func.split('.',1)[0]]
     exec 'save_param = dict( {0} )'.format(','.join(args[2:]))
-    script.save_h5(instr, filename, **save_param)
+    script.save_h5(instr, str(filename), **save_param)
     print "Data saved to",filename
 
 

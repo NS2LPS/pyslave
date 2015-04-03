@@ -51,7 +51,7 @@ def save_h5(source, filename, dataset='data', attrs=dict(), **kwargs):
             for k,v in attrs.iteritems() :
                 ds.attrs[k] = v
     else:
-        ds = hdf_file.create_dataset(dataset, data=source, **kwargs)
+        ds = filename.create_dataset(dataset, data=source, **kwargs)
         for k,v in attrs.iteritems() :
             ds.attrs[k] = v
         hdf.flush()

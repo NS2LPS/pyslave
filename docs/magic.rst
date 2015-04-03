@@ -66,3 +66,11 @@ Miscellaneous functions
 **%lastday**
 
     Change directory to the last day of data.
+
+**%fetch_txt** *instrument* *filename*
+
+    Fetch data from an instrument and save them to a text file.
+  
+**%fetch_txt** *instrument* *filename* *keywords ...*
+
+    Fetch data from an instrument and save them to a HDF5 file. The extra keywords are passed to the save_h5 function (see pyslave.script).
