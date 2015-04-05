@@ -11,7 +11,7 @@ def increment(filename, ndigits=3):
     The number is zero padded to have n digits."""
     basename = filename.rsplit('.',1)[0] if '.' in filename else filename
     ext = '.'+filename.rsplit('.',1)[1] if '.' in filename else ''
-    files = sorted(glob.glob( basename+'*'+ext ))
+    files = sorted(glob.glob( basename + '[0-9]'*ndigits + ext ))
     if files :
         lastfile = files[-1]
         counter = lastfile[len(basename):-len(ext)]

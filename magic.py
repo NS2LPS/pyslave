@@ -2,11 +2,23 @@
 
 from IPython.core.magic import register_line_magic, needs_local_scope
 from pyslave import instruments
-from pyslave import __slave__
+from pyslave.slave import SlaveWindow
 
 slave = None
 
 data_directory = 'Z:\\Data\\'
+
+# Parsing functions
+import re
+cool_pattern = re.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'")
+def __arg_split__(line):
+    split = re.findall(cool_pattern, line)
+    out=[]
+    while split:
+        val=split.pop(0)
+        if val.endswith('=') : val+=split.pop(0)
+        out.append(val)
+    return out
 
 # Instruments loading and listing
 @register_line_magic
@@ -47,7 +59,7 @@ del listall, openall, openinst, closeinst
 # Scripts launching, pausing
 def __start_slave__():
     global slave
-    slave = __slave__.SlaveWindow()
+    slave = SlaveWindow()
     slave.show()
 
 @register_line_magic
@@ -59,91 +71,96 @@ def call(filename, local_ns):
     if slave is None : __start_slave__()
     slave.call(filename, local_ns)
 
+    
 @register_line_magic
 @needs_local_scope
 def monitor(line, local_ns):
     """Monitor the output of an instrument and plot it."""
-    args = line.split(' ')
+    args = __arg_split__(line)
     script = """
-    import time
-    ax, fig = subplots(111)
-    monitor_out = dict(values=[], times=[])
-    t0 = time.time()
-    def script_monitor(thread):
-        while True:
-            val = {0}
-            thread.display('Monitored value '+str(val))
-            monitor_out['values'].append(val)
-            monitor_out['times'].append(time.time()-t0)
-            ax.cla()
-            ax.plot(monitor_out['times'], monitor_out['values'])
-            thread.draw()
-            time.sleep({1})
-            thread.pause()
-            if thread.stopflag : break
-    """.format(args[0], args[1] if len(args)>1 else 1)
+import time
+fig, ax = subplots()
+monitor_out = dict(values=[], times=[])
+t0 = time.time()
+def script_monitor(thread):
+    while True:
+        val = {0}
+        thread.display('Monitored value '+str(val))
+        monitor_out['values'].append(val)
+        monitor_out['times'].append(time.time()-t0)
+        ax.cla()
+        ax.plot(monitor_out['times'], monitor_out['values'])
+        thread.draw()
+        time.sleep({1})
+        thread.pause()
+        if thread.stopflag : break""".format(args[0], args[1] if len(args)>1 else 1)
     exec script in local_ns
     if slave is None : __start_slave__()
     slave.thread_start(local_ns['script_monitor'])
 
-measure_parameters = {'iterable' : '',
-                      'set_function' : '',
-                      'set_sleep' : '',
-                      'read_function' : '',
-                      'read_sleep' : '',
-                      'plot':'y',
-                      'filename':'',
-                      }
+from collections import OrderedDict
+measure_parameters = OrderedDict([
+                      ('iterable' , ''),
+                      ('set_function' , ''),
+                      ('set_sleep' , '0'),
+                      ('read_function' , 'dmm1.measurement.read(1)'),
+                      ('read_sleep' , '0'),
+                      ('plot','y'),
+                      ('filename',''),
+                      ])
 
-def __update_measure_parameter__():
-    text_input = {'iterable' : 'Variable to iterate over',
-                  'set_function' : 'Set instrument value (looping variable is x)',
-                  'set_sleep' : 'Sleep',
-                  'read_function' : 'Read instrument',
-                  'read_sleep' : 'Sleep',
-                  'plot':'Plot',
-                  'filename':'Save to',
-                  }
+text_input = OrderedDict([
+              ('iterable' , 'Parameter values to iterate over'),
+              ('set_function' , 'Set parameter (parameter variable is x)'),
+              ('set_sleep' , 'Sleep (in s)'),
+              ('read_function' , 'Read value'),
+              ('read_sleep' , 'Sleep (in s)'),
+              ('plot' , 'Plot (y/n)'),
+              ('filename' , 'Save to (filename.txt)'),
+              ])
 
 @register_line_magic
 @needs_local_scope
 def measure(line, local_ns):
     """Measure the output of an instrument and plot it while scanning a parameter."""
     if line :
+        args = __arg_split__(line)
         exec 'args=dict({0})'.format(','.join(args))
         measure_parameters.update(args)
     else :
         for k,v in text_input.iteritems():
-            inp = input('{0} [{1}] '.format(v, measure_parameters[k]))
+            inp = raw_input('{0} [{1}] : '.format(v, measure_parameters[k]))
             if inp : measure_parameters[k] = inp
     script = """
-    import time
-    from pyslave.script import increment
-    if {plot}=='y': ax, fig = subplots(111)
-    measure_out = dict(values=[], parameters=[])
-    filename = increment({filename})
-    def script_measure(thread):
-        for x in {iterable}:
-            {set_function}
-            time.sleep({set_sleep})
-            val = {read_function}
-            thread.display('Measured value '+str(val))
-            measure_out['values'].append(val)
-            measure_out['parameters'].append(x)
-            ax.cla()
-            if {plot}=='y':
-                ax.plot(measure_out['parameters'], measure_out['values'])
-                thread.draw()
+import time
+from pyslave.script import increment
+if '{plot}'=='y': fig, ax = subplots()
+measure_out = dict(values=[], parameters=[])
+filename = increment('{filename}') if '{filename}' else ''
+def script_measure(thread):
+    for x in {iterable}:
+        {set_function}
+        time.sleep({set_sleep})
+        val = {read_function}
+        thread.display('Measured value '+str(val))
+        measure_out['values'].append(val)
+        measure_out['parameters'].append(x)
+        ax.cla()
+        if '{plot}'=='y':
+            ax.plot(measure_out['parameters'], measure_out['values'])
+            thread.draw()
+        if filename:
             with open(filename, 'a') as f:
-                f.write('{0}    {1}\n'.format(x, val))
-            time.sleep({read_sleep})
-            thread.pause()
-            if thread.stopflag : break
-    """.format(measure_parameters)
+                f.write("{{0}}    {{1}}\\n".format(x, val))
+        time.sleep({read_sleep})
+        thread.pause()
+        if thread.stopflag : break
+    if filename : print "Data saved to", filename """.format(**measure_parameters)
     exec script in local_ns
     if slave is None : __start_slave__()
-    print 'To quickly start the same measurement, copy paste this line : '
-    print 'measure {0}'.format(' '.join(["{0}='{1}'" for k,v in measure_parameters]))
+    if not line:
+        print 'To quickly start the same measurement, copy paste this line : '
+        print 'measure {0}'.format(' '.join(["{0}='{1}'".format(k,v) for k,v in measure_parameters.iteritems()]))
     slave.thread_start(local_ns['script_measure'])
 
 @register_line_magic
@@ -171,7 +188,7 @@ def window(line):
     if slave is None : __start_slave__()
     slave.show()
 
-del call, window, pause, resume, abort
+del call, window, pause, resume, abort, monitor, measure
 
 # Miscellaneous
 import time, os
@@ -203,11 +220,13 @@ def lastday(line):
 @needs_local_scope
 def fetch_txt(line, local_ns):
     """Fetch data from an instrument and save them as text file."""
-    args = line.split(' ')
+    args = __arg_split__(line)
     func = args[0] if '(' in args[0] else '{0}.fetch()'.format(args[0])
     exec func in local_ns
-    filename = script.increment(args[1])
     instr = local_ns[func.split('.',1)[0]]
+    param = dict(increment=True)
+    if len(args)>2 : param.update(eval('dict({0})'.format(','.join(args[2:]))))
+    filename = script.increment(args[1]) if param['increment'] else args[1] 
     script.save_txt(instr, filename)
     print "Data saved to",filename
 
@@ -215,13 +234,15 @@ def fetch_txt(line, local_ns):
 @needs_local_scope
 def fetch_h5(line, local_ns):
     """Fetch data from an instrument and save them as HDF5 file."""
-    args = line.split(' ')
+    args = __arg_split__(line)
     func = args[0] if '(' in args[0] else '{0}.fetch()'.format(args[0])
     exec func in local_ns
-    filename = script.increment(args[1])
     instr = local_ns[func.split('.',1)[0]]
-    exec 'save_param = dict( {0} )'.format(','.join(args[2:]))
-    script.save_h5(instr, str(filename), **save_param)
+    param = dict(increment=True)
+    if len(args)>2 : param.update(eval('dict({0})'.format(','.join(args[2:]))))
+    filename = script.increment(args[1]) if param['increment'] else args[1] 
+    if 'increment' in param : del param['increment']
+    script.save_h5(instr, str(filename), **param)
     print "Data saved to",filename
 
 

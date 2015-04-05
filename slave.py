@@ -139,9 +139,6 @@ class SlaveWindow(QtGui.QMainWindow):
         draw()
         self.draw_semaphore.release()
 
-#slave_window = SlaveWindow()
-#slave_window.show()
-
 def __replace__(line):
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause?','thread.pause()')
