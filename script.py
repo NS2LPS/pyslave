@@ -7,6 +7,7 @@ import h5py
 # Logger
 logger = logging.getLogger('pyslave.script')
 logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.NullHandler())
 
 def increment(filename, ndigits=3):
     """Automatically generate filenames with an incremented number

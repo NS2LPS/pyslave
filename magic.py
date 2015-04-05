@@ -1,9 +1,11 @@
 """This module defines magic IPython functions to run pyslave from the IPython shell."""
 
 from IPython.core.magic import register_line_magic, needs_local_scope
-import time, os, re, logging, inspect
+import time, os, re, logging, inspect, logging.handlers
 from collections import OrderedDict
 
+# Load pyslave modules
+import pyslave
 from pyslave import script
 from pyslave import instruments
 from pyslave.slave import SlaveWindow
@@ -11,14 +13,19 @@ from pyslave.slave import SlaveWindow
 # Data directory
 data_directory = 'Z:\\Data\\'
 
+########################################################
 # Logger
+########################################################
 logger = logging.getLogger('pyslave')
 logger.setLevel(logging.DEBUG)
-# create file handler
-fh = logging.TimedRotatingFileHandler(os.path.join(os.path.dirname(inspect.getfile(script)), '/log/pyslave.log'), when='midnight', delay=True)
-fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-fh.setLevel(logging.DEBUG)
-logger.addHandler(fh)
+logger.propagate = 0
+# Create file handler
+if not logger.handlers:
+    logfile = os.path.normpath(os.path.join(os.path.dirname(inspect.getabsfile(pyslave)), 'log/pyslave.log'))
+    fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight', delay=True)
+    fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    fh.setLevel(logging.DEBUG)
+    logger.addHandler(fh)
 logger.info('Magic functions loaded')
 
 ########################################################
@@ -118,6 +125,7 @@ def script_monitor(thread):
         if thread.stopflag : break""".format(args[0], args[1] if len(args)>1 else 1)
     exec script in local_ns
     if slave is None : __start_slave__()
+    logger.info('Creating monitor script :\n'+script)
     slave.thread_start(local_ns['script_monitor'])
 
 measure_parameters = OrderedDict([
@@ -182,6 +190,7 @@ def script_measure(thread):
     if not line:
         print 'To quickly start the same measurement, copy paste this line : '
         print 'measure {0}'.format(' '.join(["{0}='{1}'".format(k,v) for k,v in measure_parameters.iteritems()]))
+    logger.info('Creating measurement script :\n'+script)
     slave.thread_start(local_ns['script_measure'])
 
 @register_line_magic

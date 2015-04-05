@@ -3,13 +3,14 @@ The module also defines the way scripts are converted before being run."""
 
 from PyQt4 import QtCore, QtGui, Qt, Qwt5
 from IPython.core.magic import register_line_magic
-import sys, traceback, time, imp, os, inspect, logging
+import sys, traceback, time, imp, os, logging
 from ui.SlaveWindow import Ui_MainWindow
 from matplotlib.pyplot import draw
 
 # Logger
 logger = logging.getLogger('pyslave.slave')
 logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.NullHandler())
 
 class SlaveError(Exception):
     pass
@@ -84,6 +85,8 @@ class SlaveWindow(QtGui.QMainWindow):
             for e in error_msgs : print e
             self.display('Error while loading {0}.'.format(filename))
             return
+        with open(file,'r')as f:
+            logger.info('Creating converted script {0} :\n'.format(filename)+f.read())
         self.thread_start(local_ns['script_main'])
 
     def thread_start(self, func):
@@ -95,8 +98,7 @@ class SlaveWindow(QtGui.QMainWindow):
         self.thread.draw_signal.connect(self.draw)
         self.thread.start()
         self.ui.textEdit.clear()
-        logger.info('Script started\n' + inspect.getsource(func) )
-        self.display('Script is running...')
+        self.display('Script is running...', log=True)
 
     @QtCore.pyqtSignature("")
     def on_pushButton_Abort_clicked(self):

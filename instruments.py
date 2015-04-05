@@ -8,6 +8,7 @@ from pyslave.drivers import *
 # Logger
 logger = logging.getLogger('pyslave.instruments')
 logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.NullHandler())
 
 # VISA resource manager
 rm = visa.ResourceManager()
@@ -53,7 +54,7 @@ def openinst(address):
     app.shortname =  __loaded__[fullname].shortname if fullname in __loaded__ else __shortname__(typ)
     app.fullname = fullname
     __loaded__[fullname] = app
-    logging.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))
+    logger.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))
     return app
 
 
@@ -77,5 +78,5 @@ def closeinst(shortname):
     d = dict( [ (v.shortname, k) for k,v in __loaded__.iteritems() ] )
     fullname = d[shortname]
     __loaded__[fullname].close()
-    logging.info('Closing {0}.'.format(shortname))
+    logger.info('Closing {0}.'.format(shortname))
     del __loaded__[fullname]
