@@ -3,9 +3,13 @@ The module also defines the way scripts are converted before being run."""
 
 from PyQt4 import QtCore, QtGui, Qt, Qwt5
 from IPython.core.magic import register_line_magic
-import sys, traceback, time, imp, os
+import sys, traceback, time, imp, os, inspect, logging
 from ui.SlaveWindow import Ui_MainWindow
 from matplotlib.pyplot import draw
+
+# Logger
+logger = logging.getLogger('pyslave.slave')
+logger.setLevel(logging.DEBUG)
 
 class SlaveError(Exception):
     pass
@@ -91,6 +95,7 @@ class SlaveWindow(QtGui.QMainWindow):
         self.thread.draw_signal.connect(self.draw)
         self.thread.start()
         self.ui.textEdit.clear()
+        logger.info('Script started\n' + inspect.getsource(func) )
         self.display('Script is running...')
 
     @QtCore.pyqtSignature("")
@@ -116,10 +121,11 @@ class SlaveWindow(QtGui.QMainWindow):
         if self.thread is None : return
         self.thread.pauseflag = False
 
-    def display(self, text, echo=True):
+    def display(self, text, echo=True, log=False):
         self.ui.textEdit.append(text)
         if echo : print text
         sys.stdout.flush()
+        if log : logger.info(text)
 
     def thread_display(self):
         while self.thread.message:
@@ -127,13 +133,13 @@ class SlaveWindow(QtGui.QMainWindow):
 
     def thread_finished(self):
         if not self.thread.error:
-            self.display('Script finished.')
+            self.display('Script finished.', log=True)
         else:
-            self.display('Script finished with an error.')
+            self.display('Script finished with an error.', log=True)
         draw()
 
     def thread_terminated(self):
-        self.display('Script forced to terminate.')
+        self.display('Script forced to terminate.', log=True)
 
     def draw(self):
         draw()

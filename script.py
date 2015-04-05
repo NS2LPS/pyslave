@@ -1,8 +1,12 @@
 """This module contains helper functions to write slave scripts."""
 
-import os, glob
+import os, glob, logging
 import numpy as np
 import h5py
+
+# Logger
+logger = logging.getLogger('pyslave.script')
+logger.setLevel(logging.DEBUG)
 
 def increment(filename, ndigits=3):
     """Automatically generate filenames with an incremented number
@@ -30,6 +34,7 @@ def save_txt(source, filename):
     if type(source) is not np.ndarray:
         source = source.__save_txt__()
     np.savetxt(filename, source)
+    logger.info('Data saved to {0}.'.format(filename))
 
 def save_h5(source, filename, dataset='data', attrs=dict(), **kwargs):
     """Save the data from source to a HDF5 dataset.
@@ -55,6 +60,7 @@ def save_h5(source, filename, dataset='data', attrs=dict(), **kwargs):
         for k,v in attrs.iteritems() :
             ds.attrs[k] = v
         hdf.flush()
+    logger.info('Data saved to {0} in dataset {1}.'.format(filename,dataset))
 
 def fetch_txt(instrument, filename, fetch_args=dict()):
     """ Fetch and save data from an instrument to a text file.

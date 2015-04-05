@@ -1,9 +1,13 @@
 """The instruments module contains functions to open and close VISA instruments.
 It keeps track of all the instruments that are loaded and attributes them unique shortnames."""
 
-import traceback, sys
+import traceback, sys, logging
 import visa
 from pyslave.drivers import *
+
+# Logger
+logger = logging.getLogger('pyslave.instruments')
+logger.setLevel(logging.DEBUG)
 
 # VISA resource manager
 rm = visa.ResourceManager()
@@ -49,6 +53,7 @@ def openinst(address):
     app.shortname =  __loaded__[fullname].shortname if fullname in __loaded__ else __shortname__(typ)
     app.fullname = fullname
     __loaded__[fullname] = app
+    logging.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))
     return app
 
 
@@ -72,4 +77,5 @@ def closeinst(shortname):
     d = dict( [ (v.shortname, k) for k,v in __loaded__.iteritems() ] )
     fullname = d[shortname]
     __loaded__[fullname].close()
+    logging.info('Closing {0}.'.format(shortname))
     del __loaded__[fullname]

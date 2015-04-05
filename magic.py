@@ -1,26 +1,30 @@
 """This module defines magic IPython functions to run pyslave from the IPython shell."""
 
 from IPython.core.magic import register_line_magic, needs_local_scope
+import time, os, re, logging, inspect
+from collections import OrderedDict
+
+from pyslave import script
 from pyslave import instruments
 from pyslave.slave import SlaveWindow
 
-slave = None
-
+# Data directory
 data_directory = 'Z:\\Data\\'
 
-# Parsing functions
-import re
-cool_pattern = re.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'")
-def __arg_split__(line):
-    split = re.findall(cool_pattern, line)
-    out=[]
-    while split:
-        val=split.pop(0)
-        if val.endswith('=') : val+=split.pop(0)
-        out.append(val)
-    return out
+# Logger
+logger = logging.getLogger('pyslave')
+logger.setLevel(logging.DEBUG)
+# create file handler
+fh = logging.TimedRotatingFileHandler(os.path.join(os.path.dirname(inspect.getfile(script)), '/log/pyslave.log'), when='midnight', delay=True)
+fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+fh.setLevel(logging.DEBUG)
+logger.addHandler(fh)
+logger.info('Magic functions loaded')
 
-# Instruments loading and listing
+########################################################
+# Instruments loading and listing magic
+########################################################
+
 @register_line_magic
 @needs_local_scope
 def openinst(line, local_ns):
@@ -56,11 +60,30 @@ def listall(line):
 
 del listall, openall, openinst, closeinst
 
-# Scripts launching, pausing
+########################################################
+# Scripts launching, pausing, resuming, aborting magic
+########################################################
+
+# Slave window variable
+slave = None
+
+# Open slave window
 def __start_slave__():
     global slave
     slave = SlaveWindow()
     slave.show()
+
+# Argument parsing functions
+cool_pattern = re.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'")
+def __arg_split__(line):
+    """Split line on whitespace but do not split string parameters. Glue back jey=keyword arguments."""
+    split = re.findall(cool_pattern, line)
+    out=[]
+    while split:
+        val=split.pop(0)
+        if val.endswith('=') : val+=split.pop(0)
+        out.append(val)
+    return out
 
 @register_line_magic
 @needs_local_scope
@@ -71,7 +94,6 @@ def call(filename, local_ns):
     if slave is None : __start_slave__()
     slave.call(filename, local_ns)
 
-    
 @register_line_magic
 @needs_local_scope
 def monitor(line, local_ns):
@@ -98,7 +120,6 @@ def script_monitor(thread):
     if slave is None : __start_slave__()
     slave.thread_start(local_ns['script_monitor'])
 
-from collections import OrderedDict
 measure_parameters = OrderedDict([
                       ('iterable' , ''),
                       ('set_function' , ''),
@@ -190,9 +211,10 @@ def window(line):
 
 del call, window, pause, resume, abort, monitor, measure
 
-# Miscellaneous
-import time, os
-from pyslave import script
+
+########################################################
+# Miscellaneous magic
+########################################################
 
 @register_line_magic
 def today(line):
@@ -226,7 +248,7 @@ def fetch_txt(line, local_ns):
     instr = local_ns[func.split('.',1)[0]]
     param = dict(increment=True)
     if len(args)>2 : param.update(eval('dict({0})'.format(','.join(args[2:]))))
-    filename = script.increment(args[1]) if param['increment'] else args[1] 
+    filename = script.increment(args[1]) if param['increment'] else args[1]
     script.save_txt(instr, filename)
     print "Data saved to",filename
 
@@ -240,7 +262,7 @@ def fetch_h5(line, local_ns):
     instr = local_ns[func.split('.',1)[0]]
     param = dict(increment=True)
     if len(args)>2 : param.update(eval('dict({0})'.format(','.join(args[2:]))))
-    filename = script.increment(args[1]) if param['increment'] else args[1] 
+    filename = script.increment(args[1]) if param['increment'] else args[1]
     if 'increment' in param : del param['increment']
     script.save_h5(instr, str(filename), **param)
     print "Data saved to",filename
