@@ -3,14 +3,10 @@ IPython shell magic commands
 
 .. :module:: magic
 
-Pyslave is designed to be used in the IPython Qt console. 
-Importing the magic module defines functions to load instruments, launch scripts and interact with them.
+Pyslave is designed to be used in the IPython Qt console. Loading pyslave imports the "magic" functions defined in the ``magic`` module.
+These functions are designed to load instruments, launch scripts and interact with them.
 
-The magic functions can be automatically loaded by including the following line in the profile configuration of IPython:
 
-::
-
-    from pyslave.magic import *
 
 Instrument functions (shortcuts to the instruments module)
 ----------------------------------------------------------

@@ -4,29 +4,13 @@ from IPython.core.magic import register_line_magic, needs_local_scope
 import time, os, re, logging, inspect, logging.handlers
 from collections import OrderedDict
 
-# Load pyslave modules
-import pyslave
-from pyslave import script
-from pyslave import instruments
+from pyslave import *
 from pyslave.slave import SlaveWindow
 
-# Data directory
-data_directory = 'Z:\\Data\\'
-
-########################################################
 # Logger
-########################################################
-logger = logging.getLogger('pyslave')
+logger = logging.getLogger('pyslave.magic')
 logger.setLevel(logging.DEBUG)
-logger.propagate = 0
-# Create file handler
-if not logger.handlers:
-    logfile = os.path.normpath(os.path.join(os.path.dirname(inspect.getabsfile(pyslave)), 'log/pyslave.log'))
-    fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight', delay=True)
-    fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-    fh.setLevel(logging.DEBUG)
-    logger.addHandler(fh)
-logger.info('Magic functions loaded')
+logger.addHandler(logging.NullHandler())
 
 ########################################################
 # Instruments loading and listing magic

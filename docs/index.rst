@@ -8,6 +8,12 @@ Welcome to pyslave's documentation!
 
 .. automodule:: pyslave
 
+The following line loads the magic functions in the shell as well as the ``instruments`` and ``script`` modules.
+
+::
+
+    from pyslave import *
+
 Contents
 ========
 

@@ -7,3 +7,38 @@
 * Python Instrument drivers
 
 """
+import logging, os
+
+# Data directory
+data_directory = 'Z:\\Data\\'
+
+########################################################
+# Logger
+########################################################
+logger = logging.getLogger('pyslave')
+logger.setLevel(logging.DEBUG)
+logger.propagate = 0
+# Create file handler
+if not logger.handlers:
+    logfile = os.path.normpath(os.path.join(os.path.dirname(__file__), 'log/pyslave.log'))
+    fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight', delay=True)
+    fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    fh.setLevel(logging.DEBUG)
+    logger.addHandler(fh)
+
+########################################################
+# Load pyslave modules
+########################################################
+from pyslave import script
+from pyslave import instruments
+from pyslave.magic import *
+logger.info('Pyslave loaded')
+
+print
+print 'Welcome to pyslave !'
+print
+print 'Pyslave magic commands :'
+print '* Load instruments : %openall, %openinst, %closeinst'
+print '* Launch and interact with scripts : %call, %pause, %resume, %abort, %window'
+print '* Quick measurement : %monitor, %measure, %fetch_txt, %fetch_h5'
+print '* Miscellaneous : %today, %lastday'
