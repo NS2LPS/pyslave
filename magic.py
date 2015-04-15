@@ -15,17 +15,29 @@ logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.NullHandler())
 
 # Argument parsing functions
-cool_pattern = re.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'")
 def __arg_split__(line):
-    """Split line on whitespace but do not split string parameters. Glue back jey=keyword arguments."""
-    split = re.findall(cool_pattern, line)
-    out=[]
-    while split:
-        val=split.pop(0)
-        if val.endswith('=') : val+=split.pop(0)
-        out.append(val)
-    return out
-    
+    """Split line on whitespace but do not split string parameters."""
+    res = ['']
+    s = line.replace("\"\"\"", chr(240))
+    single_quote = False
+    double_quote = False
+    triple_quote = False
+    for c in s:
+        if single_quote or double_quote or triple_quote:
+            res[-1] += c
+            single_quote ^= c is chr(39)
+            double_quote ^= c is chr(34)
+            triple_quote ^= c is chr(240)
+        else:
+            if c is ' ':
+                res.append('')
+            else:
+                res[-1] += c
+                single_quote = c is chr(39)
+                double_quote = c is chr(34)
+                triple_quote = c is chr(240)
+    return [x.replace(chr(240), "\"\"\"" ) for x in res if x]
+
 ########################################################
 # Instruments loading and listing magic
 ########################################################
