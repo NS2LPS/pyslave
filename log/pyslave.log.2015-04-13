@@ -1,0 +1,700 @@
+2015-04-13 12:15:03,806 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 12:15:20,144 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 12:18:10,914 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 12:18:21,608 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 12:23:51,184 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 12:23:51,213 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 12:26:28,447 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 12:26:35,302 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 12:26:35,334 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 13:21:40,325 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 13:23:44,227 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 13:25:39,841 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr1.
+2015-04-13 13:26:03,920 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr1.
+2015-04-13 13:26:28,739 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 13:26:39,657 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr1.
+2015-04-13 13:26:46,301 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr2.
+2015-04-13 13:26:46,332 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 13:32:06,592 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr1.
+2015-04-13 13:43:27,492 - pyslave.instruments - INFO - Closing dcpwr1.
+2015-04-13 13:56:14,664 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 13:56:26,280 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 13:56:26,311 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 13:56:32,382 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr2.
+2015-04-13 14:09:56,315 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 14:10:00,342 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr1.
+2015-04-13 14:12:41,180 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 14:12:51,114 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr1.
+2015-04-13 14:14:06,637 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr2.
+2015-04-13 14:14:06,667 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 14:23:35,168 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 14:23:43,632 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 14:23:43,664 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 14:25:43,683 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 14:26:30,000 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 14:26:30,032 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 14:29:21,266 - pyslave.slave - INFO - Creating converted script IV_converted.py :
+# Auto generated script file
+
+import time
+
+voltage = linspace(-25,25,501)
+
+res = zeros_like(voltage)
+
+# Main script function
+def script_main(thread):
+    for index,v in enumerate(voltage):
+        thread.pause()
+        # Change parameter
+        dcpwr1.setVoltage(v)
+        time.sleep(3)
+        # Acquire data
+        res[index] = lockin1.dataSnap('x','y')[0]    
+        if thread.stopflag : break
+        thread.looptime()
+    
+    filename = increment('IV.txt')    
+    savetxt(filename, c_[voltage, res])
+
+2015-04-13 14:29:21,267 - pyslave.slave - INFO - Script is running...
+2015-04-13 14:29:21,280 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 14:29:36,631 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr2.
+2015-04-13 14:29:59,546 - pyslave.slave - INFO - Creating converted script IV_converted.py :
+# Auto generated script file
+
+import time
+
+voltage = linspace(-25,25,501)
+
+res = zeros_like(voltage)
+
+# Main script function
+def script_main(thread):
+    for index,v in enumerate(voltage):
+        thread.pause()
+        # Change parameter
+        dcpwr2.setVoltage(v)
+        time.sleep(3)
+        # Acquire data
+        res[index] = lockin1.dataSnap('x','y')[0]    
+        if thread.stopflag : break
+        thread.looptime()
+    
+    filename = increment('IV.txt')    
+    savetxt(filename, c_[voltage, res])
+
+2015-04-13 14:29:59,548 - pyslave.slave - INFO - Script is running...
+2015-04-13 14:29:59,552 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 14:30:59,719 - pyslave.slave - INFO - Creating converted script IV_converted.py :
+# Auto generated script file
+
+import time
+
+voltage = linspace(-25,25,501)
+
+res = zeros_like(voltage)
+
+# Main script function
+def script_main(thread):
+    for index,v in enumerate(voltage):
+        thread.pause()
+        # Change parameter
+        dcpwr2.setVoltage(float(v))
+        time.sleep(3)
+        # Acquire data
+        res[index] = lockin1.dataSnap('x','y')[0]    
+        if thread.stopflag : break
+        thread.looptime()
+    
+    filename = increment('IV.txt')    
+    savetxt(filename, c_[voltage, res])
+
+2015-04-13 14:30:59,720 - pyslave.slave - INFO - Script is running...
+2015-04-13 14:32:29,470 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 14:34:48,756 - pyslave.slave - INFO - Creating converted script IV_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,25,501)
+
+res = ones_like(voltage)*nan
+
+# Main script function
+def script_main(thread):
+    for index,v in enumerate(voltage):
+        thread.pause()
+        # Change parameter
+        dcpwr2.setVoltage(float(v))
+        time.sleep(3)
+        # Acquire data
+        res[index] = lockin1.dataSnap('x','y')[0]    
+        # Plot I-V
+        ax.cla()
+        ax.plot(voltage, res)
+        thread.draw()
+        if thread.stopflag : break
+        thread.looptime()
+    
+    filename = script.increment('IV.txt')    
+    savetxt(filename, c_[voltage, res])
+
+2015-04-13 14:34:48,759 - pyslave.slave - INFO - Script is running...
+2015-04-13 14:35:26,223 - pyslave.slave - INFO - Script finished.
+2015-04-13 14:36:56,069 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 14:36:56,098 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 16:00:38,654 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,25,5)
+champs = linspace(0,0.5,10)
+
+res = ones_like(voltage)*nan
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res)
+    
+    
+            thread.draw()
+            if thread.stopflag : break
+    
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res, h])
+        for index,v in enumerate(reverse(voltage)):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(3)
+            # Acquire data
+            res[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res,'r')
+    
+    
+            thread.draw()
+            if thread.stopflag : break
+    
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage, res, h])
+        thread.looptime()
+
+2015-04-13 16:00:38,655 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:00:45,398 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 16:02:11,068 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,25,5)
+champs = linspace(0,0.5,10)
+
+res = ones_like(voltage)*nan
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res, ones_like(voltage)*h])
+        
+        for index,v in enumerate(reverse(voltage)):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(3)
+            # Acquire data
+            res[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage, res, h])
+        
+        thread.looptime()
+
+2015-04-13 16:02:11,069 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:02:17,836 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 16:04:21,329 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,25,5)
+champs = linspace(0,0.5,10)
+
+res = ones_like(voltage)*nan
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res, ones_like(voltage)*h])
+        
+        for index,v in enumerate(reversed(voltage)):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(3)
+            # Acquire data
+            res[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage, res, h])
+        
+        thread.looptime()
+
+2015-04-13 16:04:21,332 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:04:43,717 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 16:06:55,742 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,25,5)
+champs = linspace(0,0.5,10)
+
+res_up = ones_like(voltage)*nan
+res_dn = ones_like(voltage)*nan
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_up[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res_up, ones_like(voltage)*h])
+        
+        for index,v in enumerate(reversed(voltage)):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(3)
+            # Acquire data
+            res_dn[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(reversed(voltage), res_dn,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage, res_dn, h])
+        
+        thread.looptime()
+
+2015-04-13 16:06:55,743 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:07:05,701 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 16:11:03,984 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,25,5)
+champs = linspace(0,0.5,10)
+
+res_up = ones_like(voltage)*nan
+res_dn = ones_like(voltage)*nan
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_up[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res_up, ones_like(voltage)*h])
+        
+        for index,v in enumerate(voltage[:-1]):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(3)
+            # Acquire data
+            res_dn[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            ax.plot(voltage[:-1], res_dn,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage, res_dn, h])
+        
+        thread.looptime()
+
+2015-04-13 16:11:03,986 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:11:13,831 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 16:11:36,371 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,25,5)
+champs = linspace(0,0.5,10)
+
+res_up = ones_like(voltage)*nan
+res_dn = ones_like(voltage)*nan
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_up[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res_up, ones_like(voltage)*h])
+        
+        for index,v in enumerate(voltage[:-1]):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(3)
+            # Acquire data
+            res_dn[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            ax.plot(voltage[::-1], res_dn,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage, res_dn, h])
+        
+        thread.looptime()
+
+2015-04-13 16:11:36,372 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:11:55,651 - pyslave.slave - INFO - Script finished with an error.
+2015-04-13 16:12:52,342 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,25,5)
+champs = linspace(0,0.5,10)
+
+res_up = ones_like(voltage)*nan
+res_dn = ones_like(voltage)*nan
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(0.1)
+            # Acquire data
+            res_up[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res_up, ones_like(voltage)*h])
+        
+        for index,v in enumerate(voltage[:-1]):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(0.1)
+            # Acquire data
+            res_dn[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            ax.plot(voltage[::-1], res_dn,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage[::-1], res_dn, ones_like(voltage)*h])
+        
+        thread.looptime()
+
+2015-04-13 16:12:52,344 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:13:22,845 - pyslave.slave - INFO - Script finished.
+2015-04-13 16:14:30,898 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,-25,5)
+champs = linspace(0,0.1,3)
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        res_up = ones_like(voltage)*nan
+        res_dn = ones_like(voltage)*nan
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_up[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res_up, ones_like(voltage)*h])
+        
+        for index,v in enumerate(voltage[:-1]):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_dn[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            ax.plot(voltage[::-1], res_dn,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage[::-1], res_dn, ones_like(voltage)*h])
+        
+        thread.looptime()
+
+2015-04-13 16:14:30,900 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:14:58,098 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 16:15:12,875 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 16:15:12,904 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 16:15:23,549 - pyslave.instruments - INFO - Opening yoko GPIB0::1::INSTR as dcpwr2.
+2015-04-13 16:15:50,309 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,-25,5)
+champs = linspace(0,0.1,3)
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        res_up = ones_like(voltage)*nan
+        res_dn = ones_like(voltage)*nan
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_up[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res_up, ones_like(voltage)*h])
+        
+        for index,v in enumerate(voltage[:-1]):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_dn[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            ax.plot(voltage[::-1], res_dn,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage[::-1], res_dn, ones_like(voltage)*h])
+        
+        thread.looptime()
+
+2015-04-13 16:15:50,312 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:16:06,799 - pyslave.slave - INFO - Script finished.
+2015-04-13 16:16:17,588 - pyslave.slave - INFO - Creating converted script IVh_converted.py :
+# Auto generated script file
+
+import time
+fig, ax = subplots()
+
+voltage = linspace(-25,-24,5)
+champs = linspace(0,0.1,3)
+
+# Main script function
+def script_main(thread):
+    dcpwr1.outputs[0].voltage_level = 5
+    dcpwr1.outputs[0].current_limit = 0
+    for indexH, h in enumerate(champs):
+        res_up = ones_like(voltage)*nan
+        res_dn = ones_like(voltage)*nan
+        dcpwr1.outputs[0].current_limit = h
+        time.sleep(1)
+        for index,v in enumerate(voltage):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_up[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_up.txt')    
+        savetxt(filename, c_[voltage, res_up, ones_like(voltage)*h])
+        
+        for index,v in enumerate(voltage[:-1]):
+            thread.pause()
+            # Change parameter
+            dcpwr2.setVoltage(float(v))
+            time.sleep(1)
+            # Acquire data
+            res_dn[index] = lockin1.dataSnap('x','y')[0]    
+            # Plot I-V
+            ax.cla()
+            ax.plot(voltage, res_up)
+            ax.plot(voltage[::-1], res_dn,'r')
+            thread.draw()
+            if thread.stopflag : break
+        filename = script.increment('IV_dn.txt')    
+        savetxt(filename, c_[voltage[::-1], res_dn, ones_like(voltage)*h])
+        
+        thread.looptime()
+
+2015-04-13 16:16:17,588 - pyslave.slave - INFO - Script is running...
+2015-04-13 16:16:51,117 - pyslave.slave - INFO - Script finished.
+2015-04-13 17:14:32,359 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 17:14:50,160 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 17:14:50,190 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 17:30:36,724 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 17:30:47,091 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 17:30:47,121 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 17:31:56,786 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 17:32:04,480 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 17:32:04,512 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 17:33:26,039 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 17:33:36,608 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr1.
+2015-04-13 17:33:36,640 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.
+2015-04-13 17:35:05,808 - pyslave.magic - INFO - Pyslave loaded
+2015-04-13 17:35:13,944 - pyslave.instruments - INFO - Opening Yokogawa 7651 GPIB0::1::INSTR as dcpwr1.
+2015-04-13 17:35:14,075 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD E3631A GPIB0::5::INSTR as dcpwr2.
+2015-04-13 17:35:14,105 - pyslave.instruments - INFO - Opening Stanford_Research_Systems SR830 GPIB0::8::INSTR as lockin1.

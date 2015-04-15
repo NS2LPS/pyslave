@@ -1,14 +1,10 @@
 from __zvb__ import rszvb as dll
 import numpy as np
 import h5py
+import time
 
 class zvb:
-    """Rohde&Schwarz Vector Network Analyzer (ZVA,ZVB) driver. All the functions from the rszvb DLL are available.
-    See the DLL help for more details.
-    
-        Example : zvb.SetPower(channel=1, power=-10)
-    
-    The channel keyword argument is set to 1 by default."""
+    """Rohde&Schwarz Vector Network Analyzer (ZVA,ZVB) driver. All the functions from the rszvb DLL are available as well as extra home made functions."""
     def __init__(self, address):
         self.iHandle = dll.rszvb_init(address, 1, 0)
     def __getattr__(self, name):
@@ -30,9 +26,10 @@ class zvb:
         return np.c_[self.freq(), self.last_data]
     def __save_h5__(self):
         return self.last_data, self.last_acquisition_parameters
-    def wait_for_average(self, channel=1, sleep_time=0.1):
+    def wait_for_average(self, channel=1, sleep_time=0.5):
         """Broken function."""
         n_average = self.GetAverageFactor(channel)
+        time.sleep(sleep_time)
         while self.GetCurrentSweep(channel)<n_average :
             time.sleep(sleep_time)
     def freq(self):

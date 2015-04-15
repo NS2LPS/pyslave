@@ -4,7 +4,9 @@ from IPython.core.magic import register_line_magic, needs_local_scope
 import time, os, re, logging, inspect, logging.handlers
 from collections import OrderedDict
 
-from pyslave import *
+from pyslave import data_directory
+from pyslave import script
+from pyslave import instruments
 from pyslave.slave import SlaveWindow
 
 # Logger
@@ -12,6 +14,18 @@ logger = logging.getLogger('pyslave.magic')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.NullHandler())
 
+# Argument parsing functions
+cool_pattern = re.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'")
+def __arg_split__(line):
+    """Split line on whitespace but do not split string parameters. Glue back jey=keyword arguments."""
+    split = re.findall(cool_pattern, line)
+    out=[]
+    while split:
+        val=split.pop(0)
+        if val.endswith('=') : val+=split.pop(0)
+        out.append(val)
+    return out
+    
 ########################################################
 # Instruments loading and listing magic
 ########################################################
@@ -20,7 +34,10 @@ logger.addHandler(logging.NullHandler())
 @needs_local_scope
 def openinst(line, local_ns):
     """Load the VISA instrument at the specified resource."""
-    res = instruments.openinst(line)
+    args = __arg_split__(line)
+    addr = str(args[0])
+    id = str(args[1]) if len(args)>1 else None
+    app = instruments.openinst(addr, id)
     local_ns[app.shortname] = app
     print '{0} loaded as {1}'.format(app.fullname, app.shortname)
 
@@ -63,18 +80,6 @@ def __start_slave__():
     global slave
     slave = SlaveWindow()
     slave.show()
-
-# Argument parsing functions
-cool_pattern = re.compile("[^\\s\"']+|\"[^\"]*\"|'[^']*'")
-def __arg_split__(line):
-    """Split line on whitespace but do not split string parameters. Glue back jey=keyword arguments."""
-    split = re.findall(cool_pattern, line)
-    out=[]
-    while split:
-        val=split.pop(0)
-        if val.endswith('=') : val+=split.pop(0)
-        out.append(val)
-    return out
 
 @register_line_magic
 @needs_local_scope

@@ -85,7 +85,7 @@ class SlaveWindow(QtGui.QMainWindow):
             for e in error_msgs : print e
             self.display('Error while loading {0}.'.format(filename))
             return
-        with open(file,'r')as f:
+        with open(filename,'r')as f:
             logger.info('Creating converted script {0} :\n'.format(filename)+f.read())
         self.thread_start(local_ns['script_main'])
 

@@ -8,6 +8,7 @@ See http://creativecommons.org/licenses/by-sa/3.0/ or the included license/LICEN
 
 Attribution requirements can be found in license/ATTRIBUTION.TXT"""
 
+import numpy as np
 import visa
 
 # VISA resource manager
@@ -18,6 +19,8 @@ class yokogawa7651:
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.outputtng = 0
+        self.voltage = 0
+        self.points_per_second = 20
 
     def trigger(self):
         '''
@@ -124,14 +127,33 @@ class yokogawa7651:
         voltage: Desired constant output voltage
         voltage = <0...+30.0>,float
         '''
-
         if ( type(voltage) == type(float()) or type(voltage) == type(int()) ):
-            self.setVoltageRange(voltage)
+            self.setVoltageRange(abs(voltage))
             self.write( 'S%f;' % (voltage) )
             self.trigger()
+            self.voltage = voltage
+        else:
+            raise Exception('Please specify voltage as a integer or float.')
+
+    # Set output Voltage
+    def setVoltageRamp(self, voltage, slope):
+        '''
+        Ramp the output voltage of the power supply at the given slope.
+
+        voltage: Desired constant output voltage
+        voltage = <0...+30.0>,float
+        '''
+        if ( type(voltage) == type(float()) or type(voltage) == type(int()) ):
+            self.setVoltageRange(max( abs(voltage), abs(self.voltage) ) ) 
+            npoints = abs(voltage-self.voltage)/slope * self.points_per_second
+            ramp = np.linspace(self.voltage, voltage, int(np.ceil(npoints)) )
+            for v in ramp:
+                self.write( 'S%f;' % (v) )
+                self.trigger()
+            self.voltage = voltage
         else:
             raise Exception('Please specify voltage as a integer for float.')
-
+            
     # Output
     def output(self,setting):
         '''

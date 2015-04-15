@@ -3,7 +3,9 @@ It keeps track of all the instruments that are loaded and attributes them unique
 
 import traceback, sys, logging
 import visa
+from pyvisa import VisaIOError
 from pyslave.drivers import *
+from collections import OrderedDict
 
 # Logger
 logger = logging.getLogger('pyslave.instruments')
@@ -20,10 +22,11 @@ known_devices   = {'HEWLETT-PACKARD 34401A': (agilent.agilent34401A, 'dmm'),
                    'Rohde&Schwarz ZVB8-2Port' : (rohdeschwarz.zvb, 'vna'),
                    'Stanford_Research_Systems SR830': (standfordresearch.SR830, 'lockin'),
                    '*IDN LECROY LT322': (lecroy.LecroyScope, 'scope'),
+                   'Yokogawa 7651':(yokogawa.yokogawa7651,'dcpwr')
                    }
 
 # Keep track of loaded instruments
-__loaded__ = dict()
+__loaded__ = OrderedDict()
 
 # Naming scheme
 def __shortname__(prefix):
@@ -31,19 +34,34 @@ def __shortname__(prefix):
     next = max(prev)+1 if prev else 1
     return prefix + str( next )
 
-def openinst(address):
+class InstrumentError(Exception):
+    pass
+    
+def openinst(address, id=None, shortname=None):
     """Open the instrument at the specified address.
-    The address must be a valid VISA resource. The instrument ID is queried and
+    The address must be a valid VISA resource. If id is None, the instrument ID is queried and
     the function looks for the appropriate class and returns an instance of the found class.
-    The function also sets the fullname and shortname attributes."""
-    try :
-        app = rm.open_resource(address)
-        id = app.query('*IDN?')
-        app.close()
-    except :
-        raise InstrumentError('Could not id intrument at {0}.'.format(address))
-    id = id.split(',')[:2]
-    id = str(' '.join(id)).strip()
+    The function also sets the fullname and shortname attributes automatically (unless shortname is specified)."""
+    if id is None:
+        try :
+            app = rm.open_resource(address)
+            id = app.query('*IDN?')
+            id = id.split(',')[:2]
+            id = str(' '.join(id)).strip()
+        except VisaIOError:
+            # It may be a yoko...            
+            try:
+                alias = str(app.resource_info[0].alias)
+                if 'YOKO' in alias.upper(): 
+                    id = 'Yokogawa 7651'
+                else:
+                    raise InstrumentError('Could not id intrument at {0}.'.format(address))
+            except:
+               raise InstrumentError('Could not id intrument at {0}.'.format(address))
+        except:
+            raise InstrumentError('Could not id intrument at {0}.'.format(address))
+        finally:
+            app.close()
     if id in known_devices:
         driver, typ = known_devices[id]
         app = driver(address)
@@ -51,7 +69,10 @@ def openinst(address):
         app = rm.open_resource(address)
         typ = 'instr'
     fullname = id + ' ' + address
-    app.shortname =  __loaded__[fullname].shortname if fullname in __loaded__ else __shortname__(typ)
+    if shortname is None:
+        app.shortname =  __loaded__[fullname].shortname if fullname in __loaded__ else __shortname__(typ)
+    else:
+        app.shortname = shortname
     app.fullname = fullname
     __loaded__[fullname] = app
     logger.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))

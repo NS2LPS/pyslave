@@ -234,7 +234,7 @@ class SR830:
         else:
             raise Exception('Only "ch1" and "ch2" are valid channels.')
 
-        self.write( 'DDEF %s,%s,%s' (channel,display,ratio) )
+        self.write( 'DDEF %s,%s,%s' % (channel,display,ratio) )
 
     # Set the Channel Offset and Expand
     def setOffsetExpand(self,mode,offset,expand):
@@ -278,7 +278,7 @@ class SR830:
         else:
             raise Exception('Expand must be 1, 10, 100.')
 
-        self.write( 'OEXP %s,%s,%s' (mode,offset,expand) )
+        self.write( 'OEXP %s,%s,%s' % (mode,offset,expand) )
 
     # Enable Auto Offset
     def autoOffset(self,mode):
@@ -409,11 +409,11 @@ class SR830:
             raise Exception('Only "x" , "y" , "r" , "theta" , "aux1" , "aux2" , "aux3" , "aux4" , "ref" , "ch1" and "ch2" are valid snapshot parameters.')
 
         if mode2 in valid:
-            mode2 = valid.index(mode1) + 1
+            mode2 = valid.index(mode2) + 1
         else:
             raise Exception('Only "x" , "y" , "r" , "theta" , "aux1" , "aux2" , "aux3" , "aux4" , "ref" , "ch1" and "ch2" are valid snapshot parameters.')
 
-        result = self.query( 'SNAP? %s,%s' (mode1,mode2) )
+        result = self.query( 'SNAP? %s,%s' % (mode1,mode2) )
         return map( float, result.split(',') )
 
     # Read Data Buffer
@@ -446,7 +446,7 @@ class SR830:
         # Query device for entire buffer, returning in ASCII, then
         # converting to an array of doubles before returning to the
         # calling method
-        return     map( float, self.query( 'TRCA?%s,0,%s' (channel,N) ).split(',') )
+        return     map( float, self.query( 'TRCA?%s,0,%s' % (channel,N) ).split(',') )
 
     # Check number of data sets in buffer
     def numDataPoints(self):

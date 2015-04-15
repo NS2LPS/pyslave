@@ -76,4 +76,4 @@ def fetch_h5(instrument, filename, fetch_args=dict(), dataset='data', attrs=dict
 
     The fetch method of the instrument is called with the fetch_args. Then the data are saved as described in save_h5."""
     instrument.fetch(**fetch_args)
-    save_h5(instrument, filename, dataset='data', attrs=dict(), **kwargs)
+    save_h5(instrument, filename, dataset=dataset, attrs=dict(), **kwargs)

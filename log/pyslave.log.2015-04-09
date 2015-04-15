@@ -1,0 +1,577 @@
+2015-04-09 15:10:25,614 - pyslave.magic - INFO - Pyslave loaded
+2015-04-09 15:10:38,134 - pyslave.instruments - INFO - Opening *IDN LECROY LT322 GPIB0::5::INSTR as scope1.
+2015-04-09 15:10:38,197 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD 34401A GPIB0::23::INSTR as dmm1.
+2015-04-09 15:13:23,766 - pyslave.instruments - INFO - Opening *IDN LECROY LT322 GPIB0::5::INSTR as scope1.
+2015-04-09 15:13:23,802 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD 34401A GPIB0::23::INSTR as dmm1.
+2015-04-09 15:13:23,835 - pyslave.instruments - INFO - Opening Rohde&Schwarz ZVA40-2Port GPIB0::25::INSTR as vna1.
+2015-04-09 15:17:59,737 - pyslave.script - INFO - Data saved to calibration_16dBm.txt.
+2015-04-09 15:19:37,984 - pyslave.script - INFO - Data saved to calibration_16dBm.txt.
+2015-04-09 15:21:18,625 - pyslave.script - INFO - Data saved to temperature_4,2K.txt.
+2015-04-09 15:26:47,384 - pyslave.script - INFO - Data saved to temperature000.txt.
+2015-04-09 15:28:59,219 - pyslave.script - INFO - Data saved to temperature001.txt.
+2015-04-09 15:30:57,592 - pyslave.script - INFO - Data saved to temperature002.txt.
+2015-04-09 15:32:21,066 - pyslave.script - INFO - Data saved to temperature003.txt.
+2015-04-09 15:34:09,226 - pyslave.script - INFO - Data saved to temperature004.txt.
+2015-04-09 15:36:20,621 - pyslave.script - INFO - Data saved to temperature005.txt.
+2015-04-09 15:40:49,913 - pyslave.script - INFO - Data saved to temperature006.txt.
+2015-04-09 15:41:27,088 - pyslave.script - INFO - Data saved to temperature007.txt.
+2015-04-09 15:50:20,351 - pyslave.magic - INFO - Pyslave loaded
+2015-04-09 15:50:26,178 - pyslave.instruments - INFO - Opening *IDN LECROY LT322 GPIB0::5::INSTR as scope1.
+2015-04-09 15:50:26,246 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD 34401A GPIB0::23::INSTR as dmm1.
+2015-04-09 15:50:26,296 - pyslave.instruments - INFO - Opening Rohde&Schwarz ZVA40-2Port GPIB0::25::INSTR as vna1.
+2015-04-09 15:54:48,864 - pyslave.script - INFO - Data saved to temperature008.txt.
+2015-04-09 15:57:53,299 - pyslave.magic - INFO - Pyslave loaded
+2015-04-09 15:58:07,098 - pyslave.instruments - INFO - Opening *IDN LECROY LT322 GPIB0::5::INSTR as scope1.
+2015-04-09 15:58:07,148 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD 34401A GPIB0::23::INSTR as dmm1.
+2015-04-09 15:58:07,188 - pyslave.instruments - INFO - Opening Rohde&Schwarz ZVA40-2Port GPIB0::25::INSTR as vna1.
+2015-04-09 15:58:09,311 - pyslave.slave - INFO - Creating converted script vna_power_scan_converted.py :
+# Auto generated script file
+
+# Powers to be scanned
+power = linspace(1e-4,1,100)
+
+# Main script function
+def script_main(thread):
+    for index,p in enumerate(power):
+        thread.pause()
+        # Change parameter
+        vna1.SetPower(power = 10*log10(p))
+        vna1.RestartAverage()
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Acquire and save data
+        vna1.wait_for_average()
+        attrs = dict(rcernox=recernox, power=p)
+        save_h5(vna1, 'power_dependence.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 15:58:09,312 - pyslave.slave - INFO - Script is running...
+2015-04-09 15:58:14,835 - pyslave.slave - INFO - Script finished with an error.
+2015-04-09 15:58:49,756 - pyslave.slave - INFO - Creating converted script vna_power_scan_converted.py :
+# Auto generated script file
+
+# Powers to be scanned
+power = linspace(1e-4,1,100)
+
+# Main script function
+def script_main(thread):
+    for index,p in enumerate(power):
+        thread.pause()
+        # Change parameter
+        vna1.SetPower(power = 10*log10(p))
+        vna1.RestartAverage()
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Acquire and save data
+        vna1.wait_for_average()
+        attrs = dict(rcernox=rcernox, power=p)
+        save_h5(vna1, 'power_dependence.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 15:58:49,759 - pyslave.slave - INFO - Script is running...
+2015-04-09 15:58:55,288 - pyslave.slave - INFO - Script finished with an error.
+2015-04-09 16:00:27,898 - pyslave.slave - INFO - Creating converted script vna_power_scan_converted.py :
+# Auto generated script file
+
+# Powers to be scanned
+power = linspace(1e-4,1,100)
+
+# Main script function
+def script_main(thread):
+    for index,p in enumerate(power):
+        thread.pause()
+        # Change parameter
+        vna1.SetPower(power = 10*log10(p))
+        vna1.RestartAverage()
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Acquire and save data
+        vna1.wait_for_average()
+        attrs = dict(rcernox=rcernox, power=p)
+        script.save_h5(vna1, 'power_dependence.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 16:00:27,898 - pyslave.slave - INFO - Script is running...
+2015-04-09 16:00:33,421 - pyslave.slave - INFO - Script finished with an error.
+2015-04-09 16:01:47,183 - pyslave.slave - INFO - Creating converted script vna_power_scan_converted.py :
+# Auto generated script file
+
+# Powers to be scanned
+power = linspace(1e-4,1,100)
+
+# Main script function
+def script_main(thread):
+    for index,p in enumerate(power):
+        thread.pause()
+        # Change parameter
+        vna1.SetPower(power = 10*log10(p))
+        vna1.RestartAverage()
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Acquire and save data
+        vna1.wait_for_average()
+        attrs = dict(rcernox=rcernox, power=p)
+        script.fetch_h5(vna1, 'power_dependence.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 16:01:47,184 - pyslave.slave - INFO - Script is running...
+2015-04-09 16:01:52,790 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data.
+2015-04-09 16:01:58,460 - pyslave.slave - INFO - Script finished with an error.
+2015-04-09 16:02:22,405 - pyslave.slave - INFO - Creating converted script vna_power_scan_converted.py :
+# Auto generated script file
+
+# Powers to be scanned
+power = linspace(1e-4,1,100)
+
+# Main script function
+def script_main(thread):
+    for index,p in enumerate(power):
+        thread.pause()
+        # Change parameter
+        vna1.SetPower(power = 10*log10(p))
+        vna1.RestartAverage()
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Acquire and save data
+        vna1.wait_for_average()
+        attrs = dict(rcernox=rcernox, power=p)
+        script.fetch_h5(vna1, 'power_dependence.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 16:02:22,407 - pyslave.slave - INFO - Script is running...
+2015-04-09 16:02:28,061 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data.
+2015-04-09 16:02:33,681 - pyslave.slave - INFO - Script finished with an error.
+2015-04-09 16:05:23,782 - pyslave.slave - INFO - Creating converted script vna_power_scan_converted.py :
+# Auto generated script file
+
+# Powers to be scanned
+power = linspace(1e-4,1,100)
+
+# Main script function
+def script_main(thread):
+    for index,p in enumerate(power):
+        thread.pause()
+        # Change parameter
+        vna1.SetPower(power = 10*log10(p))
+        vna1.RestartAverage()
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Acquire and save data
+        vna1.wait_for_average()
+        attrs = dict(rcernox=rcernox, power=p)
+        script.fetch_h5(vna1, 'power_dependence.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 16:05:23,782 - pyslave.slave - INFO - Script is running...
+2015-04-09 16:05:29,400 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data000.
+2015-04-09 16:05:35,019 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data001.
+2015-04-09 16:05:40,690 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data002.
+2015-04-09 16:05:46,296 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data003.
+2015-04-09 16:05:51,904 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data004.
+2015-04-09 16:05:52,122 - pyslave.slave - INFO - Script finished with an error.
+2015-04-09 16:09:25,069 - pyslave.slave - INFO - Creating converted script vna_power_scan_converted.py :
+# Auto generated script file
+
+# Powers to be scanned
+power = linspace(1e-4,-0.5,100)
+
+# Main script function
+def script_main(thread):
+    for index,p in enumerate(power):
+        thread.pause()
+        # Change parameter
+        vna1.SetPower(power = 10*log10(p))
+        vna1.RestartAverage()
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Acquire and save data
+        vna1.wait_for_average()
+        attrs = dict(rcernox=rcernox, power=p)
+        script.fetch_h5(vna1, 'power_dependence.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 16:09:25,069 - pyslave.slave - INFO - Script is running...
+2015-04-09 16:09:30,750 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data000.
+2015-04-09 16:09:31,194 - pyslave.slave - INFO - Script finished with an error.
+2015-04-09 16:11:00,803 - pyslave.slave - INFO - Creating converted script vna_power_scan_converted.py :
+# Auto generated script file
+
+# Powers to be scanned
+power = linspace(1e-4,0.5,100)
+
+# Main script function
+def script_main(thread):
+    for index,p in enumerate(power):
+        thread.pause()
+        # Change parameter
+        vna1.SetPower(power = 10*log10(p))
+        vna1.RestartAverage()
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Acquire and save data
+        vna1.wait_for_average()
+        attrs = dict(rcernox=rcernox, power=p)
+        script.fetch_h5(vna1, 'power_dependence.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 16:11:00,805 - pyslave.slave - INFO - Script is running...
+2015-04-09 16:11:06,605 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data000.
+2015-04-09 16:11:12,223 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data001.
+2015-04-09 16:11:17,835 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data002.
+2015-04-09 16:11:23,451 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data003.
+2015-04-09 16:11:29,065 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data004.
+2015-04-09 16:11:34,691 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data005.
+2015-04-09 16:11:40,681 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data006.
+2015-04-09 16:11:46,296 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data007.
+2015-04-09 16:11:51,913 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data008.
+2015-04-09 16:11:57,529 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data009.
+2015-04-09 16:12:03,142 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data010.
+2015-04-09 16:12:08,757 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data011.
+2015-04-09 16:12:14,371 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data012.
+2015-04-09 16:12:20,029 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data013.
+2015-04-09 16:12:25,641 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data014.
+2015-04-09 16:12:31,262 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data015.
+2015-04-09 16:12:36,880 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data016.
+2015-04-09 16:12:42,509 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data017.
+2015-04-09 16:12:48,125 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data018.
+2015-04-09 16:12:53,743 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data019.
+2015-04-09 16:12:59,357 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data020.
+2015-04-09 16:13:04,976 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data021.
+2015-04-09 16:13:10,598 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data022.
+2015-04-09 16:13:16,233 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data023.
+2015-04-09 16:13:21,878 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data024.
+2015-04-09 16:13:27,496 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data025.
+2015-04-09 16:13:33,170 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data026.
+2015-04-09 16:13:38,786 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data027.
+2015-04-09 16:13:44,403 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data028.
+2015-04-09 16:13:50,019 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data029.
+2015-04-09 16:13:55,638 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data030.
+2015-04-09 16:14:01,407 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data031.
+2015-04-09 16:14:07,015 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data032.
+2015-04-09 16:14:12,635 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data033.
+2015-04-09 16:14:18,252 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data034.
+2015-04-09 16:14:23,855 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data035.
+2015-04-09 16:14:29,470 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data036.
+2015-04-09 16:14:35,091 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data037.
+2015-04-09 16:14:40,709 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data038.
+2015-04-09 16:14:46,323 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data039.
+2015-04-09 16:14:51,931 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data040.
+2015-04-09 16:14:57,549 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data041.
+2015-04-09 16:15:03,157 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data042.
+2015-04-09 16:15:08,898 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data043.
+2015-04-09 16:15:14,515 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data044.
+2015-04-09 16:15:20,132 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data045.
+2015-04-09 16:15:25,759 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data046.
+2015-04-09 16:15:31,377 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data047.
+2015-04-09 16:15:36,992 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data048.
+2015-04-09 16:15:42,612 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data049.
+2015-04-09 16:15:48,232 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data050.
+2015-04-09 16:15:53,855 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data051.
+2015-04-09 16:15:59,482 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data052.
+2015-04-09 16:16:05,108 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data053.
+2015-04-09 16:16:10,743 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data054.
+2015-04-09 16:16:16,361 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data055.
+2015-04-09 16:16:21,980 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data056.
+2015-04-09 16:16:27,625 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data057.
+2015-04-09 16:16:33,242 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data058.
+2015-04-09 16:16:38,861 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data059.
+2015-04-09 16:16:44,480 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data060.
+2015-04-09 16:16:50,104 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data061.
+2015-04-09 16:16:55,721 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data062.
+2015-04-09 16:17:01,342 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data063.
+2015-04-09 16:17:06,957 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data064.
+2015-04-09 16:17:12,575 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data065.
+2015-04-09 16:17:18,187 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data066.
+2015-04-09 16:17:24,690 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data067.
+2015-04-09 16:17:30,308 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data068.
+2015-04-09 16:17:35,924 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data069.
+2015-04-09 16:17:41,549 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data070.
+2015-04-09 16:17:47,174 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data071.
+2015-04-09 16:17:52,798 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data072.
+2015-04-09 16:17:58,414 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data073.
+2015-04-09 16:18:04,052 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data074.
+2015-04-09 16:18:09,674 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data075.
+2015-04-09 16:18:15,299 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data076.
+2015-04-09 16:18:20,924 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data077.
+2015-04-09 16:18:26,552 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data078.
+2015-04-09 16:18:32,180 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data079.
+2015-04-09 16:18:37,803 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data080.
+2015-04-09 16:18:43,427 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data081.
+2015-04-09 16:18:49,049 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data082.
+2015-04-09 16:18:54,673 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data083.
+2015-04-09 16:19:00,289 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data084.
+2015-04-09 16:19:05,911 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data085.
+2015-04-09 16:19:11,532 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data086.
+2015-04-09 16:19:17,167 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data087.
+2015-04-09 16:19:22,788 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data088.
+2015-04-09 16:19:28,423 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data089.
+2015-04-09 16:19:34,049 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data090.
+2015-04-09 16:19:39,683 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data091.
+2015-04-09 16:19:45,311 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data092.
+2015-04-09 16:19:50,946 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data093.
+2015-04-09 16:19:56,562 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data094.
+2015-04-09 16:20:02,178 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data095.
+2015-04-09 16:20:07,789 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data096.
+2015-04-09 16:20:13,418 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data097.
+2015-04-09 16:20:19,033 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data098.
+2015-04-09 16:20:24,653 - pyslave.script - INFO - Data saved to power_dependence.h5 in dataset data099.
+2015-04-09 16:20:24,654 - pyslave.slave - INFO - Script finished.
+2015-04-09 17:12:15,625 - pyslave.instruments - INFO - Opening *IDN LECROY LT322 GPIB0::5::INSTR as scope1.
+2015-04-09 17:12:15,644 - pyslave.instruments - INFO - Opening Agilent Technologies  E8257D GPIB0::19::INSTR as instr1.
+2015-04-09 17:12:15,677 - pyslave.instruments - INFO - Opening HEWLETT-PACKARD 34401A GPIB0::23::INSTR as dmm1.
+2015-04-09 17:15:30,651 - pyslave.slave - INFO - Creating converted script AM_hysteresis_converted.py :
+# Auto generated script file
+
+import time
+
+freq = linspace(6.428,6.440,121)
+
+# Filename for the data
+filename = increment('AM_hysteresis.h5')
+
+# Main script function
+def script_main(thread):
+    for index,f in enumerate(freq):
+        thread.pause()
+        # Change parameter
+        instr1.write('FREQ {0} GHz'.format(f))
+        time.sleep(1)
+        # Acquire data
+        res = 0
+        for i in range(20):
+            c1 = scope1.fetch('C1')
+            res = res + c1
+            time.sleep(0.1)
+        res /= 20
+        c2 = scope1.fetch('C2')
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Display data
+        thread.display('#{0:03d} Rc {1}'.format(index,rcernox))
+        # Save data
+        data = c_[c2,res]
+        attrs = dict(rcernox=rcernox, frequency=f)
+        script.save_h5(data, 'AM_hysteresis.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 17:15:30,653 - pyslave.slave - INFO - Script is running...
+2015-04-09 17:15:41,638 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data000.
+2015-04-09 17:15:52,551 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data001.
+2015-04-09 17:16:03,450 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data002.
+2015-04-09 17:16:14,279 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data003.
+2015-04-09 17:16:25,256 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data004.
+2015-04-09 17:16:36,101 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data005.
+2015-04-09 17:16:46,946 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data006.
+2015-04-09 17:16:57,917 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data007.
+2015-04-09 17:17:08,878 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data008.
+2015-04-09 17:17:19,726 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data009.
+2015-04-09 17:17:30,569 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data010.
+2015-04-09 17:17:41,565 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data011.
+2015-04-09 17:17:52,539 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data012.
+2015-04-09 17:18:03,384 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data013.
+2015-04-09 17:18:14,289 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data014.
+2015-04-09 17:18:25,176 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data015.
+2015-04-09 17:18:36,167 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data016.
+2015-04-09 17:18:47,005 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data017.
+2015-04-09 17:18:57,849 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data018.
+2015-04-09 17:19:08,697 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data019.
+2015-04-09 17:19:19,588 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data020.
+2015-04-09 17:19:30,493 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data021.
+2015-04-09 17:19:41,484 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data022.
+2015-04-09 17:19:52,424 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data023.
+2015-04-09 17:20:03,358 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data024.
+2015-04-09 17:20:14,296 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data025.
+2015-04-09 17:20:25,141 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data026.
+2015-04-09 17:20:36,076 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data027.
+2015-04-09 17:20:46,829 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data028.
+2015-04-09 17:20:57,769 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data029.
+2015-04-09 17:21:08,838 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data030.
+2015-04-09 17:21:19,756 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data031.
+2015-04-09 17:21:30,733 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data032.
+2015-04-09 17:22:56,713 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data033.
+2015-04-09 17:23:07,558 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data034.
+2015-04-09 17:23:18,450 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data035.
+2015-04-09 17:23:29,227 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data036.
+2015-04-09 17:23:40,091 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data037.
+2015-04-09 17:23:50,901 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data038.
+2015-04-09 17:24:01,729 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data039.
+2015-04-09 17:24:12,558 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data040.
+2015-04-09 17:24:23,401 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data041.
+2015-04-09 17:24:34,230 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data042.
+2015-04-09 17:24:45,094 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data043.
+2015-04-09 17:24:55,901 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data044.
+2015-04-09 17:25:06,730 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data045.
+2015-04-09 17:25:17,555 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data046.
+2015-04-09 17:25:28,401 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data047.
+2015-04-09 17:25:39,230 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data048.
+2015-04-09 17:25:50,091 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data049.
+2015-04-09 17:26:00,933 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data050.
+2015-04-09 17:26:11,780 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data051.
+2015-04-09 17:26:22,589 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data052.
+2015-04-09 17:26:33,404 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data053.
+2015-04-09 17:26:44,246 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data054.
+2015-04-09 17:26:55,061 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data055.
+2015-04-09 17:27:05,901 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data056.
+2015-04-09 17:27:16,749 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data057.
+2015-04-09 17:27:27,592 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data058.
+2015-04-09 17:27:38,404 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data059.
+2015-04-09 17:27:49,247 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data060.
+2015-04-09 17:28:00,073 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data061.
+2015-04-09 17:28:10,937 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data062.
+2015-04-09 17:28:21,717 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data063.
+2015-04-09 17:28:32,559 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data064.
+2015-04-09 17:28:43,404 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data065.
+2015-04-09 17:28:54,232 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data066.
+2015-04-09 17:29:05,075 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data067.
+2015-04-09 17:29:15,901 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data068.
+2015-04-09 17:29:26,747 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data069.
+2015-04-09 17:29:37,559 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data070.
+2015-04-09 17:29:48,421 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data071.
+2015-04-09 17:29:59,249 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data072.
+2015-04-09 17:30:10,095 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data073.
+2015-04-09 17:30:20,920 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data074.
+2015-04-09 17:30:31,747 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data075.
+2015-04-09 17:30:42,559 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data076.
+2015-04-09 17:30:53,367 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data077.
+2015-04-09 17:31:04,147 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data078.
+2015-04-09 17:31:15,012 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data079.
+2015-04-09 17:31:25,903 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data080.
+2015-04-09 17:31:36,746 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data081.
+2015-04-09 17:31:47,493 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data082.
+2015-04-09 17:31:58,259 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data083.
+2015-04-09 17:32:09,101 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data084.
+2015-04-09 17:32:19,913 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data085.
+2015-04-09 17:32:30,723 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data086.
+2015-04-09 17:32:41,602 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data087.
+2015-04-09 17:32:52,410 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data088.
+2015-04-09 17:33:03,262 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data089.
+2015-04-09 17:33:14,066 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data090.
+2015-04-09 17:33:24,881 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data091.
+2015-04-09 17:33:35,690 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data092.
+2015-04-09 17:33:46,505 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data093.
+2015-04-09 17:33:57,375 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data094.
+2015-04-09 17:34:08,160 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data095.
+2015-04-09 17:34:18,970 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data096.
+2015-04-09 17:34:29,782 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data097.
+2015-04-09 17:34:40,625 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data098.
+2015-04-09 17:34:51,467 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data099.
+2015-04-09 17:35:02,232 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data100.
+2015-04-09 17:35:13,030 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data101.
+2015-04-09 17:35:23,819 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data102.
+2015-04-09 17:35:34,673 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data103.
+2015-04-09 17:35:45,522 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data104.
+2015-04-09 17:35:56,388 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data105.
+2015-04-09 17:36:07,217 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data106.
+2015-04-09 17:36:18,094 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data107.
+2015-04-09 17:36:28,970 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data108.
+2015-04-09 17:36:39,815 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data109.
+2015-04-09 17:36:50,627 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data110.
+2015-04-09 17:37:01,473 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data111.
+2015-04-09 17:37:12,315 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data112.
+2015-04-09 17:37:23,145 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data113.
+2015-04-09 17:37:33,967 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data114.
+2015-04-09 17:37:44,750 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data115.
+2015-04-09 17:37:55,628 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data116.
+2015-04-09 17:38:06,473 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data117.
+2015-04-09 17:38:17,285 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data118.
+2015-04-09 17:38:28,094 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data119.
+2015-04-09 17:38:38,971 - pyslave.script - INFO - Data saved to AM_hysteresis.h5 in dataset data120.
+2015-04-09 17:38:38,976 - pyslave.slave - INFO - Script finished.
+2015-04-09 17:57:45,326 - pyslave.slave - INFO - Creating converted script AM_hysteresis_converted.py :
+# Auto generated script file
+
+import time
+
+freq = linspace(6.350,6.500,51)
+
+# Filename for the data
+filename = increment('AM_hysteresis.h5')
+
+# Main script function
+def script_main(thread):
+    for index,f in enumerate(freq):
+        thread.pause()
+        # Change parameter
+        instr1.write('FREQ {0} GHz'.format(f))
+        time.sleep(1)
+        # Acquire data
+        res = 0
+        for i in range(20):
+            c1 = scope1.fetch('C1')
+            res = res + c1
+            time.sleep(0.1)
+        res /= 20
+        c2 = scope1.fetch('C2')
+        # Read the cernox resistance
+        rcernox =  dmm1.measurement.read(1)
+        # Display data
+        thread.display('#{0:03d} Rc {1}'.format(index,rcernox))
+        # Save data
+        data = c_[c2,res]
+        attrs = dict(rcernox=rcernox, frequency=f)
+        script.save_h5(data, 'AM_hysteresis_LARGE.h5', dataset='data{0:03d}'.format(index), attrs=attrs )
+        if thread.stopflag : break
+        thread.looptime()
+
+2015-04-09 17:57:45,328 - pyslave.slave - INFO - Script is running...
+2015-04-09 17:57:56,259 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data000.
+2015-04-09 17:58:07,171 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data001.
+2015-04-09 17:58:18,091 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data002.
+2015-04-09 17:58:28,944 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data003.
+2015-04-09 17:58:39,763 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data004.
+2015-04-09 17:58:50,655 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data005.
+2015-04-09 17:59:01,503 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data006.
+2015-04-09 17:59:12,329 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data007.
+2015-04-09 17:59:23,267 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data008.
+2015-04-09 17:59:34,313 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data009.
+2015-04-09 17:59:45,148 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data010.
+2015-04-09 17:59:56,191 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data011.
+2015-04-09 18:00:07,576 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data012.
+2015-04-09 18:00:18,542 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data013.
+2015-04-09 18:00:29,467 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data014.
+2015-04-09 18:00:40,359 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data015.
+2015-04-09 18:00:51,204 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data016.
+2015-04-09 18:01:02,249 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data017.
+2015-04-09 18:01:13,085 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data018.
+2015-04-09 18:01:23,983 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data019.
+2015-04-09 18:01:34,877 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data020.
+2015-04-09 18:01:45,785 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data021.
+2015-04-09 18:01:56,667 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data022.
+2015-04-09 18:02:07,542 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data023.
+2015-04-09 18:02:18,467 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data024.
+2015-04-09 18:02:29,446 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data025.
+2015-04-09 18:02:40,323 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data026.
+2015-04-09 18:02:51,345 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data027.
+2015-04-09 18:03:02,351 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data028.
+2015-04-09 18:03:13,243 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data029.
+2015-04-09 18:03:24,081 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data030.
+2015-04-09 18:03:35,036 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data031.
+2015-04-09 18:03:45,963 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data032.
+2015-04-09 18:03:56,844 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data033.
+2015-04-09 18:04:07,703 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data034.
+2015-04-09 18:04:18,667 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data035.
+2015-04-09 18:04:29,655 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data036.
+2015-04-09 18:04:40,631 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data037.
+2015-04-09 18:04:51,545 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data038.
+2015-04-09 18:05:02,454 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data039.
+2015-04-09 18:05:13,480 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data040.
+2015-04-09 18:05:24,819 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data041.
+2015-04-09 18:05:35,964 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data042.
+2015-04-09 18:05:46,808 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data043.
+2015-04-09 18:05:57,700 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data044.
+2015-04-09 18:06:08,750 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data045.
+2015-04-09 18:06:19,871 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data046.
+2015-04-09 18:06:30,792 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data047.
+2015-04-09 18:06:41,668 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data048.
+2015-04-09 18:06:52,568 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data049.
+2015-04-09 18:07:03,463 - pyslave.script - INFO - Data saved to AM_hysteresis_LARGE.h5 in dataset data050.
+2015-04-09 18:07:03,463 - pyslave.slave - INFO - Script finished.
