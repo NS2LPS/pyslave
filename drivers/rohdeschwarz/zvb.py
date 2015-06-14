@@ -22,6 +22,10 @@ class zvb:
         self.last_data = data
         self.last_acquisition_parameters = self.acquisition_parameters(channel)
         return data
+    def __plot__(self, ax):
+        ax.plot(self.freq()/1e9, 10*np.log10(self.last_data[:,0]**2 + self.last_data[:,1]**2))
+        ax.set_xlabel('Frequency (GHz)')
+        ax.set_ylabel('Magnitude (dB)')
     def __save_txt__(self):
         return np.c_[self.freq(), self.last_data]
     def __save_h5__(self):

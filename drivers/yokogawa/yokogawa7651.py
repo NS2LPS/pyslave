@@ -18,8 +18,8 @@ visa_rm = visa.ResourceManager()
 class yokogawa7651:
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
-        self.outputtng = 0
-        self.voltage = 0
+        self.outputting = 0
+        self.value = 0
         self.points_per_second = 20
 
     def trigger(self):
@@ -31,7 +31,7 @@ class yokogawa7651:
         self.write('E;')
 
     # Set Voltage Range
-    def setVoltageRange(self,voltage):
+    def setVoltageRange(self,value):
         '''
         Function changes the voltage range of the power supply.
         A float representing the desired voltage will have the range adjusted accordingly, or a string specifying the range will also work.
@@ -41,32 +41,32 @@ class yokogawa7651:
         voltage: Desired voltage (float) or directly specified voltage range (string)
         voltage = {<0...+30.0>|10MV|100MV|1V|10V|30V},float/string
         '''
-        if ( type(voltage) == type(float()) ) or ( type(voltage) == type(int()) ):
-            if voltage < 10e-3:
+        if ( type(value) == type(float()) ) or ( type(value) == type(int()) ):
+            if value < 10e-3:
                 yokoRange = 2
-            elif ( voltage >= 10e-3 ) and ( voltage < 100e-3 ):
+            elif ( value >= 10e-3 ) and ( value < 100e-3 ):
                 yokoRange = 3
-            elif ( voltage >= 100e-3 ) and ( voltage < 1 ):
+            elif ( value >= 100e-3 ) and ( value < 1 ):
                 yokoRange = 4
-            elif ( voltage >= 1 ) and ( voltage < 10 ):
+            elif ( value >= 1 ) and ( value < 10 ):
                 yokoRange = 5
-            elif ( voltage >= 10 ) and ( voltage <= 30 ):
+            elif ( value >= 10 ) and ( value <= 30 ):
                 yokoRange = 6
             else:
                 raise Exception('Highest voltage range is 30V.')
-        elif type(voltage) == type(str()):
-            voltage = voltage.lower()
+        elif type(value) == type(str()):
+            value = value.lower()
             valid = ['10mv','100mv','1v','10v','30v']
-            if voltage not in valid:
+            if value not in valid:
                 raise Exception('Allowed voltage range values are 10mv, 100mv, 1v, 10v and 30v.')
             else:
-                yokoRange = valid.index(voltage) + 2
+                yokoRange = valid.index(value) + 2
 
         self.write( 'R%i;' % (yokoRange) )
         self.trigger()
 
     # Set Current Range
-    def setCurrentRange(self,current):
+    def setCurrentRange(self,value):
         '''
         Function changes the current range of the power supply.
         A float representing the desired current will have the range adjusted accordingly, or a string specifying the range will also work.
@@ -76,22 +76,22 @@ class yokogawa7651:
         current: Desired current (float) or directly specified current range (string)
         voltage = {<0...+0.1>|1MA|10MA|100MA},float/string
         '''
-        if ( type(current) == type(float()) ) or ( type(current) == type(int()) ):
-            if current < 1e-3:
+        if ( type(value) == type(float()) ) or ( type(value) == type(int()) ):
+            if value < 1.2e-3:
                 yokoRange = 4
-            elif ( current >= 1e-3 ) and ( current < 10e-3 ):
+            elif ( value >= 1.2e-3 ) and ( value < 12e-3 ):
                 yokoRange = 5
-            elif ( voltage >= 10e-3 ) and ( voltage < 100e-3 ):
+            elif ( value >= 12e-3 ) and ( value <= 120e-3 ):
                 yokoRange = 6
             else:
                 raise Exception('Highest current range is 100mA.')
-        elif type(current) == type(str()):
-            current = current.lower()
+        elif type(value) == type(str()):
+            value = value.lower()
             valid = ['1ma','10ma','100ma']
-            if current not in valid:
+            if value not in valid:
                 raise Exception('Allowed current range values are 1mA, 10mA and 100mA.')
             else:
-                yokoRange = valid.index(current) + 4
+                yokoRange = valid.index(value) + 4
 
         self.write( 'R%i;' % (yokoRange) )
         self.trigger()
@@ -120,39 +120,58 @@ class yokogawa7651:
         self.trigger()
 
     # Set output Voltage
-    def setVoltage(self,voltage):
+    def setVoltage(self,value):
         '''
         Set the output voltage of the power supply.
 
         voltage: Desired constant output voltage
         voltage = <0...+30.0>,float
         '''
-        if ( type(voltage) == type(float()) or type(voltage) == type(int()) ):
-            self.setVoltageRange(abs(voltage))
-            self.write( 'S%f;' % (voltage) )
+        value = float(value)
+        if abs(value) <= 30. :
+            self.setVoltageRange(abs(value))
+            self.write( 'S%f;' % (value) )
             self.trigger()
-            self.voltage = voltage
+            self.value = value
         else:
-            raise Exception('Please specify voltage as a integer or float.')
-
-    # Set output Voltage
-    def setVoltageRamp(self, voltage, slope):
+            raise Exception('Voltage is out of range.')
+    
+    # Set output Current
+    def setCurrent(self,value):
         '''
-        Ramp the output voltage of the power supply at the given slope.
+        Set the output voltage of the power supply.
 
         voltage: Desired constant output voltage
         voltage = <0...+30.0>,float
         '''
-        if ( type(voltage) == type(float()) or type(voltage) == type(int()) ):
-            self.setVoltageRange(max( abs(voltage), abs(self.voltage) ) ) 
-            npoints = abs(voltage-self.voltage)/slope * self.points_per_second
-            ramp = np.linspace(self.voltage, voltage, int(np.ceil(npoints)) )
+        value = float(value)
+        if abs(value) <= 120e-3 :
+            self.setCurrentRange(abs(value))
+            self.write( 'S%f;' % (value) )
+            self.trigger()
+            self.value = value
+        else:
+            raise Exception('Current is out of range.')    
+            
+    # Ramp output Voltage
+    def setVoltageRamp(self, value, slope):
+        '''
+        Ramp the output voltage of the power supply at the given slope.
+
+        voltage: Desired constant output voltage
+        voltage = <-30.0...+30.0>,float
+        '''
+        value = float(value)
+        if abs(value) <= 30. :
+            #self.setVoltageRange(max( abs(voltage), abs(self.voltage) ) ) 
+            npoints = abs(value-self.value)/slope * self.points_per_second
+            ramp = np.linspace(self.value, value, int(np.ceil(npoints)) )
             for v in ramp:
                 self.write( 'S%f;' % (v) )
                 self.trigger()
-            self.voltage = voltage
+            self.value = value
         else:
-            raise Exception('Please specify voltage as a integer for float.')
+            raise Exception('Voltage is out of range.')
             
     # Output
     def output(self,setting):
@@ -186,6 +205,9 @@ class yokogawa7651:
 
     def write(self, str):
         self.instrument.write(str)
+        
+    def clear(self):
+        self.instrument.clear()
 
     def query(self, str):
         return self.instrument.query(str)

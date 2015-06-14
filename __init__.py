@@ -33,13 +33,3 @@ if not logger.handlers:
 from pyslave import instruments
 from pyslave.magic import *
 logger.info('Pyslave loaded')
-
-def pyslave_welcome():
-    print
-    print 'Welcome to pyslave !'
-    print
-    print 'Pyslave magic commands :'
-    print '* Load instruments : %openall, %openinst, %closeinst'
-    print '* Launch and interact with scripts : %call, %pause, %resume, %abort, %window'
-    print '* Quick measurement : %monitor, %measure, %fetch_txt, %fetch_h5'
-    print '* Miscellaneous : %today, %lastday'

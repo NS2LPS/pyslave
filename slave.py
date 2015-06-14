@@ -1,7 +1,7 @@
 """Create the GUI to handle script execution.
 The module also defines the way scripts are converted before being run."""
 
-from PyQt4 import QtCore, QtGui, Qt, Qwt5
+from PyQt4 import QtCore, QtGui, Qt
 from IPython.core.magic import register_line_magic
 import sys, traceback, time, imp, os, logging
 from ui.SlaveWindow import Ui_MainWindow

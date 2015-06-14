@@ -45,7 +45,9 @@ def openinst(address, id=None, shortname=None):
     if id is None:
         try :
             app = rm.open_resource(address)
+            app.clear()
             id = app.query('*IDN?')
+            app.clear()
             id = id.split(',')[:2]
             id = str(' '.join(id)).strip()
         except VisaIOError:

@@ -1,5 +1,6 @@
 """This module defines magic IPython functions to run pyslave from the IPython shell."""
 
+from matplotlib.pyplot import subplots
 from IPython.core.magic import register_line_magic, needs_local_scope
 import time, os, re, logging, inspect, logging.handlers
 from collections import OrderedDict
@@ -18,6 +19,7 @@ logger.addHandler(logging.NullHandler())
 def __arg_split__(line):
     """Split line on whitespace but do not split string parameters."""
     res = ['']
+    line = str(line)
     s = line.replace("\"\"\"", chr(240))
     single_quote = False
     double_quote = False
@@ -264,6 +266,33 @@ def fetch_txt(line, local_ns):
 
 @register_line_magic
 @needs_local_scope
+def capture(line, local_ns):
+    args = __arg_split__(line)
+    # First argument
+    func = args[0]
+    instr = local_ns[ func.split('.',1)[0] if '.' in func else func.split('(',1)[0] ]
+    # Second argument
+    try:
+        exec 'out = ' + args[1]
+    except:
+        out = str(args[1])
+    # Optional extra arguments
+    param = eval('dict({0})'.format(','.join(args[2:])))
+    # Fetch data
+    exec args[0] in local_ns
+    # Redirect data to output
+    if type(out) is str:
+        # Save to File
+        if filename.endswith('h5'):
+            script.save_h5(instr, filename, **param)
+        else:
+            script.save_txt(instr, filename, **param)
+        print "Data saved to",filename
+    else:
+        # Plot
+        if len(args)>2 : 
+        
+
 def fetch_h5(line, local_ns):
     """Fetch data from an instrument and save them as HDF5 file."""
     args = __arg_split__(line)
@@ -277,5 +306,16 @@ def fetch_h5(line, local_ns):
     script.save_h5(instr, str(filename), **param)
     print "Data saved to",filename
 
-
-del today, lastday, fetch_txt, fetch_h5
+@register_line_magic
+@needs_local_scope
+def fetch_plot(line, local_ns):
+    """Fetch data from an instrument and plot them."""
+    arg = line.strip()
+    func = arg if '(' in arg else '{0}.fetch()'.format(arg)
+    exec func in local_ns
+    instr = local_ns[func.split('.',1)[0]]
+    exec "fig, ax = subplots()" in local_ns
+    instr.__plot__(local_ns['ax'])
+    exec "fig.show()" in local_ns
+    
+del today, lastday, fetch_txt, fetch_h5, fetch_plot
