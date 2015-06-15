@@ -5,3 +5,5 @@ Lecroy instrument drivers
 
 .. autoclass:: pyslave.drivers.lecroy.lecroyscope.LecroyScope
    :members:
+   
+   .. automethod:: __call__    

@@ -24,8 +24,8 @@ Contents
    magic.rst
    scripting_language.rst
    instruments.rst
-   drivers.rst
    data.rst
+   drivers.rst
 
 
 Indices and tables

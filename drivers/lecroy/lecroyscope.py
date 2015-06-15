@@ -22,6 +22,7 @@ class LecroyScope:
         return lecroy_trace( dict( [ (k, full_output[k] ) for k in params_to_save ] ) )
 
     def write(self, str):
+        """Write GPIB command."""
         self.instrument.write(str)
 
     def read_raw(self):
@@ -29,10 +30,6 @@ class LecroyScope:
 
     def close(self):
         self.instrument.close()
-
-    def acquisition_parameters(self):
-        """Return the acquisition parameters of the last acquired waveform."""
-        return dict([ (k, self.last_wave[k]) for k in params_to_save])
 
 
 def lecroy_decode(trc):

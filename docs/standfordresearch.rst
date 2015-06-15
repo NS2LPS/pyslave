@@ -5,3 +5,5 @@ Standford Research instrument drivers
 
 .. autoclass:: pyslave.drivers.standfordresearch.SR830.SR830
    :members:
+   
+   .. automethod:: __call__

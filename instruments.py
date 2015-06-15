@@ -1,7 +1,7 @@
 """The instruments module contains functions to open and close VISA instruments.
 It keeps track of all the instruments that are loaded and attributes them unique shortnames."""
 
-import traceback, sys, logging
+import time, traceback, sys, logging
 import visa
 from pyvisa import VisaIOError
 from pyslave.drivers import *
@@ -47,19 +47,21 @@ def openinst(address, id=None, shortname=None):
             app = rm.open_resource(address)
             app.clear()
             id = app.query('*IDN?')
-            app.clear()
             id = id.split(',')[:2]
             id = str(' '.join(id)).strip()
         except VisaIOError:
-            # It may be a yoko...            
-            try:
-                alias = str(app.resource_info[0].alias)
-                if 'YOKO' in alias.upper(): 
-                    id = 'Yokogawa 7651'
-                else:
-                    raise InstrumentError('Could not id intrument at {0}.'.format(address))
-            except:
-               raise InstrumentError('Could not id intrument at {0}.'.format(address))
+            # We assume it's a yoko...            
+            # try:
+                # alias = str(app.resource_info[0].alias)
+                # if 'YOKO' in alias.upper(): 
+                    # id = 'Yokogawa 7651'
+                # else:
+                    # raise InstrumentError('Could not id intrument at {0}.'.format(address))
+            # except:
+               # raise InstrumentError('Could not id intrument at {0}.'.format(address))
+            id = 'Yokogawa 7651'
+            time.sleep(0.5)
+            app.clear()
         except:
             raise InstrumentError('Could not id intrument at {0}.'.format(address))
         finally:
