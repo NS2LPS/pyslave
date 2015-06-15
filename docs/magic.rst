@@ -26,8 +26,8 @@ Instrument functions (shortcuts to the instruments module)
 **%closeinst** *instrument_short_name*
 
     Close the specified instrument.
-    
-    
+
+
 Slave functions (run and interact with scripts )
 ------------------------------------------------
 
@@ -50,49 +50,44 @@ Slave functions (run and interact with scripts )
 **%window**
 
     Show the slave window if it was closed.
-    
+
 Quick measurement functions
 ---------------------------
 
-**%fetch_txt** *instrument* *filename* *increment=True*
+**%capture** *instrument_method* *filename* *key=value ...*
 
-    Fetch data from an instrument and save them to a text file. If no fetch method is specified, fetch() is used. The filename is automatically incremented unless specified with increment=False.
-
-        ::
-        
-            fetch_txt vna1 trace.txt
-            fetch_txt vna1.fetch(channel=2) trace.txt
-        
-          
-        Fetch channel 1 data from the VNA and save them to trace000.txt. Then fetch channel 2 data from the VNA and save them to trace001.txt
-  
-**%fetch_h5** *instrument* *filename* *key=value ...*
-
-    Fetch data from an instrument and save them to a HDF5 file. If no fetch method is specified, fetch() is used. The filename is automatically incremented unless specified with increment=False.
-    The extra keywords are passed to the save_h5 function (see pyslave.script.save_h5).    
+    Fetch data from an instrument, plot them and save them to a file if filename is given.
+    If parentheses are omitted in ``instrument_method`` then ``instrument_method()`` is called.
+    Extra keyword arguments are passed to the save function. See the ``data`` module for more information.
 
         ::
-        
-            fetch_h5 vna1 trace.h5 dataset='channel 1' increment=False compression='gzip' 
-            fetch_h5 vna1.fetch(channel=2) trace.h5 dataset='channel 2' increment=False
-        
-            
-        Fetch channel 1 data from the VNA and save them to trace.h5 with compression. Then fetch channel 2 data from the VNA and save them to a different dataset in trace.h5.
 
-**%monitor** *instrument_read_method* *time_interval*
+            capture vna1 trace.txt
+            capture vna1 trace.h5 compression='gzip'
+            capture vna1(channel=2) trace.h5 compression='gzip'
 
-    Monitor the output of an instrument and plot it. If the time interval is not given, it is set to one second.
-    
+        Fetch channel 1 data from the VNA and save them to trace000.txt. Fetch channel 1 & 2 from the VNA and save them as two datasets in a HDF5 file.
+
+
+**%monitor** *instrument_method* *time_interval*
+
+    Monitor the output of an instrument and plot it. If parentheses are omitted in ``instrument_method`` then ``instrument_method()`` is called.
+    If the time interval is not given, it is set to one second.
+    Data are available in the shell using the ``monitor_out`` variable.
+
         ::
-        
-            monitor dmm1.measurement.read(1) 5
-            
-        Monitor the dmm1 output every 5 seconds 
+
+            monitor dmm1 5
+
+        Monitor the dmm1 output every 5 seconds
 
 **%measure** *key=value ...*
 
-    Scan one value while monitoring the output of an instrument. Just enter ``measure`` and follow the instructions.
-            
+    Scan one value while monitoring the output of an instrument. Just enter ``measure`` and follow the instructions. As above, parentheses can be omitted
+    and will be added automatically with the specific case that the ``set_function`` will be changed to ``set_function(x)`` where ``x`` is the scanned parameter.
+    Data are available in the shell using the ``measure_out`` variable.
+
+
 Miscellaneous functions
 -----------------------
 
@@ -104,4 +99,3 @@ Miscellaneous functions
 **%lastday**
 
     Change directory to the last day of data.
-
