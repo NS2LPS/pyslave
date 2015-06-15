@@ -5,3 +5,5 @@ Yokogawa instrument drivers
 
 .. autoclass:: pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651
    :members:
+
+   .. automethod:: __call__
