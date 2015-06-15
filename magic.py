@@ -6,7 +6,6 @@ import time, os, re, logging, inspect, logging.handlers
 from collections import OrderedDict
 
 from pyslave import data_directory
-from pyslave import script
 from pyslave import instruments
 from pyslave.slave import SlaveWindow
 
@@ -111,21 +110,23 @@ def monitor(line, local_ns):
     args = __arg_split__(line)
     script = """
 import time
+from pyslave.data import xy
 fig, ax = subplots()
-monitor_out = dict(values=[], times=[])
+monitor_out = xy(x=np.empty(0), y=np.empty(0))
 t0 = time.time()
 def script_monitor(thread):
     while True:
         val = {0}
         thread.display('Monitored value '+str(val))
-        monitor_out['values'].append(val)
-        monitor_out['times'].append(time.time()-t0)
+        monitor_out.y = append(monitor_out.y, val)
+        monitor_out.x = append(monitor_out.x, time.time()-t0)
         ax.cla()
-        ax.plot(monitor_out['times'], monitor_out['values'])
+        monitor_out.plot(ax)
         thread.draw()
         time.sleep({1})
         thread.pause()
-        if thread.stopflag : break""".format(args[0], args[1] if len(args)>1 else 1)
+        if thread.stopflag : break""".format(args[0] if '(' in args[0] else args[0] + '()',
+                                             args[1] if len(args)>1 else 1)
     exec script in local_ns
     if slave is None : __start_slave__()
     logger.info('Creating monitor script :\n'+script)
@@ -133,9 +134,9 @@ def script_monitor(thread):
 
 measure_parameters = OrderedDict([
                       ('iterable' , ''),
-                      ('set_function' , ''),
+                      ('set_function' , 'dcpwr1(x)'),
                       ('set_sleep' , '0'),
-                      ('read_function' , 'dmm1.measurement.read(1)'),
+                      ('read_function' , 'dmm1()'),
                       ('read_sleep' , '0'),
                       ('plot','y'),
                       ('filename',''),
@@ -162,32 +163,36 @@ def measure(line, local_ns):
     else :
         for k,v in text_input.iteritems():
             inp = raw_input('{0} [{1}] : '.format(v, measure_parameters[k]))
-            if inp : measure_parameters[k] = inp
+            if inp : measure_parameters[k] = inp.strip()
+    if '(' not in measure_parameters['read_function'] : measure_parameters['read_function']+= '()'
+    if '(' not in measure_parameters['set_function'] : measure_parameters['set_function']+= '(x)'
     script = """
 import time
-from pyslave.script import increment
+from pyslave.data import xy
 if '{plot}'=='y': fig, ax = subplots()
-measure_out = dict(values=[], parameters=[])
-filename = increment('{filename}') if '{filename}' else ''
+measure_out = xy(x=np.empty(0), y=np.empty(0))
+
 def script_measure(thread):
-    for x in {iterable}:
+    loopover = {iterable}
+    for i,x in enumerate(loopover):
         {set_function}
         time.sleep({set_sleep})
-        val = {read_function}
-        thread.display('Measured value '+str(val))
-        measure_out['values'].append(val)
-        measure_out['parameters'].append(x)
-        ax.cla()
+        y = {read_function}
+        thread.display('Step ' + i + '/' + len(loopover))
+        thread.looptime()
+        measure_out.x = append(measure_out.x, x)
+        measure_out.y = append(measure_out.y, y)
         if '{plot}'=='y':
-            ax.plot(measure_out['parameters'], measure_out['values'])
+            ax.cla()
+            measure_out.plot(ax)
             thread.draw()
-        if filename:
-            with open(filename, 'a') as f:
-                f.write("{{0}}    {{1}}\\n".format(x, val))
         time.sleep({read_sleep})
         thread.pause()
         if thread.stopflag : break
-    if filename : print "Data saved to", filename """.format(**measure_parameters)
+    if {filename} :
+        msg = xy.save({filename})
+        print msg
+        """.format(**measure_parameters)
     exec script in local_ns
     if slave is None : __start_slave__()
     if not line:
@@ -250,72 +255,26 @@ def lastday(line):
     os.chdir(path)
     print 'Directory set to',path
 
-@register_line_magic
-@needs_local_scope
-def fetch_txt(line, local_ns):
-    """Fetch data from an instrument and save them as text file."""
-    args = __arg_split__(line)
-    func = args[0] if '(' in args[0] else '{0}.fetch()'.format(args[0])
-    exec func in local_ns
-    instr = local_ns[func.split('.',1)[0]]
-    param = dict(increment=True)
-    if len(args)>2 : param.update(eval('dict({0})'.format(','.join(args[2:]))))
-    filename = script.increment(args[1]) if param['increment'] else args[1]
-    script.save_txt(instr, filename)
-    print "Data saved to",filename
 
 @register_line_magic
 @needs_local_scope
 def capture(line, local_ns):
     args = __arg_split__(line)
     # First argument
-    func = args[0]
-    instr = local_ns[ func.split('.',1)[0] if '.' in func else func.split('(',1)[0] ]
+    func = 'out = ' + args[0] if '(' in args[0] else args[0].strip() + '()'
     # Second argument
-    try:
-        exec 'out = ' + args[1]
-    except:
-        out = str(args[1])
+    filename = str(args[1]) if len(args)>1 else None
     # Optional extra arguments
     param = eval('dict({0})'.format(','.join(args[2:])))
     # Fetch data
-    exec args[0] in local_ns
-    # Redirect data to output
-    if type(out) is str:
-        # Save to File
-        if filename.endswith('h5'):
-            script.save_h5(instr, filename, **param)
-        else:
-            script.save_txt(instr, filename, **param)
-        print "Data saved to",filename
-    else:
-        # Plot
-        if len(args)>2 : 
-        
-
-def fetch_h5(line, local_ns):
-    """Fetch data from an instrument and save them as HDF5 file."""
-    args = __arg_split__(line)
-    func = args[0] if '(' in args[0] else '{0}.fetch()'.format(args[0])
-    exec func in local_ns
-    instr = local_ns[func.split('.',1)[0]]
-    param = dict(increment=True)
-    if len(args)>2 : param.update(eval('dict({0})'.format(','.join(args[2:]))))
-    filename = script.increment(args[1]) if param['increment'] else args[1]
-    if 'increment' in param : del param['increment']
-    script.save_h5(instr, str(filename), **param)
-    print "Data saved to",filename
-
-@register_line_magic
-@needs_local_scope
-def fetch_plot(line, local_ns):
-    """Fetch data from an instrument and plot them."""
-    arg = line.strip()
-    func = arg if '(' in arg else '{0}.fetch()'.format(arg)
-    exec func in local_ns
-    instr = local_ns[func.split('.',1)[0]]
+    data = eval(func, globals(), local_ns)
+    # Plot data
     exec "fig, ax = subplots()" in local_ns
-    instr.__plot__(local_ns['ax'])
+    data.plot(local_ns['ax'], **param)
     exec "fig.show()" in local_ns
-    
-del today, lastday, fetch_txt, fetch_h5, fetch_plot
+    # Save data to file
+    if filename :
+        msg = data.save(filename, **param)
+        print msg
+
+del today, lastday, capture

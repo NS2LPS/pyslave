@@ -1,8 +1,7 @@
 import numpy as np
 import struct
-import h5py
-
 import visa
+from pyslave.data import lecroy_trace
 
 # VISA resource manager
 visa_rm = visa.ResourceManager()
@@ -13,50 +12,37 @@ class LecroyScope:
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.lastvar = None
 
-    def fetch(self, channel='C1'):
-        """Fetch the waveform from the specified channel ('C1','C2,'TA', ...) and return it as a numpy vector array."""
+    def __call__(self, channel='C1'):
+        """Fetch the waveform from the specified channel ('C1','C2,'TA', ...) and return it as a lecroy_trace data object."""
         ret = self.write('{0}:WF?'.format(channel))
         trc = self.read_raw()
-        self.last_wave = lecroy_decode(trc)
-        return self.last_wave['vertical_data']
-            
-    def horiz(self):
-        """Return the horizontal axis vector corresponding to the last acquired waveform."""
-        p = self.last_wave
-        x = np.arange( len(p['vertical_data']) )*p['horiz_interval']
-        x += p['horiz_offset']
-        return x
-            
-    def __save_txt__(self):
-        return np.c_[self.horiz(), self.last_wave['vertical_data']]
-        
-    def __save_h5__(self):
-        return self.last_wave['vertical_data'], self.acquisition_parameters()
-            
+        full_output = lecroy_decode(trc)
+        params_to_save = ['horiz_interval', 'horiz_offset', 'sweeps_per_acq','bandwidth_limit',
+                          'vertical_gain', 'vertical_offset', 'vert_coupling', 'acq_vert_offset','probe_att','wave']
+        return lecroy_trace( dict( [ (k, full_output[k] ) for k in params_to_save ] ) )
+
     def write(self, str):
         self.instrument.write(str)
 
     def read_raw(self):
         return self.instrument.read_raw()
-        
+
     def close(self):
         self.instrument.close()
 
     def acquisition_parameters(self):
         """Return the acquisition parameters of the last acquired waveform."""
-        params_to_save = ['horiz_interval', 'horiz_offset', 'sweeps_per_acq','bandwidth_limit',
-                          'vertical_gain', 'vertical_offset', 'vert_coupling', 'acq_vert_offset','probe_att']
         return dict([ (k, self.last_wave[k]) for k in params_to_save])
 
-        
+
 def lecroy_decode(trc):
     """ Decode the string `trc` returned by a Lecroy scope or read from a Lecroy TRC file.
     Return a dictionary containing the data and the parameters included in the WAVEDESC descriptor.
-    
+
     This Lecroy waveform interpreter is adapted from :
     LeCrunch
     Copyright (C) 2010 Anthony LaTorre"""
-    
+
     # Parse the WAVEDESC block
     startpos = trc.find('WAVEDESC')
     param = dict(endian = '>')
@@ -74,14 +60,10 @@ def lecroy_decode(trc):
     datatype = Word if param['comm_type'] else Byte
     y = np.fromstring(trc[startpos + param['wave_descriptor'] + param['user_text'] : ],
                       dtype = param['endian'] + datatype.packfmt,
-                      count = param['wave_array_count'] ).astype(np.float)
+                      count = param['wave_array_count'] )
+    param['wave'] = y
+    return param
 
-    # Convert to volt
-    y *= param['vertical_gain']
-    y -= param['vertical_offset']
-    param['vertical_data'] = y
-    return param        
-        
 
 # data types in lecroy binary blocks, where:
 # length  -- byte length of type
@@ -170,4 +152,3 @@ wavedesc = ( ('descriptor_name'    , 0   , String),
              ('vertical_vernier'   , 336 , Float),
              ('acq_vert_offset'    , 340 , Float),
              ('wave_source'        , 344 , Enum) )
-             
