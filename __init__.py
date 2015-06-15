@@ -29,7 +29,5 @@ if not logger.handlers:
 ########################################################
 # Load pyslave modules
 ########################################################
-#from pyslave import script
-from pyslave import instruments
 from pyslave.magic import *
 logger.info('Pyslave loaded')

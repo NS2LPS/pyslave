@@ -21,7 +21,7 @@ class zvb:
         if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
         return Sij( Sij=data, **self.acquisition_parameters(channel) )
     def wait_for_average(self, channel=1, sleep_time=0.5):
-        """Only works with the ZVA."""
+        """Only works with the ZVA. Blocks until the enough traces are acquired to perform the average."""
         n_average = self.GetAverageFactor(channel)
         time.sleep(sleep_time)
         while self.GetCurrentSweep(channel)<n_average :

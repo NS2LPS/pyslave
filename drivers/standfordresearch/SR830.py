@@ -18,6 +18,10 @@ class SR830:
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.write('OUTX 1') # Set the device responce port to GPIB
+        
+    def __call__(self, mode='x'):
+        """Read and return a single value. Mode can be x, y, r, or theta."""
+        return self.outp(mode)
 
     # Set Frequency Source
     def setFreqSource(self,source):
@@ -415,7 +419,31 @@ class SR830:
 
         result = self.query( 'SNAP? %s,%s' % (mode1,mode2) )
         return map( float, result.split(',') )
+        
+    def outp(self, mode):
+        '''
+        Read one value. Mode can x, y, r, or theta.
+        '''
+        valid = ['x','y','r','theta']
+        if mode in valid:
+            mode = valid.index(mode) + 1
+        else:
+            raise Exception('Only "x" , "y" , "r" , "theta" are valid parameters.')
+        result = self.query( 'OUTP? %s' % (mode) )
+        return float(result)
 
+    def outr(self, mode):
+        '''
+        Read one value. Mode can ch1 or ch2.
+        '''
+        valid = ['ch1','ch2']
+        if mode in valid:
+            mode = valid.index(mode) + 1
+        else:
+            raise Exception('Only "ch1" , "ch2" are valid parameters.')
+        result = self.query( 'OUTR? %s' % (mode) )
+        return float(result)
+        
     # Read Data Buffer
     def readDataBuffer(self,channel):
         '''

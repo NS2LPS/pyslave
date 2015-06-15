@@ -106,8 +106,10 @@ class data(dict):
         return msg
 
 class Sij(data):
-    """Vector network analyzer data.
+    """Vector network analyzer Sij data class.
+    
     Attributes : freq, real, imag, mag, phase, start_frequency, stop_frequency, number_of_points, power
+    
     Data format : c_[freq, real, imag]"""
     @property
     def freq(self):
@@ -137,8 +139,10 @@ class Sij(data):
         return attrs
 
 class lecroy_trace(data):
-    """Lecroy oscilloscope waveform.
+    """Lecroy oscilloscope waveform data class.
+    
     Attributes : horiz, vert, horiz_interval, horiz_offset, sweeps_per_acq, bandwidth_limit, vertical_gain, vertical_offset, vert_coupling, acq_vert_offset, probe_att, wave
+    
     Data format : c_[horiz, vert]"""
     @property
     def __data__(self):
@@ -152,7 +156,6 @@ class lecroy_trace(data):
         return attrs
     @property
     def horiz(self):
-        """Horizontal axis vector."""
         x = np.arange( len(self.wave) ) * self.horiz_interval
         x += self.horiz_offset
         return x
@@ -164,8 +167,10 @@ class lecroy_trace(data):
 
 
 class xy(data):
-    """Generic x,y data.
+    """Generic x,y data class.
+    
     Attributes : x, y
+    
     Data format : c_[x,y]"""
     @property
     def __data__(self):
