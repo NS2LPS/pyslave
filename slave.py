@@ -138,7 +138,6 @@ class SlaveWindow(QtGui.QMainWindow):
             self.display('Script finished.', log=True)
         else:
             self.display('Script finished with an error.', log=True)
-        draw()
 
     def thread_terminated(self):
         self.display('Script forced to terminate.', log=True)

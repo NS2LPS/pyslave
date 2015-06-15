@@ -24,7 +24,7 @@ class yokogawa7651:
 
     def __call__(self, value, slope=0.1):
         """Ramp the output value with the given slope."""
-        self.ramp(value, ramp)
+        self.ramp(value, slope)
 
     def trigger(self):
         '''
@@ -175,9 +175,9 @@ class yokogawa7651:
 
     def ready(self):
         """Blocks until the output is stabilized."""
-        ready = int(self.query('OC;')) & 8
-        while not ready:
-            ready = int(self.query('OC;')) & 8
+        notready = int(self.query('OC;').strip('STS1=')) & 8
+        while notready:
+            notready = int(self.query('OC;').strip('STS1=')) & 8
             time.sleep(1./self.points_per_second)
 
     def write(self, str):

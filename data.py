@@ -55,26 +55,27 @@ class data(dict):
     def save(self, file, **kwargs):
         """Save the data to a file in text or HDF5 format.
 
-        - Text format : used if file is a string ending in 'txt'.
-        The optional keywords are increment=True and ndigits=3 to control the behaviour of the filename autoincrement (see the save_txt method for more details).
+        - Text format : used if file is a string ending in txt.
+            The optional keywords are increment=True and ndigits=3 to control the behaviour of the filename autoincrement (see the save_txt method for more details).
 
-        - HDF5 format : used if file is an opened HDF5 file or a string ending in 'h5'.
-        The optional keywords are increment=True and ndigits=3 to control the behaviour of the dataset autoincrement.
-        The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function.
-        (see the save_h5 method for more details)."""
+        - HDF5 format : used if file is an opened HDF5 file or a string ending in h5.
+            The optional keywords are increment=True and ndigits=3 to control the behaviour of the dataset autoincrement.
+            The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function.
+            (see the save_h5 method for more details).
+            
+        """
         if type(file) is str:
             if file.endswith('txt'):
-                msg = self.save_txt(file, **kwargs)
+                self.save_txt(file, **kwargs)
             elif file.endswith('h5'):
                 with h5py.File(file, 'a') as hdf:
-                    msg = self.save_h5(hdf, **kwargs)
+                    self.save_h5(hdf, **kwargs)
             else:
                 raise Exception('Unknown file extension : {0}'.format(file))
         elif type(file) is h5py._hl.files.File:
-            msg = self.save_h5(file, **kwargs)
+            self.save_h5(file, **kwargs)
         else :
             raise TypeError('File should be a string or an opened HDF file.')
-        return msg
     def save_txt(self, filename, increment=True, ndigits=3):
         """Save the data to a text file. If increment is True, the filename is automatically incremented and will contain a ndigits integer."""
         if increment : filename = increment_file(filename, ndigits)
@@ -82,7 +83,7 @@ class data(dict):
         np.savetxt(filename, nparray)
         msg = 'Data saved to {0}.'.format(str(filename))
         logger.info(msg)
-        return msg
+        print msg
     def save_h5(self, hdf, dataset='data', attrs=dict(), increment=True, ndigits=3, **kwargs):
         """Save the data to a HDF5 dataset. The first parameter hdf must a HDF5 file opened for writing.
         If increment is True, the name of the dataset is automatically incremented and will contain a ndigits integer.
@@ -101,9 +102,9 @@ class data(dict):
         for k,v in attrs.iteritems() :
             ds.attrs[k] = v
         hdf.flush()
-        msg = 'Data saved to {0} in dataset {1}.'.format(str(file.filename), dataset)
+        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
         logger.info(msg)
-        return msg
+        print msg
 
 class Sij(data):
     """Vector network analyzer Sij data class.

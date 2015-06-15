@@ -139,7 +139,7 @@ measure_parameters = OrderedDict([
                       ('read_function' , 'dmm1()'),
                       ('read_sleep' , '0'),
                       ('plot','y'),
-                      ('filename',''),
+                      ('filename','iv.txt'),
                       ])
 
 text_input = OrderedDict([
@@ -149,7 +149,7 @@ text_input = OrderedDict([
               ('read_function' , 'Read value'),
               ('read_sleep' , 'Sleep (in s)'),
               ('plot' , 'Plot (y/n)'),
-              ('filename' , 'Save to (filename.txt)'),
+              ('filename' , 'Save to'),
               ])
 
 @register_line_magic
@@ -178,7 +178,7 @@ def script_measure(thread):
         {set_function}
         time.sleep({set_sleep})
         y = {read_function}
-        thread.display('Step ' + i + '/' + len(loopover))
+        thread.display('Step ' + str(i) + '/' + str(len(loopover)))
         thread.looptime()
         measure_out.x = append(measure_out.x, x)
         measure_out.y = append(measure_out.y, y)
@@ -189,9 +189,8 @@ def script_measure(thread):
         time.sleep({read_sleep})
         thread.pause()
         if thread.stopflag : break
-    if {filename} :
-        msg = xy.save({filename})
-        print msg
+    if "{filename}" :
+        measure_out.save("{filename}")
         """.format(**measure_parameters)
     exec script in local_ns
     if slave is None : __start_slave__()
