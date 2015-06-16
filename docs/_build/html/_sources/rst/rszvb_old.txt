@@ -1,0 +1,2460 @@
+.. method:: init(IDQuery,resetDevice,instrumentHandle)
+
+.. method:: ApplicationExample(channel=1,startFrequency,stopFrequency,power,noOfValues,stimulusData,responseData)
+
+.. method:: WindowNew(setupName)
+
+.. method:: WindowSelect(setupName)
+
+.. method:: WindowClose(setupName)
+
+.. method:: WindowList(catalog,bufferSize)
+
+.. method:: Print(printerName)
+
+.. method:: PrinttoFile(fileName,fileFormat,diagramArea,logo,dateAndTime,markerList)
+
+.. method:: PrintSetup(diagramArea,logo,dateAndTime,markerList,pageOrientation,leftMargin,rightMargin,topMargin,bottomMargin)
+
+.. method:: FileManager(operationToBePerformed,source,destination)
+
+.. method:: GetCurrentDirectory(currentDirectory)
+
+.. method:: SetupSave(fileName)
+
+.. method:: SetupRecall(fileName)
+
+.. method:: readToFile(source,destination)
+
+.. method:: writeFromFile(source,destination)
+
+.. method:: SelectPowerMeter(channel=1,traceName,powerMeter,outPort)
+
+.. method:: SelectSParameters(channel=1,traceName,outPort,inPort)
+
+.. method:: SelectMoreSParameters(channel=1,traceName,outMode,outPort,inMode,inPort)
+
+.. method:: SelectRatios(channel=1,traceName,ratios)
+
+.. method:: SelectMoreRatios(channel=1,traceName,sourcePort,numeratorType,numeratorPortNumber,denominatorType,denominatorPortNumber)
+
+.. method:: SelectMoreRatiosWithDetector(channel=1,traceName,sourcePort,numeratorType,numeratorPortNumber,denominatorType,denominatorPortNumber,detector,observationTime)
+
+.. method:: SelectMoreRatiosGenerator(channel=1,traceName,generatorNumber,numeratorType,numeratorPortNumber,denominatorType,denominatorPortNumber)
+
+.. method:: SelectMoreRatiosGeneratorWithDetector(channel=1,traceName,generatorNumber,numeratorType,numeratorPortNumber,denominatorType,denominatorPortNumber,detector,observationTime)
+
+.. method:: SelectWaveQuantities(channel=1,traceName,waveQuantities)
+
+.. method:: SelectMoreWaveQuantities(channel=1,traceName,waveQuantityType,waveQuantityPortNumber,sourcePort)
+
+.. method:: SelectMoreWaveQuantitiesWithDetector(channel=1,traceName,waveQuantityType,waveQuantityPortNumber,sourcePort,detector,observationTime)
+
+.. method:: SelectImpedances(channel=1,traceName,outPort,inPort)
+
+.. method:: SelectMoreImpedances(channel=1,traceName,outMode,outPort,inMode,inPort)
+
+.. method:: SelectAdmitances(channel=1,traceName,outPort,inPort)
+
+.. method:: SelectMoreAdmitances(channel=1,traceName,outMode,outPort,inMode,inPort)
+
+.. method:: SelectZParameters(channel=1,traceName,outMode,outPort,inMode,inPort)
+
+.. method:: SelectYParameters(channel=1,traceName,outMode,outPort,inMode,inPort)
+
+.. method:: SelectStabilityFactors(channel=1,traceName,DUTOut,DUTIn,stabilityFactor)
+
+.. method:: SelectDCMeasurement(channel=1,traceName,DCMeas)
+
+.. method:: SelectPAEMeasurement(channel=1,traceName,DUTOut,DUTIn)
+
+.. method:: DefinePAEMeasurement(channel_Trace,testModel,constantC,constantK)
+
+.. method:: SelectNoiseFigure(channel=1,traceName,outPort,inPort)
+
+.. method:: CreateTrace(channel=1,traceName,parameter)
+
+.. method:: ConfigureMesurementParameters(channel=1,traceName,parameter)
+
+.. method:: QueryMesurementParameters(channel=1,traceName,bufferSize,parameters)
+
+.. method:: SetTraceFormat(channel_Trace,format)
+
+.. method:: GetTraceFormat(channel_Trace,format)
+
+.. method:: SetTraceUnit(channel_Trace,format)
+
+.. method:: GetTraceUnit(channel_Trace,format)
+
+.. method:: SetApertureGroupDelaySteps(channel_Trace,steps)
+
+.. method:: GetApertureGroupDelaySteps(channel_Trace,steps)
+
+.. method:: TraceAutoscale(window,window_Trace)
+
+.. method:: TraceAutoscaleByName(window,traceName)
+
+.. method:: SetTraceBottom(window,window_Trace,bottom)
+
+.. method:: GetTraceBottom(window,window_Trace,bottom)
+
+.. method:: SetTraceScaleDivisions(window,window_Trace,scaleDivisions)
+
+.. method:: SetTraceScaleDivisionsByName(window,scaleDivisions,traceName)
+
+.. method:: GetTraceScaleDivisions(window,window_Trace,scaleDivisions)
+
+.. method:: SetTraceRefValue(window,window_Trace,referenceLevel)
+
+.. method:: SetTraceRefValueByName(window,referenceLevel,traceName)
+
+.. method:: GetTraceRefValue(window,window_Trace,referenceLevel)
+
+.. method:: SetTraceRefPosition(window,window_Trace,referencePosition)
+
+.. method:: SetTraceRefPositionByName(window,referencePosition,traceName)
+
+.. method:: GetTraceRefPosition(window,window_Trace,referencePosition)
+
+.. method:: SetTraceTop(window,window_Trace,top)
+
+.. method:: GetTraceTop(window,window_Trace,top)
+
+.. method:: TraceAdd(channel=1,traceName)
+
+.. method:: TraceAddMode(channel=1,traceName,outMode,inMode)
+
+.. method:: SetTraceDisplayState(traceType,singleTraceName,showTrace)
+
+.. method:: GetTraceDisplayState(traceType,singleTraceName,showTrace)
+
+.. method:: TraceAddSParameterGroup(channel=1,numberOfLogicalPortNumbers,logicalPortNumber_s)
+
+.. method:: QueryTraceAddSParameterGroup(channel=1,logicalPortNumber_s)
+
+.. method:: TraceAddDiagramArea(window,window_Trace,channel=1,traceName)
+
+.. method:: TraceAssignDiagramArea(window,window_Trace,traceName)
+
+.. method:: TraceAssignWindowDiagramArea(window,traceName)
+
+.. method:: TraceUnassignDiagramArea(window,window_Trace)
+
+.. method:: TraceSelect(channel=1,traceName)
+
+.. method:: TraceDelete(channel=1,traceName)
+
+.. method:: TraceDeleteAll(channel=1)
+
+.. method:: TraceDeleteAllChannels()
+
+.. method:: TraceList(channel=1,catalog,bufferSize)
+
+.. method:: TraceRename(oldTraceName,newTraceName)
+
+.. method:: ChannelTraceRename(channel=1,traceName)
+
+.. method:: TraceListCatalog(catalog,bufferSize)
+
+.. method:: TraceGetTraceName(traceNumber,traceName)
+
+.. method:: TraceGetTraceNumber(traceName,traceNumber)
+
+.. method:: TraceGetChannelName(traceName,channelName)
+
+.. method:: TraceGetChannelNumber(traceName,channelNumber)
+
+.. method:: TraceDataToMemory(channel_Trace)
+
+.. method:: TraceDataToMemoryTrace(memoryTrace,dataTrace)
+
+.. method:: TraceMathToMemoryTrace(memoryTrace,dataTrace)
+
+.. method:: DeleteMemoryTrace(memoryTrace)
+
+.. method:: TraceUserDefinedMath(channel_Trace,mathematicalExpression)
+
+.. method:: SetTraceMathState(channel_Trace,mathState)
+
+.. method:: GetTraceMathState(channel_Trace,mathState)
+
+.. method:: SetTraceMathFunction(channel_Trace,mathematicalFunction)
+
+.. method:: GetTraceMathFunction(channel_Trace,mathematicalFunction)
+
+.. method:: SetTraceMathWaveQuantityState(channel_Trace,mathWaveQuantityState)
+
+.. method:: GetTraceMathWaveQuantityState(channel_Trace,mathWaveQuantityState)
+
+.. method:: SetTraceTransformDomain(channel_Trace,transformDomain)
+
+.. method:: GetTraceTransformDomain(channel_Trace,transformDomain)
+
+.. method:: SetTraceTransformConversion(channel_Trace,conversion)
+
+.. method:: GetTraceTransformConversion(channel_Trace,conversion)
+
+.. method:: SetTimeDomainStartTime(channel_Trace,startTime)
+
+.. method:: GetTimeDomainStartTime(channel_Trace,startTime)
+
+.. method:: SetTimeDomainStopTime(channel_Trace,stopTime)
+
+.. method:: GetTimeDomainStopTime(channel_Trace,stopTime)
+
+.. method:: SetTimeDomainCenterTime(channel_Trace,centerTime)
+
+.. method:: GetTimeDomainCenterTime(channel_Trace,centerTime)
+
+.. method:: SetTimeDomainTimeSpan(channel_Trace,timeSpan)
+
+.. method:: GetTimeDomainTimeSpan(channel_Trace,timeSpan)
+
+.. method:: SetTimeDomainTimeAxisScaling(channel_Trace,timeAxisScaling)
+
+.. method:: GetTimeDomainTimeAxisScaling(channel_Trace,timeAxisScaling)
+
+.. method:: SetTimeDomainTransformationType(channel_Trace,transformationType)
+
+.. method:: GetTimeDomainTransformationType(channel_Trace,transformationType)
+
+.. method:: SetTimeDomainTransformationFilter(channel_Trace,filterType)
+
+.. method:: GetTimeDomainTransformationFilter(channel_Trace,filterType)
+
+.. method:: SetTimeDomainTransformationSidebandSuppression(channel_Trace,sidebandSuppression)
+
+.. method:: GetTimeDomainTransformationSidebandSuppression(channel_Trace,sidebandSuppression)
+
+.. method:: SetTimeDomainTransformationResolutionEfactor(channel_Trace,resolution)
+
+.. method:: GetTimeDomainTransformationResolutionEfactor(channel_Trace,resolution)
+
+.. method:: SetHarmonicGridAndKeep(channel_Trace,calculationMethod)
+
+.. method:: SetDCValue(channel_Trace,DCValue)
+
+.. method:: GetDCValue(channel_Trace,DCValue)
+
+.. method:: ExtrapolateDCValue(channel_Trace)
+
+.. method:: SetContinuousExtrapolation(channel_Trace,continuousExtrapolation)
+
+.. method:: GetContinuousExtrapolation(channel_Trace,continuousExtrapolation)
+
+.. method:: CalculateHarmonicGrid(channel_Trace)
+
+.. method:: SetTimeGateState(channel_Trace,timeGate)
+
+.. method:: GetTimeGateState(channel_Trace,timeGate)
+
+.. method:: SetTimeGateStartTime(channel_Trace,startTime)
+
+.. method:: GetTimeGateStartTime(channel_Trace,startTime)
+
+.. method:: SetTimeGateStopTime(channel_Trace,stopTime)
+
+.. method:: GetTimeGateStopTime(channel_Trace,stopTime)
+
+.. method:: SetTimeGateCenterTime(channel_Trace,centerTime)
+
+.. method:: GetTimeGateCenterTime(channel_Trace,centerTime)
+
+.. method:: SetTimeGateType(channel_Trace,timeGateType)
+
+.. method:: GetTimeGateType(channel_Trace,timeGateType)
+
+.. method:: SetTimeGateFilter(channel_Trace,filterType)
+
+.. method:: GetTimeGateFilter(channel_Trace,filterType)
+
+.. method:: SetTimeGateSidebandSuppression(channel_Trace,sidebandSuppression)
+
+.. method:: GetTimeGateSidebandSuppression(channel_Trace,sidebandSuppression)
+
+.. method:: SetTimeGateShape(channel_Trace,timeGateShape)
+
+.. method:: GetTimeGateShape(channel_Trace,timeGateShape)
+
+.. method:: SetTimeGateSpan(channel_Trace,span)
+
+.. method:: GetTimeGateSpan(channel_Trace,span)
+
+.. method:: SetTimeGateDisplayState(channel_Trace,timeGateDisplay)
+
+.. method:: GetTimeGateDisplayState(channel_Trace,timeGateDisplay)
+
+.. method:: TraceEvaluationRange(channel_Trace,evaluationRange,start,stop)
+
+.. method:: TraceStatisticalEvaluation(channel_Trace,statisticalParameter,infoField,responseValue_s)
+
+.. method:: SetTraceEvaluationRangeShow(channel_Trace,showRange)
+
+.. method:: GetTraceEvaluationRangeShow(channel_Trace,showRange)
+
+.. method:: SetTraceCompressionValue(channel_Trace,compressionValue)
+
+.. method:: GetTraceCompressionValue(channel_Trace,compressionValue)
+
+.. method:: GetTraceCompressionPoint(channel_Trace,compressionPointIn,compressionPointOut)
+
+.. method:: SetDisplayResultsState(channel_Trace,resultType,displayResults)
+
+.. method:: GetDisplayResultsState(channel_Trace,resultType,displayResults)
+
+.. method:: SetTraceSmoothing(channel_Trace,smoothing,aperture)
+
+.. method:: GetTraceSmoothing(channel_Trace,smoothing,aperture)
+
+.. method:: TraceResponseData(channel_Trace,dataFormat,noOfValues,traceData)
+
+.. method:: TraceResponseDataError(channel_Trace,errorTerm,noOfValues,traceData)
+
+.. method:: TraceResponseDataAll(channel_Trace,dataFormat,noOfValues,traceData)
+
+.. method:: TraceComplexResponseData(channel_Trace,dataFormat,noOfValues,traceData)
+
+.. method:: TraceComplexResponseCatalog(channel_Trace,bufferSize,catalog)
+
+.. method:: TraceResponseDataAllData(channel_Trace,dataFormat,noOfValues,traceData)
+
+.. method:: TraceResponseSingleSweepData(channel_Trace,sweepNumber,noOfValues,traceData)
+
+.. method:: TraceResponseSingleSweepDataCount(channel_Trace,sweepCount)
+
+.. method:: TraceResponseSingleSweepDataForward(channel_Trace,sweepNumber,noOfValues,traceData)
+
+.. method:: TraceStimulusData(channel_Trace,noOfValues,traceData)
+
+.. method:: WriteMemoryTraceData(channel_Trace,noOfPoints,traceData)
+
+.. method:: WriteMemoryTraceDataExt(channel_Trace,dataFormat,noOfPoints,traceData)
+
+.. method:: SetTraceFormatZVR(dataFormat)
+
+.. method:: GetTraceFormatZVR(dataFormat)
+
+.. method:: TraceResponseDataZVR(dataFormat,valuesToReturn,noOfValues,traceData)
+
+.. method:: TraceStimulusDataZVR(dataFormat,valuesToReturn,noOfValues,traceData)
+
+.. method:: TraceResponseDataSParameterGroup(channel_Trace,dataFormat,valuesToReturn,noOfValues,traceData)
+
+.. method:: TraceImportData(traceName,fileName)
+
+.. method:: TraceExportData(traceName,fileName)
+
+.. method:: TraceExportDataWithOptions(traceName,fileName,exportFormat,exportData)
+
+.. method:: TraceExportDataWithOptionsExt(traceName,fileName,exportFormat,exportData,decimalSeparator,fieldSeparator)
+
+.. method:: ChannelTraceExportData(selectChannel,channel_Trace,fileName)
+
+.. method:: ChannelTraceExportDataWithOptions(selectChannel,channel_Trace,fileName,exportFormat,exportData)
+
+.. method:: ChannelTraceExportDataWithOptionsExt(selectChannel,channel_Trace,fileName,exportFormat,exportData,decimalSeparator,fieldSeparator)
+
+.. method:: TraceExportDataPorts(channel=1,fileName,exportData,port1,port2,port3,port4)
+
+.. method:: TraceExportDataPortsIncomplete(channel=1,fileName,exportData,port1,port2,port3,port4)
+
+.. method:: SetRenormalizationState(state)
+
+.. method:: GetRenormalizationState(state)
+
+.. method:: SetRenormalizationMode(mode)
+
+.. method:: GetRenormalizationMode(mode)
+
+.. method:: SetRenormalizationImpedance(impedance)
+
+.. method:: GetRenormalizationImpedance(impedance)
+
+.. method:: TraceShiftStimulusValue(window,window_Trace,shiftStimulusValue)
+
+.. method:: TraceShiftResponseValue(window,window_Trace,magnitude,phase,real,imaginary)
+
+.. method:: SetHold(channel=1,hold)
+
+.. method:: GetHold(channel=1,hold)
+
+.. method:: LinearityDeviationManual(channel=1,slope,constant,electricalLength)
+
+.. method:: LinearityDeviationAuto(channel=1)
+
+.. method:: SetLinearityDeviationState(channel=1,state)
+
+.. method:: GetLinearityDeviationState(channel=1,state)
+
+.. method:: SetLinearityDeviationSlope(channel=1,slope)
+
+.. method:: GetLinearityDeviationSlope(channel=1,slope)
+
+.. method:: SetLinearityDeviationConstant(channel=1,constant)
+
+.. method:: GetLinearityDeviationConstant(channel=1,constant)
+
+.. method:: SetLinearityDeviationElectricalLength(channel=1,electricalLength)
+
+.. method:: GetLinearityDeviationElectricalLength(channel=1,electricalLength)
+
+.. method:: SetMarkerState(channel_Trace,marker,markerState)
+
+.. method:: GetMarkerState(channel_Trace,marker,markerState)
+
+.. method:: SetMarkerStimulus(channel_Trace,marker,markerStimulus)
+
+.. method:: GetMarkerStimulus(channel_Trace,marker,markerStimulus)
+
+.. method:: GetMarkerResponse(channel_Trace,marker,markerResponse)
+
+.. method:: SetReferenceMarkerState(channel_Trace,marker,referenceMarkerState)
+
+.. method:: GetReferenceMarkerState(channel_Trace,marker,referenceMarkerState)
+
+.. method:: SetReferenceMarkerStimulus(channel_Trace,marker,referenceMarkerStimulus)
+
+.. method:: GetReferenceMarkerStimulus(channel_Trace,marker,referenceMarkerStimulus)
+
+.. method:: GetReferenceMarkerResponse(channel_Trace,marker,referenceMarkerResponse)
+
+.. method:: SetReferenceDiscreteMarker(channel_Trace,marker,mode)
+
+.. method:: GetReferenceDiscreteMarker(channel_Trace,marker,mode)
+
+.. method:: SetReferenceFixedMarker(channel_Trace,marker,type)
+
+.. method:: GetReferenceFixedMarker(channel_Trace,marker,type)
+
+.. method:: SetDeltaMarkerState(channel_Trace,marker,deltaMarkerState)
+
+.. method:: GetDeltaMarkerState(channel_Trace,marker,deltaMarkerState)
+
+.. method:: SetCoupledMarkers(channel_Trace,marker,markerCoupled)
+
+.. method:: GetCoupledMarkers(channel_Trace,marker,markerCoupled)
+
+.. method:: SetDiscreteMarker(channel_Trace,marker,discreteMode)
+
+.. method:: GetDiscreteMarker(channel_Trace,marker,discreteMode)
+
+.. method:: SetFixedMarker(channel_Trace,marker,fixedMarker)
+
+.. method:: GetFixedMarker(channel_Trace,marker,fixedMarker)
+
+.. method:: SetMarkerFormat(channel_Trace,marker,markerFormat)
+
+.. method:: GetMarkerFormat(channel_Trace,marker,markerFormat)
+
+.. method:: SetAllMarkersOff(channel_Trace)
+
+.. method:: SaveAllMarkers(fileName)
+
+.. method:: MarkerSearch(channel_Trace,marker,search)
+
+.. method:: MarkerTargetSearch(channel_Trace,marker,search)
+
+.. method:: SetMarkerTargetValue(channel_Trace,marker,targetValue)
+
+.. method:: GetMarkerTargetValue(channel_Trace,marker,targetValue)
+
+.. method:: MarkerBandpassSearch(channel_Trace,marker)
+
+.. method:: MarkerBandstopSearch(channel_Trace,marker)
+
+.. method:: SetMarkerSearchMode(channel_Trace,marker,searchMode)
+
+.. method:: GetMarkerSearchMode(channel_Trace,marker,searchMode)
+
+.. method:: MarkerBandfilterTracking(channel_Trace,marker,bandfilterTracking)
+
+.. method:: MarkerxdBBandwidth(channel_Trace,marker,xDBBandwidth)
+
+.. method:: MarkerBandfilterResults(channel_Trace,marker,bandwidth,centerStimulus,q,loss,LBE,UBE)
+
+.. method:: MarkerxdBBandwidthZVR(channel_Trace,marker,xDBBandwidth)
+
+.. method:: MarkerBandfilterResultsZVR(channel_Trace,marker,bandwidth)
+
+.. method:: SetMarkerSearchResultState(channel_Trace,marker,searchResults)
+
+.. method:: GetMarkerSearchResultState(channel_Trace,marker,searchResults)
+
+.. method:: SetMarkerTracking(channel_Trace,marker,markerTracking)
+
+.. method:: GetMarkerTracking(channel_Trace,marker,markerTracking)
+
+.. method:: MarkerSearchRange(channel_Trace,marker,searchRange,start,stop)
+
+.. method:: SetMarkerSearchRangeShow(channel_Trace,marker,showRange)
+
+.. method:: GetMarkerSearchRangeShow(channel_Trace,marker,showRange)
+
+.. method:: MarkerSearchResults(channel_Trace,marker,markerStimulus,markerResponse)
+
+.. method:: SetStartToMarker(channel_Trace,marker)
+
+.. method:: SetStopToMarker(channel_Trace,marker)
+
+.. method:: SetCenterToMarker(channel_Trace,marker)
+
+.. method:: ShowLimitLine(channel_Trace,displayLimitLine)
+
+.. method:: SetLimitCheck(channel_Trace,limitLine,limitCheck)
+
+.. method:: GetLimitCheck(channel_Trace,limitLine,limitCheck)
+
+.. method:: SetLimitLineFailBeep(channel_Trace,failBeep)
+
+.. method:: GetLimitLineFailBeep(channel_Trace,failBeep)
+
+.. method:: GetLimitCheckResult(channel_Trace,limitCheckResult)
+
+.. method:: AddLimitLineSegment(channel_Trace,segment,type,startStimulus,stopStimulus,startResponse,stopResponse)
+
+.. method:: EditLimitLineSegment(channel_Trace,segment,type,startStimulus,stopStimulus,startResponse,stopResponse)
+
+.. method:: ReadLimitLineSegmentList(channel_Trace,listSize,segmentsCount,type,startStimulus,stopStimulus,startResponse,stopResponse)
+
+.. method:: WriteLimitLineSegmentList(channel_Trace,listSize,type,startStimulus,stopStimulus,startResponse,stopResponse)
+
+.. method:: ShiftLimitLineSegmentList(channel_Trace,limitLineType,stimulusOffset,responseOffset)
+
+.. method:: DeleteLimitLineSegments(channel_Trace)
+
+.. method:: RecallLimitLine(traceName,fileName)
+
+.. method:: RecallLimitLineWithOptions(traceName,fileName,sParameter,xOffset,yOffset,type)
+
+.. method:: SaveLimitLine(traceName,fileName)
+
+.. method:: ImportTraceasLimitLine(channel_Trace,limitLineType,stimulusOffset,responseOffset,traceName)
+
+.. method:: SetLimitLineTTLOutPass(channel_Trace,outputNo,TTLOutput)
+
+.. method:: GetLimitLineTTLOutPass(channel_Trace,outputNo,TTLOutput)
+
+.. method:: SetDisplayLine(channel_Trace,displayLine,position)
+
+.. method:: GetDisplayLine(channel_Trace,displayLine,position)
+
+.. method:: SetLimitDomainUnits(channel_Trace,domainUnits)
+
+.. method:: SetLimitResponseDomainComplexUnits(channel_Trace,responseUnits)
+
+.. method:: SetLimitResponseDomainFormatUnits(channel_Trace,responseUnits)
+
+.. method:: SetLimitResponseDomainSpacingUnits(channel_Trace,responseUnits)
+
+.. method:: SetRippleCheckOn(channel_Trace,limitCheck)
+
+.. method:: GetRippleCheckOn(channel_Trace,limitCheck)
+
+.. method:: GetRippleLimitGlobalCheckResult(channel_Trace,rippleLimitCheckResult)
+
+.. method:: SetCheckRippleLimitRangeSegment(channel_Trace,segment,limitCheck)
+
+.. method:: GetCheckRippleLimitRangeSegment(channel_Trace,segment,limitCheck)
+
+.. method:: GetRippleLimitCheckSegmentResult(channel_Trace,segment,fail,limitCheckResult)
+
+.. method:: SetRippleLimitsDisplayState(channel_Trace,displayLine)
+
+.. method:: GetRippleLimitsDisplayState(channel_Trace,displayLine)
+
+.. method:: SetRippleFailBeepOn(channel_Trace,failBeep)
+
+.. method:: GetRippleFailBeepOn(channel_Trace,failBeep)
+
+.. method:: AddRippleLimitLineRangesSegment(channel_Trace,noOfValues,type,startStimulus,stopStimulus,limit)
+
+.. method:: EditRippleLimitLineSegment(channel_Trace,segment,startStimulus,stopStimulus)
+
+.. method:: DeleteAllRippleLimitRanges(channel_Trace)
+
+.. method:: SetRippleLimitPhysicalUnits(channel_Trace,physicalUnits)
+
+.. method:: SetRippleLimitResponseDomainFormatUnits(channel_Trace,responseUnits)
+
+.. method:: GetNumberRippleLimitRanges(channel_Trace,segment,number)
+
+.. method:: SetRippleLimitRange(channel_Trace,segment,limit)
+
+.. method:: GetRippleLimitRange(channel_Trace,segment,limit)
+
+.. method:: SaveRecallRippleLimit(operationToBePerformed,traceName,fileName)
+
+.. method:: SetStartFrequency(channel=1,startFrequency)
+
+.. method:: GetStartFrequency(channel=1,startFrequency)
+
+.. method:: SetStopFrequency(channel=1,stopFrequency)
+
+.. method:: GetStopFrequency(channel=1,stopFrequency)
+
+.. method:: SetCenterFrequency(channel=1,centerFrequency)
+
+.. method:: GetCenterFrequency(channel=1,centerFrequency)
+
+.. method:: SetFrequencySpan(channel=1,span)
+
+.. method:: GetFrequencySpan(channel=1,span)
+
+.. method:: SetPower(channel=1,power)
+
+.. method:: GetPower(channel=1,power)
+
+.. method:: SetCWFrequency(channel=1,CWFrequency)
+
+.. method:: GetCWFrequency(channel=1,CWFrequency)
+
+.. method:: SetStartPower(channel=1,startPower)
+
+.. method:: GetStartPower(channel=1,startPower)
+
+.. method:: SetStopPower(channel=1,stopPower)
+
+.. method:: GetStopPower(channel=1,stopPower)
+
+.. method:: SetSourcePort(channel=1,sourcePort)
+
+.. method:: GetSourcePort(channel=1,sourcePort)
+
+.. method:: ConfigurePowerBandwidthAverage(channel=1,RFState,measBandwidth,averageState,averageFactor)
+
+.. method:: SetReceiverStepAttenuators(channel=1,analyzerPort,attenuationFactor)
+
+.. method:: GetReceiverStepAttenuators(channel=1,analyzerPort,attenuationFactor)
+
+.. method:: SetGeneratorStepAttenuators(channel=1,port,attenuationFactor)
+
+.. method:: GetGeneratorStepAttenuators(channel=1,port,attenuationFactor)
+
+.. method:: SetAutomaticGeneratorAttenuator(channel=1,port,automaticAttenuation)
+
+.. method:: GetAutomaticGeneratorAttenuator(channel=1,port,automaticAttenuation)
+
+.. method:: GetAutomaticGeneratorAttenuation(channel=1,port,attenuation)
+
+.. method:: SetGeneratorAttenuatorMode(channel=1,port,attenuationMode)
+
+.. method:: GetGeneratorAttenuatorMode(channel=1,port,attenuationMode)
+
+.. method:: SetRFState(RFState)
+
+.. method:: GetRFState(RFState)
+
+.. method:: SetMeasBandwidth(channel=1,measBandwidth)
+
+.. method:: GetMeasBandwidth(channel=1,measBandwidth)
+
+.. method:: SetMeasBandwidthSelectivity(channel=1,measBandwidthSelectivity)
+
+.. method:: GetMeasBandwidthSelectivity(channel=1,measBandwidthSelectivity)
+
+.. method:: SetMeasBandwidthReduction(channel=1,reduction)
+
+.. method:: GetMeasBandwidthReduction(channel=1,reduction)
+
+.. method:: SetAverageState(channel=1,averageState)
+
+.. method:: GetAverageState(channel=1,averageState)
+
+.. method:: SetAverageFactor(channel=1,averageFactor)
+
+.. method:: GetAverageFactor(channel=1,averageFactor)
+
+.. method:: GetCurrentSweep(channel=1,currentSweep)
+
+.. method:: RestartAverage(channel=1)
+
+.. method:: SetPartialMeasurementResolutionBandwidthMode(channel=1,bandwidthMode)
+
+.. method:: GetPartialMeasurementResolutionBandwidthMode(channel=1,bandwidthMode)
+
+.. method:: SetGeneratorPortResolutionBandwidth(channel=1,generatorPort,resolutionBandwidth)
+
+.. method:: GetGeneratorPortResolutionBandwidth(channel=1,generatorPort,resolutionBandwidth)
+
+.. method:: SetPhysicalPortResolutionBandwidth(channel=1,analyzerPort,resolutionBandwidth)
+
+.. method:: GetPhysicalPortResolutionBandwidth(channel=1,analyzerPort,resolutionBandwidth)
+
+.. method:: SetSweepType(channel=1,sweepType)
+
+.. method:: GetSweepType(channel=1,sweepType)
+
+.. method:: InsertNewSegment(channel=1,segment,startFrequency,stopFrequency,numberOfPoints,power,sweepTimeSelect,time,pointDelay,measBandwidth)
+
+.. method:: RedefineSegment(channel=1,segment,startFrequency,stopFrequency,numberOfPoints,power,sweepTimeSelect,time,pointDelay,measBandwidth)
+
+.. method:: AddNewSegment(channel=1,segment)
+
+.. method:: DeleteSelectedSegment(channel=1,segment)
+
+.. method:: DeleteAllSegments(channel=1)
+
+.. method:: GetSweepSegmentsCount(channel=1,count)
+
+.. method:: SetSweepSegmentState(channel=1,segment,state)
+
+.. method:: GetSweepSegmentState(channel=1,segment,state)
+
+.. method:: SetSweepSegmentStartFrequency(channel=1,segment,startFrequency)
+
+.. method:: GetSweepSegmentStartFrequency(channel=1,segment,startFrequency)
+
+.. method:: SetSweepSegmentStopFrequency(channel=1,segment,stopFrequency)
+
+.. method:: GetSweepSegmentStopFrequency(channel=1,segment,stopFrequency)
+
+.. method:: SetSweepSegmentNumberOfPoints(channel=1,segment,numberOfPoints)
+
+.. method:: GetSweepSegmentNumberOfPoints(channel=1,segment,numberOfPoints)
+
+.. method:: SetSweepSegmentName(channel=1,segment,name)
+
+.. method:: GetSweepSegmentName(channel=1,segment,bufferSize,name)
+
+.. method:: SetSweepSegmentPower(channel=1,segment,power)
+
+.. method:: GetSweepSegmentPower(channel=1,segment,power)
+
+.. method:: SetSweepSegmentIndependentPower(channel=1,segment,power)
+
+.. method:: GetSweepSegmentIndependentPower(channel=1,segment,power)
+
+.. method:: SetSweepSegmentMeasBandwidth(channel=1,segment,measBandwidth)
+
+.. method:: GetSweepSegmentMeasBandwidth(channel=1,segment,measBandwidth)
+
+.. method:: SetSweepSegmentIndependentBandwidth(channel=1,segment,measBandwidth)
+
+.. method:: GetSweepSegmentIndependentBandwidth(channel=1,segment,measBandwidth)
+
+.. method:: SetSweepSegmentSpurAvoid(channel=1,segment,spurAvoid)
+
+.. method:: GetSweepSegmentSpurAvoid(channel=1,segment,spurAvoid)
+
+.. method:: SetSweepSegmentIndependentSpurAvoid(channel=1,segment,spurAvoid)
+
+.. method:: GetSweepSegmentIndependentSpurAvoid(channel=1,segment,spurAvoid)
+
+.. method:: SetSweepSegmentSelectivity(channel=1,segment,selectivity)
+
+.. method:: GetSweepSegmentSelectivity(channel=1,segment,selectivity)
+
+.. method:: SetSweepSegmentIndependentSelectivity(channel=1,segment,selectivity)
+
+.. method:: GetSweepSegmentIndependentSelectivity(channel=1,segment,selectivity)
+
+.. method:: SetSweepSegmentSweepTime(channel=1,segment,time)
+
+.. method:: GetSweepSegmentSweepTime(channel=1,segment,time)
+
+.. method:: SetSweepSegmentIndependentTime(channel=1,segment,time)
+
+.. method:: GetSweepSegmentIndependentTime(channel=1,segment,time)
+
+.. method:: SetSweepSegmentPointDelay(channel=1,segment,pointDelay)
+
+.. method:: GetSweepSegmentPointDelay(channel=1,segment,pointDelay)
+
+.. method:: SetSweepSegmentIndependentPointDelay(channel=1,segment,pointDelay)
+
+.. method:: GetSweepSegmentIndependentPointDelay(channel=1,segment,pointDelay)
+
+.. method:: SetSweepSegmentTriggering(channel=1,segment,triggering)
+
+.. method:: GetSweepSegmentTriggering(channel=1,segment,triggering)
+
+.. method:: SetSweepSelectiveSegmentTriggering(channel=1,triggering)
+
+.. method:: GetSweepSelectiveSegmentTriggering(channel=1,triggering)
+
+.. method:: SetSweepSegmentBitsState(channel=1,state)
+
+.. method:: GetSweepSegmentBitsState(channel=1,state)
+
+.. method:: SetSweepSegmentBitValues(channel=1,segment,bit0,bit1,bit2,bit3)
+
+.. method:: GetSweepSegmentBitValues(channel=1,segment,bit0,bit1,bit2,bit3)
+
+.. method:: GetSweepSegmentCenterFrequency(channel=1,segment,centerFrequency)
+
+.. method:: GetSweepSegmentFrequencySpan(channel=1,segment,frequencySpan)
+
+.. method:: SaveSegment(channel=1,fileName)
+
+.. method:: LoadSegment(channel=1,fileName)
+
+.. method:: QueryOverlappingSweepSegments(segment,overlapping)
+
+.. method:: QuerySumOfSweepSegmentsTime(channel=1,sweepTime)
+
+.. method:: SetPulseTimeStart(channel=1,timeStart)
+
+.. method:: GetPulseTimeStart(channel=1,timeStart)
+
+.. method:: SetPulseTimeStop(channel=1,timeStop)
+
+.. method:: GetPulseTimeStop(channel=1,timeStop)
+
+.. method:: SetPulseTimeBandwidth(channel=1,timeBandwidth)
+
+.. method:: GetPulseTimeBandwidth(channel=1,timeBandwidth)
+
+.. method:: SetPulseCoupledSectionLimitLinesState(channel=1,coupleLimits)
+
+.. method:: GetPulseCoupledSectionLimitLinesState(channel=1,coupleLimits)
+
+.. method:: SetPulseEvaluationMode(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,evaluationMode)
+
+.. method:: GetPulseEvaluationMode(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,evaluationMode)
+
+.. method:: SetPulseEvaluationSectionStart(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,evaluationStartTime)
+
+.. method:: GetPulseEvaluationSectionStart(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,evaluationStartTime)
+
+.. method:: SetPulseEvaluationSectionStop(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,evaluationStopTime)
+
+.. method:: GetPulseEvaluationSectionStop(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,evaluationStopTime)
+
+.. method:: SetPulseSectionLimitLinesState(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,limitLinesState)
+
+.. method:: GetPulseSectionLimitLinesState(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,limitLinesState)
+
+.. method:: SetPulseShiftStimulus(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,shiftStimulus)
+
+.. method:: GetPulseShiftStimulus(channel=1,receiverType,recordNumber,interfaceType,generatorPortNumber,shiftStimulus)
+
+.. method:: ReadTimeSamplesData(channel_Trace,noOfValues,traceData)
+
+.. method:: SetSweepNumberOfPoints(channel=1,numberOfPoints)
+
+.. method:: GetSweepNumberOfPoints(channel=1,numberOfPoints)
+
+.. method:: SetFrequencyStepSize(channel=1,stepSize)
+
+.. method:: GetFrequencyStepSize(channel=1,stepSize)
+
+.. method:: SetSweepCount(channel=1,sweepCount)
+
+.. method:: GetSweepCount(channel=1,sweepCount)
+
+.. method:: ConfigureSweepTime(channel=1,autoSweepTime,sweepTime,measDelay)
+
+.. method:: SetSweepTime(channel=1,sweepTime)
+
+.. method:: GetSweepTime(channel=1,sweepTime)
+
+.. method:: SetSweepMeasDelay(channel=1,measDelay)
+
+.. method:: GetSweepMeasDelay(channel=1,measDelay)
+
+.. method:: SetSweepTimeAuto(channel=1,autoSweepTime)
+
+.. method:: GetSweepTimeAuto(channel=1,autoSweepTime)
+
+.. method:: ConfigureTriggerFreeRun(channel=1)
+
+.. method:: ConfigureTriggerExternal(channel=1,triggerOn)
+
+.. method:: ConfigureTriggerPeriodic(channel=1,triggerPeriod)
+
+.. method:: ConfigureTriggerRFPower(channel=1)
+
+.. method:: ConfigureTriggerManual(channel=1)
+
+.. method:: ConfigureTriggerSettings(channel=1,triggerMeasSequence,triggerDelay)
+
+.. method:: SetTriggerSource(channel=1,triggerSource)
+
+.. method:: GetTriggerSource(channel=1,triggerSource)
+
+.. method:: SetTriggerDelay(channel=1,triggerDelay)
+
+.. method:: GetTriggerDelay(channel=1,triggerDelay)
+
+.. method:: SetPartialMeasurementTriggerMode(channel=1,triggerMode)
+
+.. method:: GetPartialMeasurementTriggerMode(channel=1,triggerMode)
+
+.. method:: SetGeneratorPortTriggerDelay(channel=1,generatorPort,triggerDelay)
+
+.. method:: GetGeneratorPortTriggerDelay(channel=1,generatorPort,triggerDelay)
+
+.. method:: SetPhysicalPortTriggerDelay(channel=1,analyzerPort,triggerDelay)
+
+.. method:: GetPhysicalPortTriggerDelay(channel=1,analyzerPort,triggerDelay)
+
+.. method:: SetTriggeredMeasSequence(channel=1,triggerMeasSequence)
+
+.. method:: GetTriggeredMeasSequence(channel=1,triggerMeasSequence)
+
+.. method:: SetTriggerOn(channel=1,triggerOn)
+
+.. method:: GetTriggerOn(channel=1,triggerOn)
+
+.. method:: SetTriggerPeriod(channel=1,triggerPeriod)
+
+.. method:: GetTriggerPeriod(channel=1,triggerPeriod)
+
+.. method:: SendTrigger()
+
+.. method:: SendTriggerWaitOPC(timeout)
+
+.. method:: SendChannelTrigger(channel=1)
+
+.. method:: SendChannelTriggerWaitOPC(channel=1,timeout)
+
+.. method:: SetSweepSingleAllChans(singleSweep)
+
+.. method:: GetSweepSingleAllChans(singleSweep)
+
+.. method:: SweepRestart(channel=1)
+
+.. method:: SetSweepSingle(channel=1,singleSweep)
+
+.. method:: GetSweepSingle(channel=1,singleSweep)
+
+.. method:: DefineGroupOfMeasuredPorts(channel=1,group,firstPort,lastPort)
+
+.. method:: GetGroupOfMeasuredPorts(channel=1,group,firstPort,lastPort)
+
+.. method:: DefineGroupOfAllMeasuredPorts(channel=1,group,numberOfPortsInGroup,ports)
+
+.. method:: GetGroupOfAllMeasuredPorts(channel=1,group,numberOfPortsInGroup,ports)
+
+.. method:: GetPortGroupsCount(channel=1,portGroups)
+
+.. method:: DeleteGroupOfMeasuredPorts(channel=1,group)
+
+.. method:: DeleteAllGroupsOfMeasuredPorts(channel=1)
+
+.. method:: DefineBalancedPort(channel=1,logicalPort,physicalPort1,physicalPort2)
+
+.. method:: GetBalancedPort(channel=1,logicalPort,physicalPort1,physicalPort2)
+
+.. method:: DeleteBalancedPort(channel=1,logicalPort)
+
+.. method:: DeleteAllBalancedPorts(channel=1)
+
+.. method:: SetDifferentialModeImpedance(channel=1,logicalPort,impedance)
+
+.. method:: GetDifferentialModeImpedance(channel=1,logicalPort,impedance)
+
+.. method:: SetCommonModeImpedance(channel=1,logicalPort,impedance)
+
+.. method:: GetCommonModeImpedance(channel=1,logicalPort,impedance)
+
+.. method:: DefinePortPair(channel=1,functionType,portPair,port1,port2)
+
+.. method:: DeletePortPair(channel=1,functionType,portPair)
+
+.. method:: SetDefaultConfigurationState(defaultSettings)
+
+.. method:: GetDefaultConfigurationState(defaultSettings)
+
+.. method:: SetPortConfigration(channel=1,portGroupA,portGroupB,portGroupC,portGroupD)
+
+.. method:: GetPortConfigration(channel=1,portGroupA,portGroupB,portGroupC,portGroupD)
+
+.. method:: SetConverterPowerOffset(channel=1,port,portPowerOffset,offsetParameter)
+
+.. method:: GetConverterPowerOffset(channel=1,port,portPowerOffset,offsetParameter)
+
+.. method:: SetConverterCalPowerOffset(channel=1,converter,calPowerOffset)
+
+.. method:: GetConverterCalPowerOffset(channel=1,converter,calPowerOffset)
+
+.. method:: SetAdvancedPowerTransferModelFrequencyState(channel=1,state)
+
+.. method:: GetAdvancedPowerTransferModelFrequencyState(channel=1,state)
+
+.. method:: SetSenseTypeOfPortTransferModel(channel=1,port,modelType)
+
+.. method:: GetSenseTypeOfPortTransferModel(channel=1,port,modelType)
+
+.. method:: SetSenseTypeOfAdvancedPowerTransferModel(channel=1,modelType)
+
+.. method:: GetSenseTypeOfAdvancedPowerTransferModel(channel=1,modelType)
+
+.. method:: SetConverterDataSetType(port,dataSetType)
+
+.. method:: GetConverterDataSetType(port,dataSetType)
+
+.. method:: SetConverterUserDataSetDirectory(port,directory)
+
+.. method:: GetConverterUserDataSetDirectory(port,bufferSize,directory)
+
+.. method:: SetConverterPortAssignment(port,serialNumber)
+
+.. method:: GetConverterPortAssignment(port,bufferSize,serialNumber)
+
+.. method:: SetPortTransferModelState(channel=1,port,state)
+
+.. method:: GetPortTransferModelState(channel=1,port,state)
+
+.. method:: SetPortWaveguideAttenuator(channel=1,port,waveguideAttenuator,attenuation)
+
+.. method:: GetPortWaveguideAttenuatorType(channel=1,port,waveguideAttenuator)
+
+.. method:: GetPortWaveguideAttenuator(channel=1,port,waveguideAttenuator,attenuation)
+
+.. method:: SetPortWaveguideAttenuatorSlope(channel=1,port,slope)
+
+.. method:: GetPortWaveguideAttenuatorSlope(channel=1,port,slope)
+
+.. method:: SetPortWaveguideAttenuatorOffset(channel=1,port,offset)
+
+.. method:: GetPortWaveguideAttenuatorOffset(channel=1,port,offset)
+
+.. method:: SetPortElectronicPowerTreshold(channel=1,port,threshold)
+
+.. method:: GetPortElectronicPowerTreshold(channel=1,port,threshold)
+
+.. method:: SetPortElectronicPowerReduction(channel=1,port,reduction)
+
+.. method:: GetPortElectronicPowerReduction(channel=1,port,reduction)
+
+.. method:: SetSimultaneousMeasurementOfPortsGroups(channel=1,state)
+
+.. method:: GetSimultaneousMeasurementOfPortsGroups(channel=1,state)
+
+.. method:: SetSimultaneousMeasurementFrequencyOffsetState(channel=1,state)
+
+.. method:: GetSimultaneousMeasurementFrequencyOffsetState(channel=1,state)
+
+.. method:: SetSimultaneousMeasurementMinimumFrequencyOffsetMode(channel=1,minimumFrequencyOffset)
+
+.. method:: GetSimultaneousMeasurementMinimumFrequencyOffsetMode(channel=1,minimumFrequencyOffset)
+
+.. method:: SetFrequencyConversion(measurementType,channel=1,port,numerator,denominator,offset,sweepType)
+
+.. method:: GetFrequencyConversion(measurementType,channel=1,port,numerator,denominator,offset,sweepType)
+
+.. method:: SetPowerMeterFrequencyConversion(channel=1,powerMeterNumber,numerator,denominator,offset,sweepType)
+
+.. method:: GetPowerMeterFrequencyConversion(channel=1,powerMeterNumber,numerator,denominator,offset,sweepType)
+
+.. method:: SetGeneratorFrequencyConversion(channel=1,port,generatorNumber,state,numerator,denominator,offset,sweepType)
+
+.. method:: GetGeneratorFrequencyConversion(channel=1,port,generatorNumber,state,numerator,denominator,offset,sweepType)
+
+.. method:: SetConverterSourceFrequency(channel=1,port,numerator,denominator,offset,sweepType)
+
+.. method:: GetConverterSourceFrequency(channel=1,port,numerator,denominator,offset,sweepType)
+
+.. method:: SetMeasureAWavesState(channel=1,state)
+
+.. method:: GetMeasureAWavesState(channel=1,state)
+
+.. method:: SetLocalOscilatorAState(channel=1,port,state)
+
+.. method:: GetLocalOscilatorAState(channel=1,port,state)
+
+.. method:: SetLocalOscilatorBState(channel=1,port,state)
+
+.. method:: GetLocalOscilatorBState(channel=1,port,state)
+
+.. method:: SetLogicalPortCommonRefImpedance(channel=1,port,real,imaginary)
+
+.. method:: GetLogicalPortCommonRefImpedance(channel=1,port,real,imaginary)
+
+.. method:: SetLogicalPortDifferentialRefImpedance(channel=1,port,real,imaginary)
+
+.. method:: GetLogicalPortDifferentialRefImpedance(channel=1,port,real,imaginary)
+
+.. method:: SetPortImpedancesRenormalization(channel=1,theory)
+
+.. method:: GetPortImpedancesRenormalization(channel=1,theory)
+
+.. method:: SetPhysicalPortRefImpedance(channel=1,port,real,imaginary)
+
+.. method:: GetPhysicalPortRefImpedance(channel=1,port,real,imaginary)
+
+.. method:: SetIFGain(channel=1,port,IFGain)
+
+.. method:: GetIFGain(channel=1,port,IFGain)
+
+.. method:: SetIFGainReferenceChannel(channel=1,port,IFGain)
+
+.. method:: GetIFGainReferenceChannel(channel=1,port,IFGain)
+
+.. method:: SetRFSignalSourceState(channel=1,port,state)
+
+.. method:: GetRFSignalSourceState(channel=1,port,state)
+
+.. method:: SetPermanentSignalSourceState(channel=1,port,state)
+
+.. method:: GetPermanentSignalSourceState(channel=1,port,state)
+
+.. method:: SetPermanentSignalGeneratorState(channel=1,port,generatorNumber,state)
+
+.. method:: GetPermanentSignalGeneratorState(channel=1,port,generatorNumber,state)
+
+.. method:: SetPortPowerGeneratorOffset(channel=1,portNumber,generatorNumber,portPowerOffset,offsetParameter)
+
+.. method:: GetPortPowerGeneratorOffset(channel=1,portNumber,generatorNumber,portPowerOffset,offsetParameter)
+
+.. method:: SetSlope(channel=1,port,slope)
+
+.. method:: GetSlope(channel=1,port,slope)
+
+.. method:: SetSourceCombinerState(channel=1,state)
+
+.. method:: GetSourceCombinerState(channel=1,state)
+
+.. method:: SetFrequencyStimulus(channel=1,frequencyStimulus)
+
+.. method:: GetFrequencyStimulus(channel=1,frequencyStimulus)
+
+.. method:: SetPowerStimulus(channel=1,powerStimulus)
+
+.. method:: GetPowerStimulus(channel=1,powerStimulus)
+
+.. method:: SetTDIFState(channel=1,trueDifferentialModeState)
+
+.. method:: GetTDIFState(channel=1,trueDifferentialModeState)
+
+.. method:: SetTDIFAmplitudeImbalanceLogicalPort(channel=1,port)
+
+.. method:: GetTDIFAmplitudeImbalanceLogicalPort(channel=1,port)
+
+.. method:: SetTDIFAmplitudeImbalanceStartPower(channel=1,startPower)
+
+.. method:: GetTDIFAmplitudeImbalanceStartPower(channel=1,startPower)
+
+.. method:: SetTDIFAmplitudeImbalanceStopPower(channel=1,stopPower)
+
+.. method:: GetTDIFAmplitudeImbalanceStopPower(channel=1,stopPower)
+
+.. method:: SetTDIFPhaseImbalanceLogicalPort(channel=1,port)
+
+.. method:: GetTDIFPhaseImbalanceLogicalPort(channel=1,port)
+
+.. method:: SetTDIFPhaseImbalanceStartPhase(channel=1,startPhase)
+
+.. method:: GetTDIFPhaseImbalanceStartPhase(channel=1,startPhase)
+
+.. method:: SetTDIFPhaseImbalanceStopPhase(channel=1,stopPhase)
+
+.. method:: GetTDIFPhaseImbalanceStopPhase(channel=1,stopPhase)
+
+.. method:: SetTDIFSourcePowerMode(channel=1,sourcePowerMode)
+
+.. method:: GetTDIFSourcePowerMode(channel=1,sourcePowerMode)
+
+.. method:: SetTDIFCompensationState(channel=1,compensationState)
+
+.. method:: GetTDIFCompensationState(channel=1,compensationState)
+
+.. method:: SetTDIFReceiverFrequency(channel=1,receiverFrequency)
+
+.. method:: GetTDIFReceiverFrequency(channel=1,receiverFrequency)
+
+.. method:: SetPulseGeneratorState(channel=1,pulseGeneratorState)
+
+.. method:: GetPulseGeneratorState(channel=1,pulseGeneratorState)
+
+.. method:: DefinePulseGenerator(channel=1,generator,pulseType,pulseWidth,singleTrainPulsePeriod,pulsePolarity,pulseMode)
+
+.. method:: DefinePulseTrainSegments(channel=1,bufferSize,pulseTrainActive,startTime,stopTime)
+
+.. method:: ConfigureChoppedPulseProfile(channel=1,choppedPulseProfileMode,delayIncrement)
+
+.. method:: SetPulseGeneratorType(channel=1,generator,pulseType)
+
+.. method:: GetPulseGeneratorType(channel=1,generator,pulseType)
+
+.. method:: SetPulseGeneratorWidth(channel=1,generator,pulseWidth)
+
+.. method:: GetPulseGeneratorWidth(channel=1,generator,pulseWidth)
+
+.. method:: SetPulseGeneratorSinglePeriod(channel=1,singlePulsePeriod)
+
+.. method:: GetPulseGeneratorSinglePeriod(channel=1,singlePulsePeriod)
+
+.. method:: SetPulseGeneratorTrainPeriod(channel=1,trainPulsePeriod)
+
+.. method:: GetPulseGeneratorTrainPeriod(channel=1,trainPulsePeriod)
+
+.. method:: SetPulseGeneratorPolarity(channel=1,generator,pulsePolarity)
+
+.. method:: GetPulseGeneratorPolarity(channel=1,generator,pulsePolarity)
+
+.. method:: SetPulseGeneratorMode(channel=1,pulseMode)
+
+.. method:: GetPulseGeneratorMode(channel=1,pulseMode)
+
+.. method:: SetPulseGeneratorMasterChannel(masterChannel)
+
+.. method:: GetPulseGeneratorMasterChannel(masterChannel)
+
+.. method:: GetPulseTrainSegments(channel=1,bufferSize,pulseTrainActive,startTime,stopTime)
+
+.. method:: SetPulseTrainSegmentState(channel=1,segment,segmentState)
+
+.. method:: GetPulseTrainSegmentState(channel=1,segment,segmentState)
+
+.. method:: SetPulseTrainSegmentStart(channel=1,segment,segmentStart)
+
+.. method:: GetPulseTrainSegmentStart(channel=1,segment,segmentStart)
+
+.. method:: SetPulseTrainSegmentStop(channel=1,segment,segmentStop)
+
+.. method:: GetPulseTrainSegmentStop(channel=1,segment,segmentStop)
+
+.. method:: GetPulseTrainSegmentCount(channel=1,segmentCount)
+
+.. method:: DeleteAllPulseTrainSegments(channel=1)
+
+.. method:: SavePulseTrainFile(channel=1,generator,fileName)
+
+.. method:: LoadPulseTrainFile(channel=1,generator,fileName)
+
+.. method:: SetPulseGeneratorDelay(channel=1,delay)
+
+.. method:: GetPulseGeneratorDelay(channel=1,delay)
+
+.. method:: SetChoppedPulseProfileMode(channel=1,choppedPulseProfileMode)
+
+.. method:: GetChoppedPulseProfileMode(channel=1,choppedPulseProfileMode)
+
+.. method:: SetChoppedPulseProfileDelayIncrement(channel=1,delayIncrement)
+
+.. method:: GetChoppedPulseProfileDelayIncrement(channel=1,delayIncrement)
+
+.. method:: ConfigureZVAXPath(channel=1,path,internalCombiner,harmonicFilter,pulseModulator)
+
+.. method:: ConfigurePulseGenerators(channel=1,extSignalGeneratorInput,extSignalGeneratorOutput,assignment)
+
+.. method:: SetInternalCombiner(channel=1,internalCombiner)
+
+.. method:: GetInternalCombiner(channel=1,internalCombiner)
+
+.. method:: SetHarmonicFilter(channel=1,path,harmonicFilter)
+
+.. method:: GetHarmonicFilter(channel=1,path,harmonicFilter)
+
+.. method:: SetLNPreamplifier(channel=1,state)
+
+.. method:: GetLNPreamplifier(channel=1,state)
+
+.. method:: SetPulseModulator(channel=1,path,pulseModulator)
+
+.. method:: GetPulseModulator(channel=1,path,pulseModulator)
+
+.. method:: SetExternalSignalGeneratorInput(channel=1,extSignalGeneratorInput)
+
+.. method:: GetExternalSignalGeneratorInput(channel=1,extSignalGeneratorInput)
+
+.. method:: SetPulseGeneratorAssignment(channel=1,assignment)
+
+.. method:: GetPulseGeneratorAssignment(channel=1,assignment)
+
+.. method:: SetExternalSignalGeneratorOutput(channel=1,extSignalGeneratorOutput)
+
+.. method:: GetExternalSignalGeneratorOutput(channel=1,extSignalGeneratorOutput)
+
+.. method:: SetTRMMeasureInput(channel=1,path,input)
+
+.. method:: GetTRMMeasureInput(channel=1,path,input)
+
+.. method:: SetTRMCombinerState(channel=1,path,combinerState)
+
+.. method:: GetTRMCombinerState(channel=1,path,combinerState)
+
+.. method:: SetTRMPowerAmplifierState(channel=1,path,powerAmplifierState)
+
+.. method:: GetTRMPowerAmplifierState(channel=1,path,powerAmplifierState)
+
+.. method:: SetTRMPulseModulatorState(channel=1,path,pulseModulatorState)
+
+.. method:: GetTRMPulseModulatorState(channel=1,path,pulseModulatorState)
+
+.. method:: SetTRMUserSourcePathExtensionState(channel=1,path,userSourcePathExtension)
+
+.. method:: GetTRMUserSourcePathExtensionState(channel=1,path,userSourcePathExtension)
+
+.. method:: SetTRMUserMeasurementPathExtensionState(channel=1,path,userMeasurementPathExtension)
+
+.. method:: GetTRMUserMeasurementPathExtensionState(channel=1,path,userMeasurementPathExtension)
+
+.. method:: SetTRMPulseModulatorSource(channel=1,path,pulseModulatorSource)
+
+.. method:: GetTRMPulseModulatorSource(channel=1,path,pulseModulatorSource)
+
+.. method:: SetTRMPulseGeneratorSource(channel=1,extOut,pulseGeneratorSource)
+
+.. method:: GetTRMPulseGeneratorSource(channel=1,extOut,pulseGeneratorSource)
+
+.. method:: SetTRMPulseGeneratorInvertSource(channel=1,extOut,invertSource)
+
+.. method:: GetTRMPulseGeneratorInvertSource(channel=1,extOut,invertSource)
+
+.. method:: GetTRMNumberOfUnits(numberOfUnits)
+
+.. method:: GetTRMUnitDeviceID(bufferSize,deviceID)
+
+.. method:: GetTRMUnitHardwareOptions(bufferSize,optionList)
+
+.. method:: ConfigureHarmonicMeasurement(channel=1,harmonicMeasurement,relativeHarmonicMeasurement,source,harmonicMeasuredAt,harmonicOrder)
+
+.. method:: SetHarmonicMeasurementState(channel=1,harmonicMeasurement)
+
+.. method:: GetHarmonicMeasurementState(channel=1,harmonicMeasurement)
+
+.. method:: SetHarmonicOrder(channel=1,harmonicOrder)
+
+.. method:: GetHarmonicOrder(channel=1,harmonicOrder)
+
+.. method:: SetHarmonicSourcePort(channel=1,port)
+
+.. method:: GetHarmonicSourcePort(channel=1,port)
+
+.. method:: SetHarmonicReceivePort(channel=1,port)
+
+.. method:: GetHarmonicReceivePort(channel=1,port)
+
+.. method:: SetHarmonicRelativeState(channel=1,relativeHarmonicMeasurement)
+
+.. method:: GetHarmonicRelativeState(channel=1,relativeHarmonicMeasurement)
+
+.. method:: SetMixerMode(channel=1,mixerMode)
+
+.. method:: GetMixerMode(channel=1,mixerMode)
+
+.. method:: SetNumberOfStages(channel=1,numberOfStages)
+
+.. method:: GetNumberOfStages(channel=1,numberOfStages)
+
+.. method:: SetSignalSource(channel=1,stage,source,portNumber)
+
+.. method:: GetSignalSource(channel=1,stage,source,portNumber)
+
+.. method:: SetIFSignalPort(channel=1,portNumber)
+
+.. method:: GetIFSignalPort(channel=1,portNumber)
+
+.. method:: SetRFSignalPort(channel=1,portNumber)
+
+.. method:: GetRFSignalPort(channel=1,portNumber)
+
+.. method:: SetInternalSignalSource(channel=1,internalSignalSource)
+
+.. method:: GetInternalSignalSource(channel=1,internalSignalSource)
+
+.. method:: SetExternalSignalSource(channel=1,externalSignalSource)
+
+.. method:: GetExternalSignalSource(channel=1,externalSignalSource)
+
+.. method:: ConfigurePowerSettings(channel=1,fundamentalPower,fixedPower)
+
+.. method:: SetFundamentalPowerSignal(channel=1,fundamentalPower)
+
+.. method:: GetFundamentalPowerSignal(channel=1,fundamentalPower)
+
+.. method:: SetFixedPower(channel=1,fixedPower)
+
+.. method:: GetFixedPower(channel=1,fixedPower)
+
+.. method:: SetFixedPowerToSignal(channel=1,signal,fixedPower)
+
+.. method:: GetFixedPowerToSignal(channel=1,signal,fixedPower)
+
+.. method:: SetSignalPowerMode(channel=1,signal,mode)
+
+.. method:: GetSignalPowerMode(channel=1,signal,mode)
+
+.. method:: ConfigureFrequencySettings(channel=1,fundamentalFrequencySignal,fixedFrequencySignal,fixedFrequency,frequencyConversionMode)
+
+.. method:: SetFundamentalFrequencySignal(channel=1,fundamentalFrequency)
+
+.. method:: GetFundamentalFrequencySignal(channel=1,fundamentalFrequency)
+
+.. method:: SetFixedFrequencySignal(channel=1,fixedFrequency)
+
+.. method:: GetFixedFrequencySignal(channel=1,fixedFrequency)
+
+.. method:: SetFixedFrequencySignalStage2(channel=1,fixedFrequency)
+
+.. method:: GetFixedFrequencySignalStage2(channel=1,fixedFrequency)
+
+.. method:: SetFixedFrequency(channel=1,fixedFrequency)
+
+.. method:: GetFixedFrequency(channel=1,fixedFrequency)
+
+.. method:: SetFixedFrequencyToSignal(channel=1,signal,fixedFrequency)
+
+.. method:: GetFixedFrequencyToSignal(channel=1,signal,fixedFrequency)
+
+.. method:: SetFrequencyConversionMode(channel=1,frequencyConversionMode)
+
+.. method:: GetFrequencyConversionMode(channel=1,frequencyConversionMode)
+
+.. method:: SetFrequencyConversionModeStage2(channel=1,frequencyConversionMode)
+
+.. method:: GetFrequencyConversionModeStage2(channel=1,frequencyConversionMode)
+
+.. method:: SetFrequencyHighAccuracy(channel=1,highAccuracy)
+
+.. method:: GetFrequencyHighAccuracy(channel=1,highAccuracy)
+
+.. method:: SetFrequencyLOConversionFactor(channel=1,stage,numerator,denominator)
+
+.. method:: GetFrequencyLOConversionFactor(channel=1,stage,numerator,denominator)
+
+.. method:: SetFrequencyRFConversionFactor(channel=1,numerator,denominator)
+
+.. method:: GetFrequencyRFConversionFactor(channel=1,numerator,denominator)
+
+.. method:: SetRFImageFrequency(channel=1,RFImageFrequency)
+
+.. method:: GetRFImageFrequency(channel=1,RFImageFrequency)
+
+.. method:: SetExternalPowerMeter(channel=1,numberOfExternalPowerMeter)
+
+.. method:: GetExternalPowerMeter(channel=1,numberOfExternalPowerMeter)
+
+.. method:: RFSourceCalibration(channel=1)
+
+.. method:: IFReceiverCalibration(channel=1)
+
+.. method:: LOSourceCalibration(channel=1)
+
+.. method:: LOSourceCalibrationStage2(channel=1)
+
+.. method:: SetMixerDelayMeasurementSetup(channel=1,measurementSetup)
+
+.. method:: GetMixerDelayMeasurementSetup(channel=1,measurementSetup)
+
+.. method:: SetMixerDelayLANConnection(channel=1,LANConnection)
+
+.. method:: GetMixerDelayLANConnection(channel=1,LANConnection)
+
+.. method:: DefineMixerDelayReceiver(measurementSetup)
+
+.. method:: ClearMixerDelayReceiverList()
+
+.. method:: StartMixerDelayCalibrationSweep(channel=1)
+
+.. method:: SetMixerDelayAperture(channel=1,aperture)
+
+.. method:: GetMixerDelayAperture(channel=1,aperture)
+
+.. method:: SetMixerDelayConstant(channel=1,constantDelay)
+
+.. method:: GetMixerDelayConstant(channel=1,constantDelay)
+
+.. method:: SetMixerDelayCombinerState(channel=1,internalCombiner)
+
+.. method:: GetMixerDelayCombinerState(channel=1,internalCombiner)
+
+.. method:: SetMixerDelayDivisionByTwoEnabled(channel=1,divisionByTwo)
+
+.. method:: GetMixerDelayDivisionByTwoEnabled(channel=1,divisionByTwo)
+
+.. method:: SetMixerConstantDelayEnabled(channel=1,constantDelay)
+
+.. method:: GetMixerConstantDelayEnabled(channel=1,constantDelay)
+
+.. method:: SetMixerDelayCorrection(channel=1,correction)
+
+.. method:: GetMixerDelayCorrection(channel=1,correction)
+
+.. method:: SetMixerDelayUpperToneSource(channel=1,source,portNumber)
+
+.. method:: GetMixerDelayUpperToneSource(channel=1,source,portNumber)
+
+.. method:: LoadMixerDelayValues(channel=1,type,file)
+
+.. method:: LoadMixerDelayCalibrationData(channel=1,file)
+
+.. method:: StoreMixerDelayCalibrationData(channel=1,file)
+
+.. method:: SetVectorMixerMode(channel=1,mixerMode)
+
+.. method:: GetVectorMixerMode(channel=1,mixerMode)
+
+.. method:: SetInternalSignalSourceAUX(channel=1,internalSignalSource)
+
+.. method:: GetInternalSignalSourceAUX(channel=1,internalSignalSource)
+
+.. method:: SetExternalSignalSourceAUX(channel=1,externalSignalSource)
+
+.. method:: GetExternalSignalSourceAUX(channel=1,externalSignalSource)
+
+.. method:: SetAUXMixerPort(channel=1,portNumber)
+
+.. method:: GetAUXMixerPort(channel=1,portNumber)
+
+.. method:: SetAUXFixedPower(channel=1,fixedPower)
+
+.. method:: GetAUXFixedPower(channel=1,fixedPower)
+
+.. method:: AutomaticVectorMixerCalibration(channel=1,mode,dispersion,mixerParameter,delayPhase)
+
+.. method:: SetIMODLowerToneSource(channel=1,source,sourceNumber)
+
+.. method:: GetIMODLowerToneSource(channel=1,source,sourceNumber)
+
+.. method:: SetIMODUpperToneSource(channel=1,source,sourceNumber)
+
+.. method:: GetIMODUpperToneSource(channel=1,source,sourceNumber)
+
+.. method:: SetIMODToneDistance(channel=1,toneDistance)
+
+.. method:: GetIMODToneDistance(channel=1,toneDistance)
+
+.. method:: SetIMODReceiverPort(channel=1,receiverPort)
+
+.. method:: GetIMODReceiverPort(channel=1,receiverPort)
+
+.. method:: SetIMODMeasurementOrder(channel=1,productOrder,measurementState)
+
+.. method:: GetIMODMeasurementOrder(channel=1,productOrder,measurementState)
+
+.. method:: SetIMODEnhancedWaveCorrection(channel=1,state)
+
+.. method:: GetIMODEnhancedWaveCorrection(channel=1,state)
+
+.. method:: SetIMODInternalCombiner(channel=1,internalCombiner)
+
+.. method:: GetIMODInternalCombiner(channel=1,internalCombiner)
+
+.. method:: SetIMODSpectrumMeasurement(channel=1,spectrumMeasurement)
+
+.. method:: GetIMODSpectrumMeasurement(channel=1,spectrumMeasurement)
+
+.. method:: SetIMODMaxOrder(channel=1,maxOrder)
+
+.. method:: GetIMODMaxOrder(channel=1,maxOrder)
+
+.. method:: SetIMODTwoToneOutput(channel=1,twoToneOutput)
+
+.. method:: GetIMODTwoToneOutput(channel=1,twoToneOutput)
+
+.. method:: StartIMODLowerToneSourcePowerCalibration(channel=1)
+
+.. method:: StartIMODUpperToneSourcePowerCalibration(channel=1)
+
+.. method:: StartIMODReceivePortSourcePowerCalibration(channel=1)
+
+.. method:: StartIMODLowerUpperTonePortsSourcePowerCalibration(channel=1)
+
+.. method:: StartIMODReceiverPortPowerCalibration(channel=1)
+
+.. method:: StartIMODReceiverPowerCalibration(channel=1)
+
+.. method:: SetIMODDistortionMeasurementCalibrationState(channel=1,state)
+
+.. method:: GetIMODDistortionMeasurementCalibrationState(channel=1,state)
+
+.. method:: DisableIMODMeasurement(channel=1)
+
+.. method:: SetNoiseFigureDetectorMeasurementTime(channel=1,detectorTime)
+
+.. method:: GetNoiseFigureDetectorMeasurementTime(channel=1,detectorTime)
+
+.. method:: SetNoiseFigureMeasurementMode(channel=1,measurementMode)
+
+.. method:: GetNoiseFigureMeasurementMode(channel=1,measurementMode)
+
+.. method:: SetNoiseFigureLOOscillator(channel=1,LOOscillator)
+
+.. method:: GetNoiseFigureLOOscillator(channel=1,LOOscillator)
+
+.. method:: SetNoiseFigureNarowbandDUT(channel=1,narowbandDUT)
+
+.. method:: GetNoiseFigureNarowbandDUT(channel=1,narowbandDUT)
+
+.. method:: SetNoiseFigureRFImageCorrection(channel=1,RFImageCorrection)
+
+.. method:: GetNoiseFigureRFImageCorrection(channel=1,RFImageCorrection)
+
+.. method:: SetNoiseFigureCalibrationState(channel=1,calibration)
+
+.. method:: GetNoiseFigureCalibrationState(channel=1,calibration)
+
+.. method:: GetNoiseFigureCalibrationStateLabel(channel=1,bufferSize,label)
+
+.. method:: DefineNoiseFigureCalibrationSettings(channel=1,port1,port2,externalAttenuator,sourceNoiseCalAttenuation,DUTMeasurementAttenuation)
+
+.. method:: StartNoiseFigureCalibration(channel=1,calibrationStep)
+
+.. method:: TerminateNoiseFigureCalibration(channel=1)
+
+.. method:: CompleteNoiseFigureCalibration(channel=1)
+
+.. method:: OverwriteNoiseFigureChannelSettings(channel=1,traceName)
+
+.. method:: SetVirtualTransformBalancedState(channel=1,functionType,logicalPortNumber,state)
+
+.. method:: GetVirtualTransformBalancedState(channel=1,functionType,logicalPortNumber,state)
+
+.. method:: SetVirtualTransformBalancedPort(channel=1,functionType,logicalPortNumber,parameterType,parameterNumber,circuitModel,value)
+
+.. method:: GetVirtualTransformBalancedPort(channel=1,functionType,logicalPortNumber,parameterType,parameterNumber,circuitModel,value)
+
+.. method:: SetVirtualTransformBalancedCircuitModel(channel=1,functionType,logicalPortNumber,circuitModel)
+
+.. method:: GetVirtualTransformBalancedCircuitModel(channel=1,functionType,logicalPortNumber,circuitModel)
+
+.. method:: LoadBalancedPortCircuitModelData(channel=1,functionType,logicalPortNumber,fileName,parameter)
+
+.. method:: LoadAndInterchangeBalancedPortCircuitModelData(channel=1,functionType,logicalPortNumber,fileName,parameter)
+
+.. method:: SetVirtualTransformSingleEndedState(channel=1,functionType,physicalPortNumber,state)
+
+.. method:: GetVirtualTransformSingleEndedState(channel=1,functionType,physicalPortNumber,state)
+
+.. method:: SetVirtualTransformSingleEndedPort(channel=1,functionType,physicalPortNumber,parameterType,parameterNumber,circuitModel,value)
+
+.. method:: GetVirtualTransformSingleEndedPort(channel=1,functionType,physicalPortNumber,parameterType,parameterNumber,circuitModel,value)
+
+.. method:: SetVirtualTransformSingleEndedCircuitModel(channel=1,functionType,physicalPortNumber,circuitModel)
+
+.. method:: GetVirtualTransformSingleEndedCircuitModel(channel=1,functionType,physicalPortNumber,circuitModel)
+
+.. method:: LoadSingleEndedPortCircuitModelData(channel=1,functionType,physicalPortNumber,fileName)
+
+.. method:: LoadAndInterchangeSingleEndedPortCircuitModelData(channel=1,functionType,physicalPortNumber,fileName)
+
+.. method:: SetVirtualTransformGroundLoopState(channel=1,functionType,state)
+
+.. method:: GetVirtualTransformGroundLoopState(channel=1,functionType,state)
+
+.. method:: SetVirtualTransformGroundLoop(channel=1,functionType,parameterType,circuitModel,groundLoopValue)
+
+.. method:: GetVirtualTransformGroundLoop(channel=1,functionType,parameterType,circuitModel,groundLoopValue)
+
+.. method:: SetVirtualTransformGroundLoopCircuitModel(channel=1,functionType,circuitModel)
+
+.. method:: GetVirtualTransformGroundLoopCircuitModel(channel=1,functionType,circuitModel)
+
+.. method:: LoadGroundLoopCircuitModelData(channel=1,functionType,fileName)
+
+.. method:: SetVirtualTransformPortPairState(channel=1,functionType,portPair,state)
+
+.. method:: GetVirtualTransformPortPairState(channel=1,functionType,portPair,state)
+
+.. method:: SetVirtualTransformPortPair(channel=1,functionType,portPair,parameterType,parameterNumber,circuitModel,value)
+
+.. method:: GetVirtualTransformPortPair(channel=1,functionType,portPair,parameterType,parameterNumber,circuitModel,value)
+
+.. method:: SetVirtualTransformPortPairCircuitModel(channel=1,functionType,portPair,circuitModel)
+
+.. method:: GetVirtualTransformPortPairCircuitModel(channel=1,functionType,portPair,circuitModel)
+
+.. method:: LoadPortPairCircuitModelData(channel=1,functionType,portPair,fileName,parameter,interchangePortNumbers)
+
+.. method:: SetCoherentSignalState(channel=1,port,coherentSignal)
+
+.. method:: GetCoherentSignalState(channel=1,port,coherentSignal)
+
+.. method:: SetCoherentSignalAmplitude(channel=1,port,amplitude)
+
+.. method:: GetCoherentSignalAmplitude(channel=1,port,amplitude)
+
+.. method:: SetCoherentSignalPhase(channel=1,port,phase)
+
+.. method:: GetCoherentSignalPhase(channel=1,port,phase)
+
+.. method:: SetCoherentSignalReferencePort(channel=1,referencePort)
+
+.. method:: GetCoherentSignalReferencePort(channel=1,referencePort)
+
+.. method:: SetAlternateSweepMode(channel=1,alternateSweepMode)
+
+.. method:: GetAlternateSweepMode(channel=1,alternateSweepMode)
+
+.. method:: SetSpuriousAvoidance(channel=1,spuriousAvoidance)
+
+.. method:: GetSpuriousAvoidance(channel=1,spuriousAvoidance)
+
+.. method:: SetAutomaticLevelControlState(ALCState)
+
+.. method:: GetAutomaticLevelControlState(ALCState)
+
+.. method:: SetIndividualALCPortState(channel=1,port,state)
+
+.. method:: GetIndividualALCPortState(channel=1,port,state)
+
+.. method:: SetALCPortState(channel=1,port,state)
+
+.. method:: GetALCPortState(channel=1,port,state)
+
+.. method:: SetALCPortClamp(channel=1,port,clampState)
+
+.. method:: GetALCPortClamp(channel=1,port,clampState)
+
+.. method:: SetALCPortAUBWState(channel=1,port,state)
+
+.. method:: GetALCPortAUBWState(channel=1,port,state)
+
+.. method:: SetALCPortBandwidth(channel=1,port,bandwidth)
+
+.. method:: GetALCPortBandwidth(channel=1,port,bandwidth)
+
+.. method:: SetALCPortCoupling(channel=1,state)
+
+.. method:: GetALCPortCoupling(channel=1,state)
+
+.. method:: SetALCChannelState(channel=1,state)
+
+.. method:: GetALCChannelState(channel=1,state)
+
+.. method:: SetALCLowPhaseNoiseMode(channel=1,state)
+
+.. method:: GetALCLowPhaseNoiseMode(channel=1,state)
+
+.. method:: SetALCPortOffsetState(channel=1,port,state)
+
+.. method:: GetALCPortOffsetState(channel=1,port,state)
+
+.. method:: SetALCPortControlRange(channel=1,port,controlRange)
+
+.. method:: GetALCPortControlRange(channel=1,port,controlRange)
+
+.. method:: SetALCPortStartOffset(channel=1,port,startOffset)
+
+.. method:: GetALCPortStartOffset(channel=1,port,startOffset)
+
+.. method:: SetALCPortSettingTolerance(channel=1,port,settingTolerance)
+
+.. method:: GetALCPortSettingTolerance(channel=1,port,settingTolerance)
+
+.. method:: SetLowPhaseNoiseState(channel=1,lowPhaseNoiseState)
+
+.. method:: GetLowPhaseNoiseState(channel=1,lowPhaseNoiseState)
+
+.. method:: ConfigurePortPIController(channel=1,port,PIControllerMode,gain,integrationTime)
+
+.. method:: ConfigureSAWMatchingNetwork(channel=1,apply,parallelL,serialC,differentialModeImpedance,commonModeImpedance)
+
+.. method:: SetSAWState(channel=1,apply)
+
+.. method:: GetSAWState(channel=1,apply)
+
+.. method:: SetSAWParallelL(channel=1,parallelL)
+
+.. method:: GetSAWParallelL(channel=1,parallelL)
+
+.. method:: SetSAWSerialC(channel=1,serialC)
+
+.. method:: GetSAWSerialC(channel=1,serialC)
+
+.. method:: SetSAWSimulationType(channel=1,type)
+
+.. method:: GetSAWSimulationType(channel=1,type)
+
+.. method:: SetPIControllerMode(channel=1,port,PIControllerMode)
+
+.. method:: GetPIControllerMode(channel=1,port,PIControllerMode)
+
+.. method:: SetPIControllerGain(channel=1,port,gain)
+
+.. method:: GetPIControllerGain(channel=1,port,gain)
+
+.. method:: SetPIControllerIntegrationTime(channel=1,port,integrationTime)
+
+.. method:: GetPIControllerIntegrationTime(channel=1,port,integrationTime)
+
+.. method:: ChannelAdd(channel=1,channelName)
+
+.. method:: ChannelAddTrace(window,window_Trace,channel=1,channelName,traceName)
+
+.. method:: ChannelAddTraceDiagramArea(window,window_Trace,channel=1,channelName,traceName)
+
+.. method:: ChannelDelete(channel=1)
+
+.. method:: ChannelList(catalog,bufferSize)
+
+.. method:: ChannelGetChannelName(channel=1,channelName)
+
+.. method:: ChannelGetChannelNumber(channelName,channelNumber)
+
+.. method:: ChannelSetActive(channel=1)
+
+.. method:: ChannelGetActive(channel)
+
+.. method:: ChannelRename(channel=1,channelName)
+
+.. method:: SetConnector(channel=1,port,connector)
+
+.. method:: GetConnector(channel=1,port,connector)
+
+.. method:: SetSameConnectorTypeAtAllPorts(channel=1,sameConnectorAtAllPorts)
+
+.. method:: GetSameConnectorTypeAtAllPorts(channel=1,sameConnectorAtAllPorts)
+
+.. method:: SetSameConnectorGenderAtAllPorts(channel=1,sameGenderAtAllPorts)
+
+.. method:: GetSameConnectorGenderAtAllPorts(channel=1,sameGenderAtAllPorts)
+
+.. method:: SetUserConnector(channel=1,port,connector,connectorGender)
+
+.. method:: GetUserConnector(channel=1,port,connector,connectorGender)
+
+.. method:: SetSameSweepSetup(channel=1,sameSweepSetup)
+
+.. method:: GetSameSweepSetup(channel=1,sameSweepSetup)
+
+.. method:: SetSParameterDetector(channel=1,sParameterDetector)
+
+.. method:: GetSParameterDetector(channel=1,sParameterDetector)
+
+.. method:: SelectCalibrationType(channel=1,calibrationName,parameters,port1,port2,port3,port4)
+
+.. method:: GetCalibrationType(channel=1,calibrationType,port1,port2,port3,port4)
+
+.. method:: StartCalibration(channel=1,standard,port1,port2)
+
+.. method:: StartCalibrationLine(channel=1,line,port1,port2)
+
+.. method:: StartCalibrationWithOptions(channel=1,standard,port1,port2,dispersion,delayPhase,delayPhaseValue)
+
+.. method:: SetCalibrationReferencePlaneShift(channel=1,referencePlaneShift)
+
+.. method:: GetCalibrationReferencePlaneShift(channel=1,referencePlaneShift)
+
+.. method:: SetCalibrationReferencePlaneShiftSpecific(channel=1,referencePlaneShift,calibrationName)
+
+.. method:: GetCalibrationReferencePlaneShiftSpecific(channel=1,calibrationName,referencePlaneShift)
+
+.. method:: QueryCalibrationReferencePlaneShift(channel=1,calibrationIndex,referencePlaneShift)
+
+.. method:: SaveCalibrationData(channel=1)
+
+.. method:: GenerateDefaultCalibrationData(channel=1)
+
+.. method:: DeleteCalibrationData(channel=1,calibrationName)
+
+.. method:: DeleteAllCalibrationData(channel=1)
+
+.. method:: ReadCalibrationData(channel=1,errorTermParameters,port1,port2,calibrationData)
+
+.. method:: WriteCalibrationData(channel=1,errorTermParameters,port1,port2,calibrationData)
+
+.. method:: SetCorrectionState(channel=1,correctionState)
+
+.. method:: GetCorrectionState(channel=1,correctionState)
+
+.. method:: AcquireSourcePowerCalibration(channel=1,source,portNumber)
+
+.. method:: InitiateSourcePowerCalibration(channel=1,portNumber,externalPowerMeter)
+
+.. method:: SetDummySourcePowerCalibrationState(dummySourcePowerCalibration)
+
+.. method:: GetDummySourcePowerCalibrationState(dummySourcePowerCalibration)
+
+.. method:: SetSourcePowerCalibrationPortState(channel=1,portNumber,portState)
+
+.. method:: GetSourcePowerCalibrationPortState(channel=1,portNumber,portState)
+
+.. method:: SetSourcePowerCalibrationGeneratorState(channel=1,portNumber,generatorState)
+
+.. method:: GetSourcePowerCalibrationGeneratorState(channel=1,portNumber,generatorState)
+
+.. method:: SetVerificationSweepState(channel=1,verificationSweep)
+
+.. method:: GetVerificationSweepState(channel=1,verificationSweep)
+
+.. method:: QueryVerificationSweepResults(calibrationPassed,maxOffset)
+
+.. method:: GeneratorPowerCalibrationHarmonic(channel=1)
+
+.. method:: SetSourcePowerCalibrationState(calibrationState)
+
+.. method:: GetSourcePowerCalibrationState(calibrationState)
+
+.. method:: SetReferenceReceiverCalibrationState(calibrationState)
+
+.. method:: GetReferenceReceiverCalibrationState(calibrationState)
+
+.. method:: ModifySourcePowerCalibrationSettings(channel=1,portNumber,numberOfReadings,tolerance,otherSourcesState,portPowerOffset,offsetParameter,calibrationPowerOffset)
+
+.. method:: SetNumberOfReadings(channel=1,numberOfReadings)
+
+.. method:: GetNumberOfReadings(channel=1,numberOfReadings)
+
+.. method:: SetTolerance(channel=1,tolerance)
+
+.. method:: GetTolerance(channel=1,tolerance)
+
+.. method:: SetOtherSourcesState(channel=1,otherSources)
+
+.. method:: GetOtherSourcesState(channel=1,otherSources)
+
+.. method:: SetPortPowerOffset(channel=1,portNumber,portPowerOffset,offsetParameter)
+
+.. method:: GetPortPowerOffset(channel=1,portNumber,portPowerOffset,offsetParameter)
+
+.. method:: SetCalibrationPowerOffset(channel=1,portNumber,calibrationPowerOffset)
+
+.. method:: GetCalibrationPowerOffset(channel=1,portNumber,calibrationPowerOffset)
+
+.. method:: SetCalibrationPowerGeneratorOffset(channel=1,portNumber,generatorNumber,calPowerGeneratorOffset)
+
+.. method:: GetCalibrationPowerGeneratorOffset(channel=1,portNumber,generatorNumber,calPowerGeneratorOffset)
+
+.. method:: SetReferenceReceiverAfterFirstCalSweep(fastSourcePowerCalibration)
+
+.. method:: GetReferenceReceiverAfterFirstCalSweep(fastSourcePowerCalibration)
+
+.. method:: SetPowerCalibrationMethodSource(methodSource)
+
+.. method:: GetPowerCalibrationMethodSource(methodSource)
+
+.. method:: SetCalibrationPowerMeterReadings(powerMeterReadings)
+
+.. method:: GetCalibrationPowerMeterReadings(powerMeterReadings)
+
+.. method:: ReadSourcePowerCorrectionData(channel=1,portNumber,calibratedWave,numberOfValues,powerCorrectionValues)
+
+.. method:: WriteSourcePowerCorrectionData(channel=1,portNumber,calibratedWave,numberOfValues,powerCorrectionValues)
+
+.. method:: GetSourcePowerCalibrationNumberOfWaves(channel=1,numberOfWaves)
+
+.. method:: GetSourcePowerCalibrationParamaterWave(channel=1,calibrationIndex,bufferSize,calibratedWave)
+
+.. method:: GetSourcePowerCalibrationParamaterStart(channel=1,calibrationIndex,start)
+
+.. method:: GetSourcePowerCalibrationParamaterStop(channel=1,calibrationIndex,stop)
+
+.. method:: GetSourcePowerCalibrationParamaterPoints(channel=1,calibrationIndex,points)
+
+.. method:: GetSourcePowerCalibrationParamaterType(channel=1,calibrationIndex,type)
+
+.. method:: GetSourcePowerCalibrationParamaterAttenuation(channel=1,calibrationIndex,attenuation)
+
+.. method:: GetSourcePowerCalibrationParamaterCWPower(channel=1,calibrationIndex,CWPower)
+
+.. method:: GetSourcePowerCalibrationParamaterCWFrequency(channel=1,calibrationIndex,CWFrequency)
+
+.. method:: GetSourcePowerCalibrationParamaterTimestamp(channel=1,calibrationIndex,bufferSize,timestamp)
+
+.. method:: SetSourcePowerCalibrationConvergenceFactor(convergenceFactor)
+
+.. method:: GetSourcePowerCalibrationConvergenceFactor(convergenceFactor)
+
+.. method:: SetSourcePowerCalibrationConverterState(channel=1,converter,calibrationConverter)
+
+.. method:: GetSourcePowerCalibrationConverterState(channel=1,converter,calibrationConverter)
+
+.. method:: AcquireReceiverPowerCalibration(channel=1,wave,portNumber,source,sourceNumber,referencePower)
+
+.. method:: SetAWaveReceiverPowerCalibrationState(channel=1,portNumber,receiverPowerCalibration)
+
+.. method:: GetAWaveReceiverPowerCalibrationState(channel=1,portNumber,receiverPowerCalibration)
+
+.. method:: SetAWaveIdealPowerMeterMatchState(channel=1,portNumber,state)
+
+.. method:: GetAWaveIdealPowerMeterMatchState(channel=1,portNumber,state)
+
+.. method:: SetBWaveReceiverPowerCalibrationState(channel=1,portNumber,receiverPowerCalibration)
+
+.. method:: GetBWaveReceiverPowerCalibrationState(channel=1,portNumber,receiverPowerCalibration)
+
+.. method:: ReadReceiverPowerCorrectionData(channel=1,portNumber,calibratedWave,numberOfValues,powerCorrectionValues)
+
+.. method:: WriteReceiverPowerCorrectionData(channel=1,portNumber,calibratedWave,numberOfValues,powerCorrectionValues)
+
+.. method:: ReceiverPowerCalibrationHarmonic(channel=1)
+
+.. method:: CorrectionManager(operationToBePerformed,fileName,loadParameter)
+
+.. method:: SetPowerSensorPosition(powerSensorPosition)
+
+.. method:: GetPowerSensorPosition(powerSensorPosition)
+
+.. method:: SetTwoPortTransmissionCoefficientsEnabled(twoPortEnabled)
+
+.. method:: GetTwoPortTransmissionCoefficientsEnabled(twoPortEnabled)
+
+.. method:: GetLossListNumberOfValues(numberOfValues)
+
+.. method:: SetPowerLossListCoefficient(operationToBePerformed,point,frequency,transmissionCoefficient)
+
+.. method:: GetPowerLossListCoefficient(point,frequency,transmissionCoefficient)
+
+.. method:: DeleteAllPowerLossListPoints()
+
+.. method:: DeletePowerLossListSinglePoint(point)
+
+.. method:: SetPowerLossListTrace(traceName)
+
+.. method:: SetSourcePowerCorrectionState(channel=1,portNumber,sourcePowerCorrectionState)
+
+.. method:: GetSourcePowerCorrectionState(channel=1,portNumber,sourcePowerCorrectionState)
+
+.. method:: SetReceiverPowerCorrectionState(channel=1,portNumber,receiverPowerCorrectionState)
+
+.. method:: GetReceiverPowerCorrectionState(channel=1,portNumber,receiverPowerCorrectionState)
+
+.. method:: CalibrationManager(channel=1,operationToBePerformed,fileName)
+
+.. method:: CalibrationAuto(channel=1,calibrationKitName,analyzerPort1,analyzerPort2,analyzerPort3,analyzerPort4,calUnitPort1,calUnitPort2,calUnitPort3,calUnitPort4)
+
+.. method:: CalibrationAutoSimplified(channel=1,calibrationKitName,analyzerPort1,analyzerPort2,analyzerPort3,analyzerPort4)
+
+.. method:: CalibrationAutoType(channel=1,parameters,calibrationKitName,analyzerPort1,analyzerPort2,analyzerPort3,analyzerPort4,calUnitPort1,calUnitPort2,calUnitPort3,calUnitPort4)
+
+.. method:: CalibrationAutoTypeSimplified(channel=1,parameters,calibrationKitName,analyzerPort1,analyzerPort2,analyzerPort3,analyzerPort4)
+
+.. method:: CalibrationRetainPortGroups(retainPortGroups)
+
+.. method:: GetCalibrationConnection(channel=1,analyzerPort1,analyzerPort2,analyzerPort3,analyzerPort4)
+
+.. method:: CalibrationAutoEx(channel=1,calibrationKitName,analyzerPort1,analyzerPort2,analyzerPort3,analyzerPort4,calUnitPort1,calUnitPort2,calUnitPort3,calUnitPort4,timeout)
+
+.. method:: CalibrationAutoAssignmentType(channel=1,parameters,calibrationKitName)
+
+.. method:: CalibrationAutoAssignmentDefinition(channel=1,assignment,analyzerPort1,analyzerPort2,analyzerPort3,analyzerPort4,calUnitPort1,calUnitPort2,calUnitPort3,calUnitPort4)
+
+.. method:: GetCalibrationAutoAssingnmentDefinition(channel=1,assignment,analyzerPort1,analyzerPort2,analyzerPort3,analyzerPort4,calUnitPort1,calUnitPort2,calUnitPort3,calUnitPort4)
+
+.. method:: InitiateCalibrationAutoAssignment(channel=1,assignment)
+
+.. method:: CalibrationAutoAssignmentSave(channel=1)
+
+.. method:: CalibrationAutoAssingnmentDeleteAll(channel=1)
+
+.. method:: SetCalibrationDataCurrentState(channel=1,keepMeasData)
+
+.. method:: GetCalibrationDataCurrentState(channel=1,keepMeasData)
+
+.. method:: SetCalibrationDataDefaultState(channel=1,keepMeasData)
+
+.. method:: GetCalibrationDataDefaultState(channel=1,keepMeasData)
+
+.. method:: ExpCharDataTouchstoneFile(fileName)
+
+.. method:: ExportUserCharacterizationDataTouchstoneFile(directoryName,fileName)
+
+.. method:: SetCalibrationConnector(channel=1,connectorName,propagationMode,connectorType,relativePermittivity,impedance)
+
+.. method:: GetCalibrationConnector(channel=1,connectorName,propagationMode,connectorType,relativePermittivity,impedance)
+
+.. method:: CalibrationConnectorCatalog(catalog,bufferSize)
+
+.. method:: DeleteCalibrationConnector(channel=1,connectorName)
+
+.. method:: GetCalibrationDate(channel=1,bufferSize,calibrationDate)
+
+.. method:: GetCalibrationState(channel=1,calibrationState)
+
+.. method:: GetCalibrationLabel(channel=1,bufferSize,label)
+
+.. method:: GetCalibrationDataParameters(channel=1,frequencyStart,frequencyStop,numberOfPoints,internalSignalSourcePower,sweepType)
+
+.. method:: GetCalibrationsNumber(channel=1,numberOfCalibrations)
+
+.. method:: GetCalibrationDataParametersMoreCalibrations(channel=1,calibration,frequencyStart,frequencyStop,numberOfPoints,internalSignalSourcePower,sweepType)
+
+.. method:: GetCalibrationDataBandwidth(channel=1,calibration,bandwidth)
+
+.. method:: GetCalibrationDataPointDelay(channel=1,calibration,pointDelay)
+
+.. method:: GetCalibrationDataReceiverAttenuation(channel=1,calibration,arraySize,calibrationPort,attenuation,returnedValues)
+
+.. method:: GetCalibrationDataType(channel=1,calibration,calibrationType)
+
+.. method:: GetCalibrationDataPorts(channel=1,calibration,arraySize,calibrationPorts,returnedValues)
+
+.. method:: GetCalibrationDataThroughs(channel=1,calibration,bufferSize,throughs)
+
+.. method:: GetCalibrationDataTimestamp(channel=1,calibration,bufferSize,timestamp)
+
+.. method:: SetActiveCalibrationUnit(calibrationUnit)
+
+.. method:: GetActiveCalibrationUnit(bufferSize,calibrationUnit)
+
+.. method:: SetAutomaticPowerReductionState(automaticPowerReduction)
+
+.. method:: GetAutomaticPowerReductionState(automaticPowerReduction)
+
+.. method:: GetAllCalibrationUnits(bufferSize,calibrationUnit)
+
+.. method:: ConfigureCalibrationUnitStandard(standard,port1,port2)
+
+.. method:: SetFactoryCalibrationState(channel=1,factoryCalibration)
+
+.. method:: GetFactoryCalibrationState(channel=1,factoryCalibration)
+
+.. method:: SetEnhancedWaveCorrection(channel=1,errorCorrection)
+
+.. method:: GetEnhancedWaveCorrection(channel=1,errorCorrection)
+
+.. method:: SetLoadMatchingCorrection(channel=1,loadMatchingCorrection)
+
+.. method:: GetLoadMatchingCorrection(channel=1,loadMatchingCorrection)
+
+.. method:: SetCalibrationCorrectionBaseFrequencyState(channel=1,state)
+
+.. method:: GetCalibrationCorrectionBaseFrequencyState(channel=1,state)
+
+.. method:: SetCalibrationKit(connector,calibrationKitName)
+
+.. method:: GetCalibrationKit(connector,bufferSize,calibrationKitName)
+
+.. method:: SetCalibrationKitWithLabel(connector,calibrationKitName,calibrationKitLabel)
+
+.. method:: SetCalibrationKitUserConnectorType(connector,calibrationKitName)
+
+.. method:: GetCalibrationKitUserConnectorType(connector,bufferSize,calibrationKitName)
+
+.. method:: SetCalibrationKitUserConnectorTypeWithLabel(connectionType,calibrationKitName,calibrationKitLabel)
+
+.. method:: GetCalibrationKitUserConnectorTypeWithLabel(connectionType,bufferSize,calibrationKitData)
+
+.. method:: CalibrationKitCatalog(connectorName,catalog,bufferSize)
+
+.. method:: CalibrationKitCatalogWithLabel(connectorName,bufferSize,catalog)
+
+.. method:: ImportZVRCalibrationKit(calibrationKitName)
+
+.. method:: ConfigureCalibrationStandard(connector,standard,kit,serialNumber,minFreqHz,maxFreqHz,lengthmm,loss,c0L0,c1L1,c2L2,c3L3,approximation)
+
+.. method:: ConfigureCalibrationStandardWithLabel(standard,connector,calkitName,calkitLabel,standardLabel,minFreqHz,maxFreqHz,electricalLength,loss,z0,capacitances,residualInductances,approximation)
+
+.. method:: CalibrationStandardsCatalog(calibrationKitName,catalog,bufferSize)
+
+.. method:: CalibrationStandardsCatalogWithLabel(calibrationKitName,calibrationKitLabel,bufferSize,catalog)
+
+.. method:: SaveCalibrationKit(fileName)
+
+.. method:: SaveCalibrationKitPorts(fileName,parameters,arraySize,VNAPorts,calUnitPorts)
+
+.. method:: LoadCalibrationKit(connectorName,calibrationKitName,standard,calibrationKitLabel,fileName,portNumber1,portNumber2)
+
+.. method:: SetCalibrationKitLabel(calibrationKitName,label)
+
+.. method:: RenameCalibrationKit(calibrationKitName,label,newLabel)
+
+.. method:: GetCalibrationKitLabel(calibrationKitName,label)
+
+.. method:: DeleteCalibrationKit(calibrationKitName)
+
+.. method:: DeleteCalibrationKitWithLabel(calibrationKitName,calibrationKitLabel)
+
+.. method:: ImportKit(fileName)
+
+.. method:: AdditionalDirectoryCalibrationKit(directory)
+
+.. method:: ExportKit(kitName,fileName)
+
+.. method:: ExportKitWithLabel(kitName,kitLabel,fileName)
+
+.. method:: ResetOffsets(channel=1)
+
+.. method:: QueryResetOffsets(channel=1,offsets)
+
+.. method:: SetElectricalLength(channel=1,port,electricalLength)
+
+.. method:: GetElectricalLength(channel=1,port,electricalLength)
+
+.. method:: ConfigureMechanicalLength(channel=1,port,mechanicalLength,permittivity)
+
+.. method:: SetMechanicalLength(channel=1,port,mechanicalLength)
+
+.. method:: GetMechanicalLength(channel=1,port,mechanicalLength)
+
+.. method:: SetPermittivity(channel=1,port,permittivity)
+
+.. method:: GetPermittivity(channel=1,port,permittivity)
+
+.. method:: ConfigureLoss(channel=1,port,lossAtDC,lossAtFrequency,lossReferenceFrequency)
+
+.. method:: SetLossAtDC(channel=1,port,lossAtDC)
+
+.. method:: GetLossAtDC(channel=1,port,lossAtDC)
+
+.. method:: SetLossAtFrequency(channel=1,port,lossAtFrequency)
+
+.. method:: GetLossAtFrequency(channel=1,port,lossAtFrequency)
+
+.. method:: SetLossReferenceFrequency(channel=1,port,lossReferenceFrequency)
+
+.. method:: GetLossReferenceFrequency(channel=1,port,lossReferenceFrequency)
+
+.. method:: SetDelay(channel=1,port,delay)
+
+.. method:: GetDelay(channel=1,port,delay)
+
+.. method:: QueryDirectFixtureCompensation(channel=1,port,directFixtureCompensation)
+
+.. method:: AutoLength(channel=1,port)
+
+.. method:: AutoLengthAndLoss(channel=1,port)
+
+.. method:: AcquireFixtureCompensationSweep(channel=1,standardType,arraySize,ports)
+
+.. method:: StartFixtureCompensationSweep(channel=1)
+
+.. method:: SaveFixtureCompensationData(channel=1)
+
+.. method:: SetFixtureCompensationAutoLengthAndLossCalculation(autoLengthAndLoss)
+
+.. method:: GetFixtureCompensationAutoLengthAndLossCalculation(autoLengthAndLoss)
+
+.. method:: SetFixtureCompensationDirectCompensation(directCompensation)
+
+.. method:: GetFixtureCompensationDirectCompensation(directCompensation)
+
+.. method:: DiagramAreaAdd(window)
+
+.. method:: DiagramAreaDelete(window)
+
+.. method:: DiagramAreaMaximize(window,diagramArea)
+
+.. method:: DiagramAreaTitle(window,title,titleString)
+
+.. method:: DiagramAreaName(window,areaName)
+
+.. method:: DiagramAreaCatalog(window,catalog,bufferSize)
+
+.. method:: TraceDiagramAreaCatalog(window,catalog,bufferSize)
+
+.. method:: SetColorScheme(colorScheme)
+
+.. method:: GetColorScheme(colorScheme)
+
+.. method:: SaveColorScheme(fileName)
+
+.. method:: LoadColorScheme(fileName)
+
+.. method:: SetFrequencyInfo(frequencyInfo)
+
+.. method:: GetFrequencyInfo(frequencyInfo)
+
+.. method:: SetFontSize(fontSize)
+
+.. method:: GetFontSize(fontSize)
+
+.. method:: SetChannelInfo(channelInfo)
+
+.. method:: GetChannelInfo(channelInfo)
+
+.. method:: SetMarkerColorState(sameColor)
+
+.. method:: GetMarkerColorState(sameColor)
+
+.. method:: SetRGBColor(element,red,green,blue,traceStyle,traceWidth)
+
+.. method:: GetRGBColor(element,red,green,blue,traceStyle,traceWidth)
+
+.. method:: SetTraceColorState(traceColor)
+
+.. method:: GetTraceColorState(traceColor)
+
+.. method:: TraceSetRGBColor(traceName,red,green,blue,traceStyle,traceWidth)
+
+.. method:: TraceGetRGBColor(traceName,red,green,blue,traceStyle,traceWidth)
+
+.. method:: SetPowerPortLimitState(channel=1,port,limitState)
+
+.. method:: GetPowerPortLimitState(channel=1,port,limitState)
+
+.. method:: SetPowerPortLimitValue(channel=1,port,limitValue)
+
+.. method:: GetPowerPortLimitValue(channel=1,port,limitValue)
+
+.. method:: SetPowerPortLimitDirectGeneratorAndReceiverState(channel=1,port,DRGAccessState)
+
+.. method:: GetPowerPortLimitDirectGeneratorAndReceiverState(channel=1,port,DRGAccessState)
+
+.. method:: SetPresets(presetScope)
+
+.. method:: GetPresets(presetScope)
+
+.. method:: SetPresetSettingsState(state)
+
+.. method:: GetPresetSettingsState(state)
+
+.. method:: SetUserDefinedPresetState(userDefinedPreset)
+
+.. method:: GetUserDefinedPresetState(userDefinedPreset)
+
+.. method:: SetUserDefinedPresetFile(userDefinedPresetFile)
+
+.. method:: GetUserDefinedPresetFile(bufferSize,userDefinedPresetFile)
+
+.. method:: SetDisplayUpdate(displayUpdate)
+
+.. method:: GetDisplayUpdate(displayUpdate)
+
+.. method:: ImmediateSettingsUpdate()
+
+.. method:: QueryFrequencyRange(minimumFrequency,maximumFrequency)
+
+.. method:: SystemKeylock(lockout)
+
+.. method:: SetRemoteLanguage(language)
+
+.. method:: GetRemoteLanguage(language)
+
+.. method:: ConfigureExternalGenerator(generatorNumber,generatorName,generatorType,interfaceType,interfaceAddress,fastSweepMode,_10MHzReferenceFrequency)
+
+.. method:: QueryExternalGenerator(generatorNumber,generatorName,generatorType,interfaceType,interfaceAddress,fastSweepMode,_10MHzReferenceFrequency)
+
+.. method:: QueryExternalGeneratorCount(generatorCount)
+
+.. method:: QueryExternalGeneratorNumbers(arraySize,generatorNumbers)
+
+.. method:: DeleteExternalGenerator()
+
+.. method:: ConfigureExternalPowerMeter(powerMeterNumber,powerMeterName,powerMeterType,interfaceType,interfaceAddress)
+
+.. method:: QueryExternalPowerMeter(powerMeterNumber,powerMeterName,powerMeterType,interfaceType,interfaceAddress)
+
+.. method:: QueryExternalPowerMeterCount(powerMeterCount)
+
+.. method:: QueryExternalPowerMeterNumbers(bufferSize,powerMeterNumber)
+
+.. method:: AutoZeroingExternalPowerMeter(powerMeterNumber)
+
+.. method:: SetAutoConfigNRPZxx(powerMeterNumber,autoConfig)
+
+.. method:: GetAutoConfigNRPZxx(powerMeterNumber,autoConfig)
+
+.. method:: DeleteExternalPowerMeter()
+
+.. method:: SetAlarmSoundsState(alarmSounds)
+
+.. method:: GetAlarmSoundsState(alarmSounds)
+
+.. method:: SetRestartBehavior(restartBehavior)
+
+.. method:: GetRestartBehavior(restartBehavior)
+
+.. method:: SetStatusSoundsState(statusSounds)
+
+.. method:: GetStatusSoundsState(statusSounds)
+
+.. method:: SetDataTransfer(dataTransfer)
+
+.. method:: GetDataTransfer(dataTransfer)
+
+.. method:: SetErrorDisplayState(errorDisplay)
+
+.. method:: GetErrorDisplayState(errorDisplay)
+
+.. method:: SetFrequencyConversionType(converterType)
+
+.. method:: GetFrequencyConversionType(bufferSize,converterType)
+
+.. method:: SetFrequencyConversionSource(conversionSource)
+
+.. method:: GetFrequencyConversionSource(conversionSource)
+
+.. method:: SetFastMultiportCorrection(fastMultiportCorrection)
+
+.. method:: GetFastMultiportCorrection(fastMultiportCorrection)
+
+.. method:: SetPowerCoeficients(port,coeficient)
+
+.. method:: GetPowerCoeficients(port,coeficients)
+
+.. method:: SetPowerCoeficientsDefault(defaultCoeficients)
+
+.. method:: GetPowerCoeficientsDefault(defaultCoeficients)
+
+.. method:: QueryExtensionUnitDeviceID(bufferSize,deviceID)
+
+.. method:: QueryExtensionUnitHardwareOptions(bufferSize,options)
+
+.. method:: SetNWAApplicationPriority(priority)
+
+.. method:: GetNWAApplicationPriority(priority)
+
+.. method:: SystemShutdown()
+
+.. method:: GenerateSystemReport(fileName)
+
+.. method:: SetCalculationOfBandfilterCenterFrequency(channel=1,marker,centerFrequencyCalculation)
+
+.. method:: GetCalculationOfBandfilterCenterFrequency(channel=1,marker,centerFrequencyCalculation)
+
+.. method:: SetRFOffBehavior(RFOffBehavior)
+
+.. method:: GetRFOffBehavior(RFOffBehavior)
+
+.. method:: SetRemoteDisplayTitle(title)
+
+.. method:: GetRemoteDisplayTitle(bufferSize,title)
+
+.. method:: SetAnalyzerHostname(hostName)
+
+.. method:: GetAnalyzerHostname(bufferSize,hostName)
+
+.. method:: SetSoftKeyLabel(keyNumber,label)
+
+.. method:: GetPressedSoftKey(keyNumber,bufferSize,label)
+
+.. method:: SetOutputPortBits(outputPort,portBits)
+
+.. method:: GetOutputPortBits(outputPort,portBits)
+
+.. method:: SetChannelBits(channelBits)
+
+.. method:: GetChannelBits(channelBits)
+
+.. method:: SetUIDirection(port,direction)
+
+.. method:: GetUIDirection(port,direction)
+
+.. method:: SetUIData(port,data)
+
+.. method:: GetUIData(port,data)
+
+.. method:: SetUISignalPin20(pin20)
+
+.. method:: GetUISignalPin20(pin20)
+
+.. method:: SetUISignalPin21(pin21)
+
+.. method:: GetUISignalPin21(pin21)
+
+.. method:: SetUIPortBinaryData(port,data)
+
+.. method:: GetUIPortBinaryData(port,data)
+
+.. method:: SetUIPortNextState(port,nextState)
+
+.. method:: GetUIPortNextState(port,nextState)
+
+.. method:: RestoreUIDefaultStates()
+
+.. method:: setStatusRegister(registerOperation,questionableRegister,enable,PTransition,NTransition)
+
+.. method:: getStatusRegister(statusRegistersQuery,registerValue)
+
+.. method:: setTimeOut(timeout)
+
+.. method:: getTimeOut(timeout)
+
+.. method:: errorCheckState(stateChecking)
+
+.. method:: setCheckOption(optionChecking)
+
+.. method:: setCheckRange(rangeChecking)
+
+.. method:: writeInstrData(writeBuffer)
+
+.. method:: readInstrData(numberBytesToRead,readBuffer,numBytesRead)
+
+.. method:: reset()
+
+.. method:: self_test(selfTestResult,selfTestMessage)
+
+.. method:: error_query(errorCode,errorMessage)
+
+.. method:: error_message(statusCode,message)
+
+.. method:: revision_query(instrumentDriverRevision,firmwareRevision)
+
+.. method:: close()
+

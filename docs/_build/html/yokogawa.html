@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Yokogawa instrument drivers &mdash; pyslave 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyslave 0.9 documentation" href="index.html" />
+    <link rel="up" title="Instrument Drivers" href="drivers.html" />
+    <link rel="next" title="Standford Research instrument drivers" href="standfordresearch.html" />
+    <link rel="prev" title="Agilent instrument drivers" href="agilent.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="standfordresearch.html" title="Standford Research instrument drivers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="agilent.html" title="Agilent instrument drivers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li>
+          <li><a href="drivers.html" accesskey="U">Instrument Drivers</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyslave.drivers.yokogawa">
+<span id="yokogawa-instrument-drivers"></span><h1>Yokogawa instrument drivers<a class="headerlink" href="#module-pyslave.drivers.yokogawa" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651">
+<em class="property">class </em><tt class="descclassname">pyslave.drivers.yokogawa.yokogawa7651.</tt><tt class="descname">yokogawa7651</tt><big>(</big><em>resource</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yokogawa 7651 instrument driver.
+Direct call to the instrument invokes the ramp method.</p>
+<dl class="method">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.trigger">
+<tt class="descname">trigger</tt><big>(</big><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.trigger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Triggering function for the Yokogawa 7651.</p>
+<p>After changing any parameters of the instrument (for example, output voltage), the device needs to be triggered before it will update.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setVoltageRange">
+<tt class="descname">setVoltageRange</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setVoltageRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function changes the voltage range of the power supply.
+A float representing the desired voltage will have the range adjusted accordingly, or a string specifying the range will also work.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> &#8211; Desired voltage or directly specified voltage range as a string (10mV, 100mV, 1V, 10V, 30V)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setCurrentRange">
+<tt class="descname">setCurrentRange</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setCurrentRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function changes the current range of the power supply.
+A float representing the desired current will have the range adjusted accordingly, or a string specifying the range will also work.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> &#8211; Desired current or directly specified current range as a string (1mA, 10mA, 100mA)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setFunction">
+<tt class="descname">setFunction</tt><big>(</big><em>func</em><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the output of the Yokogawa 7651 to either constant voltage or constant current mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>func</strong> &#8211; Desired mode as a string (&#8216;voltage&#8217; or &#8216;current&#8217;)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setValue">
+<tt class="descname">setValue</tt><big>(</big><em>value</em>, <em>autorange=True</em><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the output value of the power supply.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>value</strong> &#8211; Desired constant output value in V or A</li>
+<li><strong>autorange</strong> &#8211; If True, the instrument will automatically adapt its range to the value</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setOutput">
+<tt class="descname">setOutput</tt><big>(</big><em>setting</em><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.setOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable or disable the output of the Yokogawa 7651.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>setting</strong> &#8211; Specify the state of the power supply output (True or False).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.ramp">
+<tt class="descname">ramp</tt><big>(</big><em>value</em>, <em>slope=0.1</em><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.ramp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ramp the output value of the power supply at the given slope.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>value</strong> &#8211; Desired final output value in V or A</li>
+<li><strong>slope</strong> &#8211; Desired slope in V/s or A/s</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.ready">
+<tt class="descname">ready</tt><big>(</big><big>)</big><a class="headerlink" href="#pyslave.drivers.yokogawa.yokogawa7651.yokogawa7651.ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blocks until the output is stabilized.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="agilent.html"
+                        title="previous chapter">Agilent instrument drivers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="standfordresearch.html"
+                        title="next chapter">Standford Research instrument drivers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/yokogawa.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="standfordresearch.html" title="Standford Research instrument drivers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="agilent.html" title="Agilent instrument drivers"
+             >previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li>
+          <li><a href="drivers.html" >Instrument Drivers</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jérôme Estève.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

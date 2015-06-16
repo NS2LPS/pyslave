@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>script Module &mdash; pyslave 0.8 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyslave 0.8 documentation" href="index.html" />
+    <link rel="next" title="Instrument Drivers" href="drivers.html" />
+    <link rel="prev" title="instruments Module" href="instruments.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="drivers.html" title="Instrument Drivers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="instruments.html" title="instruments Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyslave 0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyslave.script">
+<span id="script-module"></span><h1><tt class="xref py py-mod docutils literal"><span class="pre">script</span></tt> Module<a class="headerlink" href="#module-pyslave.script" title="Permalink to this headline">¶</a></h1>
+<p>This module contains helper functions to write slave scripts.</p>
+<dl class="function">
+<dt id="pyslave.script.increment">
+<tt class="descclassname">pyslave.script.</tt><tt class="descname">increment</tt><big>(</big><em>filename</em>, <em>ndigits=3</em><big>)</big><a class="headerlink" href="#pyslave.script.increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Automatically generate filenames with an incremented number</p>
+<p>Return a filename with an auto incremented number at the end of the name.
+The number is zero padded to have n digits.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyslave.script.save_txt">
+<tt class="descclassname">pyslave.script.</tt><tt class="descname">save_txt</tt><big>(</big><em>source</em>, <em>filename</em><big>)</big><a class="headerlink" href="#pyslave.script.save_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the data from source to a text file.</p>
+<p>Filename can be a string or a valid file handle opened for writing.</p>
+<p>Source can be a numpy array or an instrument.
+If source is an instrument the __save_txt__ method is called and the returned data are saved.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyslave.script.save_h5">
+<tt class="descclassname">pyslave.script.</tt><tt class="descname">save_h5</tt><big>(</big><em>source</em>, <em>filename</em>, <em>dataset='data'</em>, <em>attrs={}</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyslave.script.save_h5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the data from source to a HDF5 dataset.</p>
+<p>Source can be a numpy array or an instrument.
+If source is an instrument the __save_h5__ method is called and the returned data are used to create the dataset.
+Attributes passed in attrs are added to the dataset attributes.</p>
+<p>Filename can be a string or a valid HDF5 file or group opened for writing. The file is flushed after the dataset is inserted.</p>
+<p>Optional arguments are passed to the create_dataset function (e.g. compression=&#8217;gzip&#8217;).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyslave.script.fetch_txt">
+<tt class="descclassname">pyslave.script.</tt><tt class="descname">fetch_txt</tt><big>(</big><em>instrument</em>, <em>filename</em>, <em>fetch_args={}</em><big>)</big><a class="headerlink" href="#pyslave.script.fetch_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch and save data from an instrument to a text file.</p>
+<p>The fetch method of the instrument is called with the fetch_args. Then the data are saved as described in save_txt.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyslave.script.fetch_h5">
+<tt class="descclassname">pyslave.script.</tt><tt class="descname">fetch_h5</tt><big>(</big><em>instrument</em>, <em>filename</em>, <em>fetch_args={}</em>, <em>dataset='data'</em>, <em>attrs={}</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyslave.script.fetch_h5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch and save data from an instrument to a HDF5 file.</p>
+<p>The fetch method of the instrument is called with the fetch_args. Then the data are saved as described in save_h5.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="instruments.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">instruments</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="drivers.html"
+                        title="next chapter">Instrument Drivers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/script.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="drivers.html" title="Instrument Drivers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="instruments.html" title="instruments Module"
+             >previous</a> |</li>
+        <li><a href="index.html">pyslave 0.8 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jérôme Estève.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

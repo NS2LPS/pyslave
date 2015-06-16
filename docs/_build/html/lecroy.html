@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Lecroy instrument drivers &mdash; pyslave 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyslave 0.9 documentation" href="index.html" />
+    <link rel="up" title="Instrument Drivers" href="drivers.html" />
+    <link rel="prev" title="Standford Research instrument drivers" href="standfordresearch.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="standfordresearch.html" title="Standford Research instrument drivers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li>
+          <li><a href="drivers.html" accesskey="U">Instrument Drivers</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyslave.drivers.lecroy">
+<span id="lecroy-instrument-drivers"></span><h1>Lecroy instrument drivers<a class="headerlink" href="#module-pyslave.drivers.lecroy" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyslave.drivers.lecroy.lecroyscope.LecroyScope">
+<em class="property">class </em><tt class="descclassname">pyslave.drivers.lecroy.lecroyscope.</tt><tt class="descname">LecroyScope</tt><big>(</big><em>resource</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyslave.drivers.lecroy.lecroyscope.LecroyScope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lecroy oscilloscope instrument driver.
+Direct call to the instrument invokes the fetch method.</p>
+<dl class="method">
+<dt id="pyslave.drivers.lecroy.lecroyscope.LecroyScope.fetch">
+<tt class="descname">fetch</tt><big>(</big><em>channel='C1'</em><big>)</big><a class="headerlink" href="#pyslave.drivers.lecroy.lecroyscope.LecroyScope.fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch the waveform from the specified channel (&#8216;C1&#8217;,&#8217;C2,&#8217;TA&#8217;, ...) and return it as a lecroy_trace data object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.lecroy.lecroyscope.LecroyScope.write">
+<tt class="descname">write</tt><big>(</big><em>str</em><big>)</big><a class="headerlink" href="#pyslave.drivers.lecroy.lecroyscope.LecroyScope.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write GPIB command.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="standfordresearch.html"
+                        title="previous chapter">Standford Research instrument drivers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/lecroy.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="standfordresearch.html" title="Standford Research instrument drivers"
+             >previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li>
+          <li><a href="drivers.html" >Instrument Drivers</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jérôme Estève.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

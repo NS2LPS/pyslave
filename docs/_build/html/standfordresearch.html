@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Standford Research instrument drivers &mdash; pyslave 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyslave 0.9 documentation" href="index.html" />
+    <link rel="up" title="Instrument Drivers" href="drivers.html" />
+    <link rel="next" title="Lecroy instrument drivers" href="lecroy.html" />
+    <link rel="prev" title="Yokogawa instrument drivers" href="yokogawa.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lecroy.html" title="Lecroy instrument drivers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="yokogawa.html" title="Yokogawa instrument drivers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li>
+          <li><a href="drivers.html" accesskey="U">Instrument Drivers</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyslave.drivers.standfordresearch">
+<span id="standford-research-instrument-drivers"></span><h1>Standford Research instrument drivers<a class="headerlink" href="#module-pyslave.drivers.standfordresearch" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830">
+<em class="property">class </em><tt class="descclassname">pyslave.drivers.standfordresearch.SR830.</tt><tt class="descname">SR830</tt><big>(</big><em>resource</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830" title="Permalink to this definition">¶</a></dt>
+<dd><p>StandfordResearch SR830 instrument driver.
+Direct call to the instrument invokes the outp method.</p>
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setFreqSource">
+<tt class="descname">setFreqSource</tt><big>(</big><em>source</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setFreqSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets teh frequency source to either the internal
+reference clock, or an external reference.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>source</strong> (<em>string</em>) &#8211; {EXTernal|INTernal}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setFreq">
+<tt class="descname">setFreq</tt><big>(</big><em>freq</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setFreq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sers the internal reference frequency. This command only
+works if the lock-in is set to use the internal reference.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>freq</strong> (<em>float</em>) &#8211; Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setPhase">
+<tt class="descname">setPhase</tt><big>(</big><em>phase</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setPhase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the phase of the internal reference signal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>phase</strong> (<em>&lt;-360...+729.99&gt;,float</em>) &#8211; Desired phase</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setAmplitude">
+<tt class="descname">setAmplitude</tt><big>(</big><em>amplitude</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setAmplitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the amplitude of the internal reference signal.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>amplitude</strong> (<em>&lt;0.004...5&gt;,float</em>) &#8211; Desired peak-to-peak voltage</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setInputGround">
+<tt class="descname">setInputGround</tt><big>(</big><em>grounding</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setInputGround" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the input shield grounding to either &#8216;float&#8217; or &#8216;ground&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>grounding</strong> (<em>{float|ground},string</em>) &#8211; Desired input shield grounding</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setInputCoupling">
+<tt class="descname">setInputCoupling</tt><big>(</big><em>coupling</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setInputCoupling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the input coupling to either &#8216;ac&#8217; or &#8216;dc&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>coupling</strong> (<em>{ac|dc},string</em>) &#8211; Desired input coupling mode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setSampleRate">
+<tt class="descname">setSampleRate</tt><big>(</big><em>sampleRate</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setSampleRate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the data sampling rate of the lock-in</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>sampleRate</strong> (<em>{&lt;freq&gt; float,TRIGGER}</em>) &#8211; The sampling rate, in Hz as a float, or the string &#8216;trigger&#8217;. When specifying the rate in Hz, acceptable values are integer powers of 2. This means 2^n, n={-4...+9}</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setEndOfBufferMode">
+<tt class="descname">setEndOfBufferMode</tt><big>(</big><em>mode</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setEndOfBufferMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the end of buffer mode</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> (<em>{1SHOT,LOOP},string</em>) &#8211; Desired end of buffer mode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setChannelDisplay">
+<tt class="descname">setChannelDisplay</tt><big>(</big><em>channel</em>, <em>display</em>, <em>ratio</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setChannelDisplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the display of the two channels.
+Channel 1 can display X, R, X Noise, Aux In 1, Aux In 2
+Channel 2 can display Y, Theta, Y Noise, Aux In 3, Aux In 4</p>
+<p>Channel 1 can have ratio of None, Aux In 1, Aux In 2
+Channel 2 can have ratio of None, Aux In 3, Aux In 4</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>channel</strong> &#8211; {CH1|CH2|1|2},string/int</li>
+<li><strong>display</strong> &#8211; {X|Y|R|THETA|XNOISE|YNOISE|AUX1|AUX2|AUX3|AUX4},string</li>
+<li><strong>ratio</strong> &#8211; {NONE|AUX1|AUX2|AUX3|AUX4},string</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.setOffsetExpand">
+<tt class="descname">setOffsetExpand</tt><big>(</big><em>mode</em>, <em>offset</em>, <em>expand</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.setOffsetExpand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the channel offset and expand parameters.
+Offset is a percentage, and expand is given as a multiplication
+factor of 1, 10, or 100.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>mode</strong> (<em>{X|Y|R},sting</em>) &#8211; The channel mode that you wish to change.</li>
+<li><strong>offset</strong> (<em>&lt;-105...+105&gt;,float</em>) &#8211; Offset of the mode, given as a percent</li>
+<li><strong>expand</strong> (<em>{1|10|100},integer</em>) &#8211; Expansion factor for the measurement</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.autoOffset">
+<tt class="descname">autoOffset</tt><big>(</big><em>mode</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.autoOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets a specific channel mode to auto offset. This is the
+same as pressing the auto offset key on the display.
+It sets the offset of the mode specified to zero.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> (<em>{X|Y|R},string</em>) &#8211; Mode who&#8217;s offset will be set to zero.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.autoPhase">
+<tt class="descname">autoPhase</tt><big>(</big><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.autoPhase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function sets the lock-in to auto phase.
+This does the same thing as pushing the auto phase button.
+Do not send this message again without waiting the correct amount
+of time for the lock-in to finish.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.dataTransfer">
+<tt class="descname">dataTransfer</tt><big>(</big><em>mode</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.dataTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to turn the data transfer from the lockin on or off</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> &#8211; {ON|OFF},string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.startScan">
+<tt class="descname">startScan</tt><big>(</big><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.startScan" title="Permalink to this definition">¶</a></dt>
+<dd><p>After setting the data transfer on via the dataTransfer function,
+this is used to start the scan. The scan starts after a delay of
+0.5 seconds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.pause">
+<tt class="descname">pause</tt><big>(</big><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.pause" title="Permalink to this definition">¶</a></dt>
+<dd><p>Has the instrument pause data capture.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.init">
+<tt class="descname">init</tt><big>(</big><em>sampleRate</em>, <em>EoBMode</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper function to prepare the srs830 for measurement.
+Sets both the data sampling rate and the end of buffer mode</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sampleRate</strong> (<em>{&lt;freq&gt;|TRIGGER}</em>) &#8211; The sampling rate in Hz, or the string &#8220;trigger&#8221;. When specifying the rate in Hz, acceptable values are integer powers of 2. This means 2^n, n={-4...+9}.</li>
+<li><strong>EoBMode</strong> &#8211; {1SHOT|LOOP},string</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.startDataTransfer">
+<tt class="descname">startDataTransfer</tt><big>(</big><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.startDataTransfer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper function to start the actual data transfer.
+Sets the transfer mode to FAST2, and triggers the data transfer
+to start after a delay of 0.5 seconds.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.dataSnap">
+<tt class="descname">dataSnap</tt><big>(</big><em>mode1</em>, <em>mode2</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.dataSnap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function takes a snapshot of the current parameters are defined
+by variables mode1 and mode2.
+For combinations (X,Y) and (R,THETA) , they are taken at the same
+instant. All other combinations are done sequentially, and may
+not represent values taken from the same timestamp.</p>
+<p>Returns a list of floats, arranged in the order that they are
+given in the function input parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> &#8211; {X|Y|R|THETA|AUX1|AUX2|AUX3|AUX4|REF|CH1|CH2},string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.outp">
+<tt class="descname">outp</tt><big>(</big><em>mode='x'</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.outp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read one value. Mode can x, y, r, or theta.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.outr">
+<tt class="descname">outr</tt><big>(</big><em>mode='ch1'</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.outr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read one value. Mode can be ch1 or ch2.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.readDataBuffer">
+<tt class="descname">readDataBuffer</tt><big>(</big><em>channel</em><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.readDataBuffer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function reads the entire data buffer for a specific channel.
+Transfer is done in ASCII mode. Although binary would be faster,
+I haven&#8217;t yet figured out how to get that to work.</p>
+<p>Returns a list of floats containing instrument&#8217;s measurements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>channel</strong> (<em>{CH1|CH2|1|2},string/integer</em>) &#8211; Channel data buffer to read from</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.numDataPoints">
+<tt class="descname">numDataPoints</tt><big>(</big><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.numDataPoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function checks number of data sets in SRS830 buffer.
+Returns an integer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.drivers.standfordresearch.SR830.SR830.clearDataBuffer">
+<tt class="descname">clearDataBuffer</tt><big>(</big><big>)</big><a class="headerlink" href="#pyslave.drivers.standfordresearch.SR830.SR830.clearDataBuffer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears the data buffer of the SRS830.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="yokogawa.html"
+                        title="previous chapter">Yokogawa instrument drivers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lecroy.html"
+                        title="next chapter">Lecroy instrument drivers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/standfordresearch.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lecroy.html" title="Lecroy instrument drivers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="yokogawa.html" title="Yokogawa instrument drivers"
+             >previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li>
+          <li><a href="drivers.html" >Instrument Drivers</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jérôme Estève.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

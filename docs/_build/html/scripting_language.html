@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Scripting language &mdash; pyslave 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyslave 0.9 documentation" href="index.html" />
+    <link rel="next" title="instruments Module" href="instruments.html" />
+    <link rel="prev" title="IPython shell magic commands" href="magic.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="instruments.html" title="instruments Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="magic.html" title="IPython shell magic commands"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="scripting-language">
+<h1>Scripting language<a class="headerlink" href="#scripting-language" title="Permalink to this headline">¶</a></h1>
+<p>A script is a standard Python file including special comments that are interpreted by slave during the conversion.
+The only mandatory comment is <tt class="docutils literal"><span class="pre">#main</span></tt>. It separates the script initialization from the main script section.
+Everything after the <tt class="docutils literal"><span class="pre">#main</span></tt> comment is executed in a separate thread.</p>
+<p>Here is a simple script example that scans the power of a vna and record the average transmission :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">fig</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">power</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">power</span> <span class="o">=</span> <span class="n">r_</span><span class="p">[</span><span class="n">power</span><span class="p">,</span><span class="n">flipud</span><span class="p">(</span><span class="n">power</span><span class="p">)]</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">ones_like</span><span class="p">(</span><span class="n">power</span><span class="p">)</span><span class="o">*</span><span class="n">nan</span>
+
+<span class="c">#main</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">power</span><span class="p">):</span>
+    <span class="c">#pause?</span>
+    <span class="c"># Change parameter</span>
+    <span class="n">vna1</span><span class="o">.</span><span class="n">SetPower</span><span class="p">(</span><span class="n">power</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+    <span class="c"># Acquire data</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">vna1</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
+    <span class="n">out</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="mi">2</span><span class="o">+</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c"># Display data</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">power</span><span class="p">,</span><span class="n">out</span><span class="p">)</span>
+    <span class="c">#draw</span>
+    <span class="c">#break?</span>
+    <span class="c">#looptime?</span>
+</pre></div>
+</div>
+<div class="section" id="comments-interpreted-by-slave">
+<h2>Comments interpreted by slave<a class="headerlink" href="#comments-interpreted-by-slave" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt>
+<tt class="descname">#main</tt></dt>
+<dd><p>This comment signals the start of the cript main body. Everything after this comment is wrapped in a function
+that will be run in a separate thread. This comment is mandatory and must appear before the other comments listed below.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">#pause?</tt></dt>
+<dd><p>This line checks if the user asked for a pause. If yes it will wait until the user resumes or aborts the script.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">#break?</tt></dt>
+<dd><p>This line inserts a Python break statement if the user aborts the script. Multiple <tt class="docutils literal"><span class="pre">#break?</span></tt> can be used to exit nested loops.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">#abort?</tt></dt>
+<dd><p>This line inserts a Python return statement if the user aborts the script. This causes the script function to finish.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">#disp(string)</tt></dt>
+<dd><p>Displays the given string in the slave window.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">#looptime?</tt></dt>
+<dd><p>Displays the time ellapsed between two calls to the function.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descname">#draw</tt></dt>
+<dd><p>Tell Matplotlib to redraw figures.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Scripting language</a><ul>
+<li><a class="reference internal" href="#comments-interpreted-by-slave">Comments interpreted by slave</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="magic.html"
+                        title="previous chapter">IPython shell magic commands</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="instruments.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">instruments</span></tt> Module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/scripting_language.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="instruments.html" title="instruments Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="magic.html" title="IPython shell magic commands"
+             >previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jérôme Estève.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
