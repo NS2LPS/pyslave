@@ -29,9 +29,11 @@ def increment_file(filename, ndigits=3):
     return __increment__(basename, ext, files, ndigits)
 
 class data(dict):
-    """Base class to represent data acquired with instruments. Specific values stored in the data can be accessed via attributes or keys.
-    Special data values will be concatenated and saved as an array by the save methods.
-    Normal values will be discarded when saving in text format and saved as attributes in the HDF5 format."""
+    """Base class to represent experimental data. Values stored in the object can be accessed via attributes or keys.
+    Data attributes will be saved as an array by the save methods.
+    Normal attributes will be discarded when saving in text format and saved as attributes in the HDF5 format."""
+    __data_attributes__ = []
+    __hidden_attributes__ = []
     def __getattr__(self, name):
         if name in self:
             return self[name]
@@ -48,10 +50,10 @@ class data(dict):
         pass
     @property
     def __data__(self):
-        pass
+        return np.core.rec.fromarrays( [self.__getattribute__(k) for k in self.__data_attributes__] , names = self.__data_attributes__)
     @property
     def __attributes__(self):
-        pass
+        return dict([ (k,v) for k,v in self.iteritems() if k not in self.__data_attributes__ and k not in self.__hidden_attributes__])
     def save(self, file, **kwargs):
         """Save the data to a file in text or HDF5 format.
 
@@ -62,7 +64,7 @@ class data(dict):
             The optional keywords are increment=True and ndigits=3 to control the behaviour of the dataset autoincrement.
             The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function.
             (see the save_h5 method for more details).
-            
+
         """
         if type(file) is str:
             if file.endswith('txt'):
@@ -94,11 +96,8 @@ class data(dict):
         nparray = self.__data__
         attrs.update(self.__attributes__)
         if increment : dataset = __increment__(dataset, '', hdf.keys(), ndigits)
-        if dataset not in hdf:
-            ds = hdf.create_dataset(dataset, data=nparray, **kwargs)
-        else:
-            ds = hdf[dataset]
-            ds[:] = source
+        if dataset in hdf: del hdf['{0}'.format(dataset)]
+        ds = hdf.create_dataset(dataset, data=nparray, **kwargs)
         for k,v in attrs.iteritems() :
             ds.attrs[k] = v
         hdf.flush()
@@ -108,53 +107,29 @@ class data(dict):
 
 class Sij(data):
     """Vector network analyzer Sij data class.
-    
-    Attributes : freq, real, imag, mag, phase, start_frequency, stop_frequency, number_of_points, power
-    
-    Data format : c_[freq, real, imag]"""
+    Data attributes : freq, S12
+    Attributes : start_frequency, stop_frequency, number_of_points, power
+    """
     @property
     def freq(self):
         return np.linspace(self.start_frequency, self.stop_frequency, self.number_of_points)
-    @property
-    def real(self):
-        return self.Sij[:,0]
-    @property
-    def imag(self):
-        return self.Sij[:,1]
-    @property
-    def mag(self):
-        return np.sqrt(self.Sij[:,0]**2 + self.Sij[:,1]**2)
-    @property
-    def phase(self):
-        return np.arctan2(self.Sij[:,1] , self.Sij[:,0])
-    def __data__(self):
-        return np.c_[ self.freq, self.Sij]
     def plot(self, ax, scale='log', **kwargs):
-        y = 20*np.log10(self.mag) if scale is 'log' else self.mag
+        y = 10*np.log10( np.abs(self.Sij)**2 ) if scale is 'log' else np.abs(self.Sij)**2
         ax.plot(self.freq/1e9, y, **kwargs)
         ax.set_xlabel('Frequency (GHz)')
-        ax.set_ylabel('$|S_{ij}|^2$ (dB)' if scale is 'log' else '$|S_{ij}|$')
-    def __attributes__(self):
-        attrs = self.copy()
-        del attrs['Sij']
-        return attrs
+        ax.set_ylabel('$|S_{ij}|^2$ (dB)' if scale is 'log' else '$|S_{ij}|^2$')
 
 class lecroy_trace(data):
     """Lecroy oscilloscope waveform data class.
-    
-    Attributes : horiz, vert, horiz_interval, horiz_offset, sweeps_per_acq, bandwidth_limit, vertical_gain, vertical_offset, vert_coupling, acq_vert_offset, probe_att, wave
-    
-    Data format : c_[horiz, vert]"""
-    @property
-    def __data__(self):
-        return np.c_[ self.horiz, self.vert]
+    Data attributes : horiz, vert
+    Attributes : horiz_interval, horiz_offset, sweeps_per_acq, bandwidth_limit, vertical_gain, vertical_offset, vert_coupling, acq_vert_offset, probe_att
+    """
+    __data_attributes__ = ['horiz','vert']
+    __hidden_attributes__ = ['wave']
     def plot(self, ax, **kwargs):
         ax.plot(self.horiz, self.vert, **kwargs)
-    @property
-    def __attributes__(self):
-        attrs = self.copy()
-        del attrs['wave']
-        return attrs
+        ax.set_xlabel('Time (s)')
+        ax.set_ylabel('Voltage (V)')
     @property
     def horiz(self):
         x = np.arange( len(self.wave) ) * self.horiz_interval
@@ -163,24 +138,15 @@ class lecroy_trace(data):
     @property
     def vert(self):
         y = self.wave.astype(np.float)
-        y *= param['vertical_gain']
-        y -= param['vertical_offset']
+        y *= self.vertical_gain
+        y -= self.vertical_offset
+        return y
 
 
 class xy(data):
     """Generic x,y data class.
-    
-    Attributes : x, y
-    
-    Data format : c_[x,y]"""
-    @property
-    def __data__(self):
-        return np.c_[ self.x, self.y]
+    Data Attributes : x, y
+    """
+    __data_attributes__ = ['x', 'y']
     def plot(self, ax, **kwargs):
         ax.plot(self.x, self.y, **kwargs)
-    @property
-    def __attributes__(self):
-        attrs = self.copy()
-        del attrs['x']
-        del attrs['y']
-        return attrs
