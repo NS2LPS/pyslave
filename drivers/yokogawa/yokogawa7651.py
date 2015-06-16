@@ -17,6 +17,8 @@ visa_rm = visa.ResourceManager()
 
 
 class yokogawa7651:
+    """Yokogawa 7651 instrument driver.
+    Direct call to the instrument invokes the ramp method."""
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.value = 0

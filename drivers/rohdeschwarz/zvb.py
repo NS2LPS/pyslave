@@ -4,16 +4,20 @@ import time
 from pyslave.data import Sij
 
 class zvb:
-    """Rohde&Schwarz Vector Network Analyzer (ZVA,ZVB) driver. All the functions from the rszvb DLL are available as well as extra home made functions."""
+    """Rohde&Schwarz Vector Network Analyzer (ZVA,ZVB) driver. 
+    All the functions from the rszvb DLL are available as well as extra home made functions.
+    Direct call to the instrument invokes the fetch method.
+    """
     def __init__(self, address):
         self.iHandle = dll.rszvb_init(address, 1, 0)
+        self.__call__ = self.fetch
     def __getattr__(self, name):
         dll_fun = getattr(dll, 'rszvb_' + name)
         def fun(*args, **kwargs):
             res = dll_fun(self.iHandle, *args, **kwargs)
             if dll_fun.output : return res
         return fun
-    def __call__(self, channel=1):
+    def fetch(self, channel=1):
         """Fetch the trace from the specified channel and return it as a Sij data object."""
         n = self.GetSweepNumberOfPoints(channel)
         data = np.empty((n, 2), np.float64)
