@@ -19,14 +19,15 @@ class SR830:
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.write('OUTX 1') # Set the device responce port to GPIB
         self.__call__ = self.outp
-        
+
     # Set Frequency Source
     def setFreqSource(self,source):
         '''
         Function sets teh frequency source to either the internal
         reference clock, or an external reference.
 
-        source: {EXTernal|INTernal},string
+        :param source: {EXTernal|INTernal}
+        :type source: string
         '''
         if not isinstance(source,str):
             raise Exception('Parameter must be a string.')
@@ -50,8 +51,8 @@ class SR830:
         Function sers the internal reference frequency. This command only
         works if the lock-in is set to use the internal reference.
 
-        freq: Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.
-        freq: <frequency>,float
+        :param freq: Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.
+        :type freq: float
         '''
         if not isinstance(freq,int) and not isinstance(freq,float):
             raise Exception('Freq parameter must be an integer or a float.')
@@ -67,8 +68,8 @@ class SR830:
         '''
         Function sets the phase of the internal reference signal.
 
-        phase: Desired phase
-        phase = <-360...+729.99>,float
+        :param phase: Desired phase
+        :type phase = <-360...+729.99>,float
         '''
         if not isinstance(phase,int) and not isinstance(phase,float):
             raise Exception('Phase parameter must be an integer or a float.')
@@ -83,8 +84,8 @@ class SR830:
         '''
         Function sets the amplitude of the internal reference signal.
 
-        amplitude: Desired peak-to-peak voltage
-        amplitude = <0.004...5>,float
+        :param amplitude: Desired peak-to-peak voltage
+        :type amplitude: <0.004...5>,float
         '''
         if not isinstance(amplitude,int) and not isinstance(amplitude,float):
             raise Exception('Amplitude parameter must be an integer or a float.')
@@ -99,8 +100,8 @@ class SR830:
         '''
         Function sets the input shield grounding to either 'float' or 'ground'
 
-        grounding: Desired input shield grounding
-        grounding = {float|ground},string
+        :param grounding: Desired input shield grounding
+        :type grounding: {float|ground},string
         '''
         if not isinstance(grounding,str):
             raise Exception('Parameter "grounding" must be a string.')
@@ -120,8 +121,8 @@ class SR830:
         '''
         Function sets the input coupling to either 'ac' or 'dc'
 
-        coupling: Desired input coupling mode
-        coupling = {ac|dc},string
+        :param coupling: Desired input coupling mode
+        :type coupling: {ac|dc},string
         '''
         if not isinstance(coupling,str):
             raise Exception('Parameter "coupling" must be a string.')
@@ -141,10 +142,11 @@ class SR830:
         '''
         Function sets the data sampling rate of the lock-in
 
-        sampleRate: The sampling rate, in Hz as a float, or the string 'trigger'.
+        :param sampleRate: The sampling rate, in Hz as a float, or the string 'trigger'.
         When specifying the rate in Hz, acceptable values are integer powers of 2.
         This means 2^n, n={-4...+9}
-        sampleRate = {<freq>,TRIGGER}
+
+        :type sampleRate: {<freq> float,TRIGGER}
         '''
         if isinstance(sampleRate,str):
             sampleRate = sampleRate.lower()
@@ -162,8 +164,8 @@ class SR830:
         '''
         Function sets the end of buffer mode
 
-        mode: Desired end of buffer mode
-        mode = {1SHOT,LOOP},string
+        :param mode: Desired end of buffer mode
+        :type mode: {1SHOT,LOOP},string
         '''
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
@@ -188,9 +190,9 @@ class SR830:
         Channel 1 can have ratio of None, Aux In 1, Aux In 2
         Channel 2 can have ratio of None, Aux In 3, Aux In 4
 
-        channel = {CH1|CH2|1|2},string/int
-        display = {X|Y|R|THETA|XNOISE|YNOISE|AUX1|AUX2|AUX3|AUX4},string
-        ratio = {NONE|AUX1|AUX2|AUX3|AUX4},string
+        :type channel: {CH1|CH2|1|2},string/int
+        :type display: {X|Y|R|THETA|XNOISE|YNOISE|AUX1|AUX2|AUX3|AUX4},string
+        :type ratio: {NONE|AUX1|AUX2|AUX3|AUX4},string
         '''
         if not isinstance(channel,str) and not isinstance(channel,int):
             raise Exception('Parameter "channel" must be a string or integer.')
@@ -244,15 +246,13 @@ class SR830:
         Offset is a percentage, and expand is given as a multiplication
         factor of 1, 10, or 100.
 
-        mode: The channel mode that you wish to change the offset /
+        :param mode: The channel mode that you wish to change the offset /
         expand of
-        mode = {X|Y|R},sting
-
-        offset: Offset of the mode, given as a percent
-        offset = <-105...+105>,float
-
-        expand: Expansion factor for the measurement
-        expand = {1|10|100},integer
+        :type mode: {X|Y|R},sting
+        :param offset: Offset of the mode, given as a percent
+        :type offset: <-105...+105>,float
+        :param expand: Expansion factor for the measurement
+        :type expand: {1|10|100},integer
         '''
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
@@ -288,8 +288,8 @@ class SR830:
         same as pressing the auto offset key on the display.
         It sets the offset of the mode specified to zero.
 
-        mode: Mode who's offset will be set to zero.
-        mode = {X|Y|R},string
+        :param mode: Mode who's offset will be set to zero.
+        :type mode: {X|Y|R},string
         '''
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
@@ -318,9 +318,8 @@ class SR830:
     def dataTransfer(self,mode):
         '''
         Function used to turn the data transfer from the lockin on or off
-        %
-        mode:
-        mode = {ON|OFF},string
+
+        :type mode: {ON|OFF},string
         '''
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
@@ -358,12 +357,11 @@ class SR830:
         Wrapper function to prepare the srs830 for measurement.
         Sets both the data sampling rate and the end of buffer mode
 
-        sampleRate: The sampling rate in Hz, or the string "trigger".
+        :param sampleRate: The sampling rate in Hz, or the string "trigger".
         When specifing the rate in Hz, acceptable values are integer
         powers of 2. This means 2^n, n={-4...+9}.
-        sampleRate = {<freq>|TRIGGER}
-
-        mode = {1SHOT|LOOP},string
+        :type sampleRate: {<freq>|TRIGGER}
+        :type EoBMode: {1SHOT|LOOP},string
         '''
         self.clearDataBuffer()
         self.setSampleRate(sampleRate)
@@ -390,7 +388,7 @@ class SR830:
         Returns a list of floats, arranged in the order that they are
         given in the function input parameters.
 
-        mode = {X|Y|R|THETA|AUX1|AUX2|AUX3|AUX4|REF|CH1|CH2},string
+        :type mode: {X|Y|R|THETA|AUX1|AUX2|AUX3|AUX4|REF|CH1|CH2},string
         '''
         if not isinstance(mode1,str):
             raise Exception('Parameter "mode1" must be a string.')
@@ -431,7 +429,7 @@ class SR830:
 
     def outr(self, mode='ch1'):
         '''
-        Read one value. Mode can ch1 or ch2.
+        Read one value. Mode can be ch1 or ch2.
         '''
         valid = ['ch1','ch2']
         if mode in valid:
@@ -450,8 +448,8 @@ class SR830:
 
         Returns a list of floats containing instrument's measurements.
 
-        channel: Channel data buffer to read from
-        channel = {CH1|CH2|1|2},string/integer
+        :param channel: Channel data buffer to read from
+        :type channel: {CH1|CH2|1|2},string/integer
         '''
         if not isinstance(channel,str) and not isinstance(channel,int):
             raise Exception('Parameter "channel" must be a string or an integer.')
