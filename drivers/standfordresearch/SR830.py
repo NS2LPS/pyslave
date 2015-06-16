@@ -72,7 +72,7 @@ class SR830:
         Function sets the phase of the internal reference signal.
 
         :param phase: Desired phase
-        :type phase = <-360...+729.99>,float
+        :type phase: <-360...+729.99>,float
         '''
         if not isinstance(phase,int) and not isinstance(phase,float):
             raise Exception('Phase parameter must be an integer or a float.')
@@ -145,10 +145,7 @@ class SR830:
         '''
         Function sets the data sampling rate of the lock-in
 
-        :param sampleRate: The sampling rate, in Hz as a float, or the string 'trigger'.
-        When specifying the rate in Hz, acceptable values are integer powers of 2.
-        This means 2^n, n={-4...+9}
-
+        :param sampleRate: The sampling rate, in Hz as a float, or the string 'trigger'. When specifying the rate in Hz, acceptable values are integer powers of 2. This means 2^n, n={-4...+9}
         :type sampleRate: {<freq> float,TRIGGER}
         '''
         if isinstance(sampleRate,str):
@@ -193,9 +190,9 @@ class SR830:
         Channel 1 can have ratio of None, Aux In 1, Aux In 2
         Channel 2 can have ratio of None, Aux In 3, Aux In 4
 
-        :type channel: {CH1|CH2|1|2},string/int
-        :type display: {X|Y|R|THETA|XNOISE|YNOISE|AUX1|AUX2|AUX3|AUX4},string
-        :type ratio: {NONE|AUX1|AUX2|AUX3|AUX4},string
+        :param channel: {CH1|CH2|1|2},string/int
+        :param display: {X|Y|R|THETA|XNOISE|YNOISE|AUX1|AUX2|AUX3|AUX4},string
+        :param ratio: {NONE|AUX1|AUX2|AUX3|AUX4},string
         '''
         if not isinstance(channel,str) and not isinstance(channel,int):
             raise Exception('Parameter "channel" must be a string or integer.')
@@ -249,8 +246,7 @@ class SR830:
         Offset is a percentage, and expand is given as a multiplication
         factor of 1, 10, or 100.
 
-        :param mode: The channel mode that you wish to change the offset /
-        expand of
+        :param mode: The channel mode that you wish to change.
         :type mode: {X|Y|R},sting
         :param offset: Offset of the mode, given as a percent
         :type offset: <-105...+105>,float
@@ -322,7 +318,7 @@ class SR830:
         '''
         Function used to turn the data transfer from the lockin on or off
 
-        :type mode: {ON|OFF},string
+        :param mode: {ON|OFF},string
         '''
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
@@ -360,11 +356,9 @@ class SR830:
         Wrapper function to prepare the srs830 for measurement.
         Sets both the data sampling rate and the end of buffer mode
 
-        :param sampleRate: The sampling rate in Hz, or the string "trigger".
-        When specifing the rate in Hz, acceptable values are integer
-        powers of 2. This means 2^n, n={-4...+9}.
+        :param sampleRate: The sampling rate in Hz, or the string "trigger". When specifying the rate in Hz, acceptable values are integer powers of 2. This means 2^n, n={-4...+9}.
         :type sampleRate: {<freq>|TRIGGER}
-        :type EoBMode: {1SHOT|LOOP},string
+        :param EoBMode: {1SHOT|LOOP},string
         '''
         self.clearDataBuffer()
         self.setSampleRate(sampleRate)
@@ -391,7 +385,7 @@ class SR830:
         Returns a list of floats, arranged in the order that they are
         given in the function input parameters.
 
-        :type mode: {X|Y|R|THETA|AUX1|AUX2|AUX3|AUX4|REF|CH1|CH2},string
+        :param mode: {X|Y|R|THETA|AUX1|AUX2|AUX3|AUX4|REF|CH1|CH2},string
         '''
         if not isinstance(mode1,str):
             raise Exception('Parameter "mode1" must be a string.')
