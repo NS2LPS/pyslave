@@ -105,8 +105,9 @@ class data(dict):
 
 class Sij(data):
     """Vector network analyzer Sij data class.
-    Data attributes : freq, S12
-    Attributes : start_frequency, stop_frequency, number_of_points, power
+    
+    * Data attributes : freq, S12
+    * Attributes : start_frequency, stop_frequency, number_of_points, power
     """
     __data_attributes__ = ['freq','Sij']
     @property
@@ -129,8 +130,9 @@ class Sij(data):
         
 class lecroy_trace(data):
     """Lecroy oscilloscope waveform data class.
-    Data attributes : horiz, vert
-    Attributes : horiz_interval, horiz_offset, sweeps_per_acq, bandwidth_limit, vertical_gain, vertical_offset, vert_coupling, acq_vert_offset, probe_att
+    
+    * Data attributes : horiz, vert
+    * Attributes : horiz_interval, horiz_offset, sweeps_per_acq, bandwidth_limit, vertical_gain, vertical_offset, vert_coupling, acq_vert_offset, probe_att
     """
     __data_attributes__ = ['horiz','vert']
     __hidden_attributes__ = ['wave']
@@ -153,7 +155,8 @@ class lecroy_trace(data):
 
 class xy(data):
     """Generic x,y data class.
-    Data Attributes : x, y
+    
+    * Data Attributes : x, y
     """
     __data_attributes__ = ['x', 'y']
     def plot(self, ax, **kwargs):
