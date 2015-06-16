@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Agilent instrument drivers &mdash; pyslave 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyslave 0.9 documentation" href="index.html" />
+    <link rel="up" title="Instrument Drivers" href="drivers.html" />
+    <link rel="next" title="Yokogawa instrument drivers" href="yokogawa.html" />
+    <link rel="prev" title="Rohde Schwarz instrument drivers" href="rohdeschwarz.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="yokogawa.html" title="Yokogawa instrument drivers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="rohdeschwarz.html" title="Rohde Schwarz instrument drivers"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li>
+          <li><a href="drivers.html" accesskey="U">Instrument Drivers</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-pyslave.drivers.agilent">
+<span id="agilent-instrument-drivers"></span><h1>Agilent instrument drivers<a class="headerlink" href="#module-pyslave.drivers.agilent" title="Permalink to this headline">¶</a></h1>
+<p>Agilent devices are suppported via their IVI drivers. See the Python IVI documentation.</p>
+<dl class="class">
+<dt id="ivi.agilent.agilent34401A">
+<em class="property">class </em><tt class="descclassname">ivi.agilent.</tt><tt class="descname">agilent34401A</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilent34401A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Agilent 34401A IVI DMM driver</p>
+<dl class="method">
+<dt id="pyslave.drivers.agilent.agilent34401A.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>max_time=1</em><big>)</big><a class="headerlink" href="#pyslave.drivers.agilent.agilent34401A.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read a measurement and return its value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ivi.agilent.agilent34401A.doc">
+<tt class="descname">doc</tt><big>(</big><em>obj=None</em>, <em>itm=None</em>, <em>docs=None</em>, <em>prefix=None</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilent34401A.doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python IVI documentation generator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ivi.agilent.agilent34401A.help">
+<tt class="descname">help</tt><big>(</big><em>itm=None</em>, <em>complete=False</em>, <em>indent=0</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilent34401A.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python IVI help system</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="ivi.agilent.agilentE3641A">
+<em class="property">class </em><tt class="descclassname">ivi.agilent.</tt><tt class="descname">agilentE3641A</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilentE3641A" title="Permalink to this definition">¶</a></dt>
+<dd><p>Agilent E3641A IVI DC power supply driver</p>
+<dl class="method">
+<dt id="pyslave.drivers.agilent.agilentE3641A.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>value</em>, <em>output=0</em><big>)</big><a class="headerlink" href="#pyslave.drivers.agilent.agilentE3641A.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the voltage of the specified output.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ivi.agilent.agilentE3641A.doc">
+<tt class="descname">doc</tt><big>(</big><em>obj=None</em>, <em>itm=None</em>, <em>docs=None</em>, <em>prefix=None</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilentE3641A.doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python IVI documentation generator</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="ivi.agilent.agilentE3641A.help">
+<tt class="descname">help</tt><big>(</big><em>itm=None</em>, <em>complete=False</em>, <em>indent=0</em><big>)</big><a class="headerlink" href="#ivi.agilent.agilentE3641A.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Python IVI help system</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="rohdeschwarz.html"
+                        title="previous chapter">Rohde Schwarz instrument drivers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="yokogawa.html"
+                        title="next chapter">Yokogawa instrument drivers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/agilent.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="yokogawa.html" title="Yokogawa instrument drivers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="rohdeschwarz.html" title="Rohde Schwarz instrument drivers"
+             >previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li>
+          <li><a href="drivers.html" >Instrument Drivers</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jérôme Estève.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>data Module &mdash; pyslave 0.9 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.9',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pyslave 0.9 documentation" href="index.html" />
+    <link rel="next" title="Instrument Drivers" href="drivers.html" />
+    <link rel="prev" title="instruments Module" href="instruments.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="drivers.html" title="Instrument Drivers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="instruments.html" title="instruments Module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="data-module">
+<h1><tt class="xref py py-mod docutils literal"><span class="pre">data</span></tt> Module<a class="headerlink" href="#data-module" title="Permalink to this headline">¶</a></h1>
+<p>This module contains helper functions to handle and save data acquired with pyslave.</p>
+<span class="target" id="module-pyslave.data"></span><dl class="function">
+<dt id="pyslave.data.increment_file">
+<tt class="descclassname">pyslave.data.</tt><tt class="descname">increment_file</tt><big>(</big><em>filename</em>, <em>ndigits=3</em><big>)</big><a class="headerlink" href="#pyslave.data.increment_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a filename with an automatically incremented number at the end.
+The number is zero padded to have ndigits.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyslave.data.data">
+<em class="property">class </em><tt class="descclassname">pyslave.data.</tt><tt class="descname">data</tt><a class="headerlink" href="#pyslave.data.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class to represent experimental data. Values stored in the object can be accessed via attributes or keys.
+Data attributes will be saved as an array by the save methods.
+Normal attributes will be discarded when saving in text format and saved as attributes in the HDF5 format.</p>
+<dl class="method">
+<dt id="pyslave.data.data.save">
+<tt class="descname">save</tt><big>(</big><em>file</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyslave.data.data.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the data to a file in text or HDF5 format.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Text format <span class="classifier-delimiter">:</span> <span class="classifier">used if file is a string ending in txt.</span></dt>
+<dd><p class="first last">The optional keywords are increment=True and ndigits=3 to control the behaviour of the filename autoincrement (see the save_txt method for more details).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>HDF5 format <span class="classifier-delimiter">:</span> <span class="classifier">used if file is an opened HDF5 file or a string ending in h5.</span></dt>
+<dd><p class="first last">The optional keywords are increment=True and ndigits=3 to control the behaviour of the dataset autoincrement.
+The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function.
+(see the save_h5 method for more details).</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.data.data.save_txt">
+<tt class="descname">save_txt</tt><big>(</big><em>filename</em>, <em>increment=True</em>, <em>ndigits=3</em><big>)</big><a class="headerlink" href="#pyslave.data.data.save_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the data to a text file. If increment is True, the filename is automatically incremented and will contain a ndigits integer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyslave.data.data.save_h5">
+<tt class="descname">save_h5</tt><big>(</big><em>hdf</em>, <em>dataset='data'</em>, <em>attrs={}</em>, <em>increment=True</em>, <em>ndigits=3</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#pyslave.data.data.save_h5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the data to a HDF5 dataset. The first parameter hdf must a HDF5 file opened for writing.
+If increment is True, the name of the dataset is automatically incremented and will contain a ndigits integer.
+The non data attributes are saved as HDF5 attributes together with the extra attributes passed in attrs.
+The file is flushed after the dataset is inserted.
+Optional arguments are passed to the create_dataset function (e.g. compression=&#8217;gzip&#8217;).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyslave.data.Sij">
+<em class="property">class </em><tt class="descclassname">pyslave.data.</tt><tt class="descname">Sij</tt><a class="headerlink" href="#pyslave.data.Sij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vector network analyzer Sij data class.</p>
+<ul class="simple">
+<li>Data attributes : freq, S12</li>
+<li>Attributes : start_frequency, stop_frequency, number_of_points, power</li>
+</ul>
+<dl class="method">
+<dt id="pyslave.data.Sij.save_txt">
+<tt class="descname">save_txt</tt><big>(</big><em>filename</em>, <em>increment=True</em>, <em>ndigits=3</em><big>)</big><a class="headerlink" href="#pyslave.data.Sij.save_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the data to a text file. If increment is True, the filename is automatically incremented and will contain a ndigits integer.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="pyslave.data.lecroy_trace">
+<em class="property">class </em><tt class="descclassname">pyslave.data.</tt><tt class="descname">lecroy_trace</tt><a class="headerlink" href="#pyslave.data.lecroy_trace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lecroy oscilloscope waveform data class.</p>
+<ul class="simple">
+<li>Data attributes : horiz, vert</li>
+<li>Attributes : horiz_interval, horiz_offset, sweeps_per_acq, bandwidth_limit, vertical_gain, vertical_offset, vert_coupling, acq_vert_offset, probe_att</li>
+</ul>
+</dd></dl>
+
+<dl class="class">
+<dt id="pyslave.data.xy">
+<em class="property">class </em><tt class="descclassname">pyslave.data.</tt><tt class="descname">xy</tt><a class="headerlink" href="#pyslave.data.xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic x,y data class.</p>
+<ul class="simple">
+<li>Data Attributes : x, y</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="instruments.html"
+                        title="previous chapter"><tt class="docutils literal"><span class="pre">instruments</span></tt> Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="drivers.html"
+                        title="next chapter">Instrument Drivers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/data.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="drivers.html" title="Instrument Drivers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="instruments.html" title="instruments Module"
+             >previous</a> |</li>
+        <li><a href="index.html">pyslave 0.9 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Jérôme Estève.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

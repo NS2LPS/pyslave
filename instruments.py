@@ -1,10 +1,9 @@
 """The instruments module contains functions to open and close VISA instruments.
 It keeps track of all the instruments that are loaded and attributes them unique shortnames."""
 
-import time, traceback, sys, logging
+import time, traceback, sys, logging, importlib
 import visa
 from pyvisa import VisaIOError
-from pyslave.drivers import *
 from collections import OrderedDict
 
 # Logger
@@ -16,13 +15,13 @@ logger.addHandler(logging.NullHandler())
 rm = visa.ResourceManager()
 
 # Known devices with their driver and category
-known_devices   = {'HEWLETT-PACKARD 34401A': (agilent.agilent34401A, 'dmm'),
-                   'HEWLETT-PACKARD E3631A': (agilent.agilentE3641A,  'dcpwr'),
-                   'Rohde&Schwarz ZVA40-2Port' : (rohdeschwarz.zvb, 'vna'),
-                   'Rohde&Schwarz ZVB8-2Port' : (rohdeschwarz.zvb, 'vna'),
-                   'Stanford_Research_Systems SR830': (standfordresearch.SR830, 'lockin'),
-                   '*IDN LECROY LT322': (lecroy.LecroyScope, 'scope'),
-                   'Yokogawa 7651':(yokogawa.yokogawa7651,'dcpwr')
+known_devices   = {'HEWLETT-PACKARD 34401A': ('agilent' , 'agilent34401A', 'dmm'),
+                   'HEWLETT-PACKARD E3631A': ('agilent', 'agilentE3641A',  'dcpwr'),
+                   'Rohde&Schwarz ZVA40-2Port' : ('rohdeschwarz', 'zvb', 'vna'),
+                   'Rohde&Schwarz ZVB8-2Port' : ('rohdeschwarz', 'zvb', 'vna'),
+                   'Stanford_Research_Systems SR830': ('standfordresearch', 'SR830', 'lockin'),
+                   '*IDN LECROY LT322': ('lecroy','LecroyScope', 'scope'),
+                   'Yokogawa 7651':('yokogawa', 'yokogawa7651','dcpwr')
                    }
 
 # Keep track of loaded instruments
@@ -67,8 +66,17 @@ def openinst(address, id=None, shortname=None):
         finally:
             app.close()
     if id in known_devices:
-        driver, typ = known_devices[id]
-        app = driver(address)
+        pkg, driver, typ = known_devices[id]
+        try : 
+            m = importlib.import_module( '.{0}'.format(pkg), 'pyslave.drivers')
+            driver = getattr(m, driver)
+            app = driver(address)
+        except:
+            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
+            for e in error_msgs: print e
+            print 'Error while loading instrument at {0}.'.format(address)
+            app = rm.open_resource(address)
+            typ = 'instr'
     else:
         app = rm.open_resource(address)
         typ = 'instr'
