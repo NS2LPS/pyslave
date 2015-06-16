@@ -1,10 +1,16 @@
-from __zvb__ import rszvb as dll
 import numpy as np
 import time
 from pyslave.data import Sij
 
+try:
+    from __zvb__ import rszvb as dll
+except:
+    print 'Error while loading the Rohde&Shwarz ZVB DLL.'
+    class dll:
+        pass
+
 class zvb:
-    """Rohde&Schwarz Vector Network Analyzer (ZVA,ZVB) driver. 
+    """Rohde&Schwarz Vector Network Analyzer (ZVA,ZVB) driver.
     All the functions from the rszvb DLL are available as well as extra home made functions.
     Direct call to the instrument invokes the fetch method.
     """
