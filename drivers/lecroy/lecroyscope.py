@@ -7,12 +7,14 @@ from pyslave.data import lecroy_trace
 visa_rm = visa.ResourceManager()
 
 class LecroyScope:
-    """Basic class for lecroy oscilloscopes."""
+    """Lecroy oscilloscope instrument driver.
+    Direct call to the instrument invokes the fetch method."""
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.lastvar = None
+        self.__call__ = self.fetch
 
-    def __call__(self, channel='C1'):
+    def fetch(self, channel='C1'):
         """Fetch the waveform from the specified channel ('C1','C2,'TA', ...) and return it as a lecroy_trace data object."""
         ret = self.write('{0}:WF?'.format(channel))
         trc = self.read_raw()

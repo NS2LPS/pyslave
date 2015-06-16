@@ -50,7 +50,7 @@ class data(dict):
         pass
     @property
     def __data__(self):
-        return np.core.rec.fromarrays( [self.__getattribute__(k) for k in self.__data_attributes__] , names = self.__data_attributes__)
+        return np.core.rec.fromarrays( [getattr(self, k) for k in self.__data_attributes__] , names = self.__data_attributes__)
     @property
     def __attributes__(self):
         return dict([ (k,v) for k,v in self.iteritems() if k not in self.__data_attributes__ and k not in self.__hidden_attributes__])
@@ -81,8 +81,7 @@ class data(dict):
     def save_txt(self, filename, increment=True, ndigits=3):
         """Save the data to a text file. If increment is True, the filename is automatically incremented and will contain a ndigits integer."""
         if increment : filename = increment_file(filename, ndigits)
-        nparray = self.__data__
-        np.savetxt(filename, nparray)
+        np.savetxt(filename, self.__data__)
         msg = 'Data saved to {0}.'.format(str(filename))
         logger.info(msg)
         print msg
@@ -93,11 +92,10 @@ class data(dict):
         The file is flushed after the dataset is inserted.
         Optional arguments are passed to the create_dataset function (e.g. compression='gzip').
         """
-        nparray = self.__data__
         attrs.update(self.__attributes__)
         if increment : dataset = __increment__(dataset, '', hdf.keys(), ndigits)
         if dataset in hdf: del hdf['{0}'.format(dataset)]
-        ds = hdf.create_dataset(dataset, data=nparray, **kwargs)
+        ds = hdf.create_dataset(dataset, data=self.__data__, **kwargs)
         for k,v in attrs.iteritems() :
             ds.attrs[k] = v
         hdf.flush()
@@ -110,6 +108,7 @@ class Sij(data):
     Data attributes : freq, S12
     Attributes : start_frequency, stop_frequency, number_of_points, power
     """
+    __data_attributes__ = ['freq','Sij']
     @property
     def freq(self):
         return np.linspace(self.start_frequency, self.stop_frequency, self.number_of_points)
@@ -118,7 +117,16 @@ class Sij(data):
         ax.plot(self.freq/1e9, y, **kwargs)
         ax.set_xlabel('Frequency (GHz)')
         ax.set_ylabel('$|S_{ij}|^2$ (dB)' if scale is 'log' else '$|S_{ij}|^2$')
-
+    def save_txt(self, filename, increment=True, ndigits=3):
+        """Save the data to a text file. If increment is True, the filename is automatically incremented and will contain a ndigits integer."""
+        if increment : filename = increment_file(filename, ndigits)
+        data = self.__data__
+        data = np.c_[data['freq'], data['Sij'].real, data['Sij'].imag]
+        np.savetxt(filename, data)
+        msg = 'Data saved to {0}.'.format(str(filename))
+        logger.info(msg)
+        print msg
+        
 class lecroy_trace(data):
     """Lecroy oscilloscope waveform data class.
     Data attributes : horiz, vert

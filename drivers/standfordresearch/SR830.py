@@ -15,6 +15,9 @@ visa_rm = visa.ResourceManager()
 
 
 class SR830:
+    """StandfordResearch SR830 instrument driver.
+    Direct call to the instrument invokes the outp method.
+    """
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.write('OUTX 1') # Set the device responce port to GPIB

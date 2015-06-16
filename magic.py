@@ -269,11 +269,10 @@ def capture(line, local_ns):
     data = eval(func, globals(), local_ns)
     # Plot data
     exec "fig, ax = subplots()" in local_ns
-    data.plot(local_ns['ax'], **param)
+    data.plot(local_ns['ax'])
     exec "fig.show()" in local_ns
     # Save data to file
     if filename :
         msg = data.save(filename, **param)
-        print msg
 
 del today, lastday, capture
