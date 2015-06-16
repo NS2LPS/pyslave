@@ -149,8 +149,7 @@ class SlaveWindow(QtGui.QMainWindow):
 def __replace__(line):
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause?','thread.pause()')
-    line = line.replace('#break?','if thread.stopflag : break')
-    line = line.replace('#abort?','if thread.stopflag : return')
+    line = line.replace('#abort?','if thread.stopflag : break')
     line = line.replace('#looptime?','thread.looptime()')
     line = line.replace('#disp','thread.display')
     return line
