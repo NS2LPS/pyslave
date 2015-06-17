@@ -440,6 +440,9 @@ class SR830:
         "Set auxiliary output voltage."
         self.write('AUXV{0},{1}'.format(aux, voltage))
         
+    def oaux(self, aux=1):
+        "Read auxiliary input."
+        return float(self.query('OAUX?{0}'.format(aux)))
 
     # Read Data Buffer
     def readDataBuffer(self,channel):

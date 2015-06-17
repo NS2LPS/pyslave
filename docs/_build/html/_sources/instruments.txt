@@ -2,4 +2,5 @@
 =========================
 
 .. automodule:: pyslave.instruments
-    :members: openinst, openall, closeinst
+    :members:
+    

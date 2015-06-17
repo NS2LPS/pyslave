@@ -11,7 +11,7 @@ These functions are designed to load instruments, launch scripts and interact wi
 Instrument functions (shortcuts to the instruments module)
 ----------------------------------------------------------
 
-**%openinst** *resource*
+**%openinstr** *resource*
 
     Load the VISA instrument at the specified resource.
 
@@ -23,7 +23,7 @@ Instrument functions (shortcuts to the instruments module)
 
     List all loaded instruments.
 
-**%closeinst** *instrument_short_name*
+**%closeinstr** *instrument_short_name*
 
     Close the specified instrument.
 

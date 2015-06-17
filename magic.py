@@ -69,14 +69,11 @@ def openall(line, local_ns):
     res = instruments.openall('GPIB', 'visa')
     for app in res:
         local_ns[app.shortname] = app
-    print "Loaded GPIB instruments :"
-    for app in instruments.__loaded__.itervalues():
-        print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
     # NI-DAQ
-    res = instruments.openall('', 'nidaq')
+    res = instruments.openall('Mod', 'nidaq')
     for app in res:
         local_ns[app.shortname] = app
-    print "Loaded NI-DAQ devices :"
+    print "Loaded devices :"
     for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 

@@ -11,3 +11,5 @@ For example, directly calling a dmm will return the readout of the dmm.
     yokogawa
     standfordresearch
     lecroy
+    nidaq
+    
