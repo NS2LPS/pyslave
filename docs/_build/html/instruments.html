@@ -57,24 +57,34 @@
 <p>The instruments module contains functions to open and close VISA instruments.
 It keeps track of all the instruments that are loaded and attributes them unique shortnames.</p>
 <dl class="function">
-<dt id="pyslave.instruments.openinst">
-<tt class="descclassname">pyslave.instruments.</tt><tt class="descname">openinst</tt><big>(</big><em>address</em>, <em>id=None</em>, <em>shortname=None</em><big>)</big><a class="headerlink" href="#pyslave.instruments.openinst" title="Permalink to this definition">¶</a></dt>
-<dd><p>Open the instrument at the specified address.
-The address must be a valid VISA resource. If id is None, the instrument ID is queried and
-the function looks for the appropriate class and returns an instance of the found class.
+<dt id="pyslave.instruments.openinstr">
+<tt class="descclassname">pyslave.instruments.</tt><tt class="descname">openinstr</tt><big>(</big><em>address</em>, <em>id=None</em>, <em>shortname=None</em><big>)</big><a class="headerlink" href="#pyslave.instruments.openinstr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open the instrument at the specified VISA address.
+The address must be a valid VISA resource. 
+If id is None, the instrument id is queried. If no driver is found for the corresponding id, a generic instrument is returned 
+otherwise an instance of the found driver class is returned.
+The function also sets the fullname and shortname attributes automatically (unless shortname is specified).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyslave.instruments.opennidaq">
+<tt class="descclassname">pyslave.instruments.</tt><tt class="descname">opennidaq</tt><big>(</big><em>devname</em>, <em>id=None</em>, <em>shortname=None</em><big>)</big><a class="headerlink" href="#pyslave.instruments.opennidaq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open the NI-DAQ device with the specified name.
+If id is None, the device id is queried. If no driver is found for the corresponding id, an error is raised otherwise an instance of the found driver class is returned.
 The function also sets the fullname and shortname attributes automatically (unless shortname is specified).</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="pyslave.instruments.openall">
-<tt class="descclassname">pyslave.instruments.</tt><tt class="descname">openall</tt><big>(</big><em>match</em><big>)</big><a class="headerlink" href="#pyslave.instruments.openall" title="Permalink to this definition">¶</a></dt>
-<dd><p>Open all instruments whose address contains match.
-For example, openall(&#8216;GPIB&#8217;) loads all GPIB devices and return them in a list.</p>
+<tt class="descclassname">pyslave.instruments.</tt><tt class="descname">openall</tt><big>(</big><em>match</em>, <em>resource='visa'</em><big>)</big><a class="headerlink" href="#pyslave.instruments.openall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open all instruments whose address contains match in the given resource.
+For example, openall(&#8216;GPIB&#8217;, resource=&#8217;visa&#8217;) loads all GPIB devices and return them in a list.
+Or openall(&#8216;&#8217;,resource=&#8217;nidaq&#8217;) loads all NI-DAQ devices.</p>
 </dd></dl>
 
 <dl class="function">
-<dt id="pyslave.instruments.closeinst">
-<tt class="descclassname">pyslave.instruments.</tt><tt class="descname">closeinst</tt><big>(</big><em>shortname</em><big>)</big><a class="headerlink" href="#pyslave.instruments.closeinst" title="Permalink to this definition">¶</a></dt>
+<dt id="pyslave.instruments.closeinstr">
+<tt class="descclassname">pyslave.instruments.</tt><tt class="descname">closeinstr</tt><big>(</big><em>shortname</em><big>)</big><a class="headerlink" href="#pyslave.instruments.closeinstr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Close the instrument specified by its shortname and remove it from the instrument list.</p>
 </dd></dl>
 
