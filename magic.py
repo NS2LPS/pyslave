@@ -45,32 +45,41 @@ def __arg_split__(line):
 
 @register_line_magic
 @needs_local_scope
-def openinst(line, local_ns):
+def openinstr(line, local_ns):
     """Load the VISA instrument at the specified resource."""
     args = __arg_split__(line)
     addr = str(args[0])
     id = str(args[1]) if len(args)>1 else None
-    app = instruments.openinst(addr, id)
+    app = instruments.openinstr(addr, id)
     local_ns[app.shortname] = app
     print '{0} loaded as {1}'.format(app.fullname, app.shortname)
 
 @register_line_magic
 @needs_local_scope
-def closeinst(line, local_ns):
+def closeinstr(line, local_ns):
     """Close the specified instrument."""
-    res = instruments.closeinst(line)
+    res = instruments.closeinstr(line)
     del local_ns[line]
 
 @register_line_magic
 @needs_local_scope
 def openall(line, local_ns):
-    """Load all GPIB instruments."""
-    res = instruments.openall('GPIB')
+    """Load all GPIB instruments and NI-DAQ devices."""
+    # GPIB
+    res = instruments.openall('GPIB', 'visa')
     for app in res:
         local_ns[app.shortname] = app
-    print "Loaded instruments :"
+    print "Loaded GPIB instruments :"
     for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
+    # NI-DAQ
+    res = instruments.openall('', 'nidaq')
+    for app in res:
+        local_ns[app.shortname] = app
+    print "Loaded NI-DAQ devices :"
+    for app in instruments.__loaded__.itervalues():
+        print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
+
 
 @register_line_magic
 def listall(line):
@@ -79,7 +88,7 @@ def listall(line):
     for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 
-del listall, openall, openinst, closeinst
+del listall, openall, openinstr, closeinstr
 
 ########################################################
 # Scripts launching, pausing, resuming, aborting magic

@@ -436,6 +436,11 @@ class SR830:
         result = self.query( 'OUTR? %s' % (mode) )
         return float(result)
 
+    def auxv(self, voltage, aux=1):
+        "Set auxiliary output voltage."
+        self.write('AUXV{0},{1}'.format(aux, voltage))
+        
+
     # Read Data Buffer
     def readDataBuffer(self,channel):
         '''

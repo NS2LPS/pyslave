@@ -2,8 +2,6 @@
 It keeps track of all the instruments that are loaded and attributes them unique shortnames."""
 
 import time, traceback, sys, logging, importlib
-import visa
-from pyvisa import VisaIOError
 from collections import OrderedDict
 
 # Logger
@@ -11,8 +9,21 @@ logger = logging.getLogger('pyslave.instruments')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.NullHandler())
 
-# VISA resource manager
-rm = visa.ResourceManager()
+# Get VISA hookup
+try:
+    import visa
+    from pyvisa import VisaIOError
+    # VISA resource manager
+    __visa__rm__ = visa.ResourceManager()
+except:
+    __visa__rm__ = None
+
+# Get NIDAQ hookup
+try:
+    import pyDAQmx as __ni__
+    import ctypes
+except:
+    __ni__ = None
 
 # Known devices with their driver and category
 known_devices   = {'HEWLETT-PACKARD 34401A': ('agilent' , 'agilent34401A', 'dmm'),
@@ -35,24 +46,27 @@ def __shortname__(prefix):
 
 class InstrumentError(Exception):
     pass
-    
-def openinst(address, id=None, shortname=None):
-    """Open the instrument at the specified address.
+
+def openinstr(address, id=None, shortname=None):
+    """Open the instrument at the specified VISA address.
     The address must be a valid VISA resource. If id is None, the instrument ID is queried and
     the function looks for the appropriate class and returns an instance of the found class.
     The function also sets the fullname and shortname attributes automatically (unless shortname is specified)."""
+    if __visa__rm__ is None:
+        print 'VISA library not loaded'
+        return None
     if id is None:
         try :
-            app = rm.open_resource(address)
+            app = __visa__rm__.open_resource(address)
             app.clear()
             id = app.query('*IDN?')
             id = id.split(',')[:2]
             id = str(' '.join(id)).strip()
         except VisaIOError:
-            # We assume it's a yoko...            
+            # We assume it's a yoko...
             # try:
                 # alias = str(app.resource_info[0].alias)
-                # if 'YOKO' in alias.upper(): 
+                # if 'YOKO' in alias.upper():
                     # id = 'Yokogawa 7651'
                 # else:
                     # raise InstrumentError('Could not id intrument at {0}.'.format(address))
@@ -67,7 +81,7 @@ def openinst(address, id=None, shortname=None):
             app.close()
     if id in known_devices:
         pkg, driver, typ = known_devices[id]
-        try : 
+        try :
             m = importlib.import_module( '.{0}'.format(pkg), 'pyslave.drivers')
             driver = getattr(m, driver)
             app = driver(address)
@@ -75,10 +89,10 @@ def openinst(address, id=None, shortname=None):
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
             for e in error_msgs: print e
             print 'Error while loading instrument at {0}.'.format(address)
-            app = rm.open_resource(address)
+            app = __visa__rm__.open_resource(address)
             typ = 'instr'
     else:
-        app = rm.open_resource(address)
+        app = __visa__rm__.open_resource(address)
         typ = 'instr'
     fullname = id + ' ' + address
     if shortname is None:
@@ -90,15 +104,30 @@ def openinst(address, id=None, shortname=None):
     logger.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))
     return app
 
+def opennidaq(devname):
+    devicetype_buffersize = DAQmxGetDeviceAttribute(devname, __ni__.DAQmx_Dev_ProductType, NULL);
+    devicetype = (char*) malloc(devicetype_buffersize);
+    DAQmxGetDeviceAttribute(devname, __ni__.DAQmx_Dev_ProductType, devicetype, devicetype_buffersize);
 
-def openall(match):
-    """Open all instruments whose address contains match.
-    For example, openall('GPIB') loads all GPIB devices and return them in a list."""
+def openall(match, resource='visa'):
+    """Open all instruments whose address contains match in the given resource.
+    For example, openall('GPIB', resource='visa') loads all GPIB devices and return them in a list.
+    Or openall('',resource='nidaq') loads all NI-DAQ devices."""
+    if resource is 'visa':
+        return __openall_visa__(match)
+    elif resource is 'nidaq':
+        return __openall_nidaq__(match)
+    else:
+        print 'Unknown resource :',resource
+        return []
+
+def __openall_visa__(match):
     res = []
-    for address in rm.list_resources() :
+    if __visa__rm__ is None : return res
+    for address in __visa__rm__.list_resources() :
         if match in address:
             try:
-                app = openinst(str(address.strip()))
+                app = openinstr(str(address.strip()))
                 res.append(app)
             except:
                 error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
@@ -106,7 +135,26 @@ def openall(match):
                 print 'Error while opening instrument at {0}.'.format(address)
     return res
 
-def closeinst(shortname):
+def __openall_nidaq__(match):
+    res = []
+    if __ni__ is None : return res
+    buffersize = __ni__.DAQmxGetSystemInfoAttribute(__ni__.DAQmx_Sys_DevNames, devicenames)
+    devicenames = (char*)malloc(buffersize);
+    __ni__.DAQmxGetSystemInfoAttribute(__ni__.DAQmx_Sys_DevNames, devicenames, buffersize);
+    for dev in devicenames :
+        if match in dev:
+            try:
+                app = opennidaq(str(address.strip()))
+                res.append(app)
+            except:
+                error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
+                for e in error_msgs: print e
+                print 'Error while opening instrument at {0}.'.format(address)
+    return res
+
+
+
+def closeinstr(shortname):
     """Close the instrument specified by its shortname and remove it from the instrument list."""
     d = dict( [ (v.shortname, k) for k,v in __loaded__.iteritems() ] )
     fullname = d[shortname]
