@@ -44,7 +44,7 @@ Comments interpreted by slave
 
 .. function:: #abort?
 
-    This line inserts a Python break statement if the user aborts the script. Multiple ``#break?`` should be used to exit nested loops.
+    This line inserts a Python break statement if the user aborts the script. Multiple ``#abort?`` should be used to exit nested loops.
 
 .. function:: #disp(string)
 

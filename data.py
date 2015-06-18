@@ -62,7 +62,7 @@ class data(dict):
 
         - HDF5 format : used if file is an opened HDF5 file or a string ending in h5.
             The optional keywords are increment=True and ndigits=3 to control the behaviour of the dataset autoincrement.
-            The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function.
+            The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function
             (see the save_h5 method for more details).
 
         """
@@ -105,8 +105,8 @@ class data(dict):
 
 class Sij(data):
     """Vector network analyzer Sij data class.
-    
-    * Data attributes : freq, S12
+
+    * Data attributes : freq, S12 (complex)
     * Attributes : start_frequency, stop_frequency, number_of_points, power
     """
     __data_attributes__ = ['freq','Sij']
@@ -119,7 +119,7 @@ class Sij(data):
         ax.set_xlabel('Frequency (GHz)')
         ax.set_ylabel('$|S_{ij}|^2$ (dB)' if scale is 'log' else '$|S_{ij}|^2$')
     def save_txt(self, filename, increment=True, ndigits=3):
-        """Save the data to a text file. If increment is True, the filename is automatically incremented and will contain a ndigits integer."""
+        """Save the data to a text file with three columns : freq, Sij.real, Sij.imag."""
         if increment : filename = increment_file(filename, ndigits)
         data = self.__data__
         data = np.c_[data['freq'], data['Sij'].real, data['Sij'].imag]
@@ -127,10 +127,10 @@ class Sij(data):
         msg = 'Data saved to {0}.'.format(str(filename))
         logger.info(msg)
         print msg
-        
+
 class lecroy_trace(data):
     """Lecroy oscilloscope waveform data class.
-    
+
     * Data attributes : horiz, vert
     * Attributes : horiz_interval, horiz_offset, sweeps_per_acq, bandwidth_limit, vertical_gain, vertical_offset, vert_coupling, acq_vert_offset, probe_att
     """
@@ -155,7 +155,7 @@ class lecroy_trace(data):
 
 class xy(data):
     """Generic x,y data class.
-    
+
     * Data Attributes : x, y
     """
     __data_attributes__ = ['x', 'y']
