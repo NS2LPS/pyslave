@@ -1,19 +1,23 @@
 # Scan the power of the vna and acquire spectra
 
 import time
+from pyslave.data import increment_file
 
 fig,ax = subplots()
 power = linspace(1e-4,1,100)
 
 # Set number of averages
-vna1.SetAverageFactor(channel=1, averageFactor=20)
+vna1.SetAverageState(1, True)
+vna1.SetAverageFactor(1, 20)
+
+filename = increment_file('power_scan_.h5')
 
 #main
-for p in enumerate(power):
+for p in power:
     #pause?
 
     # Change parameter
-    vna1.SetPower(10*log10(p))
+    vna1.SetPower(power=10*log10(p))
     vna1.RestartAverage()
 
     # Acquire data
@@ -26,7 +30,7 @@ for p in enumerate(power):
     #draw
 
     # Save data
-    data.save('power_scan.h5')
+    data.save(filename)
 
     #abort?
     #looptime?

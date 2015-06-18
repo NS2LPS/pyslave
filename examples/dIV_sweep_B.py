@@ -23,7 +23,7 @@ for im in Icoil:
         dcpwr1(v)
         dcpwr1.ready()
         # Acquire data
-        time.sleep(0.5)
+        #time.sleep(0.5)
         vmeas[index] = lockin1()
         # Plot dI/dV
         ax.cla()

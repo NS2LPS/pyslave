@@ -183,7 +183,7 @@ def script_measure(thread):
         {set_function}
         time.sleep({set_sleep})
         y = {read_function}
-        thread.display('Step ' + str(i) + '/' + str(len(loopover)))
+        thread.display('Step ' + str(i) + '/' + str(len(measure_out.x)))
         thread.looptime()
         measure_out.y[i] = y
         if '{plot}'=='y':
