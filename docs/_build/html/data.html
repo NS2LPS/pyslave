@@ -82,7 +82,7 @@ Normal attributes will be discarded when saving in text format and saved as attr
 <li><dl class="first docutils">
 <dt>HDF5 format <span class="classifier-delimiter">:</span> <span class="classifier">used if file is an opened HDF5 file or a string ending in h5.</span></dt>
 <dd><p class="first last">The optional keywords are increment=True and ndigits=3 to control the behaviour of the dataset autoincrement.
-The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function.
+The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function
 (see the save_h5 method for more details).</p>
 </dd>
 </dl>
@@ -113,13 +113,13 @@ Optional arguments are passed to the create_dataset function (e.g. compression=&
 <em class="property">class </em><tt class="descclassname">pyslave.data.</tt><tt class="descname">Sij</tt><a class="headerlink" href="#pyslave.data.Sij" title="Permalink to this definition">¶</a></dt>
 <dd><p>Vector network analyzer Sij data class.</p>
 <ul class="simple">
-<li>Data attributes : freq, S12</li>
+<li>Data attributes : freq, S12 (complex)</li>
 <li>Attributes : start_frequency, stop_frequency, number_of_points, power</li>
 </ul>
 <dl class="method">
 <dt id="pyslave.data.Sij.save_txt">
 <tt class="descname">save_txt</tt><big>(</big><em>filename</em>, <em>increment=True</em>, <em>ndigits=3</em><big>)</big><a class="headerlink" href="#pyslave.data.Sij.save_txt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the data to a text file. If increment is True, the filename is automatically incremented and will contain a ndigits integer.</p>
+<dd><p>Save the data to a text file with three columns : freq, Sij.real, Sij.imag.</p>
 </dd></dl>
 
 </dd></dl>

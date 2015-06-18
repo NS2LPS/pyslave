@@ -54,14 +54,15 @@
             
   <div class="section" id="module-pyslave.instruments">
 <span id="instruments-module"></span><h1><tt class="xref py py-mod docutils literal"><span class="pre">instruments</span></tt> Module<a class="headerlink" href="#module-pyslave.instruments" title="Permalink to this headline">¶</a></h1>
-<p>The instruments module contains functions to open and close VISA instruments.
-It keeps track of all the instruments that are loaded and attributes them unique shortnames.</p>
+<p>The instruments module contains functions to open and close VISA or NI-DAQ instruments.
+It keeps track of all the instruments that are loaded and attributes them unique shortnames.
+Loaded instruments are stored in the <tt class="docutils literal"><span class="pre">__loaded__</span></tt> dictionary.</p>
 <dl class="function">
 <dt id="pyslave.instruments.openinstr">
 <tt class="descclassname">pyslave.instruments.</tt><tt class="descname">openinstr</tt><big>(</big><em>address</em>, <em>id=None</em>, <em>shortname=None</em><big>)</big><a class="headerlink" href="#pyslave.instruments.openinstr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open the instrument at the specified VISA address.
-The address must be a valid VISA resource. 
-If id is None, the instrument id is queried. If no driver is found for the corresponding id, a generic instrument is returned 
+The address must be a valid VISA resource.
+If id is None, the instrument id is queried. If no driver is found for the corresponding id, a generic instrument is returned
 otherwise an instance of the found driver class is returned.
 The function also sets the fullname and shortname attributes automatically (unless shortname is specified).</p>
 </dd></dl>
@@ -70,7 +71,8 @@ The function also sets the fullname and shortname attributes automatically (unle
 <dt id="pyslave.instruments.opennidaq">
 <tt class="descclassname">pyslave.instruments.</tt><tt class="descname">opennidaq</tt><big>(</big><em>devname</em>, <em>id=None</em>, <em>shortname=None</em><big>)</big><a class="headerlink" href="#pyslave.instruments.opennidaq" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open the NI-DAQ device with the specified name.
-If id is None, the device id is queried. If no driver is found for the corresponding id, an error is raised otherwise an instance of the found driver class is returned.
+If id is None, the device id is queried. If no driver is found for the corresponding id,
+an error is raised otherwise an instance of the found driver class is returned.
 The function also sets the fullname and shortname attributes automatically (unless shortname is specified).</p>
 </dd></dl>
 
@@ -79,7 +81,7 @@ The function also sets the fullname and shortname attributes automatically (unle
 <tt class="descclassname">pyslave.instruments.</tt><tt class="descname">openall</tt><big>(</big><em>match</em>, <em>resource='visa'</em><big>)</big><a class="headerlink" href="#pyslave.instruments.openall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Open all instruments whose address contains match in the given resource.
 For example, openall(&#8216;GPIB&#8217;, resource=&#8217;visa&#8217;) loads all GPIB devices and return them in a list.
-Or openall(&#8216;&#8217;,resource=&#8217;nidaq&#8217;) loads all NI-DAQ devices.</p>
+Or openall(&#8216;Mod&#8217;,resource=&#8217;nidaq&#8217;) loads all NI-DAQ modules in a rack.</p>
 </dd></dl>
 
 <dl class="function">
