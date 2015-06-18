@@ -155,7 +155,7 @@ text_input = OrderedDict([
               ('read_function' , 'Read value'),
               ('read_sleep' , 'Sleep (in s)'),
               ('plot' , 'Plot (y/n)'),
-              ('filename' , 'Save to'),
+              ('filename' , 'Save to (space for not saving)'),
               ])
 
 @register_line_magic
@@ -176,18 +176,16 @@ def measure(line, local_ns):
 import time
 from pyslave.data import xy
 if '{plot}'=='y': fig, ax = subplots()
-measure_out = xy(x=np.empty(0), y=np.empty(0))
+measure_out = xy(x=array({iterable}), y=ones_like(array({iterable}))*nan)
 
 def script_measure(thread):
-    loopover = {iterable}
-    for i,x in enumerate(loopover):
+    for i,x in enumerate(measure_out.x):
         {set_function}
         time.sleep({set_sleep})
         y = {read_function}
         thread.display('Step ' + str(i) + '/' + str(len(loopover)))
         thread.looptime()
-        measure_out.x = append(measure_out.x, x)
-        measure_out.y = append(measure_out.y, y)
+        measure_out.y[i] = y
         if '{plot}'=='y':
             ax.cla()
             measure_out.plot(ax)
