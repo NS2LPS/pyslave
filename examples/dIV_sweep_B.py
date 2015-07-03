@@ -33,7 +33,7 @@ for im in Icoil:
 
     # Save as h5 with temperature
     rcernox = dmm1()
-    iv = xy(x=vyoko, y=vmeas, rcernox=rcernox)
+    iv = xy(x=vyoko, y=vmeas, rcernox=rcernox, Icoil=im)
     iv.save(filename)
 
     #abort?

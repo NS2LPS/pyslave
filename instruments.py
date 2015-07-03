@@ -95,7 +95,7 @@ def openinstr(address, id=None, shortname=None):
     else:
         app.shortname = shortname
     app.fullname = fullname
-    __loaded__[fullname] = app
+    __loaded__[address] = app
     logger.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))
     return app
 
@@ -123,13 +123,13 @@ def opennidaq(devname, id=None, shortname=None):
     else:
         app.shortname = shortname
     app.fullname = fullname
-    __loaded__[fullname] = app
+    __loaded__[devname] = app
     logger.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))
     return app
 
 
 def openall(match, resource='visa'):
-    """Open all instruments whose address contains match in the given resource.
+    """Open all instruments whose address contains match in the given resource. Already opened devices are not reopened.
     For example, openall('GPIB', resource='visa') loads all GPIB devices and return them in a list.
     Or openall('Mod',resource='nidaq') loads all NI-DAQ modules in a rack."""
     if resource is 'visa':
@@ -144,9 +144,10 @@ def __openall_visa__(match):
     res = []
     if __visa__rm__ is None : return res
     for address in __visa__rm__.list_resources() :
-        if match in address:
+        address = str(address.strip())
+        if match in address and address not in __loaded__:
             try:
-                app = openinstr(str(address.strip()))
+                app = openinstr(address)
                 res.append(app)
             except:
                 error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
@@ -161,16 +162,16 @@ def __openall_nidaq__(match):
     __ni__.DAQmxGetSystemInfoAttribute(__ni__.DAQmx_Sys_DevNames, devicenames, 1024);
     devices = devicenames.value.split(',')
     for dev in devices :
-        if match in dev:
+        dev = str(dev.strip())
+        if match in dev and dev not in __loaded__:
             try:
-                app = opennidaq(str(dev.strip()))
+                app = opennidaq(dev)
                 res.append(app)
             except:
                 error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
                 for e in error_msgs: print e
                 print 'Error while opening device {0}.'.format(dev)
     return res
-
 
 
 def closeinstr(shortname):

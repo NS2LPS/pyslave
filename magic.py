@@ -65,23 +65,29 @@ def closeinstr(line, local_ns):
 @needs_local_scope
 def openall(line, local_ns):
     """Load all GPIB instruments and NI-DAQ devices."""
+    if instruments.__loaded__:
+        print 'Previously loaded instruments :'
+        for app in instruments.__loaded__.itervalues():
+            print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
+    print "Loading new devices ..."
     # GPIB
     res = instruments.openall('GPIB', 'visa')
     for app in res:
         local_ns[app.shortname] = app
+    for app in res:
+        print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
     # NI-DAQ
     res = instruments.openall('Mod', 'nidaq')
     for app in res:
         local_ns[app.shortname] = app
-    print "Loaded devices :"
-    for app in instruments.__loaded__.itervalues():
+    for app in res:
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
+    print "Done"
 
 
 @register_line_magic
 def listall(line):
     """List all loaded instruments."""
-    print "Loaded instruments :"
     for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 
@@ -167,11 +173,14 @@ def measure(line, local_ns):
         exec 'args=dict({0})'.format(','.join(args))
         measure_parameters.update(args)
     else :
+        print "Press enter to keep previous value. Abort with many q's (qqqq...)."
         for k,v in text_input.iteritems():
             inp = raw_input('{0} [{1}] : '.format(v, measure_parameters[k]))
+            if inp.endswith('qqqq') : return
             if inp : measure_parameters[k] = inp.strip()
     if '(' not in measure_parameters['read_function'] : measure_parameters['read_function']+= '()'
-    if '(' not in measure_parameters['set_function'] : measure_parameters['set_function']+= '(x)'
+    if '(' not in measure_parameters['set_function'] and '=' not in measure_parameters['set_function'] : 
+        measure_parameters['set_function']+= '(x)'
     script = """
 import time
 from pyslave.data import xy
@@ -183,7 +192,7 @@ def script_measure(thread):
         {set_function}
         time.sleep({set_sleep})
         y = {read_function}
-        thread.display('Step ' + str(i) + '/' + str(len(measure_out.x)))
+        thread.display('Step ' + str(i+1) + '/' + str(len(measure_out.x)))
         thread.looptime()
         measure_out.y[i] = y
         if '{plot}'=='y':

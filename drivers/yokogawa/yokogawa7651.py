@@ -158,8 +158,9 @@ class yokogawa7651:
         :param slope: Desired slope in V/s or A/s
         '''
         value = float(value)
-        npoints = abs(value-self.value)/slope * self.points_per_second
-        ramp = np.linspace(self.value, value, int(np.ceil(npoints)) )
+        if value==self.value : return
+        npoints = int(np.ceil(abs(value-self.value)/slope * self.points_per_second)) + 1
+        ramp = np.linspace(self.value, value, npoints )[1:]
         for v in ramp:
             self.write( 'S%f;' % (v) )
             self.trigger()

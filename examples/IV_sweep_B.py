@@ -4,9 +4,13 @@ import time
 from pyslave.data import xy, increment_file
 fig, ax = subplots()
 
-vyoko = r_[ linspace(0,1,51), linspace(1,-1,101), linspace(-1,0,51) ]
-Icoil = linspace(0, 0.1, 30)
+vyoko = r_[ linspace(0,1.,101), linspace(1.,-1.,201), linspace(-1.,0,101) ]
+Icoil = linspace(0.251, 0.501, 251)
 filename = increment_file('Bsweep.h5')
+
+# Set dmm to fast mode
+dmm1._interface.write('VOLT:DC:NPLC 1')
+dmm1._interface.write('DET:BAND 200')
 
 #main
 for im in Icoil:
@@ -19,19 +23,19 @@ for im in Icoil:
     vmeas = ones_like(vyoko)*nan
     for index,v in enumerate(vyoko):
         #pause?
-        # Change parameter
-        dcpwr1(v)
+        # Change Yoko
+        dcpwr1(v, 1.)
         dcpwr1.ready()
         # Acquire data
         vmeas[index] = dmm1()
-        # Plot I-V
-        ax.cla()
-        ax.plot(vyoko, vmeas)
-        #draw
         #abort?
+    # Plot I-V
+    ax.cla()
+    ax.plot(vyoko, vmeas)
+    #draw
 
     # Save as h5 
-    iv = xy(x=vyoko, y=vmeas)
+    iv = xy(x=vyoko, y=vmeas, Icoil=im)
     iv.save(filename)
 
     #abort?
