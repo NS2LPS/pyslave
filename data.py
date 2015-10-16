@@ -9,18 +9,17 @@ logger.addHandler(logging.NullHandler())
 
 def __increment__(base, ext, previous, ndigits):
     rec = re.compile(base+'[0-9]*'+ext)
-    previous = [p for p in previous if rec.match(p)]
-    if previous :
-        previous.sort()
-        last = previous[-1]
-        counter = last[len(base):]
-        if ext : counter = counter[:-len(ext)]
-        counter = int(counter)+1 if counter else 0
+    index = [p[len(base):] for p in previous if rec.match(p)]
+    if ext : index = [ p[:-len(ext)] for p in index]
+    index = [ int(p) for p in index]
+    if index :
+        index.sort()
+        counter = index[-1]+1
     else :
         counter = 0
     return base + str(counter).zfill(ndigits) + ext
 
-def increment_file(filename, ndigits=3):
+def increment_file(filename, ndigits=4):
     """Return a filename with an automatically incremented number at the end.
     The number is zero padded to have ndigits."""
     basename = filename.rsplit('.',1)[0] if '.' in filename else filename
@@ -58,10 +57,10 @@ class data(dict):
         """Save the data to a file in text or HDF5 format.
 
         - Text format : used if file is a string ending in txt.
-            The optional keywords are increment=True and ndigits=3 to control the behaviour of the filename autoincrement (see the save_txt method for more details).
+            The optional keywords are increment=True and ndigits=4 to control the behaviour of the filename autoincrement (see the save_txt method for more details).
 
         - HDF5 format : used if file is an opened HDF5 file or a string ending in h5.
-            The optional keywords are increment=True and ndigits=3 to control the behaviour of the dataset autoincrement.
+            The optional keywords are increment=True and ndigits=4 to control the behaviour of the dataset autoincrement.
             The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function
             (see the save_h5 method for more details).
 
@@ -78,14 +77,14 @@ class data(dict):
             self.save_h5(file, **kwargs)
         else :
             raise TypeError('File should be a string or an opened HDF file.')
-    def save_txt(self, filename, increment=True, ndigits=3):
+    def save_txt(self, filename, increment=True, ndigits=4):
         """Save the data to a text file. If increment is True, the filename is automatically incremented and will contain a ndigits integer."""
         if increment : filename = increment_file(filename, ndigits)
         np.savetxt(filename, self.__data__)
         msg = 'Data saved to {0}.'.format(str(filename))
         logger.info(msg)
         print msg
-    def save_h5(self, hdf, dataset='data', attrs=dict(), increment=True, ndigits=3, **kwargs):
+    def save_h5(self, hdf, dataset='data', attrs=dict(), increment=True, ndigits=4, **kwargs):
         """Save the data to a HDF5 dataset. The first parameter hdf must a HDF5 file opened for writing.
         If increment is True, the name of the dataset is automatically incremented and will contain a ndigits integer.
         The non data attributes are saved as HDF5 attributes together with the extra attributes passed in attrs.
@@ -118,7 +117,7 @@ class Sij(data):
         ax.plot(self.freq/1e9, y, **kwargs)
         ax.set_xlabel('Frequency (GHz)')
         ax.set_ylabel('$|S_{ij}|^2$ (dB)' if scale is 'log' else '$|S_{ij}|^2$')
-    def save_txt(self, filename, increment=True, ndigits=3):
+    def save_txt(self, filename, increment=True, ndigits=4):
         """Save the data to a text file with three columns : freq, Sij.real, Sij.imag."""
         if increment : filename = increment_file(filename, ndigits)
         data = self.__data__
@@ -161,3 +160,21 @@ class xy(data):
     __data_attributes__ = ['x', 'y']
     def plot(self, ax, **kwargs):
         ax.plot(self.x, self.y, **kwargs)
+
+def group(**kwargs):
+    """Group different data in a data object (see the data class documentation).
+    The __data_attribute__ is set to contain all keys that correspond to list or array variables.
+    List variables are automatically converted to arrays.
+
+    Example :  x = linspace(0,1,100)
+               y = [sin(u) for u in x]
+               mydata = group(x=x, y=y, description='test')
+               mydata.save('test.h5')   # Save to HDF5 format, x & y are stored in a dataset with an attribute description
+               mydata.save('test.txt')  # Save x & y in a text file, the description key will not be saved
+    """
+    for k,v in kwargs.iteritems():
+        if type(v) is list : kwargs[k] = np.array(v)
+    res = data(**kwargs)
+    for k,v in kwargs.iteritems():
+        if type(v) is np.ndarray : res.__data_attributes__.append(k)
+    return res
