@@ -35,22 +35,20 @@ class data(dict):
     __data_attributes__ = []
     __hidden_attributes__ = []
     def __getattr__(self, name):
-        if name in self:
-            return self[name]
-        else:
-            raise AttributeError("No such attribute : " + name)
+        return self[name]
     def __setattr__(self, name, value):
         self[name] = value
     def __delattr__(self, name):
-        if name in self:
-            del self[name]
-        else:
-            raise AttributeError("No such attribute : " + name)
+        del self[name]
     def plot(self, ax, **kwargs):
-        pass
+        x = self[__data_attributes__[0]]
+        y = self[__data_attributes__[1]]        
+        ax.plot(x, y, **kwargs)
+        ax.set_xlabel(__data_attributes__[0])
+        ax.set_ylabel(__data_attributes__[1])
     @property
     def __data__(self):
-        return np.core.rec.fromarrays( [getattr(self, k) for k in self.__data_attributes__] , names = self.__data_attributes__)
+        return np.core.rec.fromarrays( [self[k] for k in self.__data_attributes__] , names = self.__data_attributes__)
     @property
     def __attributes__(self):
         return dict([ (k,v) for k,v in self.iteritems() if k not in self.__data_attributes__ and k not in self.__hidden_attributes__])
@@ -110,9 +108,11 @@ class Sij(data):
     * Attributes : start_frequency, stop_frequency, number_of_points, power
     """
     __data_attributes__ = ['freq','Sij']
-    @property
-    def freq(self):
-        return np.linspace(self.start_frequency, self.stop_frequency, self.number_of_points)
+    def __getitem__(self, key):
+        if key is 'freq':
+            return np.linspace(self.start_frequency, self.stop_frequency, self.number_of_points)
+        else:
+            return self.get(key)
     def plot(self, ax, scale='log', **kwargs):
         y = 10*np.log10( np.abs(self.Sij)**2 ) if scale is 'log' else np.abs(self.Sij)**2
         ax.plot(self.freq/1e9, y, **kwargs)
@@ -140,24 +140,16 @@ class lecroy_trace(data):
         ax.plot(self.horiz, self.vert, **kwargs)
         ax.set_xlabel('Time (s)')
         ax.set_ylabel('Voltage (V)')
-    @property
-    def horiz(self):
-        x = np.arange( len(self.wave) ) * self.horiz_interval
-        x += self.horiz_offset
-        return x
-    @property
-    def vert(self):
-        y = self.wave.astype(np.float)
-        y *= self.vertical_gain
-        y -= self.vertical_offset
-        return y
+    def __getitem__(self, key):
+        if key is 'horiz':
+            x = np.arange( len(self.wave) ) * self.horiz_interval
+            x += self.horiz_offset
+            return x
+        elif key is 'vert':
+            y = self.wave.astype(np.float)
+            y *= self.vertical_gain
+            y -= self.vertical_offset
+            return y
+        else:
+            return self.get(key)
 
-
-class xy(data):
-    """Generic x,y data class.
-
-    * Data Attributes : x, y
-    """
-    __data_attributes__ = ['x', 'y']
-    def plot(self, ax, **kwargs):
-        ax.plot(self.x, self.y, **kwargs)
