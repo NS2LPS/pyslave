@@ -40,6 +40,7 @@ class data(dict):
     def __delattr__(self, name):
         del self[name]
     def plot(self, ax, **kwargs):
+        __data_attributes__ = self.__data_attributes__
         x = self[__data_attributes__[0]]
         y = self[__data_attributes__[1]]        
         ax.plot(x, y, **kwargs)
@@ -151,3 +152,9 @@ class lecroy_trace(data):
             return y
         else:
             return self.get(key)
+
+class xy(data):
+    """Generic x,y data class. 
+    * Data Attributes : x, y
+    """
+    __data_attributes__ = ['x', 'y']

@@ -34,6 +34,7 @@ known_devices   = {'HEWLETT-PACKARD 34401A': ('agilent' , 'agilent34401A', 'dmm'
                    'Stanford_Research_Systems SR830': ('standfordresearch', 'SR830', 'lockin'),
                    '*IDN LECROY LT322': ('lecroy','LecroyScope', 'scope'),
                    'Yokogawa 7651':('yokogawa', 'yokogawa7651','dcpwr'),
+                   'PHILIPS  PM6681':('fluke','PM6681','counter'),
                    'NI 9269': ('nidaq','ni9269','nidaqao'),
                    'NI 9239 (BNC)': ('nidaq','ni9239','nidaqai'),
                    }
