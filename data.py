@@ -28,9 +28,14 @@ def increment_file(filename, ndigits=4):
     return __increment__(basename, ext, files, ndigits)
 
 class data(dict):
-    """Base class to represent experimental data. Values stored in the object can be accessed via attributes or keys.
+    """Base class to represent experimental data. Inherits from dict.
+
+    Values stored in the object can be accessed via attributes or keys.
     Data attributes will be saved as an array by the save methods.
-    Normal attributes will be discarded when saving in text format and saved as attributes in the HDF5 format."""
+    Normal attributes will be discarded when saving in text format and saved
+    as attributes in the HDF5 format.
+
+    Data object can be created by the makedata function."""
     __data_attributes__ = []
     __hidden_attributes__ = []
     def __getattr__(self, name):
@@ -42,7 +47,7 @@ class data(dict):
     def plot(self, ax, **kwargs):
         __data_attributes__ = self.__data_attributes__
         x = self[__data_attributes__[0]]
-        y = self[__data_attributes__[1]]        
+        y = self[__data_attributes__[1]]
         ax.plot(x, y, **kwargs)
         ax.set_xlabel(__data_attributes__[0])
         ax.set_ylabel(__data_attributes__[1])
@@ -154,7 +159,29 @@ class lecroy_trace(data):
             return self.get(key)
 
 class xy(data):
-    """Generic x,y data class. 
+    """Generic x,y data class.
+    
     * Data Attributes : x, y
     """
     __data_attributes__ = ['x', 'y']
+
+
+def makedata(*args):
+    """Create a data object (see the data class).
+
+    Arguments should come by pairs of 'name', value. For example :
+    mydata = makedata('i', i, 'v', v, 'Rcernox', Rc)
+
+    Variables with type array or list will be saved as arrays in a text or h5 file.
+    Variables of other type will be saved as h5 attributes or discarded if the data are saved in a text file.
+    """
+    keys = []
+    values = []
+    __data_attributes__ = []
+    for i in range(0,len(args),2):
+        keys.append(args[i])
+        val = np.array(args[i+1]) if type(args[i+1]) is list else args[i+1]
+        values.append(val)
+        if type(val) is np.array: __data_attributes__.append(args[i])
+    res = data( zip(keys, values) )
+    res.__data_attributes__ = __data_attributes__
