@@ -40,13 +40,13 @@ class data(dict):
 
     Data object can be created by the makedata function."""
     def __init__(self, *args, **kwargs):
-        super(dict).__init__(self, *args, **kwargs)
+        super(data, self).__init__(*args, **kwargs)
         self.set_data_attributes()
         self.set_hidden_attributes()
     def set_data_attributes(self):
         self.__data_attributes__ = []
     def set_hidden_attributes(self):
-        self.__hidden_attributes__ = []
+        self.__hidden_attributes__ = ['__hidden_attributes__','__data_attributes__']
     def __getattr__(self, name):
         return self[name]
     def __setattr__(self, name, value):
@@ -63,10 +63,10 @@ class data(dict):
             for i,a in enumerate(ax):
                 a.cla()
                 x = self[__data_attributes__[0]]
-                y = self[__data_attributes__[i]]
+                y = self[__data_attributes__[i+1]]
                 a.plot(x, y, **kwargs)
                 a.set_xlabel(__data_attributes__[0])
-                a.set_ylabel(__data_attributes__[i])
+                a.set_ylabel(__data_attributes__[i+1])
         else:
             a = ax[0] if l else ax
             for i in range(1, len(__data_attributes__)):
@@ -187,7 +187,7 @@ class lecroy_trace(data):
     def set_data_attributes(self):
         self.__data_attributes__ = ['horiz','vert']
     def set_hidden_attributes(self):
-        self.__hidden_attributes__ = ['wave']
+        self.__hidden_attributes__ = ['wave','__hidden_attributes__','__data_attributes__']
     def plot(self, ax, **kwargs):
         ax.plot(self.horiz, self.vert, **kwargs)
         ax.set_xlabel('Time (s)')
@@ -257,11 +257,6 @@ def createdata(*args):
     fig, ax = subplots()
     mydata.plot(ax)
     """
-    res = data(*args, **kwargs)
-    for k,v in res.iteritems():
-        if type(v) is list:
-            res[k] = array(v)
-            res.__data_attributes__.append(k)
-        if type(v) is np.array:
-            res.__data_attributes__.append(k)
+    res = data([(k, np.empty(0)) for k in args])
+    res.__data_attributes__ = args
     return res
