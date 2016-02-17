@@ -80,7 +80,7 @@ class data(dict):
             raise DataException('Number of arguments does not match number of data fields : ' + ' '.join(self.__data_attributes__))
         for i,v in enumerate(args):
             k = self.__data_attributes__[i]
-            self[k] = np.insert(self[k], len(self[k]), v)
+            self[k] = np.append(self[k], v)
     @property
     def __data__(self):
         return np.core.rec.fromarrays( [self[k] for k in self.__data_attributes__] , names = self.__data_attributes__)
