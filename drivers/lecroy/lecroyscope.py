@@ -9,6 +9,7 @@ visa_rm = visa.ResourceManager()
 class LecroyScope:
     """Lecroy oscilloscope instrument driver.
     Direct call to the instrument invokes the fetch method."""
+    endian = '<'
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.lastvar = None
@@ -18,7 +19,7 @@ class LecroyScope:
         """Fetch the waveform from the specified channel ('C1','C2,'TA', ...) and return it as a lecroy_trace data object."""
         ret = self.write('{0}:WF?'.format(channel))
         trc = self.read_raw()
-        full_output = lecroy_decode(trc)
+        full_output = lecroy_decode(trc, self.endian)
         params_to_save = ['horiz_interval', 'horiz_offset', 'sweeps_per_acq','bandwidth_limit',
                           'vertical_gain', 'vertical_offset', 'vert_coupling', 'acq_vert_offset','probe_att','wave']
         return lecroy_trace( dict( [ (k, full_output[k] ) for k in params_to_save ] ) )
@@ -33,8 +34,12 @@ class LecroyScope:
     def close(self):
         self.instrument.close()
 
+class LT322(LecroyScope):
+    """LT 322 Lecroy Oscilloscope instrument driver.
+    Direct call to the instrument invokes the fetch method."""
+    endian = '>'
 
-def lecroy_decode(trc):
+def lecroy_decode(trc,endian='<'):
     """ Decode the string `trc` returned by a Lecroy scope or read from a Lecroy TRC file.
     Return a dictionary containing the data and the parameters included in the WAVEDESC descriptor.
 
@@ -44,7 +49,7 @@ def lecroy_decode(trc):
 
     # Parse the WAVEDESC block
     startpos = trc.find('WAVEDESC')
-    param = dict(endian = '>')
+    param = dict(endian = endian)
     for name, pos, datatype in wavedesc:
         pos += startpos
         raw = trc[pos : pos + datatype.length]
