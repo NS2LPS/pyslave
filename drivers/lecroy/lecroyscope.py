@@ -6,6 +6,9 @@ from pyslave.data import lecroy_trace
 # VISA resource manager
 visa_rm = visa.ResourceManager()
 
+# Wavesurfer : ws=LecroyScope('VICP::129.175.82.34::INSTR')
+# Or : %openinstr VICP::129.175.82.34::INSTR
+
 class LecroyScope:
     """Lecroy oscilloscope instrument driver.
     Direct call to the instrument invokes the fetch method."""

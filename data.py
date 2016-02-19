@@ -54,11 +54,13 @@ class data(dict):
     def __delattr__(self, name):
         del self[name]
     def plot(self, fig, subplots=True, **kwargs):
+        """Plot data to a figure. 
+        If subplots is True each data is plotted in a different subplot."""
         __data_attributes__ = self.__data_attributes__
         l = len(__data_attributes__)
         fig.clf()
         if subplots:
-            ax = [ fig.add_subplot(l,1,i) for i in range(1, l) ]
+            ax = [ fig.add_subplot(l-1,1,i) for i in range(1, l) ]
         else:
             ax = fig.add_subplot(1,1,1)
             ax = [ax for i in range(1, l) ]
@@ -152,6 +154,8 @@ class Sij(data):
         else:
             return self.get(key)
     def plot(self, fig, scale='log', **kwargs):
+        """Plot data to a figure. 
+        """
         fig.clf()
         ax = fig.add_subplot(1,1,1)
         y = 10*np.log10( np.abs(self.Sij)**2 ) if scale is 'log' else np.abs(self.Sij)**2
@@ -183,7 +187,11 @@ class lecroy_trace(data):
         self.__data_attributes__ = ['horiz','vert']
     def set_hidden_attributes(self):
         self.__hidden_attributes__ = ['wave','__hidden_attributes__','__data_attributes__']
-    def plot(self, ax, **kwargs):
+    def plot(self, fig, **kwargs):
+        """Plot data to a figure. 
+        """
+        fig.clf()
+        ax = fig.add_subplot(1,1,1)
         ax.plot(self.horiz, self.vert, **kwargs)
         ax.set_xlabel('Time (s)')
         ax.set_ylabel('Voltage (V)')
