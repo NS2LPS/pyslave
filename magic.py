@@ -1,6 +1,6 @@
 """This module defines magic IPython functions to run pyslave from the IPython shell."""
 
-from matplotlib.pyplot import subplots
+from matplotlib.pyplot import figure
 from IPython.core.magic import register_line_magic, needs_local_scope
 import time, os, re, logging, inspect, logging.handlers
 from collections import OrderedDict
@@ -123,17 +123,15 @@ def monitor(line, local_ns):
     script = """
 import time
 from pyslave.data import xy
-fig, ax = subplots()
+fig = figure()
 monitor_out = xy(x=np.empty(0), y=np.empty(0))
 t0 = time.time()
 def script_monitor(thread):
     while True:
         val = {0}
         thread.display('Monitored value '+str(val))
-        monitor_out.y = append(monitor_out.y, val)
-        monitor_out.x = append(monitor_out.x, time.time()-t0)
-        ax.cla()
-        monitor_out.plot(ax)
+        monitor_out.append(time.time()-t0, val)
+        monitor_out.plot(fig)
         thread.draw()
         time.sleep({1})
         thread.pause()
@@ -179,12 +177,12 @@ def measure(line, local_ns):
             if inp.endswith('qqqq') : return
             if inp : measure_parameters[k] = inp.strip()
     if '(' not in measure_parameters['read_function'] : measure_parameters['read_function']+= '()'
-    if '(' not in measure_parameters['set_function'] and '=' not in measure_parameters['set_function'] : 
+    if '(' not in measure_parameters['set_function'] and '=' not in measure_parameters['set_function'] :
         measure_parameters['set_function']+= '(x)'
     script = """
 import time
 from pyslave.data import xy
-if '{plot}'=='y': fig, ax = subplots()
+if '{plot}'=='y': fig = figure()
 measure_out = xy(x=array({iterable}), y=ones_like(array({iterable}))*nan)
 
 def script_measure(thread):
@@ -196,8 +194,7 @@ def script_measure(thread):
         thread.looptime()
         measure_out.y[i] = y
         if '{plot}'=='y':
-            ax.cla()
-            measure_out.plot(ax)
+            measure_out.plot(fig)
             thread.draw()
         time.sleep({read_sleep})
         thread.pause()
@@ -281,8 +278,8 @@ def capture(line, local_ns):
     # Fetch data
     data = eval(func, globals(), local_ns)
     # Plot data
-    exec "fig, ax = subplots()" in local_ns
-    data.plot(local_ns['ax'])
+    exec "fig = figure()" in local_ns
+    data.plot(local_ns['fig'])
     exec "fig.show()" in local_ns
     # Save data to file
     if filename :

@@ -53,28 +53,21 @@ class data(dict):
         self[name] = value
     def __delattr__(self, name):
         del self[name]
-    def plot(self, ax, **kwargs):
+    def plot(self, fig, subplots=True, **kwargs):
         __data_attributes__ = self.__data_attributes__
-        try:
-            l = len(ax)
-        except:
-            l = 0
-        if l and l==len(__data_attributes__)-1:
-            for i,a in enumerate(ax):
-                a.cla()
-                x = self[__data_attributes__[0]]
-                y = self[__data_attributes__[i+1]]
-                a.plot(x, y, **kwargs)
-                a.set_xlabel(__data_attributes__[0])
-                a.set_ylabel(__data_attributes__[i+1])
+        l = len(__data_attributes__)
+        fig.clf()
+        if subplots:
+            ax = [ fig.add_subplot(l,1,i) for i in range(1, l) ]
         else:
-            a = ax[0] if l else ax
-            for i in range(1, len(__data_attributes__)):
-                x = self[__data_attributes__[0]]
-                y = self[__data_attributes__[i]]
-                a.plot(x, y, **kwargs)
-                a.set_xlabel(__data_attributes__[0])
-                a.set_ylabel(__data_attributes__[i])
+            ax = fig.add_subplot(1,1,1)
+            ax = [ax for i in range(1, l) ]
+        for i,a in enumerate(ax):
+            x = self[__data_attributes__[0]]
+            y = self[__data_attributes__[i+1]]
+            a.plot(x, y, **kwargs)
+            a.set_xlabel(__data_attributes__[0])
+            a.set_ylabel(__data_attributes__[i+1])
     def append(self, *args):
         if len(args)!=len(self.__data_attributes__):
             raise DataException('Number of arguments does not match number of data fields : ' + ' '.join(self.__data_attributes__))
@@ -158,7 +151,9 @@ class Sij(data):
             return np.linspace(self.start_frequency, self.stop_frequency, self.number_of_points)
         else:
             return self.get(key)
-    def plot(self, ax, scale='log', **kwargs):
+    def plot(self, fig, scale='log', **kwargs):
+        fig.clf()
+        ax = fig.add_subplot(1,1,1)
         y = 10*np.log10( np.abs(self.Sij)**2 ) if scale is 'log' else np.abs(self.Sij)**2
         ax.plot(self.freq/1e9, y, **kwargs)
         ax.set_xlabel('Frequency (GHz)')
