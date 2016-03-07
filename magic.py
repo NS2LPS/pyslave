@@ -45,7 +45,7 @@ def __arg_split__(line):
 
 @register_line_magic
 @needs_local_scope
-def openinstr(line, local_ns):
+def openinst(line, local_ns):
     """Load the VISA instrument at the specified resource."""
     args = __arg_split__(line)
     addr = str(args[0])
@@ -56,7 +56,7 @@ def openinstr(line, local_ns):
 
 @register_line_magic
 @needs_local_scope
-def closeinstr(line, local_ns):
+def closeinst(line, local_ns):
     """Close the specified instrument."""
     res = instruments.closeinstr(line)
     del local_ns[line]
@@ -91,7 +91,7 @@ def listall(line):
     for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
 
-del listall, openall, openinstr, closeinstr
+del listall, openall, openinst, closeinst
 
 ########################################################
 # Scripts launching, pausing, resuming, aborting magic
@@ -264,6 +264,25 @@ def lastday(line):
     os.chdir(path)
     print 'Directory set to',path
 
+@register_line_magic
+def lastday(line):
+    """Change directory to the last day of data."""
+    lastyear = sorted(os.listdir(data_directory))[-1]
+    lastday = sorted(os.listdir(os.path.join(data_directory,lastyear)))[-1]
+    path = os.path.join(data_directory, lastyear, lastday)
+    os.chdir(path)
+    print 'Directory set to',path
+
+@register_line_magic
+def rmlast(line):
+    """Remove last file created in the directory."""
+    l = [ (os.stat(name).st_mtime, name) for name in os.listdir('.')]
+    l.sort()
+    last = l[-1][1]
+    ans = raw_input('Remove {0} ? [y] '.format(last))
+    if ans=='' or ans=='y' or ans=='Y':
+        os.remove(last)
+        print '{0} removed.'.format(last)
 
 @register_line_magic
 @needs_local_scope
@@ -285,4 +304,4 @@ def capture(line, local_ns):
     if filename :
         msg = data.save(filename, **param)
 
-del today, lastday, capture
+del today, lastday, capture, rmlast

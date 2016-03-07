@@ -30,7 +30,7 @@ def increment_file(filename, ndigits=4):
     files = os.listdir('.')
     return __increment__(basename, ext, files, ndigits)
 
-class data(dict):
+class Data(dict):
     """Base class to represent experimental data. Inherits from dict.
 
     Values stored in the object can be accessed via attributes or keys.
@@ -38,13 +38,20 @@ class data(dict):
     Normal attributes will be discarded when saving in text format and saved
     as attributes in the HDF5 format.
 
-    Data object can be created by the makedata function."""
+    Data object can be created by the createdata function."""
     def __init__(self, *args, **kwargs):
-        super(data, self).__init__(*args, **kwargs)
+        """Creates a Data instance from key,value pairs.
+        Any valid syntax to create a Python dict is allowed.
+        Keys corresponding to numpy arrays are added to the data attributes."""
+        super(Data, self).__init__(*args, **kwargs)
         self.set_data_attributes()
         self.set_hidden_attributes()
     def set_data_attributes(self):
-        self.__data_attributes__ = []
+        r = []
+        for k,v in self.iteritems():
+            if type(v) is np.array:
+                r.append(k)
+        self.__data_attributes__ = r
     def set_hidden_attributes(self):
         self.__hidden_attributes__ = ['__hidden_attributes__','__data_attributes__']
     def __getattr__(self, name):
@@ -54,7 +61,7 @@ class data(dict):
     def __delattr__(self, name):
         del self[name]
     def plot(self, fig, subplots=True, **kwargs):
-        """Plot data to a figure. 
+        """Plot data to a figure.
         If subplots is True each data is plotted in a different subplot."""
         __data_attributes__ = self.__data_attributes__
         l = len(__data_attributes__)
@@ -70,6 +77,9 @@ class data(dict):
             a.plot(x, y, **kwargs)
             a.set_xlabel(__data_attributes__[0])
             a.set_ylabel(__data_attributes__[i+1])
+            a.get_xaxis().get_major_formatter().set_powerlimits((-1, 2))
+            a.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
+
     def append(self, *args):
         if len(args)!=len(self.__data_attributes__):
             raise DataException('Number of arguments does not match number of data fields : ' + ' '.join(self.__data_attributes__))
@@ -82,6 +92,12 @@ class data(dict):
     @property
     def __attributes__(self):
         return dict([ (k,v) for k,v in self.iteritems() if k not in self.__data_attributes__ and k not in self.__hidden_attributes__])
+    def __repr__(self):
+        out = "Data:\n"
+        out += '\n'.join( [ '{0} : {1}'.format(k, self[k].__repr__()) for k in self.__data_attributes__])
+        out += "\nAttributes:\n"
+        out += '\n'.join( [ '{0} : {1}'.format(k, self[k].__repr__()) for k in self.__attributes__])
+        return out
     def save(self, file, **kwargs):
         """Save the data to a file in text or HDF5 format.
 
@@ -140,7 +156,7 @@ class data(dict):
         logger.info(msg)
         print msg
 
-class Sij(data):
+class Sij(Data):
     """Vector network analyzer Sij data class.
 
     * Data attributes : freq, S12 (complex)
@@ -154,7 +170,7 @@ class Sij(data):
         else:
             return self.get(key)
     def plot(self, fig, scale='log', **kwargs):
-        """Plot data to a figure. 
+        """Plot data to a figure.
         """
         fig.clf()
         ax = fig.add_subplot(1,1,1)
@@ -162,6 +178,8 @@ class Sij(data):
         ax.plot(self.freq/1e9, y, **kwargs)
         ax.set_xlabel('Frequency (GHz)')
         ax.set_ylabel('$|S_{ij}|^2$ (dB)' if scale is 'log' else '$|S_{ij}|^2$')
+        ax.get_xaxis().get_major_formatter().set_powerlimits((-1, 2))
+        ax.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
     def save_txt(self, filename, attrs=dict(), increment=True, ndigits=4):
         """Save the data to a text file with three columns : freq, Sij.real, Sij.imag."""
         if increment : filename = increment_file(filename, ndigits)
@@ -177,7 +195,7 @@ class Sij(data):
                 for k,v in attrs.iteritems():
                     print >>f,k,v
 
-class lecroy_trace(data):
+class Lecroy_trace(Data):
     """Lecroy oscilloscope waveform data class.
 
     * Data attributes : horiz, vert
@@ -188,13 +206,16 @@ class lecroy_trace(data):
     def set_hidden_attributes(self):
         self.__hidden_attributes__ = ['wave','__hidden_attributes__','__data_attributes__']
     def plot(self, fig, **kwargs):
-        """Plot data to a figure. 
+        """Plot data to a figure.
         """
         fig.clf()
         ax = fig.add_subplot(1,1,1)
         ax.plot(self.horiz, self.vert, **kwargs)
         ax.set_xlabel('Time (s)')
         ax.set_ylabel('Voltage (V)')
+        ax.get_xaxis().get_major_formatter().set_powerlimits((-1, 2))
+        ax.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
+
     def __getitem__(self, key):
         if key is 'horiz':
             x = np.arange( len(self.wave) ) * self.horiz_interval
@@ -208,7 +229,7 @@ class lecroy_trace(data):
         else:
             return self.get(key)
 
-class xy(data):
+class xy(Data):
     """Generic x,y data class.
 
     * Data Attributes : x, y
@@ -217,27 +238,16 @@ class xy(data):
         self.__data_attributes__ = ['x', 'y']
 
 
-def makedata(*args,**kwargs):
-    """Create a data instance (see the data class).
+def h5todata(h5_dataset):
+    """Create a data instance from a H5 dataset.
 
-    Arguments should be passed as to create a dictionary. For example:
-    mydata = makedata(i=i, v=v, Rcernox=Rc)
-    mydata = makedata( ('i',i), ('v',v), ('Rcernox',Rc) )
-
-    Data can be saved with the save method:
-    mydata.save('mydata.txt')
-
-    Data can be plotted with the plot method:
-    fig, ax = subplots()
-    mydata.plot(ax)
+    Example:
+    f = h5py.File('myfile.h5')
+    mydata = h5todata(f['data0000'])
+    print mydata
     """
-    res = data(*args, **kwargs)
-    for k,v in res.iteritems():
-        if type(v) is list:
-            res[k] = array(v)
-            res.__data_attributes__.append(k)
-        if type(v) is np.array:
-            res.__data_attributes__.append(k)
+    res = Data( [ (n, np.array(h5_dataset[n])) for n in h5_dataset.dtype.names] )
+    res.update(dict(h5_dataset.attrs))
     return res
 
 def createdata(*args):
@@ -260,6 +270,5 @@ def createdata(*args):
     fig, ax = subplots()
     mydata.plot(ax)
     """
-    res = data([(k, np.empty(0)) for k in args])
-    res.__data_attributes__ = args
+    res = Data([(k, np.empty(0)) for k in args])
     return res

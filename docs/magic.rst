@@ -11,7 +11,7 @@ These functions are designed to load instruments, launch scripts and interact wi
 Instrument functions (shortcuts to the instruments module)
 ----------------------------------------------------------
 
-**%openinstr** *resource*
+**%openinst** *resource*
 
     Load the VISA instrument at the specified resource.
 
@@ -23,7 +23,7 @@ Instrument functions (shortcuts to the instruments module)
 
     List all loaded instruments.
 
-**%closeinstr** *instrument_short_name*
+**%closeinst** *instrument_short_name*
 
     Close the specified instrument.
 
@@ -99,3 +99,7 @@ Miscellaneous functions
 **%lastday**
 
     Change directory to the last day of data.
+
+**%rmlast**
+
+    Remove the last created file in the current directory.
