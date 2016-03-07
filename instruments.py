@@ -29,7 +29,7 @@ except:
 # Known devices with their driver and type
 known_devices   = {'HEWLETT-PACKARD 34401A': ('agilent' , 'agilent34401A', 'dmm'),
                    'HEWLETT-PACKARD E3631A': ('agilent', 'agilentE3641A',  'dcpwr'),
-                   'Rohde&Schwarz ZVA40-2Port' : ('rohdeschwarz', 'zvb', 'vna'),
+                   'Rohde&Schwarz ZVA40-2Port' : ('rohdeschwarz', 'zva', 'vna'),
                    'Rohde&Schwarz ZVB8-2Port' : ('rohdeschwarz', 'zvb', 'vna'),
                    'Stanford_Research_Systems SR830': ('standfordresearch', 'SR830', 'lockin'),
                    '*IDN LECROY LT322': ('lecroy','LT322', 'scope'),
