@@ -1,7 +1,7 @@
 import numpy as np
 import struct
 import visa
-from pyslave.data import lecroy_trace
+from pyslave.data import Lecroy_trace
 
 # VISA resource manager
 visa_rm = visa.ResourceManager()
@@ -25,7 +25,7 @@ class LecroyScope:
         full_output = lecroy_decode(trc, self.endian)
         params_to_save = ['horiz_interval', 'horiz_offset', 'sweeps_per_acq','bandwidth_limit',
                           'vertical_gain', 'vertical_offset', 'vert_coupling', 'acq_vert_offset','probe_att','wave']
-        return lecroy_trace( dict( [ (k, full_output[k] ) for k in params_to_save ] ) )
+        return Lecroy_trace( dict( [ (k, full_output[k] ) for k in params_to_save ] ) )
 
     def write(self, str):
         """Write GPIB command."""
