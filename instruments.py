@@ -39,6 +39,7 @@ known_devices   = {'HEWLETT-PACKARD 34401A': ('agilent' , 'agilent34401A', 'dmm'
                    'PHILIPS  PM6681':('fluke','PM6681','counter'),
                    'NI 9269': ('nidaq','ni9269','nidaqao'),
                    'NI 9239 (BNC)': ('nidaq','ni9239','nidaqai'),
+				   'KEITHLEY INSTRUMENTS INC. MODEL 2700':('keithley','Keithley2700','dmm')
                    }
 
 # Keep track of loaded instruments

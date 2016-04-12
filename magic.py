@@ -90,8 +90,16 @@ def listall(line):
     """List all loaded instruments."""
     for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
+        
 
-del listall, openall, openinstr, closeinstr
+@register_line_magic
+def listresources(line):
+    """List all connected instruments."""
+    for app in instruments. __visa__rm__.list_resources():
+        print app
+        
+
+del listall, openall, openinstr, closeinstr, listresources
 
 ########################################################
 # Scripts launching, pausing, resuming, aborting magic
@@ -264,6 +272,25 @@ def lastday(line):
     os.chdir(path)
     print 'Directory set to',path
 
+@register_line_magic
+def lastday(line):
+    """Change directory to the last day of data."""
+    lastyear = sorted(os.listdir(data_directory))[-1]
+    lastday = sorted(os.listdir(os.path.join(data_directory,lastyear)))[-1]
+    path = os.path.join(data_directory, lastyear, lastday)
+    os.chdir(path)
+    print 'Directory set to',path
+
+@register_line_magic
+def rmlast(line):
+    """Remove last file created in the directory."""
+    l = [ (os.stat(name).st_mtime, name) for name in os.listdir('.')]
+    l.sort()
+    last = l[-1][1]
+    ans = raw_input('Remove {0} ? [y] '.format(last))
+    if ans=='' or ans=='y' or ans=='Y':
+        os.remove(last)
+        print '{0} removed.'.format(last)
 
 @register_line_magic
 @needs_local_scope
@@ -285,4 +312,4 @@ def capture(line, local_ns):
     if filename :
         msg = data.save(filename, **param)
 
-del today, lastday, capture
+del today, lastday, capture, rmlast
