@@ -234,7 +234,7 @@ def makedata(*args,**kwargs):
     res = data(*args, **kwargs)
     for k,v in res.iteritems():
         if type(v) is list:
-            res[k] = array(v)
+            res[k] = np.array(v)
             res.__data_attributes__.append(k)
         if type(v) is np.array:
             res.__data_attributes__.append(k)

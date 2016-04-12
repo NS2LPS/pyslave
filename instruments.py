@@ -28,6 +28,7 @@ except:
 
 # Known devices with their driver and type
 known_devices   = {'HEWLETT-PACKARD 34401A': ('agilent' , 'agilent34401A', 'dmm'),
+                   'Agilent Technologies 34410A' : ('agilent' , 'agilent34401A', 'dmm'),
                    'HEWLETT-PACKARD E3631A': ('agilent', 'agilentE3641A',  'dcpwr'),
                    'Rohde&Schwarz ZVA40-2Port' : ('rohdeschwarz', 'zva', 'vna'),
                    'Rohde&Schwarz ZVB8-2Port' : ('rohdeschwarz', 'zvb', 'vna'),
