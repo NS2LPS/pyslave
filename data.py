@@ -31,8 +31,8 @@ def increment_file(filename, ndigits=4):
     files = os.listdir('.')
     return __increment__(basename, ext, files, ndigits)
 
-class Data(OrderedDict):
-    """Base class to represent experimental data. Inherits from OrderedDict.
+class Data(dict):
+    """Base class to represent experimental data. Inherits from dict.
 
     Values stored in the object can be accessed via attributes or keys.
     Data attributes will be saved as an array by the save methods.
@@ -44,18 +44,25 @@ class Data(OrderedDict):
         """Creates a Data instance from key,value pairs.
         Any valid syntax to create a Python dict is allowed.
         Keys corresponding to numpy arrays are added to the data attributes."""
-        super(Data, self).__init__(*args, **kwargs)
+        super(Data, self).__init__()
+        self.__data_attributes__ = []
+        if args:
+            for k,v in args[0]:
+                self[k] = v        
+                if type(v) is np.ndarray: self.__data_attributes__.append(k)
+        if kwargs:
+            for k,v in kwargs.iteritems():
+                self[k] = v        
+                if type(v) is np.ndarray: self.__data_attributes__.append(k)
         self.set_data_attributes()
         self.set_hidden_attributes()
     def set_data_attributes(self):
-        r = []
-        for k,v in self.iteritems():
-            if type(v) is np.ndarray:
-                r.append(k)
-        self.__data_attributes__ = r
+        pass
     def set_hidden_attributes(self):
         self.__hidden_attributes__ = ['__hidden_attributes__','__data_attributes__']
     def __getattr__(self, name):
+        if name not in self:
+            raise AttributeError
         return self[name]
     def __setattr__(self, name, value):
         self[name] = value
@@ -96,8 +103,9 @@ class Data(OrderedDict):
     def __repr__(self):
         out = "Data:\n"
         out += '\n'.join( [ '{0} : {1}'.format(k, self[k].__repr__()) for k in self.__data_attributes__])
-        out += "\nAttributes:\n"
-        out += '\n'.join( [ '{0} : {1}'.format(k, self[k].__repr__()) for k in self.__attributes__])
+        if self.__attributes__:
+            out += "\nAttributes:\n"
+            out += '\n'.join( [ '{0} : {1}'.format(k, self[k].__repr__()) for k in self.__attributes__])
         return out
     def save(self, file, **kwargs):
         """Save the data to a file in text or HDF5 format.
