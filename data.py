@@ -49,7 +49,7 @@ class Data(dict):
     def set_data_attributes(self):
         r = []
         for k,v in self.iteritems():
-            if type(v) is np.array:
+            if type(v) is np.ndarray:
                 r.append(k)
         self.__data_attributes__ = r
     def set_hidden_attributes(self):
@@ -228,7 +228,20 @@ class Lecroy_trace(Data):
             return y
         else:
             return self.get(key)
-
+            
+    def save_h5(self, hdf, dataset='data', attrs=dict(), increment=True, ndigits=4, **kwargs):
+        """Save data in 8 bit mode."""
+        attrs.update(self.__attributes__)
+        if increment : dataset = __increment__(dataset, '', hdf.keys(), ndigits)
+        if dataset in hdf: del hdf['{0}'.format(dataset)]
+        ds = hdf.create_dataset(dataset, data=self.wave, **kwargs)
+        for k,v in attrs.iteritems() :
+            ds.attrs[k] = v
+        hdf.flush()
+        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
+        logger.info(msg)
+        print msg
+        
 class xy(Data):
     """Generic x,y data class.
 

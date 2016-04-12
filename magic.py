@@ -45,7 +45,7 @@ def __arg_split__(line):
 
 @register_line_magic
 @needs_local_scope
-def openinst(line, local_ns):
+def openinstr(line, local_ns):
     """Load the VISA instrument at the specified resource."""
     args = __arg_split__(line)
     addr = str(args[0])
@@ -56,7 +56,7 @@ def openinst(line, local_ns):
 
 @register_line_magic
 @needs_local_scope
-def closeinst(line, local_ns):
+def closeinstr(line, local_ns):
     """Close the specified instrument."""
     res = instruments.closeinstr(line)
     del local_ns[line]
@@ -90,8 +90,16 @@ def listall(line):
     """List all loaded instruments."""
     for app in instruments.__loaded__.itervalues():
         print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
+        
 
-del listall, openall, openinst, closeinst
+@register_line_magic
+def listresources(line):
+    """List all connected instruments."""
+    for app in instruments. __visa__rm__.list_resources():
+        print app
+        
+
+del listall, openall, openinstr, closeinstr, listresources
 
 ########################################################
 # Scripts launching, pausing, resuming, aborting magic
