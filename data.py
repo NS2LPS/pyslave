@@ -47,11 +47,23 @@ class Data(dict):
         super(Data, self).__init__()
         self.__data_attributes__ = []
         if args:
-            for k,v in args[0]:
-                self[k] = v        
-                if type(v) is np.ndarray: self.__data_attributes__.append(k)
+            if len(args)>1:
+                raise DataException('Expected at most 1 arguments, got {0}'.format(len(args)))
+            if isinstance(args[0],dict):
+                for k,v in args[0].iteritems():
+                    if k in self :  raise DataException('Duplicate key {0}'.format(k))
+                    self[k] = v        
+                    if type(v) is np.ndarray: self.__data_attributes__.append(k)
+            elif hasattr(args[0],'__iter__'):
+                for k,v in args[0]:
+                    if k in self :  raise DataException('Duplicate key {0}'.format(k))
+                    self[k] = v        
+                    if type(v) is np.ndarray: self.__data_attributes__.append(k)
+            else:
+                raise DataException('Argument should be a mapping or an iterable')
         if kwargs:
             for k,v in kwargs.iteritems():
+                if k in self :  raise DataException('Duplicate key {0}'.format(k))
                 self[k] = v        
                 if type(v) is np.ndarray: self.__data_attributes__.append(k)
         self.set_data_attributes()
@@ -61,8 +73,6 @@ class Data(dict):
     def set_hidden_attributes(self):
         self.__hidden_attributes__ = ['__hidden_attributes__','__data_attributes__']
     def __getattr__(self, name):
-        if name not in self:
-            raise AttributeError
         return self[name]
     def __setattr__(self, name, value):
         self[name] = value
