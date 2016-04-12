@@ -1,6 +1,7 @@
 import os, re, logging
 import numpy as np
 import h5py
+from collections import OrderedDict
 
 # Logger
 logger = logging.getLogger('pyslave.data')
@@ -30,8 +31,8 @@ def increment_file(filename, ndigits=4):
     files = os.listdir('.')
     return __increment__(basename, ext, files, ndigits)
 
-class Data(dict):
-    """Base class to represent experimental data. Inherits from dict.
+class Data(OrderedDict):
+    """Base class to represent experimental data. Inherits from OrderedDict.
 
     Values stored in the object can be accessed via attributes or keys.
     Data attributes will be saved as an array by the save methods.
