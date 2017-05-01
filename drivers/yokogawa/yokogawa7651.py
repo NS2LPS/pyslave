@@ -131,9 +131,9 @@ class yokogawa7651:
         '''
         value = float(value)
         if autorange:
-            self.write( 'SA%f;' % (value) )
+            self.write( 'SA%.10f;' % (value) )
         else:
-            self.write( 'S%f;' % (value) )
+            self.write( 'S%.10f;' % (value) )
         self.trigger()
         self.value = value
 
@@ -162,7 +162,7 @@ class yokogawa7651:
         npoints = int(np.ceil(abs(value-self.value)/slope * self.points_per_second)) + 1
         ramp = np.linspace(self.value, value, npoints )[1:]
         for v in ramp:
-            self.write( 'S%f;' % (v) )
+            self.write( 'S%.10f;' % (v) )
             self.trigger()
         self.value = value
 

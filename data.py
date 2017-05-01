@@ -213,7 +213,45 @@ class Sij(Data):
             with open(filename[:-4]+'_attrs.txt', 'w') as f:
                 for k,v in attrs.iteritems():
                     print >>f,k,v
+class Spec(Data):
+    """Spectrum Analyzer data class.
 
+    * Data attributes : freq, S
+    * Attributes : start_frequency, stop_frequency, number_of_points
+    """
+    def set_data_attributes(self):
+        self.__data_attributes__ = ['freq','S']
+    def __getitem__(self, key):
+        if key is 'freq':
+            return np.linspace(self.start_frequency, self.stop_frequency, self.number_of_points)
+        else:
+            return self.get(key)
+    def plot(self, fig, **kwargs):
+        """Plot data to a figure.
+        """
+        fig.clf()
+        ax = fig.add_subplot(1,1,1)
+        y = self.S
+        ax.plot(self.freq/1e9, y, **kwargs)
+        ax.set_xlabel('Frequency (GHz)')
+        ax.set_ylabel('$S$ (dB)')
+        ax.get_xaxis().get_major_formatter().set_powerlimits((-1, 2))
+        ax.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
+    def save_txt(self, filename, attrs=dict(), increment=True, ndigits=4):
+        """Save the data to a text file with two columns : freq, S."""
+        if increment : filename = increment_file(filename, ndigits)
+        data = self.__data__
+        data = np.c_[data['freq'], data['S']]
+        np.savetxt(filename, data)
+        msg = 'Data saved to {0}.'.format(str(filename))
+        logger.info(msg)
+        print msg
+        attrs.update(self.__attributes__)
+        if attrs:
+            with open(filename[:-4]+'_attrs.txt', 'w') as f:
+                for k,v in attrs.iteritems():
+                    print >>f,k,v
+                    
 class Lecroy_trace(Data):
     """Lecroy oscilloscope waveform data class.
 
