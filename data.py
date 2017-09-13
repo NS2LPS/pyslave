@@ -3,6 +3,8 @@ import numpy as np
 import h5py
 from collections import OrderedDict
 
+from pyslave.magic import slave
+
 # Logger
 logger = logging.getLogger('pyslave.data')
 logger.setLevel(logging.DEBUG)
@@ -10,6 +12,16 @@ logger.addHandler(logging.NullHandler())
 
 class DataException(Exception):
     pass
+
+def disp(msg):
+    logger.info(msg)
+    if slave is None:
+        print(msg)
+    else:
+        if slave.thread and slave.thread.isRunning():
+            slave.thread.display(msg)
+        else:
+            print(msg)
 
 def __increment__(base, ext, previous, ndigits):
     rec = re.compile(base+'[0-9]*'+ext)
@@ -52,19 +64,19 @@ class Data(dict):
             if isinstance(args[0],dict):
                 for k,v in args[0].iteritems():
                     if k in self :  raise DataException('Duplicate key {0}'.format(k))
-                    self[k] = v        
+                    self[k] = v
                     if type(v) is np.ndarray: self.__data_attributes__.append(k)
             elif hasattr(args[0],'__iter__'):
                 for k,v in args[0]:
                     if k in self :  raise DataException('Duplicate key {0}'.format(k))
-                    self[k] = v        
+                    self[k] = v
                     if type(v) is np.ndarray: self.__data_attributes__.append(k)
             else:
                 raise DataException('Argument should be a mapping or an iterable')
         if kwargs:
             for k,v in kwargs.iteritems():
                 if k in self :  raise DataException('Duplicate key {0}'.format(k))
-                self[k] = v        
+                self[k] = v
                 if type(v) is np.ndarray: self.__data_attributes__.append(k)
         self.set_data_attributes()
         self.set_hidden_attributes()
@@ -149,8 +161,7 @@ class Data(dict):
         if increment : filename = increment_file(filename, ndigits)
         np.savetxt(filename, self.__data__)
         msg = 'Data saved to {0}.'.format(str(filename))
-        logger.info(msg)
-        print msg
+        disp(msg)
         attrs.update(self.__attributes__)
         if attrs:
             with open(filename[:-4]+'_attrs.txt', 'w') as f:
@@ -172,8 +183,7 @@ class Data(dict):
             ds.attrs[k] = v
         hdf.flush()
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
-        logger.info(msg)
-        print msg
+        dips(msg)
 
 class Sij(Data):
     """Vector network analyzer Sij data class.
@@ -206,8 +216,7 @@ class Sij(Data):
         data = np.c_[data['freq'], data['Sij'].real, data['Sij'].imag]
         np.savetxt(filename, data)
         msg = 'Data saved to {0}.'.format(str(filename))
-        logger.info(msg)
-        print msg
+        disp(msg)
         attrs.update(self.__attributes__)
         if attrs:
             with open(filename[:-4]+'_attrs.txt', 'w') as f:
@@ -244,14 +253,13 @@ class Spec(Data):
         data = np.c_[data['freq'], data['S']]
         np.savetxt(filename, data)
         msg = 'Data saved to {0}.'.format(str(filename))
-        logger.info(msg)
-        print msg
+        dsip(msg)
         attrs.update(self.__attributes__)
         if attrs:
             with open(filename[:-4]+'_attrs.txt', 'w') as f:
                 for k,v in attrs.iteritems():
                     print >>f,k,v
-                    
+
 class Lecroy_trace(Data):
     """Lecroy oscilloscope waveform data class.
 
@@ -285,7 +293,7 @@ class Lecroy_trace(Data):
             return y
         else:
             return self.get(key)
-            
+
     def save_h5(self, hdf, dataset='data', attrs=dict(), increment=True, ndigits=4, **kwargs):
         """Save data in 8 bit mode."""
         attrs.update(self.__attributes__)
@@ -296,9 +304,8 @@ class Lecroy_trace(Data):
             ds.attrs[k] = v
         hdf.flush()
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
-        logger.info(msg)
-        print msg
-        
+        dsip(msg)
+
 class xy(Data):
     """Generic x,y data class.
 

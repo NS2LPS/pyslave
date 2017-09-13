@@ -1,7 +1,7 @@
 """Create the GUI to handle script execution.
 The module also defines the way scripts are converted before being run."""
 
-from PyQt4 import QtCore, QtGui, Qt
+from PyQt5 import QtCore, QtGui, Qt
 from IPython.core.magic import register_line_magic
 import sys, traceback, time, imp, os, logging
 from ui.SlaveWindow import Ui_MainWindow
@@ -25,8 +25,8 @@ class ScriptThread(QtCore.QThread):
         self.pauseflag = False
         self.parent = parent
         self.message = []
-    def display(self, msg, echo=False):
-        self.message.append( (msg, echo) )
+    def display(self, msg, echo=False, log=False):
+        self.message.append( (msg, echo, log) )
         self.display_signal.emit()
     def draw(self):
         if not self.stopflag:
@@ -46,7 +46,7 @@ class ScriptThread(QtCore.QThread):
         except:
             self.error = True
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            for e in error_msgs : print e
+            for e in error_msgs : print(e)
     def pause(self):
         disp = True
         while self.pauseflag :
@@ -63,7 +63,6 @@ class SlaveWindow(QtGui.QMainWindow):
         super(SlaveWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.timeout = 10 # timeout in seconds
         self.draw_semaphore = QtCore.QSemaphore(1)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, False)
         self.thread = None
@@ -74,7 +73,7 @@ class SlaveWindow(QtGui.QMainWindow):
                 convert(filename)
             except :
                 error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-                for e in error_msgs : print e
+                for e in error_msgs : print(e)
                 self.display('Error while converting {0}.'.format(filename))
                 return
         filename = filename[:-3] + '_converted.py'
@@ -82,7 +81,7 @@ class SlaveWindow(QtGui.QMainWindow):
             execfile(filename, local_ns)
         except :
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            for e in error_msgs : print e
+            for e in error_msgs : print(e)
             self.display('Error while loading {0}.'.format(filename))
             return
         with open(filename,'r')as f:
@@ -105,13 +104,14 @@ class SlaveWindow(QtGui.QMainWindow):
         if self.thread is None : return
         self.thread.stopflag = True
         self.thread.pauseflag = False
-        self.display('Aborting...')
-        ret = self.thread.wait(self.timeout*1000)
-        if not ret:
-            ret = QtGui.QMessageBox.warning(self, "Script", "Script is not answering. Abort Anyway ?",
-                                            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No )
-            if ret==QtGui.QMessageBox.Yes:
-                self.thread.terminate()
+        self.display('Aborting...', log=True)
+        self.display('Try Killing if script does not finish.', log=True)
+
+    @QtCore.pyqtSignature("")
+    def on_pushButton_Kill_clicked(self):
+        if self.thread is None : return
+        self.thread.terminate()
+        self.display('Killing...', log=True)
 
     @QtCore.pyqtSignature("")
     def on_pushButton_Pause_clicked(self):
@@ -125,7 +125,7 @@ class SlaveWindow(QtGui.QMainWindow):
 
     def display(self, text, echo=True, log=False):
         self.ui.textEdit.append(text)
-        if echo : print text
+        if echo : print(text)
         sys.stdout.flush()
         if log : logger.info(text)
 
@@ -148,10 +148,10 @@ class SlaveWindow(QtGui.QMainWindow):
 
 def __replace__(line):
     line = line.replace('#draw','thread.draw()')
-    line = line.replace('#pause?','thread.pause()')
-    line = line.replace('#abort?','if thread.stopflag : break')
-    line = line.replace('#looptime?','thread.looptime()')
-    line = line.replace('#disp','thread.display')
+    line = line.replace('#pause','thread.pause()')
+    line = line.replace('#abort','if thread.stopflag : break')
+    line = line.replace('#looptime','thread.looptime()')
+    line = line.replace('#disp', 'thread.disp')
     return line
 
 def convert(filename):
@@ -164,12 +164,12 @@ def convert(filename):
     header, main = [s.strip() for s in script.split('#main')]
     converted_script = filename[:-3] + '_converted.py'
     with open(converted_script,'w') as f:
-        print >>f, '# Auto generated script file'
-        print >>f
+        print('# Auto generated script file',file=f)
+        print('',file=f)
         for l in header.split('\n'):
-            print >>f,__replace__(l)
-        print >>f
-        print >>f, '# Main script function'
-        print >>f, "def script_main(thread):"
+            print(__replace__(l), file=f)
+        print('', file=f)
+        print('# Main script function', file=f)
+        print('def script_main(thread):', file=f)
         for l in main.split('\n'):
-            print >>f,"   ",__replace__(l)
+            print("   ",__replace__(l), file=f)

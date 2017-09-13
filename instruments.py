@@ -1,14 +1,8 @@
 """The instruments module contains functions to open and close VISA or NI-DAQ instruments.
-It keeps track of all the instruments that are loaded and attributes them unique shortnames.
-Loaded instruments are stored in the ``__loaded__`` dictionary."""
+The Python ressource to be loaded when opening an instrument is obtained from the drivers.ini file.
+"""
 
-import time, traceback, sys, logging, importlib
-from collections import OrderedDict
-
-# Logger
-logger = logging.getLogger('pyslave.instruments')
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.NullHandler())
+import traceback, sys, importlib, configparser
 
 # Get VISA resource manager
 try:
@@ -26,46 +20,25 @@ try:
 except:
     __ni__ = None
 
-# Known devices with their driver and type
-known_devices   = {'HEWLETT-PACKARD 34401A': ('agilent' , 'agilent34401A', 'dmm'),
-                   'Agilent Technologies 34410A' : ('agilent' , 'agilent34401A', 'dmm'),
-                   'HEWLETT-PACKARD E3631A': ('agilent', 'agilentE3641A',  'dcpwr'),
-                   'Rohde&Schwarz ZVA40-2Port' : ('rohdeschwarz', 'zva', 'vna'),
-                   'Rohde&Schwarz ZVB8-2Port' : ('rohdeschwarz', 'zvb', 'vna'),
-                   'Rohde-Schwarz ZND-2Port' : ('rohdeschwarz', 'zva', 'vna'),
-                   'Rohde&Schwarz FSEK 30' :  ('rohdeschwarz', 'fsek', 'spectro'),                   
-                   'Stanford_Research_Systems SR830': ('standfordresearch', 'SR830', 'lockin'),
-                   '*IDN LECROY LT322': ('lecroy','LT322', 'scope'),
-                   'LECROY LT322': ('lecroy','LT322', 'scope'),                   
-                   '*IDN LECROY WS104XS': ('lecroy','LecroyScope', 'scope'),
-                   'LECROY WS104XS': ('lecroy','LecroyScope', 'scope'),                   
-                   'Yokogawa 7651':('yokogawa', 'yokogawa7651','dcpwr'),
-                   'PHILIPS  PM6681':('fluke','PM6681','counter'),
-                   'NI 9269': ('nidaq','ni9269','nidaqao'),
-                   'NI 9239 (BNC)': ('nidaq','ni9239','nidaqai'),
-				   'KEITHLEY INSTRUMENTS INC. MODEL 2700':('keithley','Keithley2700','dmm')
-                   }
+# Load known devices with their driver and type
+def __drivers__():
+    drivers = configparser.ConfigParser()
+    drivers.read(os.path.join(os.path.dirname(__file__), 'drivers.ini'))
+    return drivers
 
-# Keep track of loaded instruments
-__loaded__ = OrderedDict()
-
-# Naming scheme
-def __shortname__(prefix):
-    prev = [ int(k.shortname[len(prefix):]) for k in __loaded__.itervalues() if k.shortname.startswith(prefix) ]
-    next = max(prev)+1 if prev else 1
-    return prefix + str( next )
-
-class InstrumentError(Exception):
-    pass
-
-def openinstr(address, id=None, shortname=None):
+def openVISA(address, id=None):
     """Open the instrument at the specified VISA address.
-    The address must be a valid VISA resource.
-    If id is None, the instrument id is queried. If no driver is found for the corresponding id, a generic instrument is returned
-    otherwise an instance of the found driver class is returned.
-    The function also sets the fullname and shortname attributes automatically (unless shortname is specified)."""
+    The address must be a valid VISA resource or alias.
+
+    If id is None, the instrument id is queried. If the instrument does not answer (e.g. Yoko),
+    an error is raised. If the id is listed in the drivers.ini file, the corresponding
+    driver class is loaded and one instance is created, otherwise a generic instrument is instanciated.
+
+    The function returns the instance of the instrument.
+    """
     if __visa__rm__ is None:
         raise InstrumentError('VISA library not loaded')
+
     if id is None:
         app = __visa__rm__.open_resource(address)
         try:
@@ -74,118 +47,64 @@ def openinstr(address, id=None, shortname=None):
             id = id.split(',')[:2]
             id = str(' '.join(id)).strip()
         except VisaIOError:
-            # Assume it is a yoko
-            id = 'Yokogawa 7651'
-            time.sleep(0.5)
-            app.clear()
+            raise InstrumentError("""Identification of {0} failed. The instrument did not respound.
+                                  If the instrument is a Yoko, set the id to 'Yokogawa 7651'.""".format(address))
         except:
-            raise InstrumentError('Could not id intrument at {0}.'.format(address))
+            raise InstrumentError('Unknown error while identifying {0}.'.format(address))
         finally:
             app.close()
+    known_devices = __drivers__()
     if id in known_devices:
-        pkg, driver, typ = known_devices[id]
+        pkg_name    = known_devices[id]['package']
+        driver_name = known_devices[id]['model']
+        typ         = known_devices[id]['type']
         try :
-            m = importlib.import_module( '.{0}'.format(pkg), 'pyslave.drivers')
-            driver = getattr(m, driver)
+            m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
+            driver = getattr(m, driver_name)
             app = driver(address)
         except:
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            for e in error_msgs: print e
-            print 'Error while loading instrument driver {0}, using generic instrument instead.'.format(driver)
+            for e in error_msgs: print(e)
+            print('Error while loading instrument driver {0}, using generic instrument instead.'.format(driver_name))
             app = __visa__rm__.open_resource(address)
             typ = 'instr'
+            driver_name = ''
+            pkg_name = 'generic'
     else:
         app = __visa__rm__.open_resource(address)
         typ = 'instr'
-    fullname = id + ' ' + address
-    if shortname is None:
-        app.shortname =  __loaded__[fullname].shortname if fullname in __loaded__ else __shortname__(typ)
-    else:
-        app.shortname = shortname
-    app.fullname = fullname
-    __loaded__[address] = app
-    logger.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))
+        driver_name = ''
+        pkg_name = 'generic'
+    app.id = id
+    app.resource = address
+    app.driver_name = '{0}.{1}'.format(pkg_name,driver_name)
     return app
 
-def opennidaq(devname, id=None, shortname=None):
+def openNIDAQ(devname, id=None):
     """Open the NI-DAQ device with the specified name.
+
     If id is None, the device id is queried. If no driver is found for the corresponding id,
     an error is raised otherwise an instance of the found driver class is returned.
-    The function also sets the fullname and shortname attributes automatically (unless shortname is specified)."""
+    """
     if __ni__ is None:
         raise InstrumentError('NI-DAQ library not loaded.')
+
     if id is None:
         buffer = ctypes.create_string_buffer('',1024)
         __ni__.DAQmxGetDeviceAttribute(devname, __ni__.DAQmx_Dev_ProductType, buffer, 1024)
         id = buffer.value.strip()
+    known_devices = __drivers__()
     if id in known_devices:
-        pkg, driver, typ = known_devices[id]
-        m = importlib.import_module( '.{0}'.format(pkg), 'pyslave.drivers')
-        driver = getattr(m, driver)
+        pkg_name    = known_devices[id]['package']
+        driver_name = known_devices[id]['model']
+        typ         = known_devices[id]['type']
+        m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
+        driver = getattr(m, driver_name)
         app = driver(devname)
     else:
         raise InstrumentError('No driver for NI-DAQ device {0}.'.format(id))
-    fullname = id + ' ' + devname
-    if shortname is None:
-        app.shortname =  __loaded__[fullname].shortname if fullname in __loaded__ else __shortname__(typ)
-    else:
-        app.shortname = shortname
-    app.fullname = fullname
-    __loaded__[devname] = app
-    logger.info('Opening {0} as {1}.'.format(app.fullname, app.shortname))
+    app.id = id
+    app.ressource = devname
+    app.driver_name = '{0}.{1}'.format(pkg_name,driver_name)
     return app
 
-
-def openall(match, resource='visa'):
-    """Open all instruments whose address contains match in the given resource. Already opened devices are not reopened.
-    For example, openall('GPIB', resource='visa') loads all GPIB devices and return them in a list.
-    Or openall('Mod',resource='nidaq') loads all NI-DAQ modules in a rack."""
-    if resource is 'visa':
-        return __openall_visa__(match)
-    elif resource is 'nidaq':
-        return __openall_nidaq__(match)
-    else:
-        print 'Unknown resource :',resource
-        return []
-
-def __openall_visa__(match):
-    res = []
-    if __visa__rm__ is None : return res
-    for address in __visa__rm__.list_resources() :
-        address = str(address.strip())
-        if match in address and address not in __loaded__:
-            try:
-                app = openinstr(address)
-                res.append(app)
-            except:
-                error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-                for e in error_msgs: print e
-                print 'Error while opening instrument at {0}.'.format(address)
-    return res
-
-def __openall_nidaq__(match):
-    res = []
-    if __ni__ is None : return res
-    devicenames = ctypes.create_string_buffer('',1024)
-    __ni__.DAQmxGetSystemInfoAttribute(__ni__.DAQmx_Sys_DevNames, devicenames, 1024);
-    devices = devicenames.value.split(',')
-    for dev in devices :
-        dev = str(dev.strip())
-        if match in dev and dev not in __loaded__:
-            try:
-                app = opennidaq(dev)
-                res.append(app)
-            except:
-                error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-                for e in error_msgs: print e
-                print 'Error while opening device {0}.'.format(dev)
-    return res
-
-
-def closeinstr(shortname):
-    """Close the instrument specified by its shortname and remove it from the instrument list."""
-    d = dict( [ (v.shortname, k) for k,v in __loaded__.iteritems() ] )
-    fullname = d[shortname]
-    __loaded__[fullname].close()
-    logger.info('Closing {0}.'.format(shortname))
-    del __loaded__[fullname]

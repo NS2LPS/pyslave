@@ -4,15 +4,39 @@ from matplotlib.pyplot import figure
 from IPython.core.magic import register_line_magic, needs_local_scope
 import time, os, re, logging, inspect, logging.handlers
 from collections import OrderedDict
+import configparser
+import traceback
 
-from pyslave import data_directory
 from pyslave import instruments
+from pyslave import data_directory
 from pyslave.slave import SlaveWindow
 
 # Logger
 logger = logging.getLogger('pyslave.magic')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.NullHandler())
+
+# List of ressources that are handled
+__resources__ = ['VISA', 'NIDAQ']
+
+# Keep trace of instruments
+__instruments__ = { k:{} for k in __ressources__}
+
+# Register opening functions
+__open_functions__ = {'VISA' : instruments.openVISA,
+                      'NIDAQ': instruments.openNIDAQ,
+                      }
+
+# Look for prefix (for remote access)
+config = configparser.ConfigParser()
+config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
+__prefix__ = { r:config.get(r,'prefix',fallback='') for r in __resources__}
+
+# Read the ini file
+def __config__(main_resource):
+    config = configparser.ConfigParser()
+    config.read(os.path.join(os.path.dirname(__file__), '{0}.ini'.format(main_resource)))
+    return config
 
 # Argument parsing functions
 def __arg_split__(line):
@@ -42,64 +66,137 @@ def __arg_split__(line):
 ########################################################
 # Instruments loading and listing magic
 ########################################################
+def __find_config__(name):
+    for main_resource in __resources__:
+        config_resource = __config__(main_resource)
+        for resource in config_ressource.sections():
+            value = config_ressource[resource]
+            # Look-up by name
+            if value['name']==name:
+                id = value.get('id', None)
+                return main_ressource, ressource, id, name
+            # Look-up by ressource name
+            if resource==name:
+                id = value.get('id', None)
+                name = value['name']
+                return main_ressource, ressource, id, name
+    return None, None, None, None
+
+
+def __open__(main_ressource, ressource, name, id, local_ns):
+    if not name:
+        print ("Invalid instrument name")
+        return
+    func = __open_functions__[main_ressource]
+    instr_dict = __instruments__[main_ressource]
+    if name in instr_dict:
+        print("{0} already loaded".format(name))
+        return
+    try:
+        app = func(__prefix__[main_ressource], ressource, id)
+    except:
+        error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
+        for e in error_msgs: print(e)
+        print("Error while loading {0}".format(name))
+    local_ns[name] = app
+    instr_dict[name] = app
+    logger.info('Opening {0} ({1}) as {2}'.format(name, ressource, app.driver_name))
+    print('{0} ({1}) loaded as {2}'.format(name, ressource, app.driver_name))
+
 
 @register_line_magic
 @needs_local_scope
 def openinstr(line, local_ns):
-    """Load the VISA instrument at the specified resource."""
+    """Opens an instrument through a name or address (or alias).
+    The name (or the address) is looked up in the config.ini file
+    to get information about the instrument.
+
+    If no information is found, the function assumes that one wants
+    to open a new VISA device. The function asks for an instrument
+    name and id and try to load the instrument.
+
+    The user can also provide name='...' and id='...' as parameters.
+
+    Examples :
+        # Open by name
+        openinstr vna1
+        # Open by address
+        openinstr GPIB0::22
+        openinstr GPIB0::22 name='dcpwr1' id='Yokogawa 7651'
+    """
     args = __arg_split__(line)
-    addr = str(args[0])
-    id = str(args[1]) if len(args)>1 else None
-    app = instruments.openinstr(addr, id)
-    local_ns[app.shortname] = app
-    print '{0} loaded as {1}'.format(app.fullname, app.shortname)
+    a0 = str(args[0])
+    # Look up in the config.ini file
+    main_ressource, ressource, id, name = __find_config__(a0)
+    # Otherwise assumes it is a VISA device
+    if main_ressource is None:
+        main_ressource = 'VISA'
+        ressource = a0
+        exec('args=dict({0})'.format(','.join(args[1:])) )
+        if 'name' not in args:
+            inp = raw_input('Instrument name : ')
+            name = inp.strip()
+        else:
+            name = args['name']
+        if 'id' not in args:
+            inp = raw_input('Instrument id [auto] : ')
+            id = inp.strip() or None
+        else:
+            id = args['id']
+    # Open the instrument
+    __open__(main_ressource, ressource, name, id, local_ns)
+
 
 @register_line_magic
 @needs_local_scope
 def closeinstr(line, local_ns):
     """Close the specified instrument."""
-    res = instruments.closeinstr(line)
-    del local_ns[line]
+    name = line.strip()
+    if not name:
+        return
+    logger.info('Closing {0}.'.format(name))
+    for main_ressource in __resources__:
+        d = __instruments__[main_ressource]
+        if name in d:
+            app = d.pop(name)
+            break
+    if name in local_ns:
+        app = local_ns.pop(name)
+    try:
+        app.close()
+    except:
+        pass
 
 @register_line_magic
 @needs_local_scope
 def openall(line, local_ns):
-    """Load all GPIB instruments and NI-DAQ devices."""
-    if instruments.__loaded__:
-        print 'Previously loaded instruments :'
-        for app in instruments.__loaded__.itervalues():
-            print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
-    print "Loading new devices ..."
-    # GPIB
-    res = instruments.openall('GPIB', 'visa')
-    for app in res:
-        local_ns[app.shortname] = app
-    for app in res:
-        print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
-    # NI-DAQ
-    res = instruments.openall('Mod', 'nidaq')
-    for app in res:
-        local_ns[app.shortname] = app
-    for app in res:
-        print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
-    print "Done"
+    """Load all ressources listed in the config.ini file."""
+    for main_resource in __resources__:
+        config_resource = __config__(main_resource)
+        for resource in config_resource.sections():
+            name = config_resource.get(resource, 'name')
+            id = config_resource.get(resource, 'id', fallback=None)
+            __open__(main_ressource, ressource, name, id, local_ns)
 
 
 @register_line_magic
 def listall(line):
     """List all loaded instruments."""
-    for app in instruments.__loaded__.itervalues():
-        print '{0:10s} -> {1}'.format(app.shortname, app.fullname)
-        
+    for main_resource in __resources__:
+        d = __instruments__[main_resource]
+        if d:
+            print("{0} :".format(main_resource))
+            for k,v in d.items():
+                print('{0:10s} -> {1}'.format(k, v.resource))
+
 
 @register_line_magic
-def listresources(line):
-    """List all connected instruments."""
-    for app in instruments. __visa__rm__.list_resources():
-        print app
-        
+def listVISA(line):
+    """List all available VISA instruments."""
+    for app in instruments.__visa__rm__.list_resources():
+        print(app)
 
-del listall, openall, openinstr, closeinstr, listresources
+del listall, openall, openinstr, closeinstr, listVISA
 
 ########################################################
 # Scripts launching, pausing, resuming, aborting magic
@@ -145,7 +242,7 @@ def script_monitor(thread):
         thread.pause()
         if thread.stopflag : break""".format(args[0] if '(' in args[0] else args[0] + '()',
                                              args[1] if len(args)>1 else 1)
-    exec script in local_ns
+    exec(script, local_ns)
     if slave is None : __start_slave__()
     logger.info('Creating monitor script :\n'+script)
     slave.thread_start(local_ns['script_monitor'])
@@ -176,10 +273,10 @@ def measure(line, local_ns):
     """Measure the output of an instrument and plot it while scanning a parameter."""
     if line :
         args = __arg_split__(line)
-        exec 'args=dict({0})'.format(','.join(args))
+        exec('args=dict({0})'.format(','.join(args)))
         measure_parameters.update(args)
     else :
-        print "Press enter to keep previous value. Abort with many q's (qqqq...)."
+        print("Press enter to keep previous value. Abort with many q's (qqqq...).")
         for k,v in text_input.iteritems():
             inp = raw_input('{0} [{1}] : '.format(v, measure_parameters[k]))
             if inp.endswith('qqqq') : return
@@ -210,11 +307,11 @@ def script_measure(thread):
     if "{filename}" :
         measure_out.save("{filename}")
         """.format(**measure_parameters)
-    exec script in local_ns
+    exec(script, local_ns)
     if slave is None : __start_slave__()
     if not line:
-        print 'To quickly start the same measurement, copy paste this line : '
-        print 'measure {0}'.format(' '.join(["{0}='{1}'".format(k,v) for k,v in measure_parameters.iteritems()]))
+        print('To quickly start the same measurement, copy paste the line below : ')
+        print('measure {0}'.format(' '.join(["{0}='{1}'".format(k,v) for k,v in measure_parameters.iteritems()])))
     logger.info('Creating measurement script :\n'+script)
     slave.thread_start(local_ns['script_measure'])
 
@@ -232,10 +329,15 @@ def resume(line):
 
 @register_line_magic
 def abort(line):
-    """Abort the running script. If the script does not finish within 10 s,
-    a dialog appears to eventually force the script to terminate."""
+    """Abort the running script."""
     if slave is None : return
     slave.on_pushButton_Abort_clicked()
+
+@register_line_magic
+def kill(line):
+    """Kill the running script."""
+    if slave is None : return
+    slave.on_pushButton_Kill_clicked()
 
 @register_line_magic
 def window(line):
@@ -243,54 +345,6 @@ def window(line):
     if slave is None : __start_slave__()
     slave.show()
 
-del call, window, pause, resume, abort, monitor, measure
-
-
-########################################################
-# Miscellaneous magic
-########################################################
-
-@register_line_magic
-def today(line):
-    """Change directory to today's data directory, create it if it does not exist."""
-    now = time.localtime()
-    year = str(now.tm_year)
-    month = '{0:02d}'.format(now.tm_mon)
-    day = '{0:02d}'.format(now.tm_mday)
-    # Create directory if not existing
-    path = os.path.join(data_directory, year, year+'_'+month+'_'+day)
-    if not os.path.exists(path): os.makedirs(path)
-    os.chdir(path)
-    print 'Directory set to',path
-
-@register_line_magic
-def lastday(line):
-    """Change directory to the last day of data."""
-    lastyear = sorted(os.listdir(data_directory))[-1]
-    lastday = sorted(os.listdir(os.path.join(data_directory,lastyear)))[-1]
-    path = os.path.join(data_directory, lastyear, lastday)
-    os.chdir(path)
-    print 'Directory set to',path
-
-@register_line_magic
-def lastday(line):
-    """Change directory to the last day of data."""
-    lastyear = sorted(os.listdir(data_directory))[-1]
-    lastday = sorted(os.listdir(os.path.join(data_directory,lastyear)))[-1]
-    path = os.path.join(data_directory, lastyear, lastday)
-    os.chdir(path)
-    print 'Directory set to',path
-
-@register_line_magic
-def rmlast(line):
-    """Remove last file created in the directory."""
-    l = [ (os.stat(name).st_mtime, name) for name in os.listdir('.')]
-    l.sort()
-    last = l[-1][1]
-    ans = raw_input('Remove {0} ? [y] '.format(last))
-    if ans=='' or ans=='y' or ans=='Y':
-        os.remove(last)
-        print '{0} removed.'.format(last)
 
 @register_line_magic
 @needs_local_scope
@@ -305,11 +359,11 @@ def capture(line, local_ns):
     # Fetch data
     data = eval(func, globals(), local_ns)
     # Plot data
-    exec "fig = figure()" in local_ns
-    data.plot(local_ns['fig'])
-    exec "fig.show()" in local_ns
+    exec("fig_capture = figure()", local_ns)
+    data.plot(local_ns['fig_capture'])
+    exec("fig_capture.show()", local_ns)
     # Save data to file
     if filename :
         msg = data.save(filename, **param)
 
-del today, lastday, capture, rmlast
+del call, window, pause, resume, abort, kill, monitor, measure, capture
