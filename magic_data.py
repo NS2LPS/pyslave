@@ -32,13 +32,19 @@ def lastday(line):
 
 @register_line_magic
 def rmlast(line):
-    """Remove last file created in the directory."""
+    """Remove last file created in the directory.
+    Enter 'y' to delete the proposed file, 'n' to skip the file, 'q' to quit."""
     l = [ (os.stat(name).st_mtime, name) for name in os.listdir('.')]
     l.sort()
     last = l[-1][1]
-    ans = raw_input('Remove {0} ? [y] '.format(last))
-    if ans=='' or ans=='y' or ans=='Y':
-        os.remove(last)
-        print('{0} removed.'.format(last))
+    ans = ''
+    i = 1
+    while ans.upper()!='Y' and ans.upper()!='Q' and i<=len(l):    
+        last = l[-i][1]
+        i += 1
+        ans = raw_input('Remove {0} ? [y/n/q] '.format(last))
+        if ans.upper()=='Y':
+            os.remove(last)
+            print('{0} removed.'.format(last))
 
 del today, lastday, rmlast

@@ -10,7 +10,7 @@ import logging, os, logging.handlers, configparser
 # Read config file
 ########################################################
 config = configparser.ConfigParser()
-config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
+config.read(os.path.join(os.path.dirname(__file__), 'pyslave.ini'))
 data_directory = config.get('PYSLAVE','data directory',fallback='')
 logging = config.getboolean('PYSLAVE','logging',fallback=False)
 loadall = config.getboolean('PYSLAVE','loadall',fallback=False)
