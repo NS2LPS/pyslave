@@ -68,6 +68,9 @@ class SlaveWindow(QtGui.QMainWindow):
         self.thread = None
 
     def call(self, filename, local_ns):
+        if self.thread is not None and self.thread.isRunning():
+            self.display('A script is already running.')
+            return
         if not filename.endswith('_converted.py'):
             try:
                 convert(filename)
@@ -171,5 +174,10 @@ def convert(filename):
         print('', file=f)
         print('# Main script function', file=f)
         print('def script_main(thread):', file=f)
+        abortflag = True
         for l in main.split('\n'):
+            if '#abort' in l : abortflag=False
             print("   ",__replace__(l), file=f)
+        if abortflag:
+            print("   ","if thread.stopflag : break", file=f)
+

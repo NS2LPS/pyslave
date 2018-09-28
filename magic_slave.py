@@ -132,7 +132,7 @@ def openinstr(line, local_ns):
     if main_ressource is None:
         main_ressource = 'VISA'
         ressource = a0
-        exec('args=dict({0})'.format(','.join(args[1:])) )
+        args = dict([ (args[i],args[i+1]) for i in range(1,len(args),2)])
         if 'name' not in args:
             inp = raw_input('Instrument name : ')
             name = inp.strip()
@@ -242,7 +242,7 @@ def script_monitor(thread):
         thread.pause()
         if thread.stopflag : break""".format(args[0] if '(' in args[0] else args[0] + '()',
                                              args[1] if len(args)>1 else 1)
-    exec(script, local_ns)
+    exec(script, globals(), local_ns)
     if slave is None : __start_slave__()
     logger.info('Creating monitor script :\n'+script)
     slave.thread_start(local_ns['script_monitor'])
@@ -273,7 +273,7 @@ def measure(line, local_ns):
     """Measure the output of an instrument and plot it while scanning a parameter."""
     if line :
         args = __arg_split__(line)
-        exec('args=dict({0})'.format(','.join(args)))
+        args = dict([ (args[i],args[i+1]) for i in range(0 ,len(args),2)])
         measure_parameters.update(args)
     else :
         print("Press enter to keep previous value. Abort with many q's (qqqq...).")
@@ -307,7 +307,7 @@ def script_measure(thread):
     if "{filename}" :
         measure_out.save("{filename}")
         """.format(**measure_parameters)
-    exec(script, local_ns)
+    exec(script, globals(), local_ns)
     if slave is None : __start_slave__()
     if not line:
         print('To quickly start the same measurement, copy paste the line below : ')
@@ -359,9 +359,9 @@ def capture(line, local_ns):
     # Fetch data
     data = eval(func, globals(), local_ns)
     # Plot data
-    exec("fig_capture = figure()", local_ns)
+    exec("fig_capture = figure()", globals(), local_ns)
     data.plot(local_ns['fig_capture'])
-    exec("fig_capture.show()", local_ns)
+    exec("fig_capture.show()", globals(), local_ns)
     # Save data to file
     if filename :
         msg = data.save(filename, **param)
