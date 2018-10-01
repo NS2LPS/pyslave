@@ -12,31 +12,21 @@ from pyslave import data_directory
 from pyslave.slave import SlaveWindow
 
 # Logger
-logger = logging.getLogger('pyslave.magic')
+logger = logging.getLogger('pyslave.magic_slave')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.NullHandler())
 
 # List of ressources that are handled
-__resources__ = ['VISA', 'NIDAQ']
+__resources__ = ['VISA', 'NIDAQ', 'COM', 'Other']
 
-# Keep trace of instruments
-__instruments__ = { k:{} for k in __ressources__}
+# Keep trace of all instruments
+__instruments__ = OrderedDict()
 
-# Register opening functions
-__open_functions__ = {'VISA' : instruments.openVISA,
-                      'NIDAQ': instruments.openNIDAQ,
-                      }
+# Keep track of opened COM ports and VISA devices
+__opened_COM__ = []
+__opened_VISA__ = []
+__opened_NIDAQ__ = []
 
-# Look for prefix (for remote access)
-config = configparser.ConfigParser()
-config.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
-__prefix__ = { r:config.get(r,'prefix',fallback='') for r in __resources__}
-
-# Read the ini file
-def __config__(main_resource):
-    config = configparser.ConfigParser()
-    config.read(os.path.join(os.path.dirname(__file__), '{0}.ini'.format(main_resource)))
-    return config
 
 # Argument parsing functions
 def __arg_split__(line):
@@ -66,85 +56,137 @@ def __arg_split__(line):
 ########################################################
 # Instruments loading and listing magic
 ########################################################
-def __find_config__(name):
-    for main_resource in __resources__:
-        config_resource = __config__(main_resource)
-        for resource in config_ressource.sections():
-            value = config_ressource[resource]
-            # Look-up by name
-            if value['name']==name:
-                id = value.get('id', None)
-                return main_ressource, ressource, id, name
-            # Look-up by ressource name
-            if resource==name:
-                id = value.get('id', None)
-                name = value['name']
-                return main_ressource, ressource, id, name
-    return None, None, None, None
+def __read_config_instruments__():
+    __config__ = configparser.ConfigParser()
+    __config__.read(os.path.join(os.path.dirname(__file__), 'pyslave.ini'))
+    config_instruments = dict()
+    for resource in __resources__:
+        if __config__.has_section(resource):
+            section = __config__[resource]
+            for k,v in section.items():
+                if not k.startswith('__'):
+                    vsplit = v.split(' ')
+                    if lenvsplit==1:
+                        config_instruments[k] = {'resource':resource,'address':vsplit[0],'driver':None}
+                    elif lenvsplit==2:
+                        config_instruments[k] = {'resource':resource,'address':vsplit[0],'driver':vsplit[1]}
+                    else:
+                        print('Badly formatted line in pyslave.ini:')
+                        print('{0} = {1}'.format(k,v))
+    return config_instruments
+
+# Not used for the moment
+def __read_config_special__(section):
+    __config__ = configparser.ConfigParser()
+    __config__.read(os.path.join(os.path.dirname(__file__), 'pyslave.ini'))
+    config_special = {}
+    if __config__.has_section(section):
+        section = __config__[section]
+        for k,v in section.items():
+            if k.startswith('__'):
+                config_special[k] = v
+    return config_special
 
 
-def __open__(main_ressource, ressource, name, id, local_ns):
-    if not name:
-        print ("Invalid instrument name")
-        return
-    func = __open_functions__[main_ressource]
-    instr_dict = __instruments__[main_ressource]
-    if name in instr_dict:
-        print("{0} already loaded".format(name))
-        return
-    try:
-        app = func(__prefix__[main_ressource], ressource, id)
-    except:
-        error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-        for e in error_msgs: print(e)
-        print("Error while loading {0}".format(name))
-    local_ns[name] = app
-    instr_dict[name] = app
-    logger.info('Opening {0} ({1}) as {2}'.format(name, ressource, app.driver_name))
-    print('{0} ({1}) loaded as {2}'.format(name, ressource, app.driver_name))
+def __open__(resource, address, name, driver, local_ns, verbose=False):
+    if resource=='VISA':
+        info = rm.resource_info(address)
+        res_name = info.resource_name
+        if res_name in __opened_VISA__:
+            print('{0} is already opened'.format(address))
+            return
+        inst = instruments.openVISA(address, driver)
+        name = __get_name__(inst,verbose) if name is None
+        __opened_VISA__.append(res_name)
+    elif resource=='NIDAQ':
+        if address in __opened_NIDAQ__:
+            print('{0} is already opened'.format(address))
+        inst = instruments.openNIDAQ(address, driver)
+        name = __get_name__(inst,verbose) if name is None
+        __opened_NIDAQ__.append(address)
+    elif resource=='COM':
+        if address in __opened_COM__:
+            print('{0} is already opened'.format(address))
+            return
+        inst = instruments.openCOM(address, driver)
+        name = __get_name__(inst,verbose) if name is None
+        __opened_COM__.append(address)
+    elif resource=='Other':
+        inst = instruments.openOther(address, driver)
+        name = __get_name__(inst,verbose) if name is None
+    local_ns[name] = inst
+    __instruments__[name] = inst
+    logger.info('Opening {0} {1} as {2} with {3} ({4})'.format(resource, address, name, inst.__driver_name__, inst.__driver_module__))
+    print('{0:10s} : {1} {2}'.format(name, inst.__inst_id__, inst.__address__))
 
+def __get_name__(inst, verbose=False):
+    prefix = inst.__instr_type__
+    prev = [ int(k[len(prefix):]) for k in __instruments__.keys() if k.startswith(prefix) ]
+    i = 1
+    while i in prev:
+        i += 1
+    name = prefix + str(i)
+    if verbose:
+        inp = raw_input('Instrument name [{0}] : '.format(name))
+        inp = inp.strip()
+        name = inp or name
+    return name
 
 @register_line_magic
 @needs_local_scope
 def openinstr(line, local_ns):
-    """Opens an instrument through a name or address (or alias).
-    The name (or the address) is looked up in the config.ini file
-    to get information about the instrument.
+    """Opens an instrument through a name or address.
 
-    If no information is found, the function assumes that one wants
-    to open a new VISA device. The function asks for an instrument
-    name and id and try to load the instrument.
+    The function first looks into the pyslave.ini file. If an
+    entry is found corresponding to the given name, the corresponding
+    instrument is opened.
 
-    The user can also provide name='...' and id='...' as parameters.
+    If no matches is found in pyslva.ini:
+    - if the given name contains COM, the function opens the coresponding COM port
+    - otherwise, the function assumes the passed name is a VISA alias or address and
+    tries to open it
+
+    A driver can be passed as a second argument, it will override the driver
+    specified in the pyslave.ini file.
 
     Examples :
         # Open by name
-        openinstr vna1
-        # Open by address
+        openinstr dmm1
+        # Open by address or alias
+        openinstr TCPIP::192.168.0.81
+        openinstr ZND
         openinstr GPIB0::22
-        openinstr GPIB0::22 name='dcpwr1' id='Yokogawa 7651'
+        openinstr GPIB0::22 yokogawa.yogogawa7651.yokogawa7651
     """
     args = __arg_split__(line)
-    a0 = str(args[0])
-    # Look up in the config.ini file
-    main_ressource, ressource, id, name = __find_config__(a0)
-    # Otherwise assumes it is a VISA device
-    if main_ressource is None:
-        main_ressource = 'VISA'
-        ressource = a0
-        args = dict([ (args[i],args[i+1]) for i in range(1,len(args),2)])
-        if 'name' not in args:
-            inp = raw_input('Instrument name : ')
-            name = inp.strip()
-        else:
-            name = args['name']
-        if 'id' not in args:
-            inp = raw_input('Instrument id [auto] : ')
-            id = inp.strip() or None
-        else:
-            id = args['id']
-    # Open the instrument
-    __open__(main_ressource, ressource, name, id, local_ns)
+    instr_name = args[0]
+    driver = args[1] if len(args)>1 else None
+    # Look up in the pyslave.ini file
+    config_instruments = __read_config_instruments__()
+    if instr_name in config_instruments:
+        name = instr_name
+        if name in __instruments__ :
+            print('{0} already exists. Close it before opening it again.'.format(name))
+            return
+        resource = config_instruments[instr_name]['resource']
+        address = config_instruments[instr_name]['address']
+        if driver is None:
+            driver = config_instruments[instr_name].get('driver',None)
+        __open__(resource, address, instr_name, driver, local_ns, True)
+    elif 'COM' in instr_name:
+        __open__('COM', instr_name, None, driver, local_ns, True)
+    else:
+        rm = instruments.__visa__rm__
+        if rm is None:
+            return
+        try:
+            info = rm.resource_info(instr_name)
+            res = info.resource_name
+        except:
+            print('{0} is not a known instrument, COM port or VISA resource.'.format(instr_name))
+            return
+        __open__('VISA', instr_name, None, driver, local_ns, True)
+
 
 
 @register_line_magic
@@ -155,48 +197,71 @@ def closeinstr(line, local_ns):
     if not name:
         return
     logger.info('Closing {0}.'.format(name))
-    for main_ressource in __resources__:
-        d = __instruments__[main_ressource]
-        if name in d:
-            app = d.pop(name)
-            break
-    if name in local_ns:
-        app = local_ns.pop(name)
+    if name not in __instruments__:
+        print('Unknown instrument {0}.'.format(name))
+        return
+    inst = __instruments__[name]
+    list_resources = {'VISA':__opened_VISA__,'NIDAQ':__opened_NIDAQ__,'COM':__opened_COM__}
     try:
-        app.close()
+        l = list_resources[inst.__resource__]
+        l.pop(inst.__address__)
     except:
         pass
+    try:
+        inst.close()
+    except:
+        pass
+    del __instruments__[name]
+    if name in local_ns:
+        local_ns.pop(name)
+
+@register_line_magic
+@needs_local_scope
+def closeall(line, local_ns):
+    """Close all instruments."""
+    for k in __instruments__.keys():
+        closeinstr(k, local_ns)
+
 
 @register_line_magic
 @needs_local_scope
 def openall(line, local_ns):
-    """Load all ressources listed in the config.ini file."""
-    for main_resource in __resources__:
-        config_resource = __config__(main_resource)
-        for resource in config_resource.sections():
-            name = config_resource.get(resource, 'name')
-            id = config_resource.get(resource, 'id', fallback=None)
-            __open__(main_ressource, ressource, name, id, local_ns)
+    """Load all instruments listed in the pyslave.ini file."""
+    config = __read_config_instruments__()
+    for k,v in config.items():
+        try:
+            __open__(v['resource'],v['address'],k,v['driver'],local_ns)
+        except:
+            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
+            for e in error_msgs: print e
+            print('Error while opening instrument {0}.'.format(k))
 
+
+@register_line_magic
+@needs_local_scope
+def openGPIB(line, local_ns):
+    """Load all GPIB instruments."""
+    for address in instruments.__visa__rm__.list_resources('GPIB?*::INSTR'):
+        try:
+            __open__('VISA',address,None,None,local_ns)
+        except:
+            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
+            for e in error_msgs: print e
+            print('Error while opening {0}.'.format(address))
 
 @register_line_magic
 def listall(line):
     """List all loaded instruments."""
-    for main_resource in __resources__:
-        d = __instruments__[main_resource]
-        if d:
-            print("{0} :".format(main_resource))
-            for k,v in d.items():
-                print('{0:10s} -> {1}'.format(k, v.resource))
-
+    for k,v in __instruments__.items():
+        print('{0:10s} : {1} {2}'.format(k, v.__inst_id__, v.__address__)
 
 @register_line_magic
 def listVISA(line):
     """List all available VISA instruments."""
-    for app in instruments.__visa__rm__.list_resources():
-        print(app)
+    for address in instruments.__visa__rm__.list_resources():
+        print(address)
 
-del listall, openall, openinstr, closeinstr, listVISA
+del listall, openall, openinstr, openGPIB, closeinstr, closeall, listVISA
 
 ########################################################
 # Scripts launching, pausing, resuming, aborting magic
@@ -223,7 +288,16 @@ def call(filename, local_ns):
 @register_line_magic
 @needs_local_scope
 def monitor(line, local_ns):
-    """Monitor the output of an instrument and plot it."""
+    """Monitor the output of an instrument and plot it.
+    The first argument is the function to monitor.
+    The second optional argument is the time period of the monitoring.
+    The default value is 1s.
+
+    Examples:
+    %monitor dmm1
+    %monitor dmm1 0.2
+    %monitor instr1.read()
+    """
     args = __arg_split__(line)
     script = """
 import time

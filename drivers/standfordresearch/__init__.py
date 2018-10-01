@@ -1,1 +1,1 @@
-from SR830 import SR830
+__drivers__ = {'Stanford_Research_Systems SR830': 'standfordresearch.SR830.SR830',}

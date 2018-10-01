@@ -13,6 +13,8 @@ class LecroyScope:
     """Lecroy oscilloscope instrument driver.
     Direct call to the instrument invokes the fetch method."""
     endian = '<'
+    __inst_type__ ='scope'
+    __inst_id__ = 'Lecroy Oscilloscope'
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.lastvar = None
@@ -41,6 +43,7 @@ class LT322(LecroyScope):
     """LT 322 Lecroy Oscilloscope instrument driver.
     Direct call to the instrument invokes the fetch method."""
     endian = '>'
+    __inst_id__ = 'LT322 Lecroy Oscilloscope'
 
 def lecroy_decode(trc,endian='<'):
     """ Decode the string `trc` returned by a Lecroy scope or read from a Lecroy TRC file.

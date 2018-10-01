@@ -10,8 +10,10 @@ class fsek:
     """Rohde&Schwarz Spectrum Analyzer (FSEK) driver.
     Direct call to the instrument invokes the fetch method.
     """
+    __inst_type__ = 'spectro'
+    __inst_id__ = 'Rohde&Schwarz FSEK 30'
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs) 
+        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.__call__ = self.fetch
     def fetch(self, channel=1):
         """Fetch the trace from the specified channel and return it as a Sij data object."""

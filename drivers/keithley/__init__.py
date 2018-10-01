@@ -1,1 +1,2 @@
-from Keithley2700 import Keithley2700
+__drivers__ = {'KEITHLEY INSTRUMENTS INC. MODEL 2700' : 'keithley.Keithley2700.Keithley2700',}
+

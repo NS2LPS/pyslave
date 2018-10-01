@@ -1,4 +1,2 @@
-from nidaq import nidaq_generic_ao, nidaq_generic_ai
-
-ni9269 = nidaq_generic_ao
-ni9239 = nidaq_generic_ai
+__drivers__ = {'NI 9269': 'nidaq.nidaq.nidaq_generic_ao',
+               'NI 9239 (BNC)': 'nidaq.nidaq.nidaq_generic_ai',}

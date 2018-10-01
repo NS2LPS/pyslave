@@ -18,6 +18,8 @@ class SR830:
     """StandfordResearch SR830 instrument driver.
     Direct call to the instrument invokes the outp method.
     """
+    __inst_id__ = 'Stanford_Research_Systems SR830'
+    __inst_type__ = 'lockin'
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.write('OUTX 1') # Set the device responce port to GPIB
@@ -439,7 +441,7 @@ class SR830:
     def auxv(self, voltage, aux=1):
         "Set auxiliary output voltage."
         self.write('AUXV{0},{1}'.format(aux, voltage))
-        
+
     def oaux(self, aux=1):
         "Read auxiliary input."
         return float(self.query('OAUX?{0}'.format(aux)))

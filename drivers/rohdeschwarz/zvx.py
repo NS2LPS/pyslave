@@ -15,6 +15,8 @@ class zva:
     All the functions from the rszvb DLL are available as well as extra home made functions.
     Direct call to the instrument invokes the fetch method.
     """
+    __inst_type__ = 'vna'
+    __inst_id__ = 'Rohde&Schwarz ZVA'
     def __init__(self, address):
         self.iHandle = dll.rszvb_init(address, 0, 0)
         self.__call__ = self.fetch
@@ -66,10 +68,18 @@ class zva:
         self.close()
 
 class zvb(zva):
-    """Rohde&Schwarz Vector Network Analyzer (ZVA) driver.
+    """Rohde&Schwarz Vector Network Analyzer (ZVB) driver.
     All the functions from the rszvb DLL are available as well as extra home made functions.
     Direct call to the instrument invokes the fetch method.
     """
+    __inst_id__ =  'Rohde&Schwarz ZVB'
     def wait_for_average(self, channel=1, sleep_time=0.5):
         """Not implemented in ZVB."""
         warnings.warn("The wait_for_average method is not implemented.")
+
+class znd(zva):
+    """Rohde&Schwarz Vector Network Analyzer (ZND) driver.
+    All the functions from the rszvb DLL are available as well as extra home made functions.
+    Direct call to the instrument invokes the fetch method.
+    """
+    __inst_id__ =  'Rohde&Schwarz ZND'

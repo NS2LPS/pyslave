@@ -1,8 +1,10 @@
-"""The instruments module contains functions to open and close VISA or NI-DAQ instruments.
-The Python ressource to be loaded when opening an instrument is obtained from the drivers.ini file.
+"""The instruments module contains functions to open and close VISA, NI-DAQ or COM instruments.
 """
 
-import traceback, sys, importlib, configparser
+import traceback, sys, importlib, pkgutil, os
+
+class InstrumentError(Exception):
+    pass
 
 # Get VISA resource manager
 try:
@@ -20,91 +22,145 @@ try:
 except:
     __ni__ = None
 
-# Load known devices with their driver and type
+# Get serial (COM) module
+try:
+    import serial as __com__
+except:
+    __com__ = None
+
+# Parse drivers directory to build driver list
 def __drivers__():
-    drivers = configparser.ConfigParser()
-    drivers.read(os.path.join(os.path.dirname(__file__), 'drivers.ini'))
+    drivers = {}
+    loader = pkgutil.get_loader('pyslave.drivers')
+    for sub_module in pkgutil.iter_modules([os.path.dirname(loader.get_filename())]):
+        try:
+            m = importlib.import_module( '.{0}'.format(sub_module.name), 'pyslave.drivers')
+            drivers.update(m.__drivers__)
+        except:
+            pass
     return drivers
 
-def openVISA(address, id=None):
-    """Open the instrument at the specified VISA address.
+# Open the instrument and set missing attributes
+def __open__(address, driver, resource):
+    app = driver(address)
+    app.__ressource__ = resource
+    app.__driver_name__ = driver.__name__
+    app.__driver_module__ = driver.__module__
+    if not hasattr(app, '__inst_id__'):
+        app.__inst_id__ = 'Unknown instrument'
+    if not hasattr(app, '__instr_type__'):
+        app.__instr_type__ = 'instr'
+    if not hasattr(app,'__address__'):
+        if resource in ('VISA','NIDAQ','COM'):
+            app.__address__ = address
+        else:
+            app.__address__ = ''
+    return app
+
+def openVISA(address, driver=None):
+    """Open the instrument with the specified VISA address and python driver.
     The address must be a valid VISA resource or alias.
 
-    If id is None, the instrument id is queried. If the instrument does not answer (e.g. Yoko),
-    an error is raised. If the id is listed in the drivers.ini file, the corresponding
-    driver class is loaded and one instance is created, otherwise a generic instrument is instanciated.
+    If driver is None, the instrument id is queried and a corresponding driver
+    is searched. If the instrument does not answer (e.g. Yoko) or a matching
+    driver is not found, the generic VISA instrument driver is selected.
 
-    The function returns the instance of the instrument.
+    The function returns an instance of the driver class.
     """
     if __visa__rm__ is None:
-        raise InstrumentError('VISA library not loaded')
-
-    if id is None:
+        raise InstrumentError('PyVISA module not loaded')
+    # Check if valid VISA identifier
+    info = __visa__rm__.resource_info(address)
+    address = info.resource_name
+    # Automatic driver selection
+    if driver is None:
         app = __visa__rm__.open_resource(address)
         try:
             app.clear()
             id = app.query('*IDN?')
             id = id.split(',')[:2]
             id = str(' '.join(id)).strip()
-        except VisaIOError:
-            raise InstrumentError("""Identification of {0} failed. The instrument did not respound.
-                                  If the instrument is a Yoko, set the id to 'Yokogawa 7651'.""".format(address))
-        except:
-            raise InstrumentError('Unknown error while identifying {0}.'.format(address))
-        finally:
-            app.close()
-    known_devices = __drivers__()
-    if id in known_devices:
-        pkg_name    = known_devices[id]['package']
-        driver_name = known_devices[id]['model']
-        typ         = known_devices[id]['type']
-        try :
-            m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
-            driver = getattr(m, driver_name)
-            app = driver(address)
         except:
             error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
             for e in error_msgs: print(e)
-            print('Error while loading instrument driver {0}, using generic instrument instead.'.format(driver_name))
-            app = __visa__rm__.open_resource(address)
-            typ = 'instr'
-            driver_name = ''
-            pkg_name = 'generic'
+            print("""Identification of {0} failed, using generic VISA instrument.
+                  If the instrument is a Yoko, set the driver to 'yokogawa.yokogawa7651'.""".format(address))
+            id = None
+        finally:
+            app.close()
+        if id is not None:
+            known_devices = __drivers__()
+            if id in known_devices:
+                driver = known_devices[id]
+            else:
+                print('No driver found for instrument {0}, using generic VISA instrument.'.format(id))
+    # Import driver
+    if driver is not None:
+        try:
+            pkg_name, driver_name = driver.rsplit('.',1)
+            m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
+            driver = getattr(m, driver_name)
+        except:
+            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
+            for e in error_msgs: print(e)
+            print('Error while importing instrument driver {0}, using generic VISA instrument.'.format(driver))
+            driver = __visa__rm__.open_resource
     else:
-        app = __visa__rm__.open_resource(address)
-        typ = 'instr'
-        driver_name = ''
-        pkg_name = 'generic'
-    app.id = id
-    app.resource = address
-    app.driver_name = '{0}.{1}'.format(pkg_name,driver_name)
-    return app
+        driver = __visa__rm__.open_resource
+    return __open__(address, driver, 'VISA')
 
-def openNIDAQ(devname, id=None):
-    """Open the NI-DAQ device with the specified name.
+def openNIDAQ(devname, driver=None):
+    """Open the NI-DAQ device with the specified name and python driver.
 
-    If id is None, the device id is queried. If no driver is found for the corresponding id,
-    an error is raised otherwise an instance of the found driver class is returned.
+    If driver is None, the device id is queried and a matching driver
+    is looked for. If no driver is found for the corresponding id,
+    an error is raised.
+
+    The function returns an instance of the driver class.
     """
     if __ni__ is None:
-        raise InstrumentError('NI-DAQ library not loaded.')
+        raise InstrumentError('PyDAQmx module not loaded.')
 
-    if id is None:
+    if driver is None:
         buffer = ctypes.create_string_buffer('',1024)
         __ni__.DAQmxGetDeviceAttribute(devname, __ni__.DAQmx_Dev_ProductType, buffer, 1024)
         id = buffer.value.strip()
     known_devices = __drivers__()
     if id in known_devices:
-        pkg_name    = known_devices[id]['package']
-        driver_name = known_devices[id]['model']
-        typ         = known_devices[id]['type']
+        pkg_name, driver_name = known_devices[id].rsplit('.',1)
         m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
         driver = getattr(m, driver_name)
-        app = driver(devname)
     else:
         raise InstrumentError('No driver for NI-DAQ device {0}.'.format(id))
-    app.id = id
-    app.ressource = devname
-    app.driver_name = '{0}.{1}'.format(pkg_name,driver_name)
-    return app
+    return __open__(devname, driver,'NIDAQ')
 
+def openCOM(com, driver=None):
+    """Open the COM device with the specified COM port and python driver.
+
+    If driver is None, the generic com interface driver is used.
+
+    The function returns an instance of the driver class.
+    """
+    if __com__ is None:
+        raise InstrumentError('PySerial module not loaded.')
+
+    if driver is not None:
+        try:
+            pkg_name, driver_name = driver.rsplit('.',1)
+            m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
+            driver = getattr(m, driver_name)
+        except:
+            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
+            for e in error_msgs: print(e)
+            print('Error while importing instrument driver {0}, using generic COM driver.'.format(driver))
+            driver = __com__.Serial
+    else:
+        driver = __com__.Serial
+    return __open__(com, driver,'COM')
+
+def openOther(arg, driver):
+    """Open specific types of instruments.
+
+    The function returns an instance of the driver. The first
+    argument is passed to the driver."""
+    return __open__(arg, driver, 'Other')
