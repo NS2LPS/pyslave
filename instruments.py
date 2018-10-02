@@ -43,7 +43,7 @@ def __drivers__():
 # Open the instrument and set missing attributes
 def __open__(address, driver, resource):
     app = driver(address)
-    app.__ressource__ = resource
+    app.__resource__ = resource
     app.__driver_name__ = driver.__name__
     app.__driver_module__ = driver.__module__
     if not hasattr(app, '__inst_id__'):
