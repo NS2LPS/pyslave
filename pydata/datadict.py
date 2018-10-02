@@ -1,53 +1,21 @@
-import os, re, logging
+import os, re
 import numpy as np
 import h5py
 from collections import OrderedDict
 
 try:
-    from pyslave.magic_slave import __slave__
+    from pyslave.magic import __disp__ as disp
 except:
-    __slave__ = None
+    disp = print
 
-# Logger
-logger = logging.getLogger('pyslave.data')
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.NullHandler())
+from .increment import increment_file
 
+# Error class
 class DataException(Exception):
     pass
 
-def disp(msg):    
-    if __slave__ is None:
-        print(msg)
-        logger.info(msg)
-    else:
-        if __slave__.thread and __slave__.thread.isRunning():
-            __slave__.thread.display(msg, echo=False, log=True)
-        else:
-            print(msg)
-            logger.info(msg)
 
-def __increment__(base, ext, previous, ndigits):
-    rec = re.compile(base+'[0-9]*'+ext)
-    index = [p[len(base):] for p in previous if rec.match(p)]
-    if ext : index = [ p[:-len(ext)] for p in index]
-    index = [ int(p) for p in index]
-    if index :
-        index.sort()
-        counter = index[-1]+1
-    else :
-        counter = 0
-    return base + str(counter).zfill(ndigits) + ext
-
-def increment_file(filename, ndigits=4):
-    """Return a filename with an automatically incremented number at the end.
-    The number is zero padded to have ndigits."""
-    basename = filename.rsplit('.',1)[0] if '.' in filename else filename
-    ext = '.'+filename.rsplit('.',1)[1] if '.' in filename else ''
-    files = os.listdir('.')
-    return __increment__(basename, ext, files, ndigits)
-
-class Data(dict):
+class DataDict(dict):
     """Base class to represent experimental data. Inherits from dict.
 
     Values stored in the object can be accessed via attributes or keys.
@@ -137,13 +105,16 @@ class Data(dict):
         """Save the data to a file in text or HDF5 format.
 
         - Text format : used if file is a string ending in txt.
-            The optional keywords are increment=True and ndigits=4 to control the behaviour of the filename autoincrement (see the save_txt method for more details).
+        The optional keywords are increment=True and ndigits=4 to control
+        the behaviour of the filename autoincrement (see the save_txt method
+        for more details).
 
         - HDF5 format : used if file is an opened HDF5 file or a string ending in h5.
-            The optional keywords are increment=True and ndigits=4 to control the behaviour of the dataset autoincrement.
-            The optional attrs=dict() will be added to the dataset attributes. Extra keywords arguments will be passed to the hDF5 create_dataset function
-            (see the save_h5 method for more details).
-
+        The optional keywords are increment=True and ndigits=4 to control the
+        behaviour of the dataset autoincrement. The optional attrs=dict() will
+        be added to the dataset attributes. Extra keywords arguments will be
+        passed to the hDF5 create_dataset function (see the save_h5 method for
+        more details).
         """
         if type(file) is str:
             if file.endswith('txt'):
@@ -189,7 +160,8 @@ class Data(dict):
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
         disp(msg)
 
-class Sij(Data):
+
+class Sij(DataDict):
     """Vector network analyzer Sij data class.
 
     * Data attributes : freq, S12 (complex)
@@ -226,7 +198,9 @@ class Sij(Data):
             with open(filename[:-4]+'_attrs.txt', 'w') as f:
                 for k,v in attrs.items():
                     print >>f,k,v
-class Spec(Data):
+
+
+class Spec(DataDict):
     """Spectrum Analyzer data class.
 
     * Data attributes : freq, S
@@ -264,7 +238,8 @@ class Spec(Data):
                 for k,v in attrs.items():
                     print >>f,k,v
 
-class Lecroy_trace(Data):
+
+class Lecroy_trace(DataDict):
     """Lecroy oscilloscope waveform data class.
 
     * Data attributes : horiz, vert
@@ -310,7 +285,8 @@ class Lecroy_trace(Data):
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
         dsip(msg)
 
-class xy(Data):
+
+class xy(DataDict):
     """Generic x,y data class.
 
     * Data Attributes : x, y
@@ -330,6 +306,7 @@ def h5todata(h5_dataset):
     res = Data( [ (n, np.array(h5_dataset[n])) for n in h5_dataset.dtype.names] )
     res.update(dict(h5_dataset.attrs))
     return res
+
 
 def createdata(*args):
     """Create an empty data instance (see the data class).

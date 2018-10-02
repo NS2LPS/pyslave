@@ -11,7 +11,7 @@ from pyslave import instruments
 from pyslave.slave import SlaveWindow
 
 # Logger
-logger = logging.getLogger('pyslave.magic_slave')
+logger = logging.getLogger('pyslave.magic')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.NullHandler())
 
@@ -268,13 +268,13 @@ def listVISA(line):
     """List all available VISA instruments."""
     for address in instruments.__visa__rm__.list_resources():
         print(address)
-        
+
 @register_line_magic
 def resetVISA(line):
     """Reset VISA connection.
     Close instruments before running this function"""
     instruments.resetVISA()
-        
+
 
 del listall, openall, openinstr, openGPIB, closeinstr, closeall, listVISA, resetVISA
 
@@ -284,13 +284,24 @@ del listall, openall, openinstr, openGPIB, closeinstr, closeall, listVISA, reset
 
 class SlaveError(Exception):
     pass
-    
-    
+
+
 # Slave window variable
 if is_event_loop_running_qt4():
     __slave__ = SlaveWindow()
 else:
     __slave__ = None
+
+
+def __slave_disp__(msg):
+    logger.info(msg)
+    if __slave__ is None:
+        print(msg)
+    else:
+        if __slave__.thread and __slave__.thread.isRunning():
+            __slave__.thread.display(msg, echo=False, log=False)
+        else:
+            print(msg)
 
 
 def __replace__(line):
@@ -317,46 +328,50 @@ def __convert__(filename):
             print(__replace__(l), file=f)
         print('', file=f)
         print('# Main script function', file=f)
-        print('def script_main(thread):', file=f)
+        print('def __slave_script__(thread):', file=f)
         abortflag = True
         for l in main.split('\n'):
             if '#abort' in l : abortflag=False
             print("   ",__replace__(l), file=f)
         if abortflag:
             print("   ","if thread.stopflag : break", file=f)
-            
-@register_line_magic
-@needs_local_scope
-def call(filename, local_ns):
-    """Convert and launch a script in slave."""
-    if not filename.endswith('.py'):
-        filename = filename + '.py'    
-    if not filename.endswith('_converted.py'):
-        try:
-            __convert__(filename)
-        except :
-            traceback.print_exc(limit=1,file=sys.stdout)
-            print('Error while converting {0}.'.format(filename))
-            return            
-        filename = filename[:-3] + '_converted.py'
-    try:
-        with open(filename,'r') as f:
-            code = compile(f.read(), filename, 'exec')            
-    except :
-        traceback.print_exc(limit=1,file=sys.stdout)
-        print('Error while compiling {0}.'.format(filename))
-        return
-    with open(filename,'r')as f:
-        logger.info('Creating script {0} :\n'.format(filename)+f.read())
-    glob = globals()    
-    glob.update({ k:v for k,v in local_ns.items() if not k.startswith('_')})
+
+def __start_slave__(script, filename, local_ns):
+    """Start Slave thread with the passed code"""
+    code = compile(script, filename, 'exec')
+    glob = globals()
+    for k,v in local_ns.items():
+        if not k.startswith('_'):
+            glob[k]=v
     locals = dict()
     exec(code, glob, locals)
     local_ns.update(locals)
     glob.update(locals)
-    #print(locals)
     __slave__.show()
-    __slave__.thread_start(script_main)
+    __slave__.thread_start(__slave_script__)
+    logger.info('Starting script {0} :\n{1}'.format(filename, script))
+
+
+@register_line_magic
+@needs_local_scope
+def call(filename, local_ns):
+    """Convert and launch a script in slave.
+    If the filename ends with '_converted.py', the
+    file is not converted again."""
+    if not filename.endswith('.py'):
+        filename = filename + '.py'
+    if not filename.endswith('_converted.py'):
+        try:
+            __convert__(filename)
+        except :
+            traceback.print_exc(file=sys.stdout)
+            print('Error while converting {0}.'.format(filename))
+            return
+        filename = filename[:-3] + '_converted.py'
+    with open(filename,'r') as f:
+        script = f.read()
+    __start_slave__(script, filename, local_ns)
+
 
 @register_line_magic
 @needs_local_scope
@@ -365,7 +380,7 @@ def monitor(line, local_ns):
     The first argument is the function to monitor.
     The second optional argument is the time period of the monitoring.
     The default value is 1s.
-    
+
     The results are stored in monitor_out.
 
     Examples:
@@ -376,11 +391,11 @@ def monitor(line, local_ns):
     args = __arg_split__(line)
     script = """
 import time
-from pyslave.data import xy
+from pydata import xy
 fig = figure()
 monitor_out = xy(x=empty(0), y=empty(0))
 t0 = time.time()
-def script_monitor(thread):
+def __slave_script__(thread):
     while True:
         val = {0}
         thread.display('Monitored value '+str(val))
@@ -391,16 +406,7 @@ def script_monitor(thread):
         thread.pause()
         if thread.stopflag : break""".format(args[0] if '(' in args[0] else args[0] + '()',
                                              args[1] if len(args)>1 else 1)
-    glob = globals() 
-    glob.update({ k:v for k,v in local_ns.items() if not k.startswith('_')})
-    locals = dict()
-    exec(script, glob, locals)
-    local_ns.update(locals)
-    glob.update(locals)
-    #print(locals)
-    __slave__.show()
-    logger.info('Creating monitor script :\n'+script)
-    __slave__.thread_start(script_monitor)
+    __start_slave__(script, 'monitor', local_ns)
     print("Results are stored in monitor_out.")
 
 measure_parameters = OrderedDict([
@@ -443,11 +449,11 @@ def measure(line, local_ns):
         measure_parameters['set_function']+= '(x)'
     script = """
 import time
-from pyslave.data import xy
+from pydata import xy
 if '{plot}'=='y': fig = figure()
 measure_out = xy(x=array({iterable}), y=ones_like(array({iterable}))*nan)
 
-def script_measure(thread):
+def __slave_script__(thread):
     for i,x in enumerate(measure_out.x):
         {set_function}
         time.sleep({set_sleep})
@@ -464,19 +470,10 @@ def script_measure(thread):
     if "{filename}" :
         measure_out.save("{filename}")
         """.format(**measure_parameters)
-    glob = globals() 
-    glob.update({ k:v for k,v in local_ns.items() if not k.startswith('_')})
-    locals = dict()
-    exec(script, glob, locals)
-    local_ns.update(locals)
-    glob.update(locals)
-    #print(locals)
-    __slave__.show()
+    __start_slave__(script, 'measure', local_ns)
     if not line:
         print('To quickly start the same measurement, copy paste the line below : ')
         print('measure {0}'.format(' '.join(["{0}='{1}'".format(k,v) for k,v in measure_parameters.items()])))
-    logger.info('Creating measurement script :\n'+script)
-    __slave__.thread_start(script_measure)
     print("Results are stored in measure_out.")
 
 

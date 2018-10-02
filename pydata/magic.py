@@ -1,8 +1,11 @@
 """This module defines magic IPython functions to rapidly access data."""
 
+import configparser
 from IPython.core.magic import register_line_magic, needs_local_scope
 
-from pyslave import data_directory
+__config__ = configparser.ConfigParser()
+__config__.read(os.path.join(os.path.dirname(__file__), 'pydata.ini'))
+data_directory = __config__['pydata']['data_directory']
 
 ########################################################
 # Miscellaneous magic functions for data handling
@@ -39,7 +42,7 @@ def rmlast(line):
     last = l[-1][1]
     ans = ''
     i = 1
-    while ans.upper()!='Y' and ans.upper()!='Q' and i<=len(l):    
+    while ans.upper()!='Y' and ans.upper()!='Q' and i<=len(l):
         last = l[-i][1]
         i += 1
         ans = raw_input('Remove {0} ? [y/n/q] '.format(last))
