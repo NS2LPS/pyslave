@@ -3,12 +3,7 @@ import time
 from pyslave.data import Sij
 import warnings
 
-try:
-    from __zvb__ import rszvb as dll
-except:
-    print 'Error while loading the Rohde&Shwarz ZVB DLL.'
-    class dll:
-        pass
+from .__zvb__ import rszvb as dll
 
 class zva:
     """Rohde&Schwarz Vector Network Analyzer (ZVA) driver.
@@ -18,8 +13,8 @@ class zva:
     __inst_type__ = 'vna'
     __inst_id__ = 'Rohde&Schwarz ZVA'
     def __init__(self, address):
-        self.iHandle = dll.rszvb_init(address, 0, 0)
-        self.__call__ = self.fetch
+        self.iHandle = dll.rszvb_init(address.encode(), 0, 0)
+        self.__class__.__call__ = self.__class__.fetch
     def __getattr__(self, name):
         dll_fun = getattr(dll, 'rszvb_' + name)
         def fun(*args, **kwargs):
@@ -65,7 +60,10 @@ class zva:
         """Refresh the acquisition paramters and store them"""
         self.__acquisition_parameters__ = self.acquisition_parameters(channel)
     def __del__(self):
-        self.close()
+        try:
+            self.close()
+        except:
+            pass
 
 class zvb(zva):
     """Rohde&Schwarz Vector Network Analyzer (ZVB) driver.

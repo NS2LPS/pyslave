@@ -16,7 +16,7 @@ class nidaq_generic_ao:
         buffer = ctypes.create_string_buffer('',1024)
         ni.DAQmxGetDeviceAttribute(devname, ni.DAQmx_Dev_AO_PhysicalChans, buffer, 1024)
         self.ao = [x.strip() for x in buffer.value.split(',')]
-        self.__call__ = self.out
+        self.__class__.__call__ = self.__class__.out
 
     def out(self, voltage, output=1):
         """Output a DC voltage on the specified output."""
@@ -45,7 +45,7 @@ class nidaq_generic_ai:
         buffer = ctypes.create_string_buffer('',1024)
         ni.DAQmxGetDeviceAttribute(devname, ni.DAQmx_Dev_AI_PhysicalChans, buffer, 1024)
         self.ai = [x.strip() for x in buffer.value.split(',')]
-        self.__call__ = self.read
+        self.__class__.__call__ = self.__class__.read
 
     def read(self, output=1, sampling_rate=1000, Nsamples=100, vmin=-10, vmax=10):
         """Sample the specified output."""

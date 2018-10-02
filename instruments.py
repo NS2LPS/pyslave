@@ -1,7 +1,7 @@
 """The instruments module contains functions to open and close VISA, NI-DAQ or COM instruments.
 """
 
-import traceback, sys, importlib, pkgutil, os
+import traceback, importlib, pkgutil, os, sys
 
 class InstrumentError(Exception):
     pass
@@ -34,7 +34,9 @@ def __drivers__():
     loader = pkgutil.get_loader('pyslave.drivers')
     for sub_module in pkgutil.iter_modules([os.path.dirname(loader.get_filename())]):
         try:
+            importlib.invalidate_caches()
             m = importlib.import_module( '.{0}'.format(sub_module.name), 'pyslave.drivers')
+            importlib.reload(m)
             drivers.update(m.__drivers__)
         except:
             pass
@@ -43,13 +45,13 @@ def __drivers__():
 # Open the instrument and set missing attributes
 def __open__(address, driver, resource):
     app = driver(address)
-    app.__ressource__ = resource
+    app.__resource__ = resource
     app.__driver_name__ = driver.__name__
     app.__driver_module__ = driver.__module__
     if not hasattr(app, '__inst_id__'):
         app.__inst_id__ = 'Unknown instrument'
-    if not hasattr(app, '__instr_type__'):
-        app.__instr_type__ = 'instr'
+    if not hasattr(app, '__inst_type__'):
+        app.__inst_type__ = 'instr'
     if not hasattr(app,'__address__'):
         if resource in ('VISA','NIDAQ','COM'):
             app.__address__ = address
@@ -81,10 +83,9 @@ def openVISA(address, driver=None):
             id = id.split(',')[:2]
             id = str(' '.join(id)).strip()
         except:
-            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            for e in error_msgs: print(e)
+            traceback.print_exc(limit=1,file=sys.stdout)
             print("""Identification of {0} failed, using generic VISA instrument.
-                  If the instrument is a Yoko, set the driver to 'yokogawa.yokogawa7651'.""".format(address))
+                  If the instrument is a Yoko, set the driver to 'yokogawa.yokogawa7651.yokogawa7651'.""".format(address))
             id = None
         finally:
             app.close()
@@ -98,16 +99,26 @@ def openVISA(address, driver=None):
     if driver is not None:
         try:
             pkg_name, driver_name = driver.rsplit('.',1)
+            importlib.invalidate_caches()
             m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
+            importlib.reload(m)
             driver = getattr(m, driver_name)
         except:
-            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            for e in error_msgs: print(e)
+            traceback.print_exc(limit=1,file=sys.stdout)
             print('Error while importing instrument driver {0}, using generic VISA instrument.'.format(driver))
             driver = __visa__rm__.open_resource
     else:
         driver = __visa__rm__.open_resource
     return __open__(address, driver, 'VISA')
+    
+def resetVISA():
+    """Reset the VISA connection"""
+    global __visa_rm__
+    try:
+        __visa__rm__.close()
+    except:
+        __visa__rm__ = visa.ResourceManager()
+        
 
 def openNIDAQ(devname, driver=None):
     """Open the NI-DAQ device with the specified name and python driver.
@@ -128,7 +139,9 @@ def openNIDAQ(devname, driver=None):
     known_devices = __drivers__()
     if id in known_devices:
         pkg_name, driver_name = known_devices[id].rsplit('.',1)
+        importlib.invalidate_caches()
         m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
+        importlib.reload(m)
         driver = getattr(m, driver_name)
     else:
         raise InstrumentError('No driver for NI-DAQ device {0}.'.format(id))
@@ -147,11 +160,12 @@ def openCOM(com, driver=None):
     if driver is not None:
         try:
             pkg_name, driver_name = driver.rsplit('.',1)
+            importlib.invalidate_caches()
             m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
+            importlib.reload(m)
             driver = getattr(m, driver_name)
         except:
-            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            for e in error_msgs: print(e)
+            traceback.print_exc(limit=1,file=sys.stdout)
             print('Error while importing instrument driver {0}, using generic COM driver.'.format(driver))
             driver = __com__.Serial
     else:
@@ -163,4 +177,9 @@ def openOther(arg, driver):
 
     The function returns an instance of the driver. The first
     argument is passed to the driver."""
+    pkg_name, driver_name = driver.rsplit('.',1)
+    importlib.invalidate_caches()
+    m = importlib.import_module( '.{0}'.format(pkg_name), 'pyslave.drivers')
+    importlib.reload(m)
+    driver = getattr(m, driver_name)
     return __open__(arg, driver, 'Other')

@@ -1,14 +1,13 @@
 """This module defines magic IPython functions to run pyslave from the IPython shell."""
 
-from matplotlib.pyplot import figure
-from IPython.core.magic import register_line_magic, needs_local_scope
-import time, os, re, logging, inspect, logging.handlers
+import time, os, re, logging, inspect, logging.handlers, sys
 from collections import OrderedDict
 import configparser
 import traceback
-
+from matplotlib.pyplot import figure
+from IPython.core.magic import register_line_magic, needs_local_scope
+from IPython.lib.guisupport import is_event_loop_running_qt4
 from pyslave import instruments
-from pyslave import data_directory
 from pyslave.slave import SlaveWindow
 
 # Logger
@@ -16,7 +15,7 @@ logger = logging.getLogger('pyslave.magic_slave')
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.NullHandler())
 
-# List of ressources that are handled
+# List of resources that are handled
 __resources__ = ['VISA', 'NIDAQ', 'COM', 'Other']
 
 # Keep trace of all instruments
@@ -66,9 +65,9 @@ def __read_config_instruments__():
             for k,v in section.items():
                 if not k.startswith('__'):
                     vsplit = v.split(' ')
-                    if lenvsplit==1:
+                    if len(vsplit)==1:
                         config_instruments[k] = {'resource':resource,'address':vsplit[0],'driver':None}
-                    elif lenvsplit==2:
+                    elif len(vsplit)==2:
                         config_instruments[k] = {'resource':resource,'address':vsplit[0],'driver':vsplit[1]}
                     else:
                         print('Badly formatted line in pyslave.ini:')
@@ -90,44 +89,44 @@ def __read_config_special__(section):
 
 def __open__(resource, address, name, driver, local_ns, verbose=False):
     if resource=='VISA':
-        info = rm.resource_info(address)
+        info = instruments.__visa__rm__.resource_info(address)
         res_name = info.resource_name
         if res_name in __opened_VISA__:
             print('{0} is already opened'.format(address))
             return
         inst = instruments.openVISA(address, driver)
-        name = __get_name__(inst,verbose) if name is None
+        name = __get_name__(inst,verbose) if name is None else name
         __opened_VISA__.append(res_name)
     elif resource=='NIDAQ':
         if address in __opened_NIDAQ__:
             print('{0} is already opened'.format(address))
         inst = instruments.openNIDAQ(address, driver)
-        name = __get_name__(inst,verbose) if name is None
+        name = __get_name__(inst,verbose) if name is None else name
         __opened_NIDAQ__.append(address)
     elif resource=='COM':
         if address in __opened_COM__:
             print('{0} is already opened'.format(address))
             return
         inst = instruments.openCOM(address, driver)
-        name = __get_name__(inst,verbose) if name is None
+        name = __get_name__(inst,verbose) if name is None else name
         __opened_COM__.append(address)
     elif resource=='Other':
         inst = instruments.openOther(address, driver)
-        name = __get_name__(inst,verbose) if name is None
+        name = __get_name__(inst,verbose) if name is None else name
     local_ns[name] = inst
     __instruments__[name] = inst
     logger.info('Opening {0} {1} as {2} with {3} ({4})'.format(resource, address, name, inst.__driver_name__, inst.__driver_module__))
     print('{0:10s} : {1} {2}'.format(name, inst.__inst_id__, inst.__address__))
 
 def __get_name__(inst, verbose=False):
-    prefix = inst.__instr_type__
+    prefix = inst.__inst_type__
     prev = [ int(k[len(prefix):]) for k in __instruments__.keys() if k.startswith(prefix) ]
     i = 1
     while i in prev:
         i += 1
     name = prefix + str(i)
     if verbose:
-        inp = raw_input('Instrument name [{0}] : '.format(name))
+        inp = input('Instrument name [{0}] : '.format(name))
         inp = inp.strip()
         name = inp or name
     return name
@@ -202,25 +201,35 @@ def closeinstr(line, local_ns):
         return
     inst = __instruments__[name]
     list_resources = {'VISA':__opened_VISA__,'NIDAQ':__opened_NIDAQ__,'COM':__opened_COM__}
-    try:
-        l = list_resources[inst.__resource__]
-        l.pop(inst.__address__)
-    except:
-        pass
+    l = list_resources.get(inst.__resource__,None)
+    if l:
+        l.remove(inst.__address__)
     try:
         inst.close()
     except:
         pass
-    del __instruments__[name]
     if name in local_ns:
-        local_ns.pop(name)
+        del local_ns[name]
+    del __instruments__[name]
 
 @register_line_magic
 @needs_local_scope
 def closeall(line, local_ns):
     """Close all instruments."""
-    for k in __instruments__.keys():
-        closeinstr(k, local_ns)
+    while __instruments__:
+        name,inst = __instruments__.popitem()
+        logger.info('Closing {0}.'.format(name))
+        list_resources = {'VISA':__opened_VISA__,'NIDAQ':__opened_NIDAQ__,'COM':__opened_COM__}
+        l = list_resources.get(inst.__resource__,None)
+        if l:
+            l.remove(inst.__address__)
+        try:
+            inst.close()
+        except:
+            pass
+        if name in local_ns:
+            del local_ns[name]
+        del inst
 
 
 @register_line_magic
@@ -229,13 +238,13 @@ def openall(line, local_ns):
     """Load all instruments listed in the pyslave.ini file."""
     config = __read_config_instruments__()
     for k,v in config.items():
-        try:
-            __open__(v['resource'],v['address'],k,v['driver'],local_ns)
-        except:
-            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            for e in error_msgs: print e
-            print('Error while opening instrument {0}.'.format(k))
-
+        if k in __instruments__:
+           print('{0} is already loaded.'.format(k))
+        else:
+            try:
+                __open__(v['resource'],v['address'],k,v['driver'],local_ns)
+            except:
+                pass
 
 @register_line_magic
 @needs_local_scope
@@ -245,45 +254,109 @@ def openGPIB(line, local_ns):
         try:
             __open__('VISA',address,None,None,local_ns)
         except:
-            error_msgs = traceback.format_exception(sys.exc_type, sys.exc_value, sys.exc_traceback)
-            for e in error_msgs: print e
+            traceback.print_exc(limit=1,file=sys.stdout)
             print('Error while opening {0}.'.format(address))
 
 @register_line_magic
 def listall(line):
     """List all loaded instruments."""
     for k,v in __instruments__.items():
-        print('{0:10s} : {1} {2}'.format(k, v.__inst_id__, v.__address__)
+        print('{0:10s} : {1} {2}'.format(k, v.__inst_id__, v.__address__))
 
 @register_line_magic
 def listVISA(line):
     """List all available VISA instruments."""
     for address in instruments.__visa__rm__.list_resources():
         print(address)
+        
+@register_line_magic
+def resetVISA(line):
+    """Reset VISA connection.
+    Close instruments before running this function"""
+    instruments.resetVISA()
+        
 
-del listall, openall, openinstr, openGPIB, closeinstr, closeall, listVISA
+del listall, openall, openinstr, openGPIB, closeinstr, closeall, listVISA, resetVISA
 
 ########################################################
 # Scripts launching, pausing, resuming, aborting magic
 ########################################################
 
+class SlaveError(Exception):
+    pass
+    
+    
 # Slave window variable
-slave = None
+if is_event_loop_running_qt4():
+    __slave__ = SlaveWindow()
+else:
+    __slave__ = None
 
-# Open slave window
-def __start_slave__():
-    global slave
-    slave = SlaveWindow()
-    slave.show()
 
+def __replace__(line):
+    line = line.replace('#draw','thread.draw()')
+    line = line.replace('#pause','thread.pause()')
+    line = line.replace('#abort','if thread.stopflag : break')
+    line = line.replace('#looptime','thread.looptime()')
+    line = line.replace('#disp', 'thread.disp')
+    return line
+
+def __convert__(filename):
+    """Convert a python script so that it can be called by slave.
+    The converted file is named by appending '_converted' to the filename."""
+    with open(filename,'r') as f:
+        script = f.read()
+    if '#main' not in script:
+        raise SlaveError('Could not find #main section in {0}.'.format(filename))
+    header, main = [s.strip() for s in script.split('#main')]
+    converted_script = filename[:-3] + '_converted.py'
+    with open(converted_script,'w') as f:
+        print('# Auto generated script file',file=f)
+        print('',file=f)
+        for l in header.split('\n'):
+            print(__replace__(l), file=f)
+        print('', file=f)
+        print('# Main script function', file=f)
+        print('def script_main(thread):', file=f)
+        abortflag = True
+        for l in main.split('\n'):
+            if '#abort' in l : abortflag=False
+            print("   ",__replace__(l), file=f)
+        if abortflag:
+            print("   ","if thread.stopflag : break", file=f)
+            
 @register_line_magic
 @needs_local_scope
 def call(filename, local_ns):
     """Convert and launch a script in slave."""
     if not filename.endswith('.py'):
-        filename += '.py'
-    if slave is None : __start_slave__()
-    slave.call(filename, local_ns)
+        filename = filename + '.py'    
+    if not filename.endswith('_converted.py'):
+        try:
+            __convert__(filename)
+        except :
+            traceback.print_exc(limit=1,file=sys.stdout)
+            print('Error while converting {0}.'.format(filename))
+            return            
+        filename = filename[:-3] + '_converted.py'
+    try:
+        with open(filename,'r') as f:
+            code = compile(f.read(), filename, 'exec')            
+    except :
+        traceback.print_exc(limit=1,file=sys.stdout)
+        print('Error while compiling {0}.'.format(filename))
+        return
+    with open(filename,'r')as f:
+        logger.info('Creating script {0} :\n'.format(filename)+f.read())
+    glob = globals()    
+    glob.update({ k:v for k,v in local_ns.items() if not k.startswith('__')})
+    locals = dict()
+    exec(code, glob, locals)
+    local_ns.update(locals)
+    glob.update(locals)
+    #print(locals)
+    __slave__.show()
+    __slave__.thread_start(script_main)
 
 @register_line_magic
 @needs_local_scope
@@ -292,6 +365,8 @@ def monitor(line, local_ns):
     The first argument is the function to monitor.
     The second optional argument is the time period of the monitoring.
     The default value is 1s.
+    
+    The results are stored in monitor_out.
 
     Examples:
     %monitor dmm1
@@ -303,7 +378,7 @@ def monitor(line, local_ns):
 import time
 from pyslave.data import xy
 fig = figure()
-monitor_out = xy(x=np.empty(0), y=np.empty(0))
+monitor_out = xy(x=empty(0), y=empty(0))
 t0 = time.time()
 def script_monitor(thread):
     while True:
@@ -316,10 +391,17 @@ def script_monitor(thread):
         thread.pause()
         if thread.stopflag : break""".format(args[0] if '(' in args[0] else args[0] + '()',
                                              args[1] if len(args)>1 else 1)
-    exec(script, globals(), local_ns)
-    if slave is None : __start_slave__()
+    glob = globals() 
+    glob.update(local_ns)
+    locals = dict()
+    exec(script, glob, locals)
+    local_ns.update(locals)
+    glob.update(locals)
+    #print(locals)
+    __slave__.show()
     logger.info('Creating monitor script :\n'+script)
-    slave.thread_start(local_ns['script_monitor'])
+    __slave__.thread_start(script_monitor)
+    print("Results are stored in monitor_out.")
 
 measure_parameters = OrderedDict([
                       ('iterable' , ''),
@@ -344,15 +426,16 @@ text_input = OrderedDict([
 @register_line_magic
 @needs_local_scope
 def measure(line, local_ns):
-    """Measure the output of an instrument and plot it while scanning a parameter."""
+    """Measure the output of an instrument and plot it while scanning a parameter.
+    Results are stored in measure_out."""
     if line :
         args = __arg_split__(line)
         args = dict([ (args[i],args[i+1]) for i in range(0 ,len(args),2)])
         measure_parameters.update(args)
     else :
         print("Press enter to keep previous value. Abort with many q's (qqqq...).")
-        for k,v in text_input.iteritems():
-            inp = raw_input('{0} [{1}] : '.format(v, measure_parameters[k]))
+        for k,v in text_input.items():
+            inp = input('{0} [{1}] : '.format(v, measure_parameters[k]))
             if inp.endswith('qqqq') : return
             if inp : measure_parameters[k] = inp.strip()
     if '(' not in measure_parameters['read_function'] : measure_parameters['read_function']+= '()'
@@ -381,43 +464,48 @@ def script_measure(thread):
     if "{filename}" :
         measure_out.save("{filename}")
         """.format(**measure_parameters)
-    exec(script, globals(), local_ns)
-    if slave is None : __start_slave__()
+    glob = globals() 
+    glob.update(local_ns)
+    locals = dict()
+    exec(script, glob, locals)
+    local_ns.update(locals)
+    glob.update(locals)
+    #print(locals)
+    __slave__.show()
     if not line:
         print('To quickly start the same measurement, copy paste the line below : ')
-        print('measure {0}'.format(' '.join(["{0}='{1}'".format(k,v) for k,v in measure_parameters.iteritems()])))
+        print('measure {0}'.format(' '.join(["{0}='{1}'".format(k,v) for k,v in measure_parameters.items()])))
     logger.info('Creating measurement script :\n'+script)
-    slave.thread_start(local_ns['script_measure'])
+    __slave__.thread_start(script_measure)
+    print("Results are stored in measure_out.")
+
 
 @register_line_magic
 def pause(line):
     """Pause the running script."""
-    if slave is None : return
-    slave.on_pushButton_Pause_clicked()
+    __slave__.on_pushButton_Pause_clicked()
+    print("Pausing script...")
 
 @register_line_magic
 def resume(line):
     """Resume the paused script."""
-    if slave is None : return
-    slave.on_pushButton_Resume_clicked()
+    __slave__.on_pushButton_Resume_clicked()
+    print("Resuming script...")
 
 @register_line_magic
 def abort(line):
     """Abort the running script."""
-    if slave is None : return
-    slave.on_pushButton_Abort_clicked()
+    __slave__.on_pushButton_Abort_clicked(echo=True)
 
 @register_line_magic
 def kill(line):
     """Kill the running script."""
-    if slave is None : return
-    slave.on_pushButton_Kill_clicked()
+    __slave__.on_pushButton_Kill_clicked(echo=True)
 
 @register_line_magic
 def window(line):
     """Show the slave window."""
-    if slave is None : __start_slave__()
-    slave.show()
+    __slave__.show()
 
 
 @register_line_magic
@@ -425,7 +513,7 @@ def window(line):
 def capture(line, local_ns):
     args = __arg_split__(line)
     # First argument
-    func = 'out = ' + args[0] if '(' in args[0] else args[0].strip() + '()'
+    func = args[0] if '(' in args[0] else args[0].strip() + '()'
     # Second argument
     filename = str(args[1]) if len(args)>1 else None
     # Optional extra arguments
@@ -433,11 +521,14 @@ def capture(line, local_ns):
     # Fetch data
     data = eval(func, globals(), local_ns)
     # Plot data
-    exec("fig_capture = figure()", globals(), local_ns)
-    data.plot(local_ns['fig_capture'])
-    exec("fig_capture.show()", globals(), local_ns)
+    exec("capture_fig = figure()", globals(), local_ns)
+    data.plot(local_ns['capture_fig'])
+    exec("capture_fig.show()", globals(), local_ns)
+    local_ns['capture_out'] = data
     # Save data to file
     if filename :
         msg = data.save(filename, **param)
+    else:
+        print("Data are stored in capture_out. Figure is capture_fig.")
 
 del call, window, pause, resume, abort, kill, monitor, measure, capture

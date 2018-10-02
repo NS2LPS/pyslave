@@ -1,11 +1,17 @@
 import numpy as np
 import struct
-import visa
 from pyslave.data import Lecroy_trace
 
 # VISA resource manager
-visa_rm = visa.ResourceManager()
+try:
+    from pyslave.instruments import __visa_rm__
+except:
+    __visa_rm__ = None
 
+if __visa_rm__ is None:
+    import visa
+    __visa_rm__ = visa.ResourceManager()
+   
 # Wavesurfer : ws=LecroyScope('VICP::129.175.82.34::INSTR')
 # Or : %openinstr VICP::192.168.0.2::INSTR
 
@@ -18,7 +24,7 @@ class LecroyScope:
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
         self.lastvar = None
-        self.__call__ = self.fetch
+        self.__class__.__call__ = self.__class__.fetch
 
     def fetch(self, channel='C1'):
         """Fetch the waveform from the specified channel ('C1','C2,'TA', ...) and return it as a lecroy_trace data object."""

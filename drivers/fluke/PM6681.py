@@ -1,9 +1,13 @@
 import numpy as np
-import visa
-
 # VISA resource manager
-visa_rm = visa.ResourceManager()
+try:
+    from pyslave.instruments import __visa_rm__
+except:
+    __visa_rm__ = None
 
+if __visa_rm__ is None:
+    import visa
+    __visa_rm__ = visa.ResourceManager()
 
 class PM6681:
     """Fluke PM6681 instrument driver.

@@ -1,8 +1,12 @@
-
-import visa
-
 # VISA resource manager
-visa_rm = visa.ResourceManager()
+try:
+    from pyslave.instruments import __visa_rm__
+except:
+    __visa_rm__ = None
+
+if __visa_rm__ is None:
+    import visa
+    __visa_rm__ = visa.ResourceManager()
 
 
 class agilent33250A:
@@ -13,7 +17,7 @@ class agilent33250A:
     __inst_id__ = 'Agilent Technologies 33250A'
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
-        self.__call__ = self.setamplitude
+        self.__class__.__call__ = self.__class__.setamplitude
         self.close = self.instrument.close
 
     def setamplitude(self, value):

@@ -52,6 +52,13 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="pushButton_Kill">
+        <property name="text">
+         <string>Kill</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton_Abort">
         <property name="text">
          <string>Abort</string>

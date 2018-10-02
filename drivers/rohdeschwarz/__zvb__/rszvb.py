@@ -691,7 +691,7 @@ RSZVB_MIXER_PARAM_USER = 1
 #DLL functions
 
 # rszvb_init ['ViRsrc resourceName', 'ViBoolean IDQuery', 'ViBoolean resetDevice', 'ViSession* instrumentHandle']
-prototype = WINFUNCTYPE(c_int, c_char_p,c_bool,c_bool,POINTER(c_int))
+prototype = WINFUNCTYPE(c_int, c_char_p, c_bool, c_bool, POINTER(c_int))
 paramflags = ((1, 'resourceName'),(1, 'IDQuery'),(1, 'resetDevice'),(2, 'instrumentHandle'),)
 rszvb_init  = prototype(('rszvb_init', rszvbDLL), paramflags)
 rszvb_init.name = 'rszvb_init'
