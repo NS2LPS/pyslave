@@ -1,8 +1,13 @@
-
-import visa
-
 # VISA resource manager
-visa_rm = visa.ResourceManager()
+try:
+    from pyslave.instruments import __visa_rm__
+except:
+    __visa_rm__ = None
+
+if __visa_rm__ is None:
+    import visa
+    __visa_rm__ = visa.ResourceManager()
+
 
 
 class Keithley2700:
@@ -12,8 +17,8 @@ class Keithley2700:
     __inst_id__ = 'KEITHLEY INSTRUMENTS INC. MODEL 2700'
     __inst_type__ = dmm
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
-        self.__call__ = self.read
+        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
+        self.__class__.__call__ = self.__class__.read
 
     def read(self):
         res = self.instrument.ask('DATA?')

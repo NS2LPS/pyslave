@@ -8,10 +8,16 @@ See http://creativecommons.org/licenses/by-sa/3.0/ or the included license/LICEN
 
 Attribution requirements can be found in license/ATTRIBUTION.TXT"""
 
-import visa
-
 # VISA resource manager
-visa_rm = visa.ResourceManager()
+try:
+    from pyslave.instruments import __visa_rm__
+except:
+    __visa_rm__ = None
+
+if __visa_rm__ is None:
+    import visa
+    __visa_rm__ = visa.ResourceManager()
+
 
 
 class SR830:
@@ -21,9 +27,9 @@ class SR830:
     __inst_id__ = 'Stanford_Research_Systems SR830'
     __inst_type__ = 'lockin'
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
+        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
         self.write('OUTX 1') # Set the device responce port to GPIB
-        self.__call__ = self.outp
+        self.__class__.__call__ = self.__class__.outp
 
     # Set Frequency Source
     def setFreqSource(self,source):

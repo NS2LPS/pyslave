@@ -10,20 +10,30 @@ Attribution requirements can be found in license/ATTRIBUTION.TXT"""
 
 import numpy as np
 import time
-import visa
+
 
 # VISA resource manager
-visa_rm = visa.ResourceManager()
+try:
+    from pyslave.instruments import __visa_rm__
+except:
+    __visa_rm__ = None
+
+if __visa_rm__ is None:
+    import visa
+    __visa_rm__ = visa.ResourceManager()
+
 
 
 class yokogawa7651:
+    __inst_type__ = 'dcpwr'
+    __inst_id__ = 'Yokogawa 7651'
     """Yokogawa 7651 instrument driver.
     Direct call to the instrument invokes the ramp method."""
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
+        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
         self.value = 0
         self.points_per_second = 20
-        self.__call__ = self.ramp
+        self.__class__.__call__ = self.__class__.ramp
 
     def trigger(self):
         '''

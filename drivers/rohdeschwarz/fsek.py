@@ -1,7 +1,13 @@
-import visa
-
 # VISA resource manager
-visa_rm = visa.ResourceManager()
+try:
+    from pyslave.instruments import __visa_rm__
+except:
+    __visa_rm__ = None
+
+if __visa_rm__ is None:
+    import visa
+    __visa_rm__ = visa.ResourceManager()
+
 
 from pyslave.data import Spec
 
@@ -14,7 +20,7 @@ class fsek:
     __inst_id__ = 'Rohde&Schwarz FSEK 30'
     def __init__(self, resource, *args, **kwargs):
         self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
-        self.__call__ = self.fetch
+        self.__class__.__call__ = self.__class__.fetch
     def fetch(self, channel=1):
         """Fetch the trace from the specified channel and return it as a Sij data object."""
         fstart = float(self.instrument.query('FREQ:START?'))

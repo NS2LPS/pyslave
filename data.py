@@ -3,7 +3,10 @@ import numpy as np
 import h5py
 from collections import OrderedDict
 
-from pyslave.magic import slave
+try:
+    from pyslave.magic_slave import __slave__
+except:
+    __slave__ = None
 
 # Logger
 logger = logging.getLogger('pyslave.data')
@@ -13,15 +16,16 @@ logger.addHandler(logging.NullHandler())
 class DataException(Exception):
     pass
 
-def disp(msg):
-    logger.info(msg)
-    if slave is None:
+def disp(msg):    
+    if __slave__ is None:
         print(msg)
+        logger.info(msg)
     else:
-        if slave.thread and slave.thread.isRunning():
-            slave.thread.display(msg)
+        if __slave__.thread and __slave__.thread.isRunning():
+            __slave__.thread.display(msg, echo=False, log=True)
         else:
             print(msg)
+            logger.info(msg)
 
 def __increment__(base, ext, previous, ndigits):
     rec = re.compile(base+'[0-9]*'+ext)
@@ -56,13 +60,13 @@ class Data(dict):
         """Creates a Data instance from key,value pairs.
         Any valid syntax to create a Python dict is allowed.
         Keys corresponding to numpy arrays are added to the data attributes."""
-        super(Data, self).__init__()
+        super().__init__()
         self.__data_attributes__ = []
         if args:
             if len(args)>1:
                 raise DataException('Expected at most 1 arguments, got {0}'.format(len(args)))
             if isinstance(args[0],dict):
-                for k,v in args[0].iteritems():
+                for k,v in args[0].items():
                     if k in self :  raise DataException('Duplicate key {0}'.format(k))
                     self[k] = v
                     if type(v) is np.ndarray: self.__data_attributes__.append(k)
@@ -74,7 +78,7 @@ class Data(dict):
             else:
                 raise DataException('Argument should be a mapping or an iterable')
         if kwargs:
-            for k,v in kwargs.iteritems():
+            for k,v in kwargs.items():
                 if k in self :  raise DataException('Duplicate key {0}'.format(k))
                 self[k] = v
                 if type(v) is np.ndarray: self.__data_attributes__.append(k)
@@ -121,7 +125,7 @@ class Data(dict):
         return np.core.rec.fromarrays( [self[k] for k in self.__data_attributes__] , names = self.__data_attributes__)
     @property
     def __attributes__(self):
-        return dict([ (k,v) for k,v in self.iteritems() if k not in self.__data_attributes__ and k not in self.__hidden_attributes__])
+        return dict([ (k,v) for k,v in self.items() if k not in self.__data_attributes__ and k not in self.__hidden_attributes__])
     def __repr__(self):
         out = "Data:\n"
         out += '\n'.join( [ '{0} : {1}'.format(k, self[k].__repr__()) for k in self.__data_attributes__])
@@ -165,7 +169,7 @@ class Data(dict):
         attrs.update(self.__attributes__)
         if attrs:
             with open(filename[:-4]+'_attrs.txt', 'w') as f:
-                for k,v in attrs.iteritems():
+                for k,v in attrs.items():
                     print >>f,k,v
 
     def save_h5(self, hdf, dataset='data', attrs=dict(), increment=True, ndigits=4, **kwargs):
@@ -179,11 +183,11 @@ class Data(dict):
         if increment : dataset = __increment__(dataset, '', hdf.keys(), ndigits)
         if dataset in hdf: del hdf['{0}'.format(dataset)]
         ds = hdf.create_dataset(dataset, data=self.__data__, **kwargs)
-        for k,v in attrs.iteritems() :
+        for k,v in attrs.items() :
             ds.attrs[k] = v
         hdf.flush()
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
-        dips(msg)
+        disp(msg)
 
 class Sij(Data):
     """Vector network analyzer Sij data class.
@@ -220,7 +224,7 @@ class Sij(Data):
         attrs.update(self.__attributes__)
         if attrs:
             with open(filename[:-4]+'_attrs.txt', 'w') as f:
-                for k,v in attrs.iteritems():
+                for k,v in attrs.items():
                     print >>f,k,v
 class Spec(Data):
     """Spectrum Analyzer data class.
@@ -257,7 +261,7 @@ class Spec(Data):
         attrs.update(self.__attributes__)
         if attrs:
             with open(filename[:-4]+'_attrs.txt', 'w') as f:
-                for k,v in attrs.iteritems():
+                for k,v in attrs.items():
                     print >>f,k,v
 
 class Lecroy_trace(Data):
@@ -300,7 +304,7 @@ class Lecroy_trace(Data):
         if increment : dataset = __increment__(dataset, '', hdf.keys(), ndigits)
         if dataset in hdf: del hdf['{0}'.format(dataset)]
         ds = hdf.create_dataset(dataset, data=self.wave, **kwargs)
-        for k,v in attrs.iteritems() :
+        for k,v in attrs.items() :
             ds.attrs[k] = v
         hdf.flush()
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
