@@ -22,7 +22,7 @@ class LecroyScope:
     __inst_type__ ='scope'
     __inst_id__ = 'Lecroy Oscilloscope'
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
+        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
         self.lastvar = None
         self.__class__.__call__ = self.__class__.fetch
 

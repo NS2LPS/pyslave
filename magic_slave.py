@@ -349,7 +349,7 @@ def call(filename, local_ns):
     with open(filename,'r')as f:
         logger.info('Creating script {0} :\n'.format(filename)+f.read())
     glob = globals()    
-    glob.update({ k:v for k,v in local_ns.items() if not k.startswith('__')})
+    glob.update({ k:v for k,v in local_ns.items() if not k.startswith('_')})
     locals = dict()
     exec(code, glob, locals)
     local_ns.update(locals)
@@ -392,7 +392,7 @@ def script_monitor(thread):
         if thread.stopflag : break""".format(args[0] if '(' in args[0] else args[0] + '()',
                                              args[1] if len(args)>1 else 1)
     glob = globals() 
-    glob.update(local_ns)
+    glob.update({ k:v for k,v in local_ns.items() if not k.startswith('_')})
     locals = dict()
     exec(script, glob, locals)
     local_ns.update(locals)
@@ -465,7 +465,7 @@ def script_measure(thread):
         measure_out.save("{filename}")
         """.format(**measure_parameters)
     glob = globals() 
-    glob.update(local_ns)
+    glob.update({ k:v for k,v in local_ns.items() if not k.startswith('_')})
     locals = dict()
     exec(script, glob, locals)
     local_ns.update(locals)

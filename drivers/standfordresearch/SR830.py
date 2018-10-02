@@ -27,7 +27,7 @@ class SR830:
     __inst_id__ = 'Stanford_Research_Systems SR830'
     __inst_type__ = 'lockin'
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
+        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
         self.write('OUTX 1') # Set the device responce port to GPIB
         self.__class__.__call__ = self.__class__.outp
 

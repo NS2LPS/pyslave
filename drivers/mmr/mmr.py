@@ -36,7 +36,7 @@ class mgc3:
     def send(self, msg):
         sock = socket.socket(socket.AF_INET,    # Internet
                              socket.SOCK_DGRAM) # UDP
-        sock.sendto(msg, self.address)
+        sock.sendto(msg.encode(), self.address)
 
     def set(self, n,v):
         if type(v) is str: v = "\"{0}\"".format(v)
@@ -44,9 +44,9 @@ class mgc3:
         self.send("MGC3SET {0} {1}".format(n,v))
 
     def setpoint_MC(self, TmK):
-        self.mgc3set(2, TmK*1e-3)
+        self.set(2, TmK*1e-3)
 
     def setpoint_Still(self, TmK):
-        self.mgc3set(14, TmK*1e-3)
+        self.set(14, TmK*1e-3)
     
         

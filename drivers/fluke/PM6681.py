@@ -16,7 +16,7 @@ class PM6681:
     __inst_id__ = 'PHILIPS  PM6681'
     __inst_type__ = 'counter'
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
+        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
 
     def fastmode(self):
         #Set fast mode : up to ~ 1000 counts/s
@@ -54,7 +54,6 @@ class PM6681:
         res = self.instrument.read_raw()
         res = np.fromstring(res, dtype='c,c,c,>d,c')['f3']
         return res
-
 
     def write(self, str):
         self.instrument.write(str)

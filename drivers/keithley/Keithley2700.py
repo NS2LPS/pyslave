@@ -17,7 +17,7 @@ class Keithley2700:
     __inst_id__ = 'KEITHLEY INSTRUMENTS INC. MODEL 2700'
     __inst_type__ = dmm
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
+        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
         self.__class__.__call__ = self.__class__.read
 
     def read(self):

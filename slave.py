@@ -90,7 +90,7 @@ class SlaveWindow(QtWidgets.QMainWindow):
         self.thread.stopflag = True
         self.thread.pauseflag = False
         self.display('Aborting...', echo=echo, log=True)
-        self.display('Try Killing if script does not finish.', echo=False, log=True)
+        self.display('Try Killing if script does not finish.', echo=echo, log=True)
 
     @QtCore.pyqtSlot()
     def on_pushButton_Kill_clicked(self, echo=False):
