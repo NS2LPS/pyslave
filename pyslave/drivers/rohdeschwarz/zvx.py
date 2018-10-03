@@ -1,6 +1,6 @@
 import numpy as np
 import time
-from pyslave.data import Sij
+from pydata import Sij
 import warnings
 
 from .__zvb__ import rszvb as dll

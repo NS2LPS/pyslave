@@ -92,30 +92,31 @@ def __open__(resource, address, name, driver, local_ns, verbose=False):
         res_name = info.resource_name
         if res_name in __opened_VISA__:
             print('{0} is already opened'.format(address))
-            return
-        inst = instruments.openVISA(address, driver)
+            return None
+        inst = instruments.openVISA(address, driver, verbose)
         name = __get_name__(inst,verbose) if name is None else name
         __opened_VISA__.append(res_name)
     elif resource=='NIDAQ':
         if address in __opened_NIDAQ__:
             print('{0} is already opened'.format(address))
-        inst = instruments.openNIDAQ(address, driver)
+        inst = instruments.openNIDAQ(address, driver, verbose)
         name = __get_name__(inst,verbose) if name is None else name
         __opened_NIDAQ__.append(address)
     elif resource=='COM':
         if address in __opened_COM__:
             print('{0} is already opened'.format(address))
-            return
-        inst = instruments.openCOM(address, driver)
+            return None
+        inst = instruments.openCOM(address, driver, verbose)
         name = __get_name__(inst,verbose) if name is None else name
         __opened_COM__.append(address)
     elif resource=='Other':
-        inst = instruments.openOther(address, driver)
+        inst = instruments.openOther(address, driver, verbose)
         name = __get_name__(inst,verbose) if name is None else name
     local_ns[name] = inst
     __instruments__[name] = inst
     logger.info('Opening {0} {1} as {2} with {3} ({4})'.format(resource, address, name, inst.__driver_name__, inst.__driver_module__))
     print('{0:10s} : {1} {2}'.format(name, inst.__inst_id__, inst.__address__))
+    return inst
 
 def __get_name__(inst, verbose=False):
     prefix = inst.__inst_type__
@@ -236,6 +237,7 @@ def closeall(line, local_ns):
 def openall(line, local_ns):
     """Load all instruments listed in the pyslave.ini file."""
     config = __read_config_instruments__()
+    err = ''
     for k,v in config.items():
         if k in __instruments__:
            print('{0} is already loaded.'.format(k))
@@ -243,7 +245,8 @@ def openall(line, local_ns):
             try:
                 __open__(v['resource'],v['address'],k,v['driver'],local_ns)
             except:
-                pass
+                err = err + '{0} cannot be loaded\n'.format(k)                
+    print(err)
 
 @register_line_magic
 @needs_local_scope
@@ -302,7 +305,7 @@ def __slave_disp__(msg):
 def __replace__(line):
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause','thread.pause()')
-    line = line.replace('#abort','thread.pause();if thread.stopflag : break')
+    line = line.replace('#abort','if thread.stopflag : break')
     line = line.replace('#abort_nopause','if thread.stopflag : break')
     line = line.replace('#looptime','thread.looptime()')
     line = line.replace('#disp', 'thread.display')
@@ -325,12 +328,8 @@ def __convert__(filename):
         print('', file=f)
         print('# Main script function', file=f)
         print('def __slave_script__(thread):', file=f)
-        abortflag = True
         for l in main.split('\n'):
-            if '#abort' in l : abortflag=False
             print("   ",__replace__(l), file=f)
-        if abortflag:
-            print("   ","if thread.stopflag : break", file=f)
 
 def __start_slave__(script, filename, local_ns):
     """Start Slave thread with the passed code"""

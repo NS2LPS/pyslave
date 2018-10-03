@@ -9,7 +9,7 @@ if __visa_rm__ is None:
     __visa_rm__ = visa.ResourceManager()
 
 
-from pyslave.data import Spec
+from pydata import Spec
 
 
 class fsek:

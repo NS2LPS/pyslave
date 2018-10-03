@@ -1,6 +1,6 @@
 import numpy as np
 import struct
-from pyslave.data import Lecroy_trace
+from pydata import Lecroy_trace
 
 # VISA resource manager
 try:

@@ -1,5 +1,5 @@
 """This module defines magic IPython functions to rapidly access data."""
-
+import os, time
 import configparser
 from IPython.core.magic import register_line_magic, needs_local_scope
 
@@ -45,7 +45,7 @@ def rmlast(line):
     while ans.upper()!='Y' and ans.upper()!='Q' and i<=len(l):
         last = l[-i][1]
         i += 1
-        ans = raw_input('Remove {0} ? [y/n/q] '.format(last))
+        ans = input('Remove {0} (y/n/q) ? [n] '.format(last))
         if ans.upper()=='Y':
             os.remove(last)
             print('{0} removed.'.format(last))

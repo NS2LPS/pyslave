@@ -59,7 +59,7 @@ def __open__(address, driver, resource):
             app.__address__ = ''
     return app
 
-def openVISA(address, driver=None):
+def openVISA(address, driver=None, verbose=True):
     """Open the instrument with the specified VISA address and python driver.
     The address must be a valid VISA resource or alias.
 
@@ -83,9 +83,10 @@ def openVISA(address, driver=None):
             id = id.split(',')[:2]
             id = str(' '.join(id)).strip()
         except:
-            traceback.print_exc(limit=1,file=sys.stdout)
-            print("""Identification of {0} failed, using generic VISA instrument.
-                  If the instrument is a Yoko, set the driver to 'yokogawa.yokogawa7651.yokogawa7651'.""".format(address))
+            if verbose:
+                traceback.print_exc(file=sys.stdout)
+                print("""Identification of {0} failed, using generic VISA instrument.
+                      If the instrument is a Yoko, set the driver to 'yokogawa.yokogawa7651.yokogawa7651'.""".format(address))
             id = None
         finally:
             app.close()
@@ -104,8 +105,9 @@ def openVISA(address, driver=None):
             importlib.reload(m)
             driver = getattr(m, driver_name)
         except:
-            traceback.print_exc(limit=1,file=sys.stdout)
-            print('Error while importing instrument driver {0}, using generic VISA instrument.'.format(driver))
+            if verbose:        
+                traceback.print_exc(file=sys.stdout)
+                print('Error while importing instrument driver {0}, using generic VISA instrument.'.format(driver))
             driver = __visa__rm__.open_resource
     else:
         driver = __visa__rm__.open_resource
@@ -120,7 +122,7 @@ def resetVISA():
         __visa__rm__ = visa.ResourceManager()
         
 
-def openNIDAQ(devname, driver=None):
+def openNIDAQ(devname, driver=None, verbose=True):
     """Open the NI-DAQ device with the specified name and python driver.
 
     If driver is None, the device id is queried and a matching driver
@@ -147,7 +149,7 @@ def openNIDAQ(devname, driver=None):
         raise InstrumentError('No driver for NI-DAQ device {0}.'.format(id))
     return __open__(devname, driver,'NIDAQ')
 
-def openCOM(com, driver=None):
+def openCOM(com, driver=None, verbose=True):
     """Open the COM device with the specified COM port and python driver.
 
     If driver is None, the generic com interface driver is used.
@@ -165,14 +167,15 @@ def openCOM(com, driver=None):
             importlib.reload(m)
             driver = getattr(m, driver_name)
         except:
-            traceback.print_exc(limit=1,file=sys.stdout)
-            print('Error while importing instrument driver {0}, using generic COM driver.'.format(driver))
+            if verbose:
+                traceback.print_exc(file=sys.stdout)
+                print('Error while importing instrument driver {0}, using generic COM driver.'.format(driver))
             driver = __com__.Serial
     else:
         driver = __com__.Serial
     return __open__(com, driver,'COM')
 
-def openOther(arg, driver):
+def openOther(arg, driver, verbose=True):
     """Open specific types of instruments.
 
     The function returns an instance of the driver. The first

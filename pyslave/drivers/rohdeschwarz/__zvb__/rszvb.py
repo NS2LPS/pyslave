@@ -5,7 +5,7 @@ from ctypes import *
 # Prerequisition: installed rszvb driver 32-bit
 
 # Reference to rszvb dll
-rszvbDLL = windll.rszvb_32
+rszvbDLL = windll.rszvb_64
 
 class ZVBDLLERROR(Exception):
 	pass

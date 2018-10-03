@@ -1,0 +1,26 @@
+To activate the pyslave profile:
+1) Create a Ipython profile 
+- Find the ipython directory. It should be C:\\Users\\your_name\\.ipython
+- Copy the profile-pyslave directory from pyslave\misc into the ...\.ipython directory 
+    
+2) Create custom jupyter kernel
+- Start anaconda prompt
+- Get jupyter kernel path
+    jupyter kernelspec list
+    python3 C:\Users\your_name\AppData\Local\Continuum\anaconda3\share\jupyter\kernels\python3
+ - Go to the ....\kernels folder and create a copy of the python3 folder named pyslave
+ - In the ....\kernels\pyslave folder modify the kernel.json file to 
+     {
+     "argv": [
+      "C:\\Users\\your_name\\AppData\\Local\\Continuum\\anaconda3\\python.exe",
+      "-m",
+      "ipykernel_launcher",
+      "--profile=pyslave",   <-- add this line
+      "-f",
+      "{connection_file}"
+     ],
+     "display_name": "Pyslave", <-- modify display name
+     "language": "python"
+    }
+
+3) Use the pyslave batch file to start a qt console with the pyslave profile      

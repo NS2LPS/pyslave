@@ -2,6 +2,7 @@ import os, re
 import numpy as np
 import h5py
 from collections import OrderedDict
+from .increment import *
 
 try:
     from pyslave.magic import __disp__ as disp
@@ -15,7 +16,7 @@ class DataException(Exception):
     pass
 
 
-class DataDict(dict):
+class Data(dict):
     """Base class to represent experimental data. Inherits from dict.
 
     Values stored in the object can be accessed via attributes or keys.
@@ -161,7 +162,7 @@ class DataDict(dict):
         disp(msg)
 
 
-class Sij(DataDict):
+class Sij(Data):
     """Vector network analyzer Sij data class.
 
     * Data attributes : freq, S12 (complex)
@@ -200,7 +201,7 @@ class Sij(DataDict):
                     print >>f,k,v
 
 
-class Spec(DataDict):
+class Spec(Data):
     """Spectrum Analyzer data class.
 
     * Data attributes : freq, S
@@ -239,7 +240,7 @@ class Spec(DataDict):
                     print >>f,k,v
 
 
-class Lecroy_trace(DataDict):
+class Lecroy_trace(Data):
     """Lecroy oscilloscope waveform data class.
 
     * Data attributes : horiz, vert
@@ -286,7 +287,7 @@ class Lecroy_trace(DataDict):
         dsip(msg)
 
 
-class xy(DataDict):
+class xy(Data):
     """Generic x,y data class.
 
     * Data Attributes : x, y
