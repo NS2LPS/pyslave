@@ -1,6 +1,6 @@
 """This module defines magic IPython functions to run pyslave from the IPython shell."""
 
-import time, os, re, logging, inspect, logging.handlers, sys
+import time, os, logging, inspect, logging.handlers, sys
 from collections import OrderedDict
 import configparser
 import traceback
