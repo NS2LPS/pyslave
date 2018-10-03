@@ -302,7 +302,7 @@ def h5todata(h5_dataset):
     Example:
     f = h5py.File('myfile.h5')
     mydata = h5todata(f['data0000'])
-    print mydata
+    print(mydata)
     """
     res = Data( [ (n, np.array(h5_dataset[n])) for n in h5_dataset.dtype.names] )
     res.update(dict(h5_dataset.attrs))

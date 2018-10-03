@@ -245,7 +245,7 @@ def openall(line, local_ns):
             try:
                 __open__(v['resource'],v['address'],k,v['driver'],local_ns)
             except:
-                err = err + '{0} cannot be loaded\n'.format(k)                
+                err = err + '{0} cannot be loaded\n'.format(k)
     print(err)
 
 @register_line_magic
@@ -303,9 +303,14 @@ def __slave_disp__(msg):
 
 
 def __replace__(line):
+    line = line.expandtabs(4)
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause','thread.pause()')
-    line = line.replace('#abort','if thread.stopflag : break')
+    if '#abort' in line:
+        ls = line.lstrip()
+        ns = (len(line)-len(ls))*' '
+        line = '{0}thread.pause()\n{0}if thread.stopflag : break'.format(ns)
+        return line
     line = line.replace('#abort_nopause','if thread.stopflag : break')
     line = line.replace('#looptime','thread.looptime()')
     line = line.replace('#disp', 'thread.display')
