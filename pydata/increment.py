@@ -1,3 +1,5 @@
+import re, os
+
 def __increment__(base, ext, previous, ndigits):
     rec = re.compile(base+'[0-9]*'+ext)
     index = [p[len(base):] for p in previous if rec.match(p)]

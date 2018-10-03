@@ -2,14 +2,13 @@ import os, re
 import numpy as np
 import h5py
 from collections import OrderedDict
-from .increment import *
 
 try:
     from pyslave.magic import __disp__ as disp
 except:
     disp = print
 
-from .increment import increment_file
+from .increment import increment_file, __increment__
 
 # Error class
 class DataException(Exception):
