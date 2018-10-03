@@ -6,7 +6,6 @@ import configparser
 import traceback
 from matplotlib.pyplot import figure
 from IPython.core.magic import register_line_magic, needs_local_scope
-from IPython.lib.guisupport import is_event_loop_running_qt4
 from pyslave import instruments
 from pyslave.slave import SlaveWindow
 
@@ -287,11 +286,7 @@ class SlaveError(Exception):
 
 
 # Slave window variable
-if is_event_loop_running_qt4():
-    __slave__ = SlaveWindow()
-else:
-    __slave__ = None
-
+__slave__ = None
 
 def __slave_disp__(msg):
     logger.info(msg)
@@ -307,9 +302,10 @@ def __slave_disp__(msg):
 def __replace__(line):
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause','thread.pause()')
-    line = line.replace('#abort','if thread.stopflag : break')
+    line = line.replace('#abort','thread.pause();if thread.stopflag : break')
+    line = line.replace('#abort_nopause','if thread.stopflag : break')
     line = line.replace('#looptime','thread.looptime()')
-    line = line.replace('#disp', 'thread.disp')
+    line = line.replace('#disp', 'thread.display')
     return line
 
 def __convert__(filename):
@@ -338,6 +334,7 @@ def __convert__(filename):
 
 def __start_slave__(script, filename, local_ns):
     """Start Slave thread with the passed code"""
+    global __slave__
     code = compile(script, filename, 'exec')
     glob = globals()
     for k,v in local_ns.items():
@@ -347,6 +344,8 @@ def __start_slave__(script, filename, local_ns):
     exec(code, glob, locals)
     local_ns.update(locals)
     glob.update(locals)
+    if __slave__ is None:
+        __slave__ = SlaveWindow()
     __slave__.show()
     __slave__.thread_start(__slave_script__)
     logger.info('Starting script {0} :\n{1}'.format(filename, script))
@@ -480,30 +479,36 @@ def __slave_script__(thread):
 @register_line_magic
 def pause(line):
     """Pause the running script."""
+    if __slave__ is None : return
     __slave__.on_pushButton_Pause_clicked()
     print("Pausing script...")
 
 @register_line_magic
 def resume(line):
     """Resume the paused script."""
+    if __slave__ is None : return
     __slave__.on_pushButton_Resume_clicked()
     print("Resuming script...")
 
 @register_line_magic
 def abort(line):
     """Abort the running script."""
+    if __slave__ is None : return
     __slave__.on_pushButton_Abort_clicked(echo=True)
 
 @register_line_magic
 def kill(line):
     """Kill the running script."""
+    if __slave__ is None : return
     __slave__.on_pushButton_Kill_clicked(echo=True)
 
 @register_line_magic
 def window(line):
     """Show the slave window."""
+    global __slave__
+    if __slave__ is None :
+        __slave__ = SlaveWindow()
     __slave__.show()
-
 
 @register_line_magic
 @needs_local_scope

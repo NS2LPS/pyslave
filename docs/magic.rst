@@ -3,30 +3,58 @@ IPython shell magic commands
 
 .. :module:: magic
 
-Pyslave is designed to be used in the IPython Qt console. Loading pyslave imports the "magic" functions defined in the ``magic`` module.
-These functions are designed to load instruments, launch scripts and interact with them.
+Pyslave is designed to be used in the IPython Qt console. Use
+
+**from pyslave.magic import * **
+
+to load the magic functions in IPython. These functions are designed to
+load instruments, launch scripts and interact with them. The `pyslave.ini`
+file is used to determine which instruments should be loaded.
 
 
-
-Instrument functions (shortcuts to the instruments module)
-----------------------------------------------------------
-
-**%openinst** *resource*
-
-    Load the VISA instrument at the specified resource.
+Instrument functions
+---------------------
 
 **%openall**
 
-    Load all GPIB instruments.
+    Load all instruments as defined in the `pyslave.ini` file (see below). Instruments
+    listed in the file but not plugged or not available are skipped. They
+    can be loaded later by a new call to the function.
+
+**%openinstr** *name*
+
+    Load the instrument with the specified name, COM port or VISA resource. The function
+    first looks into the 'pyslave.ini' file. If no match is found and the name contains COM,
+    the corresponding serial port is opened. Otherwise, the function tries to open the VISA
+    resource with the given name.
+
+    Examples:
+
+    opensintr dmm1
+    openinstr COM3
+    openinstr GPIB0::23
+
+**%openGPIB**
+
+    Load all GPIB devices found on the VISA interface.
 
 **%listall**
 
     List all loaded instruments.
 
-**%closeinst** *instrument_short_name*
+**%listVISA**
+
+    List all VISA resources present on the system.
+
+**%closeinstr** *instrument_short_name*
 
     Close the specified instrument.
 
+**%closeall**
+
+    Close all instruments.
+
+The pyslave.ini file
 
 Slave functions (run and interact with scripts )
 ------------------------------------------------

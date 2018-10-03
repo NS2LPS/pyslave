@@ -69,8 +69,6 @@ class SlaveWindow(QtWidgets.QMainWindow):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, False)
         self.thread = None
 
-
-
     def thread_start(self, func):
         # Setup the thread and starts it
         if self.thread is not None and self.thread.isRunning():
@@ -130,5 +128,3 @@ class SlaveWindow(QtWidgets.QMainWindow):
     def draw(self):
         draw()
         self.draw_semaphore.release()
-
-
