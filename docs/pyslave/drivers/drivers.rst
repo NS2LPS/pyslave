@@ -1,8 +1,8 @@
-Instrument Drivers
-==================
+Instrument drivers
+====================
 
 Each instrument comes with specific methods. However, calling the instrument directly should call the most useful of these methods.
-For example, directly calling a dmm will return the readout of the dmm. 
+For example, directly calling a dmm will return the readout of the dmm.
 
 .. toctree::
 
@@ -12,4 +12,3 @@ For example, directly calling a dmm will return the readout of the dmm.
     standfordresearch
     lecroy
     nidaq
-    

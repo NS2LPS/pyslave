@@ -1,7 +1,12 @@
-"""Pyslave is a package to script experiment in Python. It contains :
-* "Magic" functions to be used in the IPython shell. These functions allow to easily load instruments and launch scripts.
+"""The *pyslave* module provides function to open instruments and load them as Python objects.
+It also provides an easy way to run scripts in a seperate thread to control an experiment.
+
+The module contains :
+
+* "Magic" functions to be used in the IPython shell. These functions are shortcuts to load instruments and launch scripts.
 * A GUI to monitor the running script and interact with it.
 * Python Instrument drivers
+
 """
 
 import logging, os, logging.handlers
