@@ -1,5 +1,8 @@
-
-import PyDAQmx as ni
+try:
+    import PyDAQmx as ni
+except:
+    print("DAQmx library could not be loaded")
+    
 import ctypes
 import numpy as np
 

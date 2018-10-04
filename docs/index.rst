@@ -6,8 +6,8 @@
 Welcome to pyslave's documentation!
 ===================================
 
-The pyslave repository contains two modules *pyslave* and *pydata*. The *pyslave* module allows
-to control an experiment through Python scripts. The *pydata* module defines helper
+The pyslave repository contains two modules ``pyslave`` and ``pydata``. The ``pyslave`` module allows
+to control an experiment through Python scripts. The ``pydata`` module defines helper
 functions and classes to manipulate experimental data.
 
 
