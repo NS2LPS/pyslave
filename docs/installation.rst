@@ -60,7 +60,7 @@ Create Jupyter kernels
     }
 
 * Do the same with ``pydata``
-* Now you can start the Qt console with: ::
+* You can now start the Qt console with: ::
 
     jupyter qtconsole --kernel=pyslave
 
