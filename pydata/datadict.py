@@ -4,7 +4,7 @@ import h5py
 from collections import OrderedDict
 
 try:
-    from pyslave.magic import __disp__ as disp
+    from pyslave.magic import __slave_disp__ as disp
 except:
     disp = print
 
