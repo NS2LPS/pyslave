@@ -302,16 +302,15 @@ def __slave_disp__(msg):
             print(msg)
 
 
-def __replace__(line):
+def __replace__(line, add_pause):
     line = line.expandtabs(4)
     line = line.replace('#draw','thread.draw()')
     line = line.replace('#pause','thread.pause()')
     if '#abort' in line:
-        ls = line.lstrip()
-        ns = (len(line)-len(ls))*' '
-        line = '{0}thread.pause()\n{0}if thread.stopflag : break'.format(ns)
-        return line
-    line = line.replace('#abort_nopause','if thread.stopflag : break')
+        if add_pause and line.strip().startswith('#abort'):
+            line = line.replace('#abort','thread.pause()') + '\n' + line.replace('#abort','if thread.stopflag : break')
+        else:
+            line = line.replace('#abort','if thread.stopflag : break')
     line = line.replace('#looptime','thread.looptime()')
     line = line.replace('#disp', 'thread.display')
     return line
@@ -328,13 +327,15 @@ def __convert__(filename):
     with open(converted_script,'w') as f:
         print('# Auto generated script file',file=f)
         print('',file=f)
-        for l in header.split('\n'):
-            print(__replace__(l), file=f)
+        # Put back header
+        print(header, file=f)
         print('', file=f)
+        # Create script function
         print('# Main script function', file=f)
         print('def __slave_script__(thread):', file=f)
+        add_pause = '#pause' in main
         for l in main.split('\n'):
-            print("   ",__replace__(l), file=f)
+            print("   ",__replace__(l, add_pause), file=f)
 
 def __start_slave__(script, filename, local_ns):
     """Start Slave thread with the passed code"""
