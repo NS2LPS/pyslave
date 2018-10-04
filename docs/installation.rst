@@ -1,14 +1,16 @@
 Installing the pyslave package
 ================================
 
-We suppose that you are using the anaconda python 3 distribution.
-To install the package, enter one of the following set of commands in the conda prompt.
+The minimal environment required to run ``pyslave`` is a ``IPython`` installation, including ``numpy``, ``h5py``, ``matplotlib`` and ``pyqt5``.
+To interact with instruments, more packages are needed such as ``PyVISA``, ``PyDAQMx``, ``pyserial``.
+
+To install the package, use one of the following set of commands in a prompt (e.g. conda prompt).
 
 * Install and forget: ::
 
     pip install git+https://github.com/NS2LPS/pyslave
 
-* Install to interact with the code
+* Install and interact with the code
   First clone the github repository to a folder: ::
 
     git clone https://github.com/NS2LPS/pyslave
@@ -18,7 +20,8 @@ To install the package, enter one of the following set of commands in the conda 
     pip install -e ./pyslave
 
 
-Setting up ``pyslave`` and ``pydata`` environment
+
+Setting up ``pyslave and ``pydata`` environment
 ---------------------------------------------------
 Create IPython profiles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -28,20 +31,20 @@ Create IPython profiles
     import pyslave
     print(pyslave.__file__)
 
-* Locate the ipython directory. It should be ``C:\\Users\\your_name\\.ipython`` or ``~/.ipython``
+* Locate the ``.ipython`` directory. It should be ``C:\\Users\\your_name\\.ipython`` or ``~/.ipython``
 * Copy the ``profile-pyslave`` directory from ``pyslave\misc`` into the ``.ipython`` directory
 * Copy the ``profile-pydata`` directory from ``pydata\misc`` into the ``.ipython`` directory
 
 
 Create Jupyter kernels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-* From the conda prompt, get the Jupyter kernel path
+* From the prompt, get the Jupyter kernel path
 
     >>> jupyter kernelspec list
     python3 C:\Users\your_name\AppData\Local\Continuum\anaconda3\share\jupyter\kernels\python3
 
 * Go to the ``kernels`` folder and create a copy of the ``python3`` folder named ``pyslave``.
-  In the ``kernels\pyslave`` folder modify the kernel.json file to: ::
+  In the ``kernels\pyslave`` folder modify the ``kernel.json`` file to: ::
 
      {
      "argv": [
@@ -57,8 +60,10 @@ Create Jupyter kernels
     }
 
 * Do the same with ``pydata``
-* Now you can start the Jupyter console with: ::
+* Now you can start the Qt console with: ::
 
     jupyter qtconsole --kernel=pyslave
 
-* You can adapt the batch files located in the ``pyslave`` and ``pydata`` folder to your installation
+* If you start a Jupyter notebook server, you should see the two new kernels in the drop list to create a new notebook.
+
+* You can adapt the windows batch files located in the ``pyslave`` and ``pydata`` folder to your installation.
