@@ -21,7 +21,7 @@ To install the package, use one of the following set of commands in a prompt (e.
 
 
 
-Setting up ``pyslave and ``pydata`` environment
+Setting up ``pyslave`` and ``pydata`` environment
 ---------------------------------------------------
 Create IPython profiles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
