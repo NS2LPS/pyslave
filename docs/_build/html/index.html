@@ -1,33 +1,23 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
-    <title>Welcome to pyslave’s documentation! &mdash; pyslave 0.9 documentation</title>
-    
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <title>Welcome to pyslave’s documentation! &#8212; pyslave 2.0.0 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.9',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
-      };
-    </script>
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="pyslave 0.9 documentation" href="#" />
-    <link rel="next" title="IPython shell magic commands" href="magic.html" /> 
-  </head>
-  <body>
-    <div class="related">
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installing the pyslave package" href="installation.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -37,54 +27,43 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="magic.html" title="IPython shell magic commands"
+          <a href="installation.html" title="Installing the pyslave package"
              accesskey="N">next</a> |</li>
-        <li><a href="#">pyslave 0.9 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pyslave 2.0.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
-  <div class="section" id="module-pyslave">
-<span id="welcome-to-pyslave-s-documentation"></span><h1>Welcome to pyslave&#8217;s documentation!<a class="headerlink" href="#module-pyslave" title="Permalink to this headline">¶</a></h1>
-<p>Pyslave is a package to script experiment in Python. It contains :</p>
-<ul class="simple">
-<li>&#8220;Magic&#8221; functions to be used in the IPython shell. These functions allow to easily load instruments and launch scripts.</li>
-<li>A GUI to monitor the running script and interact with it.</li>
-<li>Python Instrument drivers</li>
-</ul>
-<p>To load pyslave :</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">pyslave</span> <span class="kn">import</span> <span class="o">*</span>
-</pre></div>
-</div>
+  <div class="section" id="welcome-to-pyslave-s-documentation">
+<h1>Welcome to pyslave’s documentation!<a class="headerlink" href="#welcome-to-pyslave-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The pyslave repository contains two modules <em>pyslave</em> and <em>pydata</em>. The <em>pyslave</em> module allows
+to control an experiment through Python scripts. The <em>pydata</em> module defines helper
+functions and classes to manipulate experimental data.</p>
 </div>
 <div class="section" id="contents">
 <h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="magic.html">IPython shell magic commands</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="magic.html#instrument-functions-shortcuts-to-the-instruments-module">Instrument functions (shortcuts to the instruments module)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="magic.html#slave-functions-run-and-interact-with-scripts">Slave functions (run and interact with scripts )</a></li>
-<li class="toctree-l2"><a class="reference internal" href="magic.html#quick-measurement-functions">Quick measurement functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="magic.html#miscellaneous-functions">Miscellaneous functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installing the pyslave package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#setting-up-pyslave-and-pydata-environment">Setting up <code class="docutils literal notranslate"><span class="pre">pyslave</span></code> and <code class="docutils literal notranslate"><span class="pre">pydata</span></code> environment</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="scripting_language.html">Scripting language</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="scripting_language.html#comments-interpreted-by-slave">Comments interpreted by slave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyslave/index.html"><code class="docutils literal notranslate"><span class="pre">pyslave</span></code> module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyslave/magic.html">IPython shell <code class="docutils literal notranslate"><span class="pre">pyslave</span></code> magic commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyslave/scripting_language.html"><code class="docutils literal notranslate"><span class="pre">pyslave</span></code> scripting language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyslave/instruments.html"><code class="docutils literal notranslate"><span class="pre">instruments</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyslave/drivers/drivers.html">Instrument drivers</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="instruments.html"><tt class="docutils literal"><span class="pre">instruments</span></tt> Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html"><tt class="docutils literal"><span class="pre">data</span></tt> Module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="drivers.html">Instrument Drivers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rohdeschwarz.html">Rohde Schwarz instrument drivers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="agilent.html">Agilent instrument drivers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="yokogawa.html">Yokogawa instrument drivers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="standfordresearch.html">Standford Research instrument drivers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lecroy.html">Lecroy instrument drivers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="nidaq.html">NI-DAQ instrument drivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pydata/index.html"><code class="docutils literal notranslate"><span class="pre">pydata</span></code> module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pydata/magic.html">IPython shell <code class="docutils literal notranslate"><span class="pre">pydata</span></code> magic commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydata/datadict.html"><code class="docutils literal notranslate"><span class="pre">datadict</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydata/h5pydata.html"><code class="docutils literal notranslate"><span class="pre">h5pydata</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pydata/increment.html"><code class="docutils literal notranslate"><span class="pre">increment</span></code> module</a></li>
 </ul>
 </li>
 </ul>
@@ -93,8 +72,8 @@
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
 </ul>
 </div>
 
@@ -102,41 +81,42 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to pyslave&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#">Welcome to pyslave’s documentation!</a></li>
 <li><a class="reference internal" href="#contents">Contents</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="magic.html"
-                        title="next chapter">IPython shell magic commands</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Installing the pyslave package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -146,14 +126,14 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="magic.html" title="IPython shell magic commands"
+          <a href="installation.html" title="Installing the pyslave package"
              >next</a> |</li>
-        <li><a href="#">pyslave 0.9 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">pyslave 2.0.0 documentation</a> &#187;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2015, Jérôme Estève.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Jérôme Estève.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
     </div>
   </body>
 </html>

@@ -104,17 +104,18 @@ class Data(dict):
     def save(self, file, **kwargs):
         """Save the data to a file in text or HDF5 format.
 
-        - Text format : used if file is a string ending in txt.
-        The optional keywords are increment=True and ndigits=4 to control
-        the behaviour of the filename autoincrement (see the save_txt method
-        for more details).
+        * Text format : used if file is a string ending in txt.
+          The optional keywords are increment=True and ndigits=4 to control
+          the behaviour of the filename autoincrement (see the save_txt method
+          for more details).
 
-        - HDF5 format : used if file is an opened HDF5 file or a string ending in h5.
-        The optional keywords are increment=True and ndigits=4 to control the
-        behaviour of the dataset autoincrement. The optional attrs=dict() will
-        be added to the dataset attributes. Extra keywords arguments will be
-        passed to the hDF5 create_dataset function (see the save_h5 method for
-        more details).
+        * HDF5 format : used if file is an opened HDF5 file or a string ending in h5.
+          The optional keywords are increment=True and ndigits=4 to control the
+          behaviour of the dataset autoincrement. The optional attrs=dict() will
+          be added to the dataset attributes. Extra keywords arguments will be
+          passed to the hDF5 create_dataset function (see the save_h5 method for
+          more details).
+
         """
         if type(file) is str:
             if file.endswith('txt'):
@@ -166,6 +167,7 @@ class Sij(Data):
 
     * Data attributes : freq, S12 (complex)
     * Attributes : start_frequency, stop_frequency, number_of_points, power
+
     """
     def set_data_attributes(self):
         self.__data_attributes__ = ['freq','Sij']
@@ -205,6 +207,7 @@ class Spec(Data):
 
     * Data attributes : freq, S
     * Attributes : start_frequency, stop_frequency, number_of_points
+
     """
     def set_data_attributes(self):
         self.__data_attributes__ = ['freq','S']
@@ -244,6 +247,7 @@ class Lecroy_trace(Data):
 
     * Data attributes : horiz, vert
     * Attributes : horiz_interval, horiz_offset, sweeps_per_acq, bandwidth_limit, vertical_gain, vertical_offset, vert_coupling, acq_vert_offset, probe_att
+
     """
     def set_data_attributes(self):
         self.__data_attributes__ = ['horiz','vert']
@@ -298,10 +302,11 @@ class xy(Data):
 def h5todata(h5_dataset):
     """Create a data instance from a H5 dataset.
 
-    Example:
-    f = h5py.File('myfile.h5')
-    mydata = h5todata(f['data0000'])
-    print mydata
+    Example::
+        f = h5py.File('myfile.h5')
+        mydata = h5todata(f['data0000'])
+        print(mydata)
+
     """
     res = Data( [ (n, np.array(h5_dataset[n])) for n in h5_dataset.dtype.names] )
     res.update(dict(h5_dataset.attrs))
@@ -311,22 +316,23 @@ def h5todata(h5_dataset):
 def createdata(*args):
     """Create an empty data instance (see the data class).
 
-    Expects string arguments that will refer to the name of the data fields. For example:
-    mydata = createdata('i', 'v', 'Rc')
+    Expects string arguments that will refer to the name of the data fields. For example::
+        mydata = createdata('i', 'v', 'Rc')
 
-    Data points can be added with the append method:
-    mydata.append(i_value, v_value, Rc_value)
+    Data points can be added with the append method::
+        mydata.append(i_value, v_value, Rc_value)
 
-    Parameters (non-data) fields are appended as dictionary (key,values) or as attributes.
-    mydata['lockin frequency'] = 77.0
-    madata.lockin_amplitude = 0.1
+    Parameters (non-data) fields are appended as dictionary (key,values) or as attributes::
+        mydata['lockin frequency'] = 77.0
+        madata.lockin_amplitude = 0.1
 
-    Data can be saved with the save method:
-    mydata.save('mydata.txt')
+    Data can be saved with the save method:::
+        mydata.save('mydata.txt')
 
-    Data can be plotted with the plot method:
-    fig, ax = subplots()
-    mydata.plot(ax)
+    Data can be plotted with the plot method:::
+        fig, ax = subplots()
+        mydata.plot(ax)
+        
     """
     res = Data([(k, np.empty(0)) for k in args])
     return res

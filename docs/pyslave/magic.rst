@@ -1,23 +1,21 @@
-IPython shell magic commands
-============================
+IPython shell ``pyslave`` magic commands
+=========================================
 
-.. :module:: magic
+Pyslave is designed to be used in the IPython Qt console. Use: ::
 
-Pyslave is designed to be used in the IPython Qt console. Use
-
-**from pyslave.magic import * **
+    from pyslave.magic import *
 
 to load the magic functions in IPython. These functions are designed to
-load instruments, launch scripts and interact with them. The `pyslave.ini`
+load instruments, launch scripts and interact with them. The ``pyslave.ini``
 file is used to determine which instruments should be loaded.
 
 
-Instrument functions
+Loading Instruments
 ---------------------
 
 **%openall**
 
-    Load all instruments as defined in the `pyslave.ini` file (see below). Instruments
+    Load all instruments as defined in the ``pyslave.ini`` file (see below). Instruments
     listed in the file but not plugged or not available are skipped. They
     can be loaded later by a new call to the function.
 
@@ -28,11 +26,12 @@ Instrument functions
     the corresponding serial port is opened. Otherwise, the function tries to open the VISA
     resource with the given name.
 
-    Examples:
+    Examples: ::
 
-    opensintr dmm1
-    openinstr COM3
-    openinstr GPIB0::23
+        opensintr dmm1
+        openinstr COM3
+        openinstr GPIB0::23
+
 
 **%openGPIB**
 
@@ -54,9 +53,47 @@ Instrument functions
 
     Close all instruments.
 
-The pyslave.ini file
+**%resetVISA**
 
-Slave functions (run and interact with scripts )
+    Reset the VISA interface.
+
+
+The ``pyslave.ini`` file
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The file is organized in sections that gather instruments with the same interface.
+Supported section names include ``VISA``, ``NI-DAQ``, ``COM`` and ``Other`` for custom instruments.
+Each line of a section defines an instrument. The instrument definition contains
+one or two arguments. The first one corresponds to the instrument address or any other string
+that identifies the instrument. The second (optional) argument is the python driver that
+should be used to load the instrument. This argument is mandatory for NI-DAQ and custom instruments.
+The file is reloaded at each call of ``openall`` and ``openinstr``.
+
+File example::
+
+    [VISA]
+    # For remote usage, prefix the adrress with the VISA server address
+    # If driver is omitted, auto identification is attempted (slow).
+    # Auto identification fails with old style Yokogawa's power supply.
+    yoko1 = GPIB0::3::INSTR yokogawa.yokogawa7651.yokogawa7651
+    dmm1  = GPIB0::21::INSTR agilent.agilent34401A
+    gen1  = GPIB0::22::INSTR agilent.agilent33250A.agilent33250A
+    zva   = GPIB0::25::INSTR rohdeschwarz.zvx.zva
+
+    [COM]
+    # USB instruments
+    # If driver is omitted, generic serial port is used
+    motor = COM3 connex.motor.motor
+
+    [Other]
+    # Custom instruments
+    mmr3 = localhost mmr.mmr.mmr3
+    mgc3 = 192.168.0.57 mmr.mmr.mgc3
+
+
+
+
+Running Scripts
 ------------------------------------------------
 
 **%call** *filename*
@@ -73,7 +110,12 @@ Slave functions (run and interact with scripts )
 
 **%abort**
 
-    Abort the running script. If the script does not finish within 10 s, a dialog appears to eventually force the script to terminate.
+    Abort the running script. The script must contains at least one ``#abort`` statement for this command to have an effect.
+
+**%kill**
+
+    Terminate the running script by sending a kill signal. Files that are left unclosed by the script may be corrupted.
+    If the kill happens during communication with an instrument, you may have to close and reopen the instrument.
 
 **%window**
 
@@ -114,20 +156,3 @@ Quick measurement functions
     Scan one value while monitoring the output of an instrument. Just enter ``measure`` and follow the instructions. As above, parentheses can be omitted
     and will be added automatically with the specific case that the ``set_function`` will be changed to ``set_function(x)`` where ``x`` is the scanned parameter.
     Data are available in the shell using the ``measure_out`` variable.
-
-
-Miscellaneous functions
------------------------
-
-**%today**
-
-    Change directory to today's data directory, create it if it does not exist.
-    The root data directory is defined in magic.py.
-
-**%lastday**
-
-    Change directory to the last day of data.
-
-**%rmlast**
-
-    Remove the last created file in the current directory.

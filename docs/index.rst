@@ -6,33 +6,20 @@
 Welcome to pyslave's documentation!
 ===================================
 
-.. automodule:: pyslave
-
-
-Pyslave contains two modules *pyslave* and *pydata*. The *pyslave* module allows
+The pyslave repository contains two modules *pyslave* and *pydata*. The *pyslave* module allows
 to control an experiment through Python scripts. The *pydata* module defines helper
-functions and classes to manipulate experimental data:
+functions and classes to manipulate experimental data.
 
-::
-
-    from pyslave import *
 
 Contents
 ========
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-    pyslave.rst::
-    magic_pyslave.rst
-    scripting_language.rst
-    instruments.rst
-    drivers.rst
-
-    pydata.rst::
-    magic_pydata.rst
-    datadict.rst
-    increment.rst
+    installation.rst
+    pyslave/index
+    pydata/index
 
 
 Indices and tables

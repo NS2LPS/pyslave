@@ -9,7 +9,7 @@ setuptools.setup(
     packages=['pyslave','pydata'],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: MIT License",
         "Operating System :: OS Independent",
     ],
 )
