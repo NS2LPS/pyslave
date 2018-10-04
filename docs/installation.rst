@@ -9,11 +9,11 @@ To install the package, enter one of the following set of commands in the conda 
     pip install git+https://github.com/NS2LPS/pyslave
 
 * Install to interact with the code
-First clone the github repository to a folder: ::
+  First clone the github repository to a folder: ::
 
     git clone https://github.com/NS2LPS/pyslave
 
-Install the package with pip: ::
+  Install the package with pip: ::
 
     pip install -e ./pyslave
 
