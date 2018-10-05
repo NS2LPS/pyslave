@@ -20,6 +20,10 @@ class mmr3:
             socket.send(key.encode())     
             msg = socket.recv()
             res = float(msg)
+        except ValueError:
+            print("Could not convert received string to float")
+            print(msg.decode())
+            res = np.nan
         except:
             traceback.print_exc(limit=1,file=sys.stdout)
             print("Error wile reading temperature")

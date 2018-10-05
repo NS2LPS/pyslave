@@ -3,6 +3,9 @@ Agilent instrument drivers
 
 .. automodule:: pyslave.drivers.agilent
 
+.. autoclass:: pyslave.drivers.agilent.agilent33250A.agilent33250A
+    :members:
+
 .. autoclass:: ivi.agilent.agilent34401A
     :members:
     :inherited-members:

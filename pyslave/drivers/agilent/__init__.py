@@ -1,4 +1,4 @@
-"""Agilent devices are suppported via their IVI drivers. See the Python IVI documentation."""
+"""Some Agilent devices are supported via their IVI drivers. See the Python IVI documentation."""
 from ivi.agilent import agilent34401A as __agilent34401A__
 from ivi.agilent import agilentE3641A as __agilentE3641A__
 
