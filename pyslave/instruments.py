@@ -11,9 +11,9 @@ try:
     import visa
     from pyvisa import VisaIOError
     # VISA resource manager
-    __visa__rm__ = visa.ResourceManager()
+    __visa_rm__ = visa.ResourceManager()
 except:
-    __visa__rm__ = None
+    __visa_rm__ = None
 
 # Get NIDAQ module
 try:
@@ -69,14 +69,14 @@ def openVISA(address, driver=None, verbose=True):
 
     The function returns an instance of the driver class.
     """
-    if __visa__rm__ is None:
+    if __visa_rm__ is None:
         raise InstrumentError('PyVISA module not loaded')
     # Check if valid VISA identifier
-    info = __visa__rm__.resource_info(address)
+    info = __visa_rm__.resource_info(address)
     address = info.resource_name
     # Automatic driver selection
     if driver is None:
-        app = __visa__rm__.open_resource(address)
+        app = __visa_rm__.open_resource(address)
         try:
             app.clear()
             id = app.query('*IDN?')
@@ -108,18 +108,18 @@ def openVISA(address, driver=None, verbose=True):
             if verbose:        
                 traceback.print_exc(file=sys.stdout)
                 print('Error while importing instrument driver {0}, using generic VISA instrument.'.format(driver))
-            driver = __visa__rm__.open_resource
+            driver = __visa_rm__.open_resource
     else:
-        driver = __visa__rm__.open_resource
+        driver = __visa_rm__.open_resource
     return __open__(address, driver, 'VISA')
     
 def resetVISA():
     """Reset the VISA connection"""
     global __visa_rm__
     try:
-        __visa__rm__.close()
+        __visa_rm__.close()
     except:
-        __visa__rm__ = visa.ResourceManager()
+        __visa_rm__ = visa.ResourceManager()
         
 
 def openNIDAQ(devname, driver=None, verbose=True):

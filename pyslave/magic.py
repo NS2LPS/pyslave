@@ -1,6 +1,6 @@
 """This module defines magic IPython functions to run pyslave from the IPython shell."""
 
-import time, os, logging, inspect, logging.handlers, sys
+import time, os, logging, inspect, logging.handlers, sys, io
 from collections import OrderedDict
 import configparser
 import traceback
@@ -88,7 +88,7 @@ def __read_config_special__(section):
 
 def __open__(resource, address, name, driver, local_ns, verbose=False):
     if resource=='VISA':
-        info = instruments.__visa__rm__.resource_info(address)
+        info = instruments.__visa_rm__.resource_info(address)
         res_name = info.resource_name
         if res_name in __opened_VISA__:
             print('{0} is already opened'.format(address))
@@ -175,7 +175,7 @@ def openinstr(line, local_ns):
     elif 'COM' in instr_name:
         __open__('COM', instr_name, None, driver, local_ns, True)
     else:
-        rm = instruments.__visa__rm__
+        rm = instruments.__visa_rm__
         if rm is None:
             return
         try:
@@ -252,7 +252,7 @@ def openall(line, local_ns):
 @needs_local_scope
 def openGPIB(line, local_ns):
     """Load all GPIB instruments."""
-    for address in instruments.__visa__rm__.list_resources('GPIB?*::INSTR'):
+    for address in instruments.__visa_rm__.list_resources('GPIB?*::INSTR'):
         try:
             __open__('VISA',address,None,None,local_ns)
         except:
@@ -268,7 +268,7 @@ def listall(line):
 @register_line_magic
 def listVISA(line):
     """List all available VISA instruments."""
-    for address in instruments.__visa__rm__.list_resources():
+    for address in instruments.__visa_rm__.list_resources():
         print(address)
 
 @register_line_magic
@@ -323,8 +323,7 @@ def __convert__(filename):
     if '#main' not in script:
         raise SlaveError('Could not find #main section in {0}.'.format(filename))
     header, main = [s.strip() for s in script.split('#main')]
-    converted_script = filename[:-3] + '_converted.py'
-    with open(converted_script,'w') as f:
+    with io.StringIO() as f:
         print('# Auto generated script file',file=f)
         print('',file=f)
         # Put back header
@@ -336,6 +335,8 @@ def __convert__(filename):
         add_pause = '#pause' in main
         for l in main.split('\n'):
             print("   ",__replace__(l, add_pause), file=f)
+        output = f.getvalue()
+    return output
 
 def __start_slave__(script, filename, local_ns):
     """Start Slave thread with the passed code"""
@@ -366,16 +367,24 @@ def call(filename, local_ns):
         filename = filename + '.py'
     if not filename.endswith('_converted.py'):
         try:
-            __convert__(filename)
+            script = __convert__(filename)
         except :
             traceback.print_exc(file=sys.stdout)
             print('Error while converting {0}.'.format(filename))
             return
-        filename = filename[:-3] + '_converted.py'
-    with open(filename,'r') as f:
-        script = f.read()
+    else:
+        with open(filename,'r') as f:
+            script = f.read()
     __start_slave__(script, filename, local_ns)
 
+@register_line_magic
+def convert(filename):
+    """Convert a script and show the result in the console."""
+    if not filename.endswith('.py'):
+        filename = filename + '.py'
+    out = __convert__(filename)
+    print(out)
+    
 
 @register_line_magic
 @needs_local_scope
@@ -538,4 +547,4 @@ def capture(line, local_ns):
     else:
         print("Data are stored in capture_out. Figure is capture_fig.")
 
-del call, window, pause, resume, abort, kill, monitor, measure, capture
+del call, convert, window, pause, resume, abort, kill, monitor, measure, capture

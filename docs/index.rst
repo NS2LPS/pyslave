@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyslave's documentation!
-===================================
+Welcome to pyslave's documentation !
+=======================================
 
 The pyslave repository contains two modules ``pyslave`` and ``pydata``. The ``pyslave`` module allows
 to control an experiment through Python scripts. The ``pydata`` module defines helper
@@ -18,6 +18,7 @@ Contents
     :maxdepth: 2
 
     installation.rst
+    getting_started.rst
     pyslave/index
     pydata/index
 

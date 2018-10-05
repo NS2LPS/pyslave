@@ -99,6 +99,10 @@ Running Scripts
 **%call** *filename*
 
     Convert and launch a script. If *filename* ends with *converted* or *converted.py*, conversion is skipped.
+    
+**%convert** *filename*
+
+    For debugging purposes: show how a script is converted by ``pyslave``
 
 **%pause**
 
