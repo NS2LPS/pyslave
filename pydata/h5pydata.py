@@ -1,6 +1,6 @@
 import h5py
 import numpy as np
-from .increment import __next_index__
+from pydata.increment import __next_index__
 
 class createh5(h5py.File):
     """Create a new H5 file to save data.
@@ -10,18 +10,22 @@ class createh5(h5py.File):
         self.__data_counter__ = dict()
     def __next_dataset__(self, dataset, ndigits):
         if not dataset in self.__data_counter__ :
-            self.__data_counter__[dataset] = __next_index__(dataset,'',self.keys())
-        return dataset + str(self.__data_counter__[dataset]).zfill(ndigits)
-    def append_dataset(self, data, attrs={}, dataset='data', ndigits=4, **kwargs):
-        """Create a new dataset with autmatic increment of the name and save data to it.
+            counter = __next_index__(dataset,'',self.keys())
+        else:
+            counter = self.__data_counter__[dataset] + 1
+        return counter, dataset + str(counter).zfill(ndigits)
+    def append_data(self, data, attrs=None, dataset='data', ndigits=4, **kwargs):
+        """Create a new dataset with automatic increment of the name and save data to it.
+        N.B. : data is an instance of the pyslave.datadict.Data class
         Attributes can be added."""
-        dataset_name = self.__next_dataset__(dataset, ndigits)
-        ds = super().create_dataset(dataset_name, data=data, **kwargs)
-        for k,v in attrs.items() :
+        counter, dataset_name = self.__next_dataset__(dataset, ndigits)
+        ds = super().create_dataset(dataset_name, data=data.__data__, **kwargs)
+        attributes = data.__attributes__.copy()
+        if attrs : attributes.update(attrs)
+        self.__data_counter__[dataset] = counter
+        for k,v in attributes.items() :
             ds.attrs[k] = v
-        self.__data_counter__[dataset] += 1
         self.flush()
-
 
 class loadh5:
     """Load all datasets of a H5 file into numpy arrays.

@@ -2,14 +2,14 @@ import os, re
 import numpy as np
 import h5py
 from collections import OrderedDict
-from .h5pydata import createh5
+from pydata.h5pydata import createh5
+from pydata.increment import increment_file, __increment__
 
 try:
     from pyslave.magic import __slave_disp__ as disp
 except:
     disp = print
 
-from .increment import increment_file, __increment__
 
 # Error class
 class DataException(Exception):
@@ -82,7 +82,6 @@ class Data(dict):
             a.set_ylabel(__data_attributes__[i+1])
             a.get_xaxis().get_major_formatter().set_powerlimits((-1, 2))
             a.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
-
     def append(self, *args):
         if len(args)!=len(self.__data_attributes__):
             raise DataException('Number of arguments does not match number of data fields : ' + ' '.join(self.__data_attributes__))
@@ -130,21 +129,47 @@ class Data(dict):
             self.save_h5(file, **kwargs)
         else :
             raise TypeError('File should be a string or an opened HDF file.')
+
+    def __save_txt__(self, filename, data, attrs, increment, ndigits):
+        attributes = self.__attributes__.copy()
+        if attrs : attributes.update(attrs)
+        if increment : filename = increment_file(filename, ndigits)
+        np.savetxt(filename, data)
+        msg = 'Data saved to {0}.'.format(str(filename))
+        disp(msg)
+        if attrs:
+            with open(filename[:-4]+'_attrs.txt', 'w') as f:
+                for k,v in attrs.items():
+                    print >>f,k,v
+
     def save_txt(self, filename, attrs=None, increment=True, ndigits=4):
         """Save the data to a text file.
         If increment is True, the filename is automatically incremented and will contain a ndigits integer.
         The non data attributes are saved in a companion text file together with the extra attributes passed in attrs.
         """
-        if increment : filename = increment_file(filename, ndigits)
-        np.savetxt(filename, self.__data__)
-        msg = 'Data saved to {0}.'.format(str(filename))
+        self.__save_txt__(filename, self.__data__, attrs, increment, ndigits)
+
+    def __save_h5__(self, hdf, data, dataset, attrs, increment, ndigits, **kwargs):
+        attributes = self.__attributes__.copy()
+        if attrs : attributes.update(attrs)
+        if increment:
+            if type(hdf) is createh5 :
+                # fast
+                counter, dataset_name = hdf.__next_dataset__(dataset, ndigits)
+            else:
+                # slow
+                dataset_name = __increment__(dataset, '', hdf.keys(), ndigits)
+        if dataset_name in hdf:
+            print('WARNING : Deleting {0} in {1}'.format(dataset_name,hdf.filename))
+            del hdf['{0}'.format(dataset_name)]
+        ds = hdf.create_dataset(dataset_name, data=self.__data__, **kwargs)
+        if increment and type(hdf) is createh5 :
+            hdf.__data_counter__[dataset] += 1
+        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset_name)
         disp(msg)
-        a = self.__attributes__.copy()
-        if attrs : a.update(attrs)
-        if a:
-            with open(filename[:-4]+'_attrs.txt', 'w') as f:
-                for k,v in a.items():
-                    print >>f,k,v
+        for k,v in attributes.items() :
+            ds.attrs[k] = v
+        hdf.flush()
 
     def save_h5(self, hdf, dataset='data', attrs=None, increment=True, ndigits=4, **kwargs):
         """Save the data to a HDF5 dataset. The first parameter hdf must a HDF5 file opened for writing.
@@ -152,25 +177,8 @@ class Data(dict):
         The non data attributes are saved as HDF5 attributes together with the extra attributes passed in attrs.
         The file is flushed after the dataset is inserted.
         Optional arguments are passed to the create_dataset function (e.g. compression='gzip').
-        """        
-        a = self.__attributes__.copy()
-        if attrs : a.update(attrs)
-        if increment:
-            if type(hdf) is createh5 :
-                # fast
-                dataset = hdf.__next_dataset__(dataset, ndigits)
-            else:
-                # slow
-                dataset = __increment__(dataset, '', hdf.keys(), ndigits)
-        if dataset in hdf:
-            print('WARNING : Deleting {0} in {1}'.format(dataset,hdf.filename))
-            del hdf['{0}'.format(dataset)]
-        ds = hdf.create_dataset(dataset, data=self.__data__, **kwargs)
-        for k,v in a.items() :
-            ds.attrs[k] = v
-        hdf.flush()
-        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
-        disp(msg)
+        """
+        self.__save_h5__(hdf, self.__data__, dataset, attrs, increment, ndigits, **kwargs)
 
 
 class Sij(Data):
@@ -200,19 +208,9 @@ class Sij(Data):
         ax.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
     def save_txt(self, filename, attrs=None, increment=True, ndigits=4):
         """Save the data to a text file with three columns : freq, Sij.real, Sij.imag."""
-        if increment : filename = increment_file(filename, ndigits)
         data = self.__data__
         data = np.c_[data['freq'], data['Sij'].real, data['Sij'].imag]
-        np.savetxt(filename, data)
-        msg = 'Data saved to {0}.'.format(str(filename))
-        disp(msg)
-        a = self.__attributes__.copy()
-        if attrs : a.update(attrs)
-        if a:
-            with open(filename[:-4]+'_attrs.txt', 'w') as f:
-                for k,v in a.items():
-                    print >>f,k,v
-
+        self.__save_txt__(filename, data, attrs, increment, ndigits)
 
 class Spec(Data):
     """Spectrum Analyzer data class.
@@ -241,19 +239,9 @@ class Spec(Data):
         ax.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
     def save_txt(self, filename, attrs=None, increment=True, ndigits=4):
         """Save the data to a text file with two columns : freq, S."""
-        if increment : filename = increment_file(filename, ndigits)
         data = self.__data__
         data = np.c_[data['freq'], data['S']]
-        np.savetxt(filename, data)
-        msg = 'Data saved to {0}.'.format(str(filename))
-        disp(msg)
-        a = self.__attributes__.copy()
-        if attrs : a.update(attrs)
-        if a:
-            with open(filename[:-4]+'_attrs.txt', 'w') as f:
-                for k,v in a.items():
-                    print >>f,k,v
-
+        self.__save_txt__(filename, data, attrs, increment, ndigits)
 
 class Lecroy_trace(Data):
     """Lecroy oscilloscope waveform data class.
@@ -292,16 +280,7 @@ class Lecroy_trace(Data):
 
     def save_h5(self, hdf, dataset='data', attrs=None, increment=True, ndigits=4, **kwargs):
         """Save data in 8 bit mode."""
-        a = self.__attributes__.copy()
-        if attrs : a.update(attrs)
-        if increment : dataset = __increment__(dataset, '', hdf.keys(), ndigits)
-        if dataset in hdf: del hdf['{0}'.format(dataset)]
-        ds = hdf.create_dataset(dataset, data=self.wave, **kwargs)
-        for k,v in a.items() :
-            ds.attrs[k] = v
-        hdf.flush()
-        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset)
-        disp(msg)
+        self.__save_h5__(hdf, self.wave, dataset, attrs, increment, ndigits, **kwargs)
 
 
 class xy(Data):
@@ -346,7 +325,7 @@ def createdata(*args):
     Data can be plotted with the plot method:::
         fig, ax = subplots()
         mydata.plot(ax)
-        
+
     """
     res = Data([(k, np.empty(0)) for k in args])
     return res

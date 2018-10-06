@@ -1,0 +1,8 @@
+[
+  "test/pydata/test_datadict.py::test_Data",
+  "test/pydata/test_datadict.py::test_h5todata",
+  "test/pydata/test_h5pydata.py::test_createh5",
+  "test/pydata/test_h5pydata.py::test_loadh5",
+  "test/pydata/test_increment.py::test__next_index__",
+  "test/pydata/test_increment.py::test_increment_file"
+]

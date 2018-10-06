@@ -1,0 +1,6 @@
+{
+  "test/pydata /test_datadict.py": true,
+  "test/pydata /test_h5pydata.py": true,
+  "test/pydata /test_increment.py::test__next_index__": true,
+  "test/pydata /test_increment.py::test_increment_file": true
+}

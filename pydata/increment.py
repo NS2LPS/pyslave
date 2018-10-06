@@ -1,13 +1,13 @@
 import re, os
 
 def __next_index__(base,ext,previous):
-    rec = re.compile(base+'[0-9]*'+ext)
+    rec = re.compile('^'+base+'[0-9]+'+ext+'$')
     index = [p[len(base):] for p in previous if rec.match(p)]
     if ext : index = [ p[:-len(ext)] for p in index]
     index = [ int(p) for p in index]
     counter = max(index)+1 if index else 0
     return counter
-    
+
 def __increment__(base, ext, previous, ndigits):
     counter = __next_index__(base,ext,previous)
     return base + str(counter).zfill(ndigits) + ext

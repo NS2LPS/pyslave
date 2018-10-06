@@ -5,6 +5,6 @@ It contains :
 * Helper functions and classes to create datasets and store them in text or H5 format
 """
 
-from .datadict import Data, xy, Sij, Spec, Lecroy_trace, createdata, h5todata
-from .increment import increment_file
-from .h5pydata import loadh5, createh5
+from pydata.datadict import Data, xy, Sij, Spec, Lecroy_trace, createdata, h5todata
+from pydata.increment import increment_file
+from pydata.h5pydata import loadh5, createh5
