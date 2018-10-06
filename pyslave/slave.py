@@ -87,24 +87,26 @@ class SlaveWindow(QtWidgets.QMainWindow):
         if self.thread is None : return
         self.thread.stopflag = True
         self.thread.pauseflag = False
-        self.display('Aborting...', echo=echo, log=True)
+        self.display('Aborting script...', echo=echo, log=True)
         self.display('Use %kill if script does not finish.', echo=echo, log=True)
 
     @QtCore.pyqtSlot()
     def on_pushButton_Kill_clicked(self, echo=False):
         if self.thread is None : return
         self.thread.terminate()
-        self.display('Killing...', echo=echo, log=True)
+        self.display('Killing script...', echo=echo, log=True)
 
     @QtCore.pyqtSlot()
-    def on_pushButton_Pause_clicked(self):
+    def on_pushButton_Pause_clicked(self, echo=False):
         if self.thread is None : return
         self.thread.pauseflag = True
+        self.display('Pausing script...', echo=echo, log=False)
 
     @QtCore.pyqtSlot()
     def on_pushButton_Resume_clicked(self):
         if self.thread is None : return
         self.thread.pauseflag = False
+        self.display('Resuming script...', echo=echo, log=False)
 
     def display(self, text, echo=False, log=False):
         self.ui.textEdit.append(text)

@@ -332,7 +332,7 @@ def __convert__(filename):
         # Create script function
         print('# Main script function', file=f)
         print('def __slave_script__(thread):', file=f)
-        add_pause = '#pause' in main
+        add_pause = '#pause' not in main
         for l in main.split('\n'):
             print("   ",__replace__(l, add_pause), file=f)
         output = f.getvalue()
@@ -494,15 +494,13 @@ def __slave_script__(thread):
 def pause(line):
     """Pause the running script."""
     if __slave__ is None : return
-    __slave__.on_pushButton_Pause_clicked()
-    print("Pausing script...")
+    __slave__.on_pushButton_Pause_clicked(echo=True)
 
 @register_line_magic
 def resume(line):
     """Resume the paused script."""
     if __slave__ is None : return
-    __slave__.on_pushButton_Resume_clicked()
-    print("Resuming script...")
+    __slave__.on_pushButton_Resume_clicked(echo=True)
 
 @register_line_magic
 def abort(line):

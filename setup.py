@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="pyslave",
-    version="2.0",
+    version="2.0.1",
     author="Jerome Esteve",
     description="Experiment control with Python",
     packages=['pyslave','pydata'],

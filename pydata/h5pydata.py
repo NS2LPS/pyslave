@@ -1,19 +1,21 @@
 import h5py
 import numpy as np
+from .increment import __next_index__
 
 class createh5(h5py.File):
     """Create a new H5 file to save data.
-    If the file already exists, its content is overwritten.
     Use the append_dataset to add data to the file."""
-    def __init__(self, name, **kwargs):
-        super().__init__(name,'w',**kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.__data_counter__ = dict()
+    def __next_dataset__(self, dataset, ndigits):
+        if not dataset in self.__data_counter__ :
+            self.__data_counter__[dataset] = __next_index__(dataset,'',self.keys())
+        return dataset + str(self.__data_counter__[dataset]).zfill(ndigits)
     def append_dataset(self, data, attrs={}, dataset='data', ndigits=4, **kwargs):
         """Create a new dataset with autmatic increment of the name and save data to it.
         Attributes can be added."""
-        if not dataset in self.__data_counter__ :
-            self.__data_counter__[dataset] = 0
-        dataset_name = dataset + str(self.__data_counter__[dataset]).zfill(ndigits)
+        dataset_name = self.__next_dataset__(dataset, ndigits)
         ds = super().create_dataset(dataset_name, data=data, **kwargs)
         for k,v in attrs.items() :
             ds.attrs[k] = v
