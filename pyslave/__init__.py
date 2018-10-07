@@ -26,3 +26,18 @@ if not logger.handlers:
     logger.addHandler(fh)
 logger.info('Pyslave loaded')
 
+# Reference to slave window
+__slave__ = {'window':None}
+
+# Slave disp
+def __slave_disp__(msg):
+    logger.info(msg)
+    if __slave__['window'] is None:
+        print(msg)
+    else:
+        __slave_window__ = __slave__['window']
+        if __slave_window__.thread and __slave_window__.thread.isRunning():
+            __slave_window__.thread.display(msg, echo=False, log=False)
+        else:
+            print(msg)
+

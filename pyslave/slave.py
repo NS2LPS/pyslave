@@ -103,7 +103,7 @@ class SlaveWindow(QtWidgets.QMainWindow):
         self.display('Pausing script...', echo=echo, log=False)
 
     @QtCore.pyqtSlot()
-    def on_pushButton_Resume_clicked(self):
+    def on_pushButton_Resume_clicked(self, echo=False):
         if self.thread is None : return
         self.thread.pauseflag = False
         self.display('Resuming script...', echo=echo, log=False)

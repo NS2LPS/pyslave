@@ -1,7 +1,8 @@
 import re, os
 
 def __next_index__(base,ext,previous):
-    rec = re.compile('^'+base+'[0-9]+'+ext+'$')
+    s = r'^{0}[0-9]+{1}$'.format(re.escape(base),re.escape(ext))
+    rec = re.compile(s)
     index = [p[len(base):] for p in previous if rec.match(p)]
     if ext : index = [ p[:-len(ext)] for p in index]
     index = [ int(p) for p in index]

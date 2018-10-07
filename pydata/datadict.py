@@ -6,7 +6,7 @@ from pydata.h5pydata import createh5
 from pydata.increment import increment_file, __increment__
 
 try:
-    from pyslave.magic import __slave_disp__ as disp
+    from pyslave import __slave_disp__ as disp
 except:
     disp = print
 
