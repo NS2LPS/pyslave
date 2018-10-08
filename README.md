@@ -21,7 +21,7 @@ Installation
 
   Install the package with pip: 
   
-    ``pip install -e ./pyslave
+    ``pip install -e ./pyslave``
     
 * Read the docs at https://pyslave.readthedocs.io/en/latest/
 
