@@ -19,8 +19,9 @@ logger.setLevel(logging.DEBUG)
 logger.propagate = 0
 # Create file handler
 if not logger.handlers:
-    logfile = os.path.normpath(os.path.join(os.path.dirname(__file__), 'log/pyslave.log'))
-    fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight', delay=True)
+    counter = os.getenv('SLAVE_ID',0)
+    logfile = os.path.normpath(os.path.join(os.path.dirname(__file__), 'log/pyslave_{0}.log'.format(counter)))
+    fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight')
     fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     fh.setLevel(logging.DEBUG)
     logger.addHandler(fh)
@@ -40,4 +41,3 @@ def __slave_disp__(msg):
             __slave_window__.thread.display(msg, echo=False, log=False)
         else:
             print(msg)
-
