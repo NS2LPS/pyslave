@@ -1,7 +1,7 @@
 """The instruments module contains functions to open and close VISA, NI-DAQ or COM instruments.
 """
 
-import traceback, importlib, pkgutil, os, sys
+import traceback, importlib, pkgutil, os, sys, time
 import pyslave.drivers
 
 class InstrumentError(Exception):
@@ -12,7 +12,17 @@ try:
     import visa
     from pyvisa import VisaIOError
     # VISA resource manager
-    __visa_rm__ = visa.ResourceManager()
+    class __ResourceManager__(visa.ResourceManager):
+        def check_if_exists(self, query):
+            """Check if an instrument is connected to the VISA interface.
+           The list of connected instruments is update every 60s. 
+            """
+            if time.time()-self.time > 60:
+                self.__list_resources_cached__ = self.list_resources()
+            return query in self.__list_resources_cached__            
+    __visa_rm__ = __ResourceManager__()
+    __visa_rm__.time = time.time()
+    __visa_rm__.__list_resources_cached__ = __visa_rm__.list_resources()
 except:
     __visa_rm__ = None
 
@@ -75,7 +85,7 @@ def openVISA(address, driver=None, verbose=True):
     # Check if valid VISA identifier
     info = __visa_rm__.resource_info(address)
     address = info.resource_name
-    if not __visa_rm__.list_resources(address):
+    if not __visa_rm__.check_if_exists(address):
         raise InstrumentError('{0} is not an available VISA resource on the system.'.format(address))
     # Automatic driver selection
     if driver is None:
