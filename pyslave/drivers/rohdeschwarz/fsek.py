@@ -19,7 +19,7 @@ class fsek:
     __inst_type__ = 'spectro'
     __inst_id__ = 'Rohde&Schwarz FSEK 30'
     def __init__(self, resource, *args, **kwargs):
-        self.instrument = visa_rm.open_resource(resource, *args, **kwargs)
+        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
         self.__class__.__call__ = self.__class__.fetch
     def fetch(self, channel=1):
         """Fetch the trace from the specified channel and return it as a Sij data object."""

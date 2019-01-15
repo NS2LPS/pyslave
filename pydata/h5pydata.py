@@ -2,12 +2,20 @@ import h5py
 import numpy as np
 from pydata.increment import __next_index__
 
+
+try:
+    from pyslave import __slave_disp__ as disp
+except:
+    disp = print
+
+    
 class createh5(h5py.File):
     """Create a new H5 file to save data.
     Use the append_dataset to add data to the file."""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__data_counter__ = dict()
+        self.fname = args[0]
     def __next_dataset__(self, dataset, ndigits):
         if not dataset in self.__data_counter__ :
             counter = __next_index__(dataset,'',self.keys())
@@ -26,6 +34,8 @@ class createh5(h5py.File):
         for k,v in attributes.items() :
             ds.attrs[k] = v
         self.flush()
+        msg = 'Data saved to {0} in dataset {1}.'.format(self.fname, dataset_name)
+        disp(msg)
 
 class loadh5:
     """Load all datasets of a H5 file into numpy arrays.

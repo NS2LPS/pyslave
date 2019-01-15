@@ -1,6 +1,6 @@
 import numpy as np
 import time
-from pydata import Sij
+from pydata import Sij, Data
 import warnings
 
 from .__zvb__ import rszvb as dll
@@ -29,6 +29,14 @@ class zva:
         if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
         if refresh_parameters : self.refresh_parameters(channel)
         return Sij( Sij = data[:,0] + 1j*data[:,1], **self.__acquisition_parameters__ )
+    def fetch_cw(self, channel=1, refresh_parameters=True):
+        """Fetch the trace from the specified channel and return it as a data object."""
+        n = self.GetSweepNumberOfPoints(channel)
+        data = np.empty((n, 2), np.float64)
+        r = self.TraceResponseData(channel,0,data)
+        if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
+        if refresh_parameters : self.refresh_parameters_cw(channel)
+        return Data( Sij = data[:,0] + 1j*data[:,1], **self.__acquisition_parameters__ )        
     def fetch_raw(self, channel=1):
         """Fetch the trace from the specified channel and return it as a complex array."""
         n = self.GetSweepNumberOfPoints(channel)
@@ -55,10 +63,22 @@ class zva:
         stop = self.GetStopFrequency(channel)
         npoints = self.GetSweepNumberOfPoints(channel)
         power = self.GetPower(channel)
-        return dict( start_frequency = start, stop_frequency = stop, number_of_points = npoints, power = power)
+        rbw = self.GetMeasBandwidth(channel)
+        return dict( start_frequency = start, stop_frequency = stop, number_of_points = npoints, power = power, rbw = rbw )
+    def acquisition_parameters_cw(self, channel = 1):
+        """Return the acquisition parameters for the specified channel."""
+        npoints = self.GetSweepNumberOfPoints(channel)
+        power = self.GetPower(channel)
+        rbw = self.GetMeasBandwidth(channel)
+        sweeptime = self.GetSweepTime(channel)
+        freq = self.GetCWFrequency(channel)
+        return dict( number_of_points = npoints, power = power, rbw=rbw, sweeptime=sweeptime, freq=freq)
     def refresh_parameters(self, channel = 1):
         """Refresh the acquisition paramters and store them"""
         self.__acquisition_parameters__ = self.acquisition_parameters(channel)
+    def refresh_parameters_cw(self, channel = 1):
+        """Refresh the acquisition paramters and store them"""
+        self.__acquisition_parameters__ = self.acquisition_parameters_cw(channel)
     def __del__(self):
         try:
             self.close()
