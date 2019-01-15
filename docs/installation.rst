@@ -10,7 +10,8 @@ To install the package, use one of the following set of commands in a prompt (e.
 
     pip install git+https://github.com/NS2LPS/pyslave
 
-* Install and interact with the code
+* Install and interact with the code:
+
   First clone the github repository to a folder: ::
 
     git clone https://github.com/NS2LPS/pyslave

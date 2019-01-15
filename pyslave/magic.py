@@ -153,10 +153,10 @@ def openinstr(line, local_ns):
         # Open by name
         openinstr dmm1
         # Open by address or alias
-        openinstr TCPIP::192.168.0.81
+        openinstr TCPIP::192.168.0.81::INSTR
         openinstr ZND
-        openinstr GPIB0::22
-        openinstr GPIB0::22 yokogawa.yogogawa7651.yokogawa7651
+        openinstr GPIB0::22::INSTR
+        openinstr GPIB0::22::INSTR yokogawa.yogogawa7651.yokogawa7651
     """
     args = __arg_split__(line)
     instr_name = args[0]
@@ -178,10 +178,11 @@ def openinstr(line, local_ns):
     else:
         rm = instruments.__visa_rm__
         if rm is None:
+            print('VISA interface not loaded')
             return
         try:
-            info = rm.resource_info(instr_name)
-            res = info.resource_name
+            info = rm.list_resources(instr_name)
+            assert len(info)==1
         except:
             print('{0} is not a known instrument, COM port or VISA resource.'.format(instr_name))
             return

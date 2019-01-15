@@ -30,7 +30,7 @@ Loading Instruments
 
         opensintr dmm1
         openinstr COM3
-        openinstr GPIB0::23
+        openinstr GPIB0::23::INSTR
 
 
 **%openGPIB**
