@@ -2,6 +2,7 @@
 """
 
 import traceback, importlib, pkgutil, os, sys
+import pyslave.drivers
 
 class InstrumentError(Exception):
     pass
@@ -74,6 +75,8 @@ def openVISA(address, driver=None, verbose=True):
     # Check if valid VISA identifier
     info = __visa_rm__.resource_info(address)
     address = info.resource_name
+    if not __visa_rm__.list_resources(address):
+        raise InstrumentError('{0} is not an available VISA resource on the system.'.format(address))
     # Automatic driver selection
     if driver is None:
         app = __visa_rm__.open_resource(address)
@@ -105,14 +108,14 @@ def openVISA(address, driver=None, verbose=True):
             importlib.reload(m)
             driver = getattr(m, driver_name)
         except:
-            if verbose:        
+            if verbose:
                 traceback.print_exc(file=sys.stdout)
                 print('Error while importing instrument driver {0}, using generic VISA instrument.'.format(driver))
             driver = __visa_rm__.open_resource
     else:
         driver = __visa_rm__.open_resource
     return __open__(address, driver, 'VISA')
-    
+
 def resetVISA():
     """Reset the VISA connection"""
     global __visa_rm__
@@ -120,7 +123,7 @@ def resetVISA():
         __visa_rm__.close()
     except:
         __visa_rm__ = visa.ResourceManager()
-        
+
 
 def openNIDAQ(devname, driver=None, verbose=True):
     """Open the NI-DAQ device with the specified name and python driver.
