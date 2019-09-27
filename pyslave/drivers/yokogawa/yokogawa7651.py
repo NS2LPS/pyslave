@@ -57,17 +57,17 @@ class yokogawa7651:
             value = str(value)
 
         if type(value) is float:
-            if value < 10e-3:
+            if value <= 10e-3:
                 yokoRange = 2
-            elif ( value >= 10e-3 ) and ( value < 100e-3 ):
+            elif ( value > 10e-3 ) and ( value <= 100e-3 ):
                 yokoRange = 3
-            elif ( value >= 100e-3 ) and ( value < 1 ):
+            elif ( value > 100e-3 ) and ( value <= 1 ):
                 yokoRange = 4
-            elif ( value >= 1 ) and ( value < 10 ):
+            elif ( value > 1 ) and ( value <= 10 ):
                 yokoRange = 5
             else:
                 yokoRange = 6
-        elif type(value) is string :
+        elif type(value) is str :
             value = value.lower()
             valid = ['10mv','100mv','1v','10v','30v']
             if value not in valid:
@@ -92,13 +92,13 @@ class yokogawa7651:
             value = str(value)
 
         if type(value) is float:
-            if value < 1.2e-3:
+            if value <= 1.2e-3:
                 yokoRange = 4
-            elif ( value >= 1.2e-3 ) and ( value < 12e-3 ):
+            elif ( value > 1.2e-3 ) and ( value <= 12e-3 ):
                 yokoRange = 5
             else:
                 yokoRange = 6
-        elif type(value) == type(str()):
+        elif type(value) == str:
             value = value.lower()
             valid = ['1ma','10ma','100ma']
             if value not in valid:

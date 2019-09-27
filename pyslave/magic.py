@@ -176,16 +176,6 @@ def openinstr(line, local_ns):
     elif 'COM' in instr_name:
         __open__('COM', instr_name, None, driver, local_ns, True)
     else:
-        rm = instruments.__visa_rm__
-        if rm is None:
-            print('VISA interface not loaded')
-            return
-        try:
-            info = rm.list_resources(instr_name)
-            assert len(info)==1
-        except:
-            print('{0} is not a known instrument, COM port or VISA resource.'.format(instr_name))
-            return
         __open__('VISA', instr_name, None, driver, local_ns, True)
 
 

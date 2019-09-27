@@ -4,10 +4,15 @@ import numpy as np
 from pydata.increment import __next_index__
 
 
+if 'pyslave' in sys.modules :   
+    from pyslave import __slave_disp__ as disp
+else:
+    disp = print
+
     
 class createh5(h5py.File):
     """Create a new H5 file to save data.
-    Use append to add data to the file."""
+    Use the append_dataset to add data to the file."""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.__data_counter__ = dict()
@@ -20,9 +25,19 @@ class createh5(h5py.File):
         return counter, dataset + str(counter).zfill(ndigits)
     def append(self, data, **kwargs):
         """Create a new dataset with automatic increment of the name and save data to it.
-        The data object must be an instance of pyslave.Data. Attributes can be added.
-        See pyslave.Data.save for more details."""
-        data.save_h5(self,**kwargs)
+        N.B. : data is an instance of the pyslave.datadict. Data class
+        Attributes can be added."""
+        data.save_h5(self,)
+        counter, dataset_name = self.__next_dataset__(dataset, ndigits)
+        ds = super().create_dataset(dataset_name, data=data.__data__, **kwargs)
+        attributes = data.__attributes__.copy()
+        if attrs : attributes.update(attrs)
+        self.__data_counter__[dataset] = counter
+        for k,v in attributes.items() :
+            ds.attrs[k] = v
+        self.flush()
+        msg = 'Data saved to {0} in dataset {1}.'.format(self.fname, dataset_name)
+        disp(msg)
 
 class loadh5:
     """Load all datasets of a H5 file into numpy arrays.

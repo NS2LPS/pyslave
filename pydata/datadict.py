@@ -1,13 +1,13 @@
-import os, re
+import os, re, sys
 import numpy as np
 import h5py
 from collections import OrderedDict
 from pydata.h5pydata import createh5
 from pydata.increment import increment_file, __increment__
 
-try:
+if 'pyslave' in sys.modules :   
     from pyslave import __slave_disp__ as disp
-except:
+else:
     disp = print
 
 
@@ -159,12 +159,14 @@ class Data(dict):
             else:
                 # slow
                 dataset_name = __increment__(dataset, '', hdf.keys(), ndigits)
+        else:
+            dataset_name = dataset
         if dataset_name in hdf:
             print('WARNING : Deleting {0} in {1}'.format(dataset_name,hdf.filename))
             del hdf['{0}'.format(dataset_name)]
         ds = hdf.create_dataset(dataset_name, data=self.__data__, **kwargs)
         if increment and type(hdf) is createh5 :
-            hdf.__data_counter__[dataset] += 1
+            hdf.__data_counter__[dataset] = counter
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset_name)
         disp(msg)
         for k,v in attributes.items() :
