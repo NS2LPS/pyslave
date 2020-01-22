@@ -20,12 +20,17 @@ logger.propagate = 0
 # Create file handler
 if not logger.handlers:
     counter = os.getenv('SLAVE_ID',0)
-    logfile = os.path.normpath(os.path.join(os.path.dirname(__file__), 'log/pyslave_{0}.log'.format(counter)))
+    logpath = os.path.normpath(os.path.join(os.path.dirname(__file__), 'log'))
+    if not os.path.isdir(logpath):
+        os.mkdir(logpath)
+        print('Creating log directory :',logpath)
+    logfile = os.path.normpath(os.path.join(logpath, 'pyslave_{0}.log'.format(counter)))
     fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight')
     fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     fh.setLevel(logging.DEBUG)
     logger.addHandler(fh)
 logger.info('Pyslave loaded')
+print('Pyslave loaded, logging activity to',logfile)
 
 # Reference to slave window
 __slave__ = {'window':None}
