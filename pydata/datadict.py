@@ -125,7 +125,7 @@ class Data(dict):
                     self.save_h5(hdf, **kwargs)
             else:
                 raise Exception('Unknown file extension : {0}'.format(file))
-        elif type(file) is h5py._hl.files.File or type(file) is createh5:
+        elif isinstance(file,h5py.Group):
             self.save_h5(file, **kwargs)
         else :
             raise TypeError('File should be a string or an opened HDF file.')
@@ -153,7 +153,7 @@ class Data(dict):
         attributes = self.__attributes__.copy()
         if attrs : attributes.update(attrs)
         if increment:
-            if type(hdf) is createh5 :
+            if hasattr(hdf,'__next_dataset__'):
                 # fast
                 counter, dataset_name = hdf.__next_dataset__(dataset, ndigits)
             else:
@@ -162,16 +162,15 @@ class Data(dict):
         else:
             dataset_name = dataset
         if dataset_name in hdf:
-            print('WARNING : Deleting {0} in {1}'.format(dataset_name,hdf.filename))
+            print('WARNING : Deleting {0} in {1}'.format(dataset_name, str(hdf.file.filename+hdf.name)))
             del hdf['{0}'.format(dataset_name)]
         ds = hdf.create_dataset(dataset_name, data=self.__data__, **kwargs)
-        if increment and type(hdf) is createh5 :
+        if increment and hasattr(hdf,'__data_counter__') :
             hdf.__data_counter__[dataset] = counter
-        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.filename), dataset_name)
+        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.file.filename+hdf.name), dataset_name)
         disp(msg)
         for k,v in attributes.items() :
             ds.attrs[k] = v
-        hdf.flush()
 
     def save_h5(self, hdf, dataset='data', attrs=None, increment=True, ndigits=4, **kwargs):
         """Save the data to a HDF5 dataset. The first parameter hdf must a HDF5 file opened for writing.
