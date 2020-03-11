@@ -121,7 +121,7 @@ class Data(dict):
             if file.endswith('txt'):
                 self.save_txt(file, **kwargs)
             elif file.endswith('h5'):
-                with h5py.File(file, 'a') as hdf:
+                with h5py.File(file, 'a', libver='latest') as hdf:
                     self.save_h5(hdf, **kwargs)
             else:
                 raise Exception('Unknown file extension : {0}'.format(file))

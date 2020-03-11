@@ -27,7 +27,11 @@ class createh5(h5py.File, __autoiter__):
     """Create a new H5 file to save data.
     Use append to add data to the file."""
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        if not args:
+            args = ('a',)
+        params = {'libver':'latest'}
+        params.update(kwargs)
+        super().__init__(*args, **params)
         self.__data_counter__ = dict()
     def create_group(self, *args, **kwargs):
         """Create a group in the file"""
@@ -55,7 +59,7 @@ class loadh5:
         self.attr_keys = []
         self.data_keys = []
         if type(filename) is str:
-            with h5py.File(filename,'r') as hdf:
+            with h5py.File(filename,'r', libver='latest', swmr=True) as hdf:
                 self.__load__(hdf)
                 self.name = hdf.file.filename + hdf.name 
         elif isinstance(filename, h5py.Group):
