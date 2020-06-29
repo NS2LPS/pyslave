@@ -7,7 +7,7 @@ class rcdat:
     def __init__(self, url="http://192.168.0.85/"):
         self.url = url
         r1 = requests.get(url+'MN?\n')
-        r2 = requests.get(url+'SN?\n')        
+        r2 = requests.get(url+'SN?\n')   
         print (r1.text.split('=')[1],'loaded with SN',r2.text.split('=')[1])
     def getatt(self):
         """Return tha current attenuation in dB."""

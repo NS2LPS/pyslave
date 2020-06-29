@@ -164,7 +164,9 @@ class Data(dict):
         if dataset_name in hdf:
             print('WARNING : Deleting {0} in {1}'.format(dataset_name, str(hdf.file.filename+hdf.name)))
             del hdf['{0}'.format(dataset_name)]
-        ds = hdf.create_dataset(dataset_name, data=self.__data__, **kwargs)
+        opts = {'track_order' : True}
+        kwargs.update(opts)
+        ds = hdf.create_dataset(dataset_name, data=self.__data__, **opts)
         if increment and hasattr(hdf,'__data_counter__') :
             hdf.__data_counter__[dataset] = counter
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.file.filename+hdf.name), dataset_name)
