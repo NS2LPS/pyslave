@@ -23,7 +23,7 @@ class fsek:
         self.__class__.__call__ = self.__class__.fetch
         self.instrument.write('FORMAT REAL,32')
     def fetch(self, channel=1):
-        """Fetch the trace from the specified channel and return it as a Sij data object."""
+        """Fetch the trace from the specified channel and return it as a data object."""
         fstart = float(self.instrument.query('FREQ:START?'))
         fstop = float(self.instrument.query('FREQ:STOP?'))
         data = self.instrument.query_binary_values('TRAC? TRACE{0}'.format(channel))
