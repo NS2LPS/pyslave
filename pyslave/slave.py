@@ -7,6 +7,8 @@ from IPython.core.magic import register_line_magic
 import sys, traceback, time, imp, os, logging
 #from .ui.SlaveWindow import Ui_MainWindow
 from matplotlib.pyplot import draw
+from datetime import timedelta
+
 
 
 dirpath = os.path.dirname(__file__)
@@ -37,13 +39,21 @@ class ScriptThread(QtCore.QThread):
             self.draw_signal.emit()
             self.parent.draw_semaphore.acquire()
             self.parent.draw_semaphore.release()
-    def looptime(self):
+    def looptime(self, iter=None, Niter=None):
         newtime  = time.time()
-        self.display('Loop time : {0:.1f} s'.format(newtime-self.lasttime))
+        if iter is None:
+            self.display('{0:.2f}s'.format(newtime-self.lasttime))
+        else:
+            if Niter is None:
+                self.display('{0:4d}  {1:.2f}s'.format(iter, newtime-self.lasttime))
+            else:
+                tend = timedelta(seconds=int( (newtime-self.starttime)*(Niter/(iter+1) - 1) ) )  
+                self.display('{0:4d}/{3:d}  {1:.2f}s  {2}'.format(iter, newtime-self.lasttime, str(tend), Niter))
         self.lasttime = newtime
     def run(self):
         self.error = False
         self.lasttime = time.time()
+        self.starttime = self.lasttime
         try:
             self.script_function(self)
         except:

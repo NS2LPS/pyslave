@@ -41,7 +41,7 @@ class fsv:
     def fetch_raw(self, window=1, trace=1):
         """Fetch the trace from the specified window and return it as an array."""
         return self.query_binary_values(f'TRAC{window}? TRACE{trace}',container=np.array)    
-    def fetch_x(s, window=1, trace=1):
+    def fetch_x(self, window=1, trace=1):
         """Fetch the x axis of the trace from the specified window and return it as an array."""
         return self.query_binary_values(f'TRAC{window}:X? TRACE{trace}',container=np.array)    
     def acquisition_parameters(self):
@@ -52,7 +52,10 @@ class fsv:
         vbw = float(self.instrument.query('BAND:VID?'))
         count = int(self.instrument.query('SWE:COUNT?'))
         typ = self.instrument.query('SWE:TYPE?')
-        return dict( start_frequency = fstart, stop_frequency = fstop, rbw = rbw, vbw = vbw, count = count, typ = typ,  )
+        det = self.instrument.query('DET?')
+        aver = int(self.instrument.query('AVER?'))
+        unit = self.instrument.query('CALC:UNIT:POW?')        
+        return dict( start_frequency = fstart, stop_frequency = fstop, rbw = rbw, vbw = vbw, count = count, typ = typ.strip(), det=det.strip(), aver=aver, unit=unit.strip() )
     def refresh_parameters(self):
         """Refresh the acquisition paramters and store them"""
         self.__acquisition_parameters__ = self.acquisition_parameters()

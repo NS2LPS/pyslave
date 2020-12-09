@@ -418,7 +418,7 @@ class SR830:
             raise Exception('Only "x" , "y" , "r" , "theta" , "aux1" , "aux2" , "aux3" , "aux4" , "ref" , "ch1" and "ch2" are valid snapshot parameters.')
 
         result = self.query( 'SNAP? %s,%s' % (mode1,mode2) )
-        return map( float, result.split(',') )
+        return list(map( float, result.split(',') ))
 
     def outp(self, mode='x'):
         '''

@@ -35,6 +35,7 @@ class mmr3:
 class mgc3:
     __inst_id__ = 'MGC3 heater'
     def __init__(self, address):
+        """Open with mgc3 = mmr.mgc3('192.168.0.57')"""
         port = int(address.split('.')[-1])+12000
         self.address = (address, port)
     def send(self, msg):

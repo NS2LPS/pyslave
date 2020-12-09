@@ -167,12 +167,13 @@ class Data(dict):
         opts = {'track_order' : True}
         kwargs.update(opts)
         ds = hdf.create_dataset(dataset_name, data=self.__data__, **opts)
+        ds.attrs.update(attributes)
         if increment and hasattr(hdf,'__data_counter__') :
             hdf.__data_counter__[dataset] = counter
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.file.filename+hdf.name), dataset_name)
         disp(msg)
-        for k,v in attributes.items() :
-            ds.attrs[k] = v
+        #for k,v in attributes.items() :
+        #    ds.attrs[k] = v
 
     def save_h5(self, hdf, dataset='data', attrs=None, increment=True, ndigits=4, **kwargs):
         """Save the data to a HDF5 dataset. The first parameter hdf must a HDF5 file opened for writing.

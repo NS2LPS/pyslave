@@ -289,6 +289,7 @@ def __replace__(line, add_pause):
             line = line.replace('#abort','thread.pause()') + '\n    ' + line.replace('#abort','if thread.stopflag : break')
         else:
             line = line.replace('#abort','if thread.stopflag : break')
+    line = line.replace('#looptime(','thread.looptime(')     
     line = line.replace('#looptime','thread.looptime()')
     line = line.replace('#disp', 'thread.display')
     return line
@@ -319,7 +320,7 @@ def __convert__(filename):
 def __start_slave__(script, filename, local_ns):
     """Start Slave thread with the passed code"""
     global __slave_window__
-    code = compile(script, filename, 'exec')
+    code = compile(script, "Converted " + filename, 'exec')
     glob = globals()
     for k,v in local_ns.items():
         if not k.startswith('_'):
