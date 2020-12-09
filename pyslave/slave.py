@@ -23,13 +23,14 @@ logger.addHandler(logging.NullHandler())
 class ScriptThread(QtCore.QThread):
     display_signal = QtCore.pyqtSignal()
     draw_signal = QtCore.pyqtSignal()
-    def __init__(self, parent, script_function):
+    def __init__(self, parent, script_function, script_content):
         QtCore.QThread.__init__(self, parent)
         self.script_function = script_function
         self.stopflag = False
         self.pauseflag = False
         self.parent = parent
         self.message = []
+        self.script_content = script_content
     def display(self, msg, echo=False, log=False):
         self.message.append( (msg, echo, log) )
         self.display_signal.emit()
@@ -58,7 +59,16 @@ class ScriptThread(QtCore.QThread):
             self.script_function(self)
         except:
             self.error = True
-            traceback.print_exc(file=sys.stdout)
+            #traceback.print_exc(file=sys.stdout)
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            for f,l in traceback.walk_tb(exc_traceback):
+                line = l-1
+            if len(self.script_content) > line:
+                print(" Error in current script:")
+                print(self.script_content[line])
+            for s in traceback.format_exception_only(exc_type, exc_value):
+                print(s, end='')           
+
     def pause(self):
         disp = True
         while self.pauseflag :
@@ -79,12 +89,12 @@ class SlaveWindow(QtWidgets.QMainWindow):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, False)
         self.thread = None
 
-    def thread_start(self, func):
+    def thread_start(self, func, script_content=[]):
         # Setup the thread and starts it
         if self.thread is not None and self.thread.isRunning():
             print('A script is already running.')
             return
-        self.thread = ScriptThread(self, func)
+        self.thread = ScriptThread(self, func, script_content)
         self.thread.finished.connect(self.thread_finished)
         self.thread.display_signal.connect(self.thread_display)
         self.thread.draw_signal.connect(self.draw)
@@ -120,7 +130,8 @@ class SlaveWindow(QtWidgets.QMainWindow):
 
     def display(self, text, echo=False, log=False):
         self.ui.textEdit.append(text)
-        if echo : print(text)
+        if echo : 
+            print(text)
         sys.stdout.flush()
         if log : logger.info(text)
 

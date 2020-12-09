@@ -4,6 +4,7 @@ import time, os, logging, inspect, logging.handlers, sys, io
 from collections import OrderedDict
 import configparser
 import traceback
+import sys
 from matplotlib.pyplot import figure
 from IPython.core.magic import register_line_magic, needs_local_scope
 from pyslave import instruments, __slave__
@@ -300,7 +301,7 @@ def __convert__(filename):
     with open(filename,'r') as f:
         script = f.read()
     if '#main' not in script:
-        raise SlaveError('Could not find #main section in {0}.'.format(filename))
+        raise SlaveError('Could not find #main section in {0}'.format(filename))
     header, main = [s.strip() for s in script.split('#main')]
     with io.StringIO() as f:
         print('# Auto generated script file',file=f)
@@ -317,24 +318,67 @@ def __convert__(filename):
         output = f.getvalue()
     return output
 
+def __findline__(target, filename):
+    target = target.strip()
+    i = 0
+    with open(filename,'r') as f: 
+        for line in f:
+            i += 1
+            if line.strip().startswith(target):
+                msg = ["""File "{0}", line {1}\n""".format(filename, i), line]
+                break
+        else:
+            msg = None
+    return msg
+
 def __start_slave__(script, filename, local_ns):
     """Start Slave thread with the passed code"""
     global __slave_window__
-    code = compile(script, "Converted " + filename, 'exec')
+    try:
+        code = compile(script, "Converted " + filename, 'exec')
+    except:
+        print('Error while compiling {0}:'.format(filename))
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        msg = traceback.format_exception_only(exc_type, exc_value)
+        if exc_type is SyntaxError:
+            res = __findline__( msg[1], filename)
+            if res is not None:
+                msg[0] = res[0]
+            else:
+                msg = msg[1:]
+        for s in msg:
+            print(s, end='')           
+        return
     glob = globals()
     for k,v in local_ns.items():
         if not k.startswith('_'):
             glob[k]=v
     locals = dict()
-    exec(code, glob, locals)
+    try:
+        exec(code, glob, locals)
+    except:
+        print('Error while executing {0}:'.format(filename))
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        for f,l in traceback.walk_tb(exc_traceback):
+            line = l-1
+        try:
+            res = __findline__(script.splitlines()[line], filename)
+        except:
+            res = None
+        if res is not None:
+            for s in res:
+                print(s, end='')
+        for s in traceback.format_exception_only(exc_type, exc_value):
+            print(s, end='')           
+        return
     local_ns.update(locals)
     glob.update(locals)
     if __slave_window__ is None:
         __slave_window__ = SlaveWindow()
         __slave__['window'] = __slave_window__
     __slave_window__.show()
-    __slave_window__.thread_start(__slave_script__)
-    logger.info('Starting script {0} :\n{1}'.format(filename, script))
+    __slave_window__.thread_start(__slave_script__,  script.splitlines())
+    logger.info('Starting script {0}:\n{1}'.format(filename, script))
 
 
 @register_line_magic
@@ -349,8 +393,11 @@ def call(filename, local_ns):
         try:
             script = __convert__(filename)
         except :
-            traceback.print_exc(file=sys.stdout)
-            print('Error while converting {0}.'.format(filename))
+            #traceback.print_exc(file=sys.stdout)
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            print('Error while converting {0}:'.format(filename))
+            for s in traceback.format_exception_only(exc_type, exc_value):
+                print(s)           
             return
     else:
         with open(filename,'r') as f:
