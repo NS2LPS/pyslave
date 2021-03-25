@@ -9,7 +9,7 @@ if __visa_rm__ is None:
     __visa_rm__ = visa.ResourceManager()
 
 
-class agilent33250A:
+class Agilent33250A:
     """Agilent 33250A instrument driver.
     Direct call to the instrument sets the amplitude.
     """
