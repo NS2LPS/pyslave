@@ -293,6 +293,7 @@ def __replace__(line, add_pause):
     line = line.replace('#looptime(','thread.looptime(')     
     line = line.replace('#looptime','thread.looptime()')
     line = line.replace('#disp', 'thread.display')
+    line = line.replace('#live(','thread.live(')
     return line
 
 def __convert__(filename):

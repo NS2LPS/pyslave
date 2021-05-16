@@ -1,14 +1,17 @@
 """Create the GUI to handle script execution.
 The module also defines the way scripts are converted before being run."""
 
-from PyQt5 import QtCore, QtGui, Qt, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from PyQt5.uic import loadUiType
-from IPython.core.magic import register_line_magic
-import sys, traceback, time, imp, os, logging
+import sys, traceback, time, os, logging
 #from .ui.SlaveWindow import Ui_MainWindow
 from matplotlib.pyplot import draw
 from datetime import timedelta
-
+import zmq
+import json
+import msgpack
+import msgpack_numpy as m
+m.patch()
 
 
 dirpath = os.path.dirname(__file__)
@@ -23,6 +26,7 @@ logger.addHandler(logging.NullHandler())
 class ScriptThread(QtCore.QThread):
     display_signal = QtCore.pyqtSignal()
     draw_signal = QtCore.pyqtSignal()
+    live_signal = QtCore.pyqtSignal()
     def __init__(self, parent, script_function, script_content):
         QtCore.QThread.__init__(self, parent)
         self.script_function = script_function
@@ -51,10 +55,22 @@ class ScriptThread(QtCore.QThread):
                 tend = timedelta(seconds=int( (newtime-self.starttime)*(Niter/(iter+1) - 1) ) )  
                 self.display('{0:4d}/{3:d}  {1:.2f}s  {2}'.format(iter, newtime-self.lasttime, str(tend), Niter))
         self.lasttime = newtime
+    def live(self, data):
+        if not self.stopflag and self.parent.live_semaphore.tryAcquire():
+            data_array = data.__data__
+            md = dict(
+                attrs = data.__attributes__,
+                data_attrs = data.__data_attributes__
+            )
+            topic = 'data'
+            self.parent.msg = (topic.encode(), json.dumps(md).encode(), msgpack.packb(data_array))
+            self.parent.live_semaphore.release()
+            self.live_signal.emit()
     def run(self):
         self.error = False
         self.lasttime = time.time()
         self.starttime = self.lasttime
+        # Run script
         try:
             self.script_function(self)
         except:
@@ -68,7 +84,6 @@ class ScriptThread(QtCore.QThread):
                 print(self.script_content[line])
             for s in traceback.format_exception_only(exc_type, exc_value):
                 print(s, end='')           
-
     def pause(self):
         disp = True
         while self.pauseflag :
@@ -86,8 +101,14 @@ class SlaveWindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.draw_semaphore = QtCore.QSemaphore(1)
+        self.live_semaphore = QtCore.QSemaphore(1)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, False)
         self.thread = None
+        self.msg = ()
+        self.zmq_context = zmq.Context()
+        self.zmq_socket = self.zmq_context.socket(zmq.PUB)
+        port = "5556"
+        self.zmq_socket.bind("tcp://*:%s" % port) 
 
     def thread_start(self, func, script_content=[]):
         # Setup the thread and starts it
@@ -98,6 +119,7 @@ class SlaveWindow(QtWidgets.QMainWindow):
         self.thread.finished.connect(self.thread_finished)
         self.thread.display_signal.connect(self.thread_display)
         self.thread.draw_signal.connect(self.draw)
+        self.thread.live_signal.connect(self.live)
         self.thread.start()
         self.ui.textEdit.clear()
         self.display('Script is running...', echo=True, log=True)
@@ -151,3 +173,9 @@ class SlaveWindow(QtWidgets.QMainWindow):
     def draw(self):
         draw()
         self.draw_semaphore.release()
+
+    def live(self):
+        if len(self.msg):
+            self.live_semaphore.acquire()
+            self.zmq_socket.send_multipart(self.msg)
+            self.live_semaphore.release()
