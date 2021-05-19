@@ -38,19 +38,16 @@ class Data(dict):
                 for k,v in args[0].items():
                     if k in self :  raise DataException('Duplicate key {0}'.format(k))
                     self[k] = v
-                    if type(v) is np.ndarray: self.__data_attributes__.append(k)
             elif hasattr(args[0],'__iter__'):
                 for k,v in args[0]:
                     if k in self :  raise DataException('Duplicate key {0}'.format(k))
                     self[k] = v
-                    if type(v) is np.ndarray: self.__data_attributes__.append(k)
             else:
                 raise DataException('Argument should be a mapping or an iterable')
         if kwargs:
             for k,v in kwargs.items():
                 if k in self :  raise DataException('Duplicate key {0}'.format(k))
                 self[k] = v
-                if type(v) is np.ndarray: self.__data_attributes__.append(k)
         self.set_data_attributes()
         self.set_hidden_attributes()
     def set_data_attributes(self):
@@ -61,8 +58,14 @@ class Data(dict):
         return self[name]
     def __setattr__(self, name, value):
         self[name] = value
+    def __delitem__(self, key):
+        super().__delitem__(key)
+        if key in self.__data_attributes__ : self.__data_attributes__.remove(key)
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value)
+        if type(value) is np.ndarray: self.__data_attributes__.append(key)
     def __delattr__(self, name):
-        del self[name]
+        self.__delitem__(name)  
     def plot(self, fig, subplots=True, **kwargs):
         """Plot data to a figure.
         If subplots is True each data is plotted in a different subplot."""

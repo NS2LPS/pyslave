@@ -1,8 +1,6 @@
-import sys
 import h5py
 import numpy as np
 from pydata.increment import __next_index__
-import types
 
 class DataException(Exception):
     pass    
@@ -82,22 +80,42 @@ class loadh5:
                 values.append(v)
         #keys,values = zip(*sorted(zip(keys, values), key=lambda x:x[0]))
         self.length = len(keys)
-        if self.length:
-            dataset = values[0]
-            attr_keys = list(dataset.attrs.keys())
-            data_keys = dataset.dtype.names
-            # Build attribute array
-            all_attrs = { k:np.empty(self.length, dtype=type(dataset.attrs[k]) ) for k in attr_keys}
-            all_data  = { k:np.empty((self.length, len(dataset[k])), dtype=dataset[k].dtype) for k in data_keys}
-            for i,d in enumerate(values):
-                for k in attr_keys : all_attrs[k][i] = d.attrs[k]
-                for k in data_keys :  all_data[k][i] = d[k]
-            for k in attr_keys:
-                setattr(self, k, all_attrs[k])
-            for k in data_keys:
-                setattr(self, k, all_data[k])
-            self.attr_keys = attr_keys
-            self.data_keys = data_keys
+        if self.length==0:
+            return
+        # Look for all attributes and all data fields
+        attr_keys = []
+        attr_types = []
+        data_keys = []
+        data_types = []
+        data_len = []
+        for d in values:
+            for k in d.attrs.keys():
+                if k not in attr_keys:
+                    attr_keys.append(k)
+                    attr_types.append(type(d.attrs[k]))
+            for k in d.dtype.names:
+                if k not in data_keys:
+                    data_keys.append(k)
+                    data_types.append(d[k].dtype)
+                    data_len.append(len(d[k]))
+                else:
+                    i = data_keys.index(k)
+                    data_len[i] = max(data_len[i], len(d[k]))
+        # Build attributes and data array
+        all_attrs = { k: np.empty(self.length, dtype=d) for k,d in zip(attr_keys,attr_types)}
+        all_data  = { k: np.nan*np.ones((self.length, l), dtype=d) for k,d,l in zip(data_keys, data_types, data_len)}
+        for i,d in enumerate(values):
+            for k in attr_keys: 
+                all_attrs[k][i] = d.attrs.get(k,np.nan)
+            for k in data_keys: 
+                if k in d.dtype.names:
+                    all_data[k][i,:len(d[k])] = d[k]
+        for k in attr_keys:
+            setattr(self, k, all_attrs[k])
+        for k in data_keys:
+            setattr(self, k, all_data[k])
+        self.attr_keys = attr_keys
+        self.data_keys = data_keys
         # Add attributes from root node
         for k,v in f.attrs.items():
             setattr(self, k, v)
