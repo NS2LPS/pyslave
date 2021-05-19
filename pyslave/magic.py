@@ -261,7 +261,8 @@ def listall(line):
 @register_line_magic
 def listVISA(line):
     """List all available VISA instruments."""
-    for address in instruments.__visa_rm__.list_resources():
+    instruments.__visa_rm__.__update__()
+    for address in instruments.__visa_rm__.__list_resources_cached__:
         print(address)
 
 @register_line_magic
@@ -302,7 +303,7 @@ def __convert__(filename):
         script = f.read()
     if '#main' not in script:
         raise SlaveError('Could not find #main section in {0}'.format(filename))
-    header, main = [s.strip() for s in script.split('#main')]
+    header, main = [s.strip() for s in script.split('#main',maxsplit=1)]
     with io.StringIO() as f:
         print('# Auto generated script file',file=f)
         print('',file=f)
@@ -341,7 +342,7 @@ def __start_slave__(script, filename, local_ns):
         exc_type, exc_value, exc_traceback = sys.exc_info()
         msg = traceback.format_exception_only(exc_type, exc_value)
         if exc_type is SyntaxError:
-            res = __findline__( msg[1], filename)
+            res = __findline__(msg[1], filename)
             if res is not None:
                 msg[0] = res[0]
             else:
@@ -384,24 +385,18 @@ def __start_slave__(script, filename, local_ns):
 @register_line_magic
 @needs_local_scope
 def call(filename, local_ns):
-    """Convert and launch a script in slave.
-    If the filename ends with '_converted.py', the
-    file is not converted again."""
+    """Convert and launch a script in slave."""
     if not filename.endswith('.py'):
         filename = filename + '.py'
-    if not filename.endswith('_converted.py'):
-        try:
-            script = __convert__(filename)
-        except :
-            #traceback.print_exc(file=sys.stdout)
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            print('Error while converting {0}:'.format(filename))
-            for s in traceback.format_exception_only(exc_type, exc_value):
-                print(s)           
-            return
-    else:
-        with open(filename,'r') as f:
-            script = f.read()
+    try:
+        script = __convert__(filename)
+    except :
+        #traceback.print_exc(file=sys.stdout)
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        print('Error while converting {0}:'.format(filename))
+        for s in traceback.format_exception_only(exc_type, exc_value):
+            print(s)           
+        return
     __start_slave__(script, filename, local_ns)
 
 @register_line_magic

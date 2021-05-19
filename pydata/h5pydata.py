@@ -111,5 +111,5 @@ class loadh5:
             s += "Data fields : " + ', '.join(self.data_keys) + '\n'
             if self.attr_keys : s += "Attributes  : " + ', '.join(self.attr_keys) + '\n'
         if self.__groups__:
-            s += "Other groups : " + ', '.join(self.__groups__) + '\n'
+            s += "Groups : " + ', '.join(self.__groups__) + '\n'
         return s

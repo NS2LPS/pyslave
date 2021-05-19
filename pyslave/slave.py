@@ -7,7 +7,7 @@ from IPython.core.magic import register_line_magic
 import sys, traceback, time, imp, os, logging
 #from .ui.SlaveWindow import Ui_MainWindow
 from matplotlib.pyplot import draw
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 
 
@@ -48,8 +48,10 @@ class ScriptThread(QtCore.QThread):
             if Niter is None:
                 self.display('{0:4d}  {1:.2f}s'.format(iter, newtime-self.lasttime))
             else:
-                tend = timedelta(seconds=int( (newtime-self.starttime)*(Niter/(iter+1) - 1) ) )  
-                self.display('{0:4d}/{3:d}  {1:.2f}s  {2}'.format(iter, newtime-self.lasttime, str(tend), Niter))
+                deltat =  (newtime-self.starttime)*(Niter/(iter+1) - 1) 
+                tdur = timedelta(seconds=int(deltat))  
+                tend =  datetime.fromtimestamp(deltat + time.time())
+                self.display('{0:4d}/{3:d}  {1:.2f}s  {4} ({2})'.format(iter+1, newtime-self.lasttime, str(tdur), Niter, tend.strftime('%a %H:%M')))
         self.lasttime = newtime
     def run(self):
         self.error = False

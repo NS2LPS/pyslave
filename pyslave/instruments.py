@@ -13,16 +13,18 @@ try:
     from pyvisa import VisaIOError
     # VISA resource manager
     class __ResourceManager__(visa.ResourceManager):
+        def __update__(self):
+            self.__list_resources_cached__ = self.list_resources()
+            self.time = time.time()
         def check_if_exists(self, query):
             """Check if an instrument is connected to the VISA interface.
            The list of connected instruments is update every 60s. 
             """
             if time.time()-self.time > 60:
-                self.__list_resources_cached__ = self.list_resources()
+                self.__update__()
             return query in self.__list_resources_cached__            
     __visa_rm__ = __ResourceManager__()
-    __visa_rm__.time = time.time()
-    __visa_rm__.__list_resources_cached__ = __visa_rm__.list_resources()
+    __visa_rm__.__update__()
 except:
     __visa_rm__ = None
 
@@ -86,7 +88,7 @@ def openVISA(address, driver=None, verbose=True):
     info = __visa_rm__.resource_info(address)
     address = info.resource_name
     if not __visa_rm__.check_if_exists(address):
-        raise InstrumentError('{0} is not an available VISA resource on the system.'.format(address))
+        raise InstrumentError('{0} is not an available VISA resource on the system. Use listVISA to update the list if the instrument has just been connected.'.format(address))
     # Automatic driver selection
     if driver is None:
         app = __visa_rm__.open_resource(address)

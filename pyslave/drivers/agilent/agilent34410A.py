@@ -21,5 +21,20 @@ class Agilent34410A:
         self.__class__.__call__ = self.__class__.read
 
     def read(self):
+        """Acquire and return one value (blocking)"""
         res = self.instrument.query('READ?')
         return float(res)
+
+    def fetch(self):
+        """Wait for acquisition to finish and return one value (blocking)"""
+        res = self.instrument.query('FETCH?')
+        return float(res)
+
+    def init(self):
+        """Start acquiring one value (non-blocking). 
+        Use fetch to retrieve the value."""
+        self.instrument.write('INIT:IMM')
+        
+    def nplc(self, val):
+        """Set voltage averaging time in number of power line cycles (20 ms)"""
+        self.instrument.write(f'SENS:VOLT:DC:NPLC {val:d}')
