@@ -19,7 +19,7 @@ except:
     __visa_rm__ = None
 
 if __visa_rm__ is None:
-    import visa
+    import pyvisa as visa
     __visa_rm__ = visa.ResourceManager()
 
 

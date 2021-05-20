@@ -179,7 +179,7 @@ class SR830(InstrumentBase):
 
     E.g.::
 
-        import visa
+        import pyvisa as visa
         from slave.sr830 import SR830
         # create a connection with a sr830 instrument via GPIB on channel 8
         connection = visa.Instrument('GPIB::8')

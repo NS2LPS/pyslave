@@ -28,7 +28,7 @@ import io
 import sys
 
 try:
-    import visa 
+    import pyvisa as visa 
     visa_rm = visa.ResourceManager()
 except ImportError:
     # PyVISA not installed, pass it up

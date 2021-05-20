@@ -9,7 +9,7 @@ class InstrumentError(Exception):
 
 # Get VISA resource manager
 try:
-    import visa
+    import pyvisa as visa
     from pyvisa import VisaIOError
     # VISA resource manager
     class __ResourceManager__(visa.ResourceManager):
