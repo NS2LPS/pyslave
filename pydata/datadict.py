@@ -63,7 +63,7 @@ class Data(dict):
         if key in self.__data_attributes__ : self.__data_attributes__.remove(key)
     def __setitem__(self, key, value):
         super().__setitem__(key, value)
-        if type(value) is np.ndarray: self.__data_attributes__.append(key)
+        if type(value) is np.ndarray and key not in  self.__data_attributes__ : self.__data_attributes__.append(key)
     def __delattr__(self, name):
         self.__delitem__(name)  
     def plot(self, fig, subplots=True, **kwargs):

@@ -14,7 +14,7 @@ class mmr3:
         Valid keys are : 'MC Cernox', 'MC RuO2', 'Still', '4K stage', '50K stage'"""   
         try:
             socket=context.socket(zmq.REQ)
-            socket.connect("tcp://{0}:5556".format(self.address))
+            socket.connect("tcp://{0}:5612".format(self.address))
             socket.setsockopt(zmq.RCVTIMEO,100)
             socket.setsockopt(zmq.SNDTIMEO,100)
             socket.send(key.encode())     
