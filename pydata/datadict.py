@@ -1,8 +1,7 @@
-import os, re, sys
+import sys
 import numpy as np
 import h5py
-from collections import OrderedDict
-from pydata.h5pydata import createh5
+from pydata.h5pydata import Group_autoiter, h5file
 from pydata.increment import increment_file, __increment__
 
 if 'pyslave' in sys.modules :   
@@ -63,7 +62,8 @@ class Data(dict):
         if key in self.__data_attributes__ : self.__data_attributes__.remove(key)
     def __setitem__(self, key, value):
         super().__setitem__(key, value)
-        if type(value) is np.ndarray and key not in  self.__data_attributes__ : self.__data_attributes__.append(key)
+        if key in self.__data_attributes__ : self.__data_attributes__.remove(key)
+        if type(value) is np.ndarray : self.__data_attributes__.append(key)
     def __delattr__(self, name):
         self.__delitem__(name)  
     def plot(self, fig, subplots=True, **kwargs):
@@ -112,7 +112,7 @@ class Data(dict):
           the behaviour of the filename autoincrement (see the save_txt method
           for more details).
 
-        * HDF5 format : used if file is an opened HDF5 file or a string ending in h5.
+        * HDF5 format : used if file is an HDF5 file object or a string ending in h5.
           The optional keywords are increment=True and ndigits=4 to control the
           behaviour of the dataset autoincrement. The optional attrs will
           be added to the dataset attributes. Extra keywords arguments will be
@@ -124,11 +124,11 @@ class Data(dict):
             if file.endswith('txt'):
                 self.save_txt(file, **kwargs)
             elif file.endswith('h5'):
-                with h5py.File(file, 'a', libver='latest') as hdf:
+                with h5file(file, 'a', libver='latest') as hdf:
                     self.save_h5(hdf, **kwargs)
             else:
                 raise Exception('Unknown file extension : {0}'.format(file))
-        elif isinstance(file,h5py.Group):
+        elif isinstance(file, h5py.Group) or type(file) is Group_autoiter:
             self.save_h5(file, **kwargs)
         else :
             raise TypeError('File should be a string or an opened HDF file.')
@@ -156,7 +156,7 @@ class Data(dict):
         attributes = self.__attributes__.copy()
         if attrs : attributes.update(attrs)
         if increment:
-            if hasattr(hdf,'__next_dataset__'):
+            if type(hdf) is Group_autoiter:
                 # fast
                 counter, dataset_name = hdf.__next_dataset__(dataset, ndigits)
             else:
@@ -164,19 +164,20 @@ class Data(dict):
                 dataset_name = __increment__(dataset, '', hdf.keys(), ndigits)
         else:
             dataset_name = dataset
-        if dataset_name in hdf:
-            print('WARNING : Deleting {0} in {1}'.format(dataset_name, str(hdf.file.filename+hdf.name)))
-            del hdf['{0}'.format(dataset_name)]
+        #if dataset_name in hdf:
+        #    print('WARNING : Deleting {0} in {1}'.format(dataset_name, str(hdf.file.filename+hdf.name)))
+        #    del hdf['{0}'.format(dataset_name)]
         opts = {'track_order' : True}
         kwargs.update(opts)
-        ds = hdf.create_dataset(dataset_name, data=self.__data__, **opts)
-        ds.attrs.update(attributes)
-        if increment and hasattr(hdf,'__data_counter__') :
+        if type(hdf) is Group_autoiter:
+            hdf.create_dataset(dataset_name, data=data, attrs=attributes, **opts)
+        else:
+            ds = hdf.create_dataset(dataset_name, data=data, **opts)
+            ds.attrs.update(attributes)
+        if increment and type(hdf) is Group_autoiter:
             hdf.__data_counter__[dataset] = counter
-        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.file.filename+hdf.name), dataset_name)
+        msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.file.filename + hdf.name), dataset_name)
         disp(msg)
-        #for k,v in attributes.items() :
-        #    ds.attrs[k] = v
 
     def save_h5(self, hdf, dataset='data', attrs=None, increment=True, ndigits=4, **kwargs):
         """Save the data to a HDF5 dataset. The first parameter hdf must a HDF5 file opened for writing.

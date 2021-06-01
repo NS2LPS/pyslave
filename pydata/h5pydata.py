@@ -1,42 +1,99 @@
 import h5py
 import numpy as np
 from pydata.increment import __next_index__
+from contextlib import contextmanager
+import time
 
 class DataException(Exception):
     pass    
 
+
+@contextmanager
+def h5file(filename, mode, **kwargs):
+    # Code to acquire resource, e.g.:
+    retry = 10
+    while retry:
+        try:
+            resource = h5py.File(filename, mode, **kwargs)
+            break
+        except OSError:
+            print(f"Unable to open {filename}, retrying...")
+            time.sleep(1)
+            retry -= 1
+    else:
+        raise DataException(f"Unable to open {filename} after 10 retries.")
+    try:
+        yield resource
+    finally:
+        # Code to release resource, e.g.:
+        resource.close()
+
+
 class __autoiter__:
+    def __init__(self):
+        self.__data_counter__ = dict()
     def __next_dataset__(self, dataset, ndigits):
         if not dataset in self.__data_counter__ :
-            counter = __next_index__(dataset,'',self.keys())
+            counter = __next_index__(dataset, '', self.keys())
         else:
             counter = self.__data_counter__[dataset] + 1
         return counter, dataset + str(counter).zfill(ndigits)
+    def __repr__(self):
+        return str(self.__data_counter__) if self.__data_counter__ else ''
+
+class Group_autoiter(__autoiter__):
+    def __init__(self, file, name):
+        super().__init__()
+        self.file = file
+        self.name = name
+    def create_group(self, name, attrs={}, track_order=True):
+        """Create a group. Syntax is similar to h5py create_dataset with the
+        extra possibility to set the attributes directly."""
+        with h5file(self.file.filename, 'a', **self.file.params) as f:
+            o = f[self.name]
+            g = o.create_group(name, track_order)
+            g.attrs.update(attrs)
+        return Group_autoiter(self.file, self.name+name+'/')
+    def create_dataset(self, name, *args, **kwargs):
+        """Create a dataset. Syntax is similar to h5py create_dataset with the
+        extra possibility to set the attributes directly."""
+        with h5file(self.file.filename, 'a', **self.file.params) as f:
+            g = f[self.name]
+            attrs = kwargs.pop('attrs') if 'attrs' in kwargs else dict()
+            ds = g.create_dataset(name, *args, **kwargs)
+            ds.attrs.update(attrs)
     def append(self, data, **kwargs):
         """Create a new dataset with automatic increment of the name and save data to it.
         The data object must be an instance of pyslave.Data. Attributes can be added.
         See pyslave.Data.save for more details."""
-        data.save_h5(self,**kwargs)
+        data.save_h5(self, **kwargs)
+    def close(self):
+        print("Closing HDF5 objects created with createh5 is no longer required.")
+    def keys(self):
+        with h5file(self.file.filename, 'r', **self.file.params) as f:
+            g = f[self.name]
+            res = list(g.keys())
+        return res
+    def __repr__(self):
+        return self.file.filename+self.name+' '+super().__repr__()
 
-class Group_autoiter(h5py.Group, __autoiter__):
-    pass
+class __h5file__:
+    def __init__(self, filename, params):
+        self.filename = filename
+        self.params = params
 
-class createh5(h5py.File, __autoiter__):
-    """Create a new H5 file to save data.
-    Use append to add data to the file."""
-    def __init__(self, *args, **kwargs):
-        if not args:
-            args = ('a',)
-        params = {'libver':'latest', 'track_order':True}
-        params.update(kwargs)
-        super().__init__(*args, **params)
-        self.__data_counter__ = dict()
-    def create_group(self, *args, **kwargs):
-        """Create a group in the file"""
-        g = super().create_group(*args, **kwargs)
-        g.__data_counter__ = dict()
-        g.__class__ = Group_autoiter
-        return g
+def createh5(filename, mode=None, **kwargs):
+    """Create a HDF5 file. Syntax is similar to h5py.File with the
+    extra possibility to set the attributes directly. Default mode
+    is append ('a')."""
+    if mode is None: 
+        mode = 'a'
+    params = {'libver':'latest', 'track_order':True}
+    params.update(kwargs)
+    attrs = params.pop('attrs') if 'attrs' in params else dict()
+    with h5file(filename, mode, **params) as f:
+        f.attrs.update(attrs)
+    return Group_autoiter(__h5file__(filename, params), '/')
 
 class loadh5:
     """Load all datasets of a H5 file or group into numpy arrays.
@@ -51,13 +108,12 @@ class loadh5:
 
       plot(d.T, abs(d.Sij).max(1))
     """
-
     def __init__(self, filename, print_file = True):
         self.__groups__ = []
         self.attr_keys = []
         self.data_keys = []
         if type(filename) is str:
-            with h5py.File(filename,'r', libver='latest') as hdf:
+            with h5file(filename,'r', libver='latest') as hdf:
                 self.__load__(hdf)
                 self.name = hdf.file.filename + hdf.name 
         elif isinstance(filename, h5py.Group):
