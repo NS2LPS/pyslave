@@ -88,8 +88,9 @@ class Data(dict):
     def append(self, *args):
         if len(args)!=len(self.__data_attributes__):
             raise DataException('Number of arguments does not match number of data fields : ' + ' '.join(self.__data_attributes__))
+        data_attributes = self.__data_attributes__.copy()
         for i,v in enumerate(args):
-            k = self.__data_attributes__[i]
+            k = data_attributes[i] 
             self[k] = np.append(self[k], v)
     @property
     def __data__(self):

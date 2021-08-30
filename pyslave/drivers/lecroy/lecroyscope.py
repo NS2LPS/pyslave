@@ -60,13 +60,13 @@ def lecroy_decode(trc,endian='<'):
     Copyright (C) 2010 Anthony LaTorre"""
 
     # Parse the WAVEDESC block
-    startpos = trc.find('WAVEDESC')
+    startpos = trc.find(b'WAVEDESC')
     param = dict(endian = endian)
     for name, pos, datatype in wavedesc:
         pos += startpos
         raw = trc[pos : pos + datatype.length]
         if datatype in (String, UnitDefinition):
-            param[name] = raw.rstrip('\x00')
+            param[name] = raw.rstrip(b'\x00')
         elif datatype in (TimeStamp,):
             param[name] = struct.unpack( param['endian'] + datatype.packfmt, raw)
         else:
