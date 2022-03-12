@@ -18,10 +18,9 @@ def dispattrs(files,*args):
 def fixattr(file,attr,value):
     """Fix or add the value of an attribute for all items in the file.
     ex : fixattr('scan0000.h5','rbw',10)"""
-    with h5py.File(f,'a') as h5f:
-        for d in h5f.items():
+    with h5py.File(file,'a') as h5f:
+        for d in h5f.values():
             d.attrs[attr]=value
-
     
 def copyh5(fin,fout,range):
     """Copy datasets from one file to another. Datasets are supposed to be named dataXXXX.
@@ -29,8 +28,7 @@ def copyh5(fin,fout,range):
     with h5py.File(fout,'a') as h5fout:
         with h5py.File(fin,'r') as h5fin:
             for i in range:
-                h5fin.copy(h5fin,h5fout,f'data{i:04d}')
-
+                h5fin.copy(h5fin[f'data{i:04d}'],h5fout)
 
 def delh5(file,range):
     """Delete datasets from one. Datasets are supposed to be named dataXXXX.
