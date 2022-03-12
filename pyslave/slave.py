@@ -151,6 +151,13 @@ class SlaveWindow(QtWidgets.QMainWindow):
         if self.thread is None : return
         self.thread.pauseflag = False
         self.display('Resuming script...', echo=echo, log=False)
+    
+    @QtCore.pyqtSlot()
+    def on_pushButton_Reset_clicked(self, echo=False):
+        self.zmq_socket.close()
+        self.zmq_socket = self.zmq_context.socket(zmq.PUB)
+        port = "5556"
+        self.zmq_socket.bind("tcp://*:%s" % port)     
 
     def display(self, text, echo=False, log=False):
         self.ui.textEdit.append(text)

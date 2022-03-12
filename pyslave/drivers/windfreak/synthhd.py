@@ -55,9 +55,9 @@ class SynthHD(serial.Serial):
         f0 = self.getfreq(0)
         p0 = self.getpower(0)
         m0 = self.getrfstatus(0)
-        s0 = 'Channel A : {0:6.1f} MHz  |  {1:+5.1f} dBm  | RF {2}\n'.format(f0,p0, 'ON' if m0 else 'OFF').encode()
+        s0 = 'Channel A : {0:6.1f} MHz  |  {1:+5.1f} dBm  | RF {2}\n'.format(f0,p0, 'ON' if m0 else 'OFF')
         f0 = self.getfreq(1)
         p0 = self.getpower(1)
         m0 = self.getrfstatus(1)
-        s1 = 'Channel B : {0:6.1f} MHz  |  {1:+5.1f} dBm  | RF {2}\n'.format(f0,p0, 'ON' if m0 else 'OFF').encode()
+        s1 = 'Channel B : {0:6.1f} MHz  |  {1:+5.1f} dBm  | RF {2}\n'.format(f0,p0, 'ON' if m0 else 'OFF')
         return s0+s1

@@ -54,8 +54,9 @@ class fsv:
         typ = self.instrument.query('SWE:TYPE?')
         det = self.instrument.query('DET?')
         aver = int(self.instrument.query('AVER?'))
-        unit = self.instrument.query('CALC:UNIT:POW?')        
-        return dict( start_frequency = fstart, stop_frequency = fstop, rbw = rbw, vbw = vbw, count = count, typ = typ.strip(), det=det.strip(), aver=aver, unit=unit.strip() )
+        unit = self.instrument.query('CALC:UNIT:POW?')
+        rlev = self.instrument.query('DISP:TRAC:Y:RLEV?')    
+        return dict( start_frequency = fstart, stop_frequency = fstop, rlev=rlev, rbw = rbw, vbw = vbw, count = count, typ = typ.strip(), det=det.strip(), aver=aver, unit=unit.strip() )
     def refresh_parameters(self):
         """Refresh the acquisition paramters and store them"""
         self.__acquisition_parameters__ = self.acquisition_parameters()
