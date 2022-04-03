@@ -3,10 +3,9 @@ import time
 from pydata import Sij, Data
 import warnings
 
-from .__zvb__ import rszvb as dll
-from myzvb import rszvb
+from .__zvb__ import myrszvb 
 
-class zva(rszvb):
+class zva(myrszvb.rszvb):
     """Rohde&Schwarz Vector Network Analyzer (ZVA) driver.
     All the functions from the rszvb DLL are available as well as extra home made functions.
     Direct call to the instrument invokes the fetch method.
