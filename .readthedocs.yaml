@@ -13,4 +13,4 @@ python:
   install:
     - method: pip
       path: .
-    - requirements: numpy
+    - requirements: docs/requirements.txt
