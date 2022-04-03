@@ -10,7 +10,7 @@ class rszvb:
         Remote-control command(s):
         [SENSe<Ch>:]FREQuency:STARt
 
-        :param startFrequency: This control defines the start frequency for a frequency sweep which is equal to the left edge of a Cartesiandiagram.
+        :param startFrequency: This control defines the start frequency for a frequency sweep which is equal to the left edge of a Cartesian diagram.
         :param channel: Channel number, defaults to 1"""
         self.write(f"SENS{channel}:FREQ:STAR {startFrequency}")
 
