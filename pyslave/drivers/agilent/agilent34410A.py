@@ -21,20 +21,24 @@ class Agilent34410A:
         self.__class__.__call__ = self.__class__.read
 
     def read(self):
-        """Acquire and return one value (blocking)"""
+        """Acquire and return one value (blocking)
+        SCPI : READ?"""
         res = self.instrument.query('READ?')
         return float(res)
 
     def fetch(self):
-        """Wait for acquisition to finish and return one value (blocking)"""
+        """Wait for acquisition to finish and return one value (blocking)
+        SCPI : FETCH?"""
         res = self.instrument.query('FETCH?')
         return float(res)
 
     def init(self):
         """Start acquiring one value (non-blocking). 
-        Use fetch to retrieve the value."""
+        Use fetch to retrieve the value.
+        SCPI : INIT:IMM"""
         self.instrument.write('INIT:IMM')
         
-    def nplc(self, val):
-        """Set voltage averaging time in number of power line cycles (20 ms)"""
+    def nplc(self, value):
+        """Set voltage averaging time in number of power line cycles (20 ms)
+        SCPI : SENS:VOLT:DC:NPLC value"""
         self.instrument.write(f'SENS:VOLT:DC:NPLC {val:d}')

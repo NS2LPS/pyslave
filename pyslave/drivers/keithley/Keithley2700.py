@@ -21,5 +21,7 @@ class Keithley2700:
         self.__class__.__call__ = self.__class__.read
 
     def read(self):
+        """Read one value from the dmm.
+        SCPI : DATA?"""
         res = self.instrument.ask('DATA?')
         return float(res.split(',')[0][:-3])

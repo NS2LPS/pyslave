@@ -10,7 +10,8 @@ class rcdat:
         r2 = requests.get(url+'SN?\n')   
         print (r1.text.split('=')[1],'loaded with SN',r2.text.split('=')[1])
     def getatt(self):
-        """Return tha current attenuation in dB."""
+        """Return tha current attenuation in dB.
+        SCPI : ATT?"""
         err = True
         retry = 0
         while err and retry<2:
@@ -24,12 +25,13 @@ class rcdat:
                 retry += 1
                 res = nan
         return res
-    def setatt(self, att):
+    def setatt(self, value):
         """Set the attenuation in dB.
-        The argument should be a multiple of 0.25 ranging between 0 and 31.25."""
-        if (att*4) % 1 :
-            print ('RDCAT : WARNING {0} is not a multiple of 0.25 dB'.format(att))
-        r=requests.get(self.url+'SETATT={0}\n'.format(att))
+        The argument should be a multiple of 0.25 ranging between 0 and 31.25.
+        SCPI : SETATT value"""
+        if (value*4) % 1 :
+            print ('RDCAT : WARNING {0} is not a multiple of 0.25 dB'.format(value))
+        r=requests.get(self.url+'SETATT={0}\n'.format(value))
         if r.text!='1':
             raise Exception('RDCAT : Error while setting attenuation.')
     def __repr__(self):

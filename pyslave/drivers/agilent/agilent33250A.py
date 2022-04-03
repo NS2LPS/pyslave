@@ -21,30 +21,36 @@ class Agilent33250A:
         self.close = self.instrument.close
 
     def setamplitude(self, value):
-        """Set the amplitude (Vpp)"""
+        """Set the amplitude (Vpp)
+        SCPI : AMPL value"""
         self.instrument.write('AMPL {0}'.format(value))
 
     def setoffset(self,value):
-        """Set the offset (V)"""
+        """Set the offset (V)
+        SCPI : VOLT:OFFS value"""
         self.instrument.write('VOLT:OFFS {0}'.format(value))
 
     def setfrequency(self, value):
-        """Set the frequency (Hz)"""
+        """Set the frequency (Hz)
+        SCPI : FREQ value"""
         self.instrument.write('FREQ {0}'.format(value))
 
     def geterror(self):
-        """Read last error."""
+        """Read last error.
+        SCPI : SYST:ERR?"""
         return self.instrument.ask('SYST:ERR?')
 
     def output(self,val):
-        """Turn the output on or off"""
+        """Turn the output on or off
+        SCPI : OUPT ON or OUTP OFF"""
         self.instrument.write('OUTP {0}'.format('ON' if val else 'OFF'))
 
     def loadarb(self,wfm):
         """Load arbitrary waveform into volatile memory.
         Values ot the wfm array must be between -2047 and +2047, which corresponds
         to the DAC range. This maximum range is -10V and +10V or -5V to +5V
-        depending on the output impedance."""
+        depending on the output impedance.
+        SCPI : DATA:DAC VOLATILE, #len(l),l,wfm"""
         wfm = wfm.astype('int16')
         l = str(2*len(wfm))
         self.instrument.write_raw('DATA:DAC VOLATILE, #{0}{1}{2}'.format(len(l),l,wfm.byteswap().tostring()))
