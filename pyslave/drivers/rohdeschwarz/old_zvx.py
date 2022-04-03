@@ -4,40 +4,53 @@ from pydata import Sij, Data
 import warnings
 
 from .__zvb__ import rszvb as dll
-from myzvb import rszvb
 
-class zva(rszvb):
+class zva:
     """Rohde&Schwarz Vector Network Analyzer (ZVA) driver.
     All the functions from the rszvb DLL are available as well as extra home made functions.
     Direct call to the instrument invokes the fetch method.
     """
     __inst_type__ = 'vna'
     __inst_id__ = 'Rohde&Schwarz ZVA'
-    def __init__(self, resource, *args, **kwargs):
-        self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
+    def __init__(self, address):
+        self.iHandle = dll.rszvb_init(address.encode(), 0, 0)
         self.__class__.__call__ = self.__class__.fetch
-        self.close = self.instrument.close
-        self.write = self.instrument.write
-        self.query = self.instrument.query
-        self.read = self.instrument.read
-        self.write('FORM:DAT REAL ,32')
+    def __getattr__(self, name):
+        dll_fun = getattr(dll, 'rszvb_' + name)
+        def fun(*args, **kwargs):
+            res = dll_fun(self.iHandle, *args, **kwargs)
+            if dll_fun.output : return res
+        return fun
     def fetch(self, channel=1, refresh_parameters=True):
         """Fetch the trace from the specified channel and return it as a Sij data object."""
-        data = self.TraceResponseData(channel)
+        n = self.GetSweepNumberOfPoints(channel)
+        data = np.empty((n, 2), np.float64)
+        r = self.TraceResponseData(channel,0,data)
+        if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
         if refresh_parameters : self.refresh_parameters(channel)
-        return Sij( Sij = data, **self.__acquisition_parameters__ )
+        return Sij( Sij = data[:,0] + 1j*data[:,1], **self.__acquisition_parameters__ )
     def fetch_cw(self, channel=1, refresh_parameters=True):
         """Fetch the trace from the specified channel and return it as a data object."""
-        data = self.TraceResponseData(channel)
+        n = self.GetSweepNumberOfPoints(channel)
+        data = np.empty((n, 2), np.float64)
+        r = self.TraceResponseData(channel,0,data)
+        if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
         if refresh_parameters : self.refresh_parameters_cw(channel)
-        return Data( Sij = data, **self.__acquisition_parameters__ )        
+        return Data( Sij = data[:,0] + 1j*data[:,1], **self.__acquisition_parameters__ )        
     def fetch_raw(self, channel=1):
         """Fetch the trace from the specified channel and return it as a complex array."""
-        return self.TraceResponseData(channel)
+        n = self.GetSweepNumberOfPoints(channel)
+        data = np.empty((n, 2), np.float64)
+        r = self.TraceResponseData(channel,0,data)
+        if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
+        return data[:,0] + 1j*data[:,1]
     def fetch_segments(self, nsegments, npoints, channel=1):
-        """Fetch the segemented trace from the specified channel and return it as a complex array."""
-        data = self.TraceResponseData(channel).reshape(nsegments,npoints,2)
-        return data
+        n = nsegments*npoints
+        data = np.empty((n, 2), np.float64)
+        r = self.TraceResponseData(channel,0,data)
+        if r!=2*n : raise dll.ZVBDLLERROR("TraceResponseData : missing data points.")
+        data = data.reshape((nsegments,npoints,2))
+        return data[:,:,0] + 1j*data[:,:,1]
     def wait_for_average(self, channel=1, sleep_time=0.5):
         """Blocks until the enough traces are acquired to perform the average."""
         n_average = self.GetAverageFactor(channel)
