@@ -631,7 +631,7 @@ class rszvb:
     def ConfigureTriggerManual(self, channel=1):
         """This function configures the manual trigger mode. In Manual trigger
         mode the trigger signal is generated on pressing the Manual Trigger
-        softkey or sending *TRG remote command (function rszvb_SendTrigger).
+        softkey or sending ``*TRG`` remote command (function rszvb_SendTrigger).
         
         Remote-control command(s):
         TRIGger<Ch>[:SEQuence]:SOURce MANual
@@ -829,8 +829,8 @@ class rszvb:
         Remote-control command(s):
         INITiate<Ch>[:IMMediate]
 
-       :param channel: Channel number, defaults to 1"""
-       self.write(f"INIT{channel}:IMM")
+        :param channel: Channel number, defaults to 1"""
+        self.write(f"INIT{channel}:IMM")
 
     def SendChannelTriggerWaitOPC(self, channel=1):
         """This function starts a new single sweep sequence and waits for
@@ -875,7 +875,7 @@ class rszvb:
         INITiate<Ch>[:IMMediate]:SCOPe?
 
         :return: singleSweep"""
-        return self.query(f"INIT{channel}:SCOP?"))   
+        return self.query(f"INIT{channel}:SCOP?").strip()   
 
     def SweepRestart(self, channel=1):
         """This function starts a new single sweep sequence.

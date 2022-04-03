@@ -3,6 +3,19 @@ import time
 from pydata import Sij, Data
 import warnings
 
+# VISA resource manager
+try:
+    from pyslave.instruments import __visa_rm__
+except:
+    __visa_rm__ = None
+
+if __visa_rm__ is None:
+    try:
+        import pyvisa as visa
+        __visa_rm__ = visa.ResourceManager()
+    except:
+        __visa_rm__ = None
+
 from .__zvb__ import myrszvb 
 
 class zva(myrszvb.rszvb):

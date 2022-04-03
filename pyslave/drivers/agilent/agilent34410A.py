@@ -5,10 +5,11 @@ except:
     __visa_rm__ = None
 
 if __visa_rm__ is None:
-    import pyvisa as visa
-    __visa_rm__ = visa.ResourceManager()
-
-
+    try:
+        import pyvisa as visa
+        __visa_rm__ = visa.ResourceManager()
+    except:
+        __visa_rm__ = None
 
 class Agilent34410A:
     """Agilent 34410A instrument driver.
