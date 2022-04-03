@@ -5,7 +5,10 @@ Rohde Schwarz instrument drivers
 
 .. autoclass:: pyslave.drivers.rohdeschwarz.zvx.zva
     :members:
+    :inherited-members:
 
-    .. include:: ./txt/rszvb.txt
+.. autoclass:: pyslave.drivers.rohdeschwarz.zvx.zvb
+    :members:
 
-
+.. autoclass:: pyslave.drivers.rohdeschwarz.zvx.znd
+    :members:
