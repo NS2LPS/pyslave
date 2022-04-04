@@ -36,14 +36,10 @@ class SR830:
 
     # Set Frequency Source
     def setFreqSource(self,source):
-        """Function sets the frequency source to either the internal
-        reference clock, or an external reference.
-        
-        SCPI: ``FREQ source``
+        """Function sets the frequency source to either the internal reference clock, or an external reference.
 
         :param source: {EXTernal|INTernal}
         :type source: string
-
         """
         if not isinstance(source,str):
             raise Exception('Parameter must be a string.')
