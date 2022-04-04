@@ -63,7 +63,7 @@ class Data(dict):
     def __setitem__(self, key, value):
         super().__setitem__(key, value)
         if key in self.__data_attributes__ : self.__data_attributes__.remove(key)
-        if type(value) is np.ndarray : self.__data_attributes__.append(key)
+        if type(value)==np.ndarray : self.__data_attributes__.append(key)
     def __delattr__(self, name):
         self.__delitem__(name) 
     def update(self,*args,**kwargs):
@@ -131,7 +131,7 @@ class Data(dict):
           more details).
 
         """
-        if type(file) is str:
+        if type(file)==str:
             if file.endswith('txt'):
                 self.save_txt(file, **kwargs)
             elif file.endswith('h5'):
@@ -139,7 +139,7 @@ class Data(dict):
                     self.save_h5(hdf, **kwargs)
             else:
                 raise Exception('Unknown file extension : {0}'.format(file))
-        elif isinstance(file, h5py.Group) or type(file) is Group_autoiter:
+        elif isinstance(file, h5py.Group) or type(file)==Group_autoiter:
             self.save_h5(file, **kwargs)
         else :
             raise TypeError('File should be a string or an opened HDF file.')
@@ -167,7 +167,7 @@ class Data(dict):
         attributes = self.__attributes__.copy()
         if attrs : attributes.update(attrs)
         if increment:
-            if type(hdf) is Group_autoiter:
+            if type(hdf)==Group_autoiter:
                 # fast
                 counter, dataset_name = hdf.__next_dataset__(dataset, ndigits)
             else:
@@ -180,12 +180,12 @@ class Data(dict):
         #    del hdf['{0}'.format(dataset_name)]
         opts = {'track_order' : True}
         kwargs.update(opts)
-        if type(hdf) is Group_autoiter:
+        if type(hdf)==Group_autoiter:
             hdf.create_dataset(dataset_name, data=data, attrs=attributes, **opts)
         else:
             ds = hdf.create_dataset(dataset_name, data=data, **opts)
             ds.attrs.update(attributes)
-        if increment and type(hdf) is Group_autoiter:
+        if increment and type(hdf)==Group_autoiter:
             hdf.__data_counter__[dataset] = counter
         msg = 'Data saved to {0} in dataset {1}.'.format(str(hdf.file.filename + hdf.name), dataset_name)
         disp(msg)
@@ -210,7 +210,7 @@ class Sij(Data):
     def set_data_attributes(self):
         self.__data_attributes__ = ['freq','Sij']
     def __getitem__(self, key):
-        if key is 'freq':
+        if key=='freq':
             return np.linspace(self.start_frequency, self.stop_frequency, self.number_of_points)
         else:
             return self.get(key)
@@ -219,10 +219,10 @@ class Sij(Data):
         """
         fig.clf()
         ax = fig.add_subplot(1,1,1)
-        y = 10*np.log10( np.abs(self.Sij)**2 ) if scale is 'log' else np.abs(self.Sij)**2
+        y = 10*np.log10( np.abs(self.Sij)**2 ) if scale=='log' else np.abs(self.Sij)**2
         ax.plot(self.freq/1e9, y, **kwargs)
         ax.set_xlabel('Frequency (GHz)')
-        ax.set_ylabel('$|S_{ij}|^2$ (dB)' if scale is 'log' else '$|S_{ij}|^2$')
+        ax.set_ylabel('$|S_{ij}|^2$ (dB)' if scale=='log' else '$|S_{ij}|^2$')
         ax.get_xaxis().get_major_formatter().set_powerlimits((-1, 2))
         ax.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
     def save_txt(self, filename, attrs=None, increment=True, ndigits=4):
@@ -241,7 +241,7 @@ class Spec(Data):
     def set_data_attributes(self):
         self.__data_attributes__ = ['freq','S']
     def __getitem__(self, key):
-        if key is 'freq':
+        if key=='freq':
             return np.linspace(self.start_frequency, self.stop_frequency, self.number_of_points)
         else:
             return self.get(key)
@@ -285,11 +285,11 @@ class Lecroy_trace(Data):
         ax.get_yaxis().get_major_formatter().set_powerlimits((-1, 2))
 
     def __getitem__(self, key):
-        if key is 'horiz':
+        if key=='horiz':
             x = np.arange( len(self.wave) ) * self.horiz_interval
             x += self.horiz_offset
             return x
-        elif key is 'vert':
+        elif key=='vert':
             y = self.wave.astype(np.float)
             y *= self.vertical_gain
             y -= self.vertical_offset
