@@ -631,7 +631,7 @@ class rszvb:
     def ConfigureTriggerManual(self, channel=1):
         """This function configures the manual trigger mode. In Manual trigger
         mode the trigger signal is generated on pressing the Manual Trigger
-        softkey or sending *TRG remote command (function rszvb_SendTrigger).
+        softkey or sending \*TRG remote command (function rszvb_SendTrigger).
         
         Remote-control command(s):
         TRIGger<Ch>[:SEQuence]:SOURce MANual
@@ -790,7 +790,7 @@ class rszvb:
         Generates a manual trigger signal (Manual Trigger).
         
         Remote-control command(s):
-        *TRG
+        \*TRG
         """
         self.write("*TRG")
 
