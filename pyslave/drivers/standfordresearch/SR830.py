@@ -38,6 +38,7 @@ class SR830:
     def setFreqSource(self,source):
         """Function sets the frequency source to either the internal
         reference clock, or an external reference.
+        
         SCPI: ``FREQ source``
 
         :param source: {EXTernal|INTernal}
@@ -64,6 +65,7 @@ class SR830:
     def setFreq(self,freq):
         """Function sets the internal reference frequency. This command only
         works if the lock-in is set to use the internal reference.
+
         SCPI: ``FREQ freq``
 
         :param freq: Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.
@@ -83,11 +85,12 @@ class SR830:
     def setPhase(self,phase):
         """
         Function sets the phase of the internal reference signal.
+
         SCPI: ``PHAS phase``
 
         :param phase: Desired phase
         :type phase: float, <-360...+729.99>
-        
+
         """
         if not isinstance(phase,int) and not isinstance(phase,float):
             raise Exception('Phase parameter must be an integer or a float.')
