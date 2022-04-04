@@ -38,6 +38,8 @@ class SR830:
     def setFreqSource(self,source):
         """Function sets the frequency source to either the internal reference clock, or an external reference.
 
+        SCPI: ``FREQ source``
+
         :param source: {EXTernal|INTernal}
         :type source: string
         """
@@ -85,7 +87,7 @@ class SR830:
         SCPI: ``PHAS phase``
 
         :param phase: Desired phase
-        :type phase: float, <-360...+729.99>
+        :type phase: <-360...+729.99>, float
 
         """
         if not isinstance(phase,int) and not isinstance(phase,float):
@@ -103,7 +105,6 @@ class SR830:
         SCPI: ``SLVL amplitude``
 
         :param amplitude: Desired peak-to-peak voltage
-        
         :type amplitude: <0.004...5>,float
         """
         if not isinstance(amplitude,int) and not isinstance(amplitude,float):
