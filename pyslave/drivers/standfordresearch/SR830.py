@@ -42,6 +42,7 @@ class SR830:
 
         :param source: {EXTernal|INTernal}
         :type source: string
+
         """
         if not isinstance(source,str):
             raise Exception('Parameter must be a string.')
@@ -67,6 +68,7 @@ class SR830:
 
         :param freq: Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.
         :type freq: float
+
         """
         if not isinstance(freq,int) and not isinstance(freq,float):
             raise Exception('Freq parameter must be an integer or a float.')
@@ -85,6 +87,7 @@ class SR830:
 
         :param phase: Desired phase
         :type phase: float, <-360...+729.99>
+        
         """
         if not isinstance(phase,int) and not isinstance(phase,float):
             raise Exception('Phase parameter must be an integer or a float.')
