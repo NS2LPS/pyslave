@@ -38,10 +38,10 @@ class SR830:
     def setFreqSource(self,source):
         """Function sets the frequency source to either the internal reference clock, or an external reference.
 
-        SCPI: ``FREQ source``
-
         :param source: {EXTernal|INTernal}
         :type source: string
+        
+        SCPI : FREQ source
         """
         if not isinstance(source,str):
             raise Exception('Parameter must be a string.')
@@ -64,11 +64,10 @@ class SR830:
         """Function sets the internal reference frequency. This command only
         works if the lock-in is set to use the internal reference.
 
-        SCPI: ``FREQ freq``
-
         :param freq: Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.
         :type freq: float
-
+        
+        SCPI : FREQ freq
         """
         if not isinstance(freq,int) and not isinstance(freq,float):
             raise Exception('Freq parameter must be an integer or a float.')
@@ -84,11 +83,10 @@ class SR830:
         """
         Function sets the phase of the internal reference signal.
 
-        SCPI: ``PHAS phase``
-
         :param phase: Desired phase
         :type phase: <-360...+729.99>, float
-
+        
+        SCPI : PHAS phase
         """
         if not isinstance(phase,int) and not isinstance(phase,float):
             raise Exception('Phase parameter must be an integer or a float.')
@@ -102,10 +100,11 @@ class SR830:
     def setAmplitude(self,amplitude):
         """
         Function sets the amplitude of the internal reference signal.
-        SCPI: ``SLVL amplitude``
 
         :param amplitude: Desired peak-to-peak voltage
         :type amplitude: <0.004...5>,float
+
+        SCPI : SLVL amplitude
         """
         if not isinstance(amplitude,int) and not isinstance(amplitude,float):
             raise Exception('Amplitude parameter must be an integer or a float.')
@@ -122,6 +121,7 @@ class SR830:
         
         :param grounding: Desired input shield grounding
         :type grounding: {float|ground},string
+        
         SCPI : IGND grounding
         """
         if not isinstance(grounding,str):
@@ -144,6 +144,7 @@ class SR830:
 
         :param coupling: Desired input coupling mode
         :type coupling: {ac|dc},string
+        
         SCPI : ICPL coupling
         """
         if not isinstance(coupling,str):
@@ -166,6 +167,7 @@ class SR830:
 
         :param sampleRate: The sampling rate, in Hz as a float, or the string 'trigger'. When specifying the rate in Hz, acceptable values are integer powers of 2. This means 2^n, n={-4...+9}
         :type sampleRate: {<freq> float,TRIGGER}
+        
         SCPI : SRAT sampleRate
         """
         if isinstance(sampleRate,str):
@@ -186,6 +188,7 @@ class SR830:
 
         :param mode: Desired end of buffer mode
         :type mode: {1SHOT,LOOP},string
+        
         SCPI : SEND mode
         """
         if not isinstance(mode,str):
@@ -214,6 +217,7 @@ class SR830:
         :param channel: {CH1|CH2|1|2},string/int
         :param display: {X|Y|R|THETA|XNOISE|YNOISE|AUX1|AUX2|AUX3|AUX4},string
         :param ratio: {NONE|AUX1|AUX2|AUX3|AUX4},string
+        
         SCPI : DDEF channel, display, ratio
         """
         if not isinstance(channel,str) and not isinstance(channel,int):
@@ -274,6 +278,7 @@ class SR830:
         :type offset: <-105...+105>,float
         :param expand: Expansion factor for the measurement
         :type expand: {1|10|100},integer
+        
         SCPI : OEXP mode,offset,expand
         """
         if not isinstance(mode,str):
@@ -312,6 +317,7 @@ class SR830:
 
         :param mode: Mode who's offset will be set to zero.
         :type mode: {X|Y|R},string
+        
         SCPI : AOFF mode
         """
         if not isinstance(mode,str):
@@ -334,6 +340,7 @@ class SR830:
         This does the same thing as pushing the auto phase button.
         Do not send this message again without waiting the correct amount
         of time for the lock-in to finish.
+        
         SCPI : APHS
         """
         self.write('APHS')
@@ -344,6 +351,7 @@ class SR830:
         Function used to turn the data transfer from the lockin on or off
 
         :param mode: {ON|OFF},string
+        
         SCPI : FAST mode
         """
         if not isinstance(mode,str):
@@ -366,6 +374,7 @@ class SR830:
         After setting the data transfer on via the dataTransfer function,
         this is used to start the scan. The scan starts after a delay of
         0.5 seconds.
+        
         SCPI : STRD
         '''
         self.write('STRD')
@@ -374,6 +383,7 @@ class SR830:
     def pause(self):
         '''
         Has the instrument pause data capture.
+        
         SCPI : PAUS
         '''
         self.write('PAUS')
@@ -414,6 +424,7 @@ class SR830:
         given in the function input parameters.
 
         :param mode: {X|Y|R|THETA|AUX1|AUX2|AUX3|AUX4|REF|CH1|CH2},string
+        
         SCPI : SNAP? mode1,mode2
         '''
         if not isinstance(mode1,str):
@@ -444,6 +455,7 @@ class SR830:
     def outp(self, mode='x'):
         '''
         Read one value. Mode can x, y, r, or theta.
+        
         SCPI : OUTP? mode
         '''
         valid = ['x','y','r','theta']
@@ -457,6 +469,7 @@ class SR830:
     def outr(self, mode='ch1'):
         '''
         Read one value. Mode can be ch1 or ch2.
+        
         SCPI : OUTR? mode
         '''
         valid = ['ch1','ch2']
@@ -469,11 +482,13 @@ class SR830:
 
     def auxv(self, voltage, aux=1):
         '''Set auxiliary output voltage.
+        
         SCPI : AUXVaux,voltage'''
         self.write('AUXV{0},{1}'.format(aux, voltage))
 
     def oaux(self, aux=1):
         '''Read auxiliary input.
+        
         SCPI : OAUX?aux'''
         return float(self.query('OAUX?{0}'.format(aux)))
 
@@ -488,6 +503,7 @@ class SR830:
 
         :param channel: Channel data buffer to read from
         :type channel: {CH1|CH2|1|2},string/integer
+        
         SCPI : TRCA?channel,0,
         '''
         if not isinstance(channel,str) and not isinstance(channel,int):
