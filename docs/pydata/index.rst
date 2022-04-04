@@ -11,3 +11,5 @@
     datadict.rst
     h5pydata.rst
     increment.rst
+    utilities.rst
+    
