@@ -20,7 +20,7 @@ from .__zvb__ import myrszvb
 
 class zva(myrszvb.rszvb):
     """Rohde&Schwarz Vector Network Analyzer (ZVA) driver.
-    All the functions from the rszvb DLL are available as well as extra home made functions.
+    Includes some functions from the R&S DLL as well as home made functions.
     Direct call to the instrument invokes the fetch method.
     """
     __inst_type__ = 'vna'
@@ -60,8 +60,8 @@ class zva(myrszvb.rszvb):
     def fetch_segments(self, nsegments, npoints, channel=1):
         """Fetch the segemented trace from the specified channel and return it as a complex array.
         
-        :param nsegements
-        :param npoints
+        :param nsegments: Number of segments
+        :param npoints: Number of points per sweep segment
         :param channel: Channel number, defaults to 1"""
         data = self.TraceResponseData(channel).reshape(nsegments,npoints,2)
         return data
@@ -118,7 +118,7 @@ class zva(myrszvb.rszvb):
 
 class zvb(zva):
     """Rohde&Schwarz Vector Network Analyzer (ZVB) driver.
-    All the functions from the rszvb DLL are available as well as extra home made functions.
+    Includes some functions from the R&S DLL as well as home made functions.
     Direct call to the instrument invokes the fetch method.
     """
     __inst_id__ =  'Rohde&Schwarz ZVB'
@@ -129,7 +129,7 @@ class zvb(zva):
 
 class znd(zva):
     """Rohde&Schwarz Vector Network Analyzer (ZND) driver.
-    All the functions from the rszvb DLL are available as well as extra home made functions.
+    Includes some functions from the R&S DLL as well as home made functions.
     Direct call to the instrument invokes the fetch method.
     """
     __inst_id__ =  'Rohde&Schwarz ZND'
