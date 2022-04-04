@@ -33,6 +33,7 @@ class zva(myrszvb.rszvb):
         self.query = self.instrument.query
         self.read = self.instrument.read
         self.write('FORM:DAT REAL ,32')
+    
     def fetch(self, channel=1, refresh_parameters=True):
         """Fetch the trace from the specified channel and return it as a Sij data object.
         
@@ -41,6 +42,7 @@ class zva(myrszvb.rszvb):
         data = self.TraceResponseData(channel)
         if refresh_parameters : self.refresh_parameters(channel)
         return Sij( Sij = data, **self.__acquisition_parameters__ )
+    
     def fetch_cw(self, channel=1, refresh_parameters=True):
         """Fetch the trace from the specified channel and return it as a data object.
         
@@ -49,6 +51,7 @@ class zva(myrszvb.rszvb):
         data = self.TraceResponseData(channel)
         if refresh_parameters : self.refresh_parameters_cw(channel)
         return Data( Sij = data, **self.__acquisition_parameters__ )        
+    
     def fetch_raw(self, channel=1):
         """Fetch the trace from the specified channel and return it as a complex array.
         
@@ -62,15 +65,17 @@ class zva(myrszvb.rszvb):
         :param channel: Channel number, defaults to 1"""
         data = self.TraceResponseData(channel).reshape(nsegments,npoints,2)
         return data
-    def wait_for_average(self, channel=1, sleep_time=0.5):
+
+    def wait_for_average(self, channel=1, sleeptime=0.5):
         """Blocks until the enough traces are acquired to perform the average.
         
         :param channel: Channel number, defaults to 1
-        :param sleep_time, defaults to 0.5"""
+        :param sleeptime: Polling interval, defaults to 0.5"""
         n_average = self.GetAverageFactor(channel)
-        time.sleep(sleep_time)
+        time.sleep(sleeptime)
         while self.GetCurrentSweep(channel)<n_average :
-            time.sleep(sleep_time)
+            time.sleep(sleeptime)
+
     def acquisition_parameters(self, channel = 1):
         """Return the acquisition parameters for the specified channel.
         
@@ -81,6 +86,7 @@ class zva(myrszvb.rszvb):
         power = self.GetPower(channel)
         rbw = self.GetMeasBandwidth(channel)
         return dict( start_frequency = start, stop_frequency = stop, number_of_points = npoints, power = power, rbw = rbw )
+    
     def acquisition_parameters_cw(self, channel = 1):
         """Return the acquisition parameters for the specified channel.
 
@@ -91,16 +97,19 @@ class zva(myrszvb.rszvb):
         sweeptime = self.GetSweepTime(channel)
         freq = self.GetCWFrequency(channel)
         return dict( number_of_points = npoints, power = power, rbw=rbw, sweeptime=sweeptime, freq=freq)
+    
     def refresh_parameters(self, channel = 1):
         """Refresh the acquisition paramters and store them
         
         :param channel: Channel number, defaults to 1"""
         self.__acquisition_parameters__ = self.acquisition_parameters(channel)
+    
     def refresh_parameters_cw(self, channel = 1):
         """Refresh the acquisition paramters and store them
         
         :param channel: Channel number, defaults to 1"""
         self.__acquisition_parameters__ = self.acquisition_parameters_cw(channel)
+    
     def __del__(self):
         try:
             self.close()
@@ -114,7 +123,8 @@ class zvb(zva):
     """
     __inst_id__ =  'Rohde&Schwarz ZVB'
     def wait_for_average(self, channel=1, sleep_time=0.5):
-        """Not implemented in ZVB."""
+        """Not implemented in ZVB.
+        """
         warnings.warn("The wait_for_average method is not implemented.")
 
 class znd(zva):

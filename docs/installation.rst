@@ -4,19 +4,14 @@ Installing the pyslave package
 The minimal environment required to run ``pyslave`` is a ``IPython`` installation, including ``numpy``, ``h5py``, ``matplotlib`` and ``pyqt5``.
 To interact with instruments, more packages are needed such as ``PyVISA``, ``PyDAQMx``, ``pyserial``.
 
-To install the package, use one of the following set of commands in a prompt (e.g. conda prompt).
+To install the package, use the following set of commands in a prompt (e.g. conda prompt):
 
-* Install and forget: ::
 
-    pip install git+https://github.com/NS2LPS/pyslave
-
-* Install and interact with the code:
-
-  First clone the github repository to a folder: ::
+* First clone the github repository to a folder: ::
 
     git clone https://github.com/NS2LPS/pyslave
 
-  Install the package with pip: ::
+* Install the package with pip: ::
 
     pip install -e ./pyslave
 
@@ -26,11 +21,6 @@ Setting up ``pyslave`` and ``pydata`` environment
 ---------------------------------------------------
 Create IPython profiles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-* If you have used the install and forget option, you have to locate the ``pyslave`` folder. You can do: ::
-
-    import pyslave
-    print(pyslave.__file__)
 
 * Locate the ``.ipython`` directory. It should be ``C:\\Users\\your_name\\.ipython`` or ``~/.ipython``
 * Copy the ``profile-pyslave`` directory from ``pyslave\misc`` into the ``.ipython`` directory

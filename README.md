@@ -10,12 +10,7 @@ functions and classes to manipulate experimental data.
 Installation
 --------------
 
-* Install and forget:
-
-    ``pip install git+https://github.com/NS2LPS/pyslave``
-
-* Install to interact with the code
-  First clone the github repository:
+* First clone the github repository:
   
     ``git clone https://github.com/NS2LPS/pyslave``
 
