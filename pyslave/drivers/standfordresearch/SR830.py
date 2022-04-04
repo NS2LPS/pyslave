@@ -36,14 +36,14 @@ class SR830:
 
     # Set Frequency Source
     def setFreqSource(self,source):
-        '''
+        """
         Function sets teh frequency source to either the internal
         reference clock, or an external reference.
         SCPI: ``FREQ source``
 
         :param source: {EXTernal|INTernal}
         :type source: string
-        '''
+        """
         if not isinstance(source,str):
             raise Exception('Parameter must be a string.')
 
@@ -62,14 +62,14 @@ class SR830:
 
     # Set Frequency
     def setFreq(self,freq):
-        '''
+        """
         Function sers the internal reference frequency. This command only
         works if the lock-in is set to use the internal reference.
-        SCPI command ``FREQ freq``
-
+        SCPI: ``FREQ freq``
+        
         :param freq: Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.
         :type freq: float
-        '''
+        """
         if not isinstance(freq,int) and not isinstance(freq,float):
             raise Exception('Freq parameter must be an integer or a float.')
 
@@ -81,13 +81,13 @@ class SR830:
 
     # Set Phase
     def setPhase(self,phase):
-        '''
+        """
         Function sets the phase of the internal reference signal.
+        SCPI: PHAS phase
 
         :param phase: Desired phase
         :type phase: <-360...+729.99>,float
-        SCPI : PHAS phase
-        '''
+        """
         if not isinstance(phase,int) and not isinstance(phase,float):
             raise Exception('Phase parameter must be an integer or a float.')
 
@@ -98,13 +98,13 @@ class SR830:
 
     # Set Amplitude
     def setAmplitude(self,amplitude):
-        '''
+        """
         Function sets the amplitude of the internal reference signal.
 
         :param amplitude: Desired peak-to-peak voltage
         :type amplitude: <0.004...5>,float
         SCPI : SLVL amplitude
-        '''
+        """
         if not isinstance(amplitude,int) and not isinstance(amplitude,float):
             raise Exception('Amplitude parameter must be an integer or a float.')
 
@@ -115,13 +115,13 @@ class SR830:
 
     # Set Input Shield Grounding
     def setInputGround(self,grounding):
-        '''
+        """
         Function sets the input shield grounding to either 'float' or 'ground'
-
+        
         :param grounding: Desired input shield grounding
         :type grounding: {float|ground},string
         SCPI : IGND grounding
-        '''
+        """
         if not isinstance(grounding,str):
             raise Exception('Parameter "grounding" must be a string.')
 
@@ -137,13 +137,13 @@ class SR830:
 
     # Set Input Coupling
     def setInputCoupling(self,coupling):
-        '''
+        """
         Function sets the input coupling to either 'ac' or 'dc'
 
         :param coupling: Desired input coupling mode
         :type coupling: {ac|dc},string
         SCPI : ICPL coupling
-        '''
+        """
         if not isinstance(coupling,str):
             raise Exception('Parameter "coupling" must be a string.')
 
@@ -159,13 +159,13 @@ class SR830:
 
     # Set Data Sample Rate
     def setSampleRate(self,sampleRate):
-        '''
+        """
         Function sets the data sampling rate of the lock-in
 
         :param sampleRate: The sampling rate, in Hz as a float, or the string 'trigger'. When specifying the rate in Hz, acceptable values are integer powers of 2. This means 2^n, n={-4...+9}
         :type sampleRate: {<freq> float,TRIGGER}
         SCPI : SRAT sampleRate
-        '''
+        """
         if isinstance(sampleRate,str):
             sampleRate = sampleRate.lower()
 
@@ -179,13 +179,13 @@ class SR830:
 
     # Set End of Buffer Mode
     def setEndOfBufferMode(self,mode):
-        '''
+        """
         Function sets the end of buffer mode
 
         :param mode: Desired end of buffer mode
         :type mode: {1SHOT,LOOP},string
         SCPI : SEND mode
-        '''
+        """
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
 
@@ -201,7 +201,7 @@ class SR830:
 
     # Set Channel Display
     def setChannelDisplay(self,channel,display,ratio):
-        '''
+        """
         Function sets the display of the two channels.
         Channel 1 can display X, R, X Noise, Aux In 1, Aux In 2
         Channel 2 can display Y, Theta, Y Noise, Aux In 3, Aux In 4
@@ -213,7 +213,7 @@ class SR830:
         :param display: {X|Y|R|THETA|XNOISE|YNOISE|AUX1|AUX2|AUX3|AUX4},string
         :param ratio: {NONE|AUX1|AUX2|AUX3|AUX4},string
         SCPI : DDEF channel, display, ratio
-        '''
+        """
         if not isinstance(channel,str) and not isinstance(channel,int):
             raise Exception('Parameter "channel" must be a string or integer.')
         if not isinstance(display,str):
@@ -261,7 +261,7 @@ class SR830:
 
     # Set the Channel Offset and Expand
     def setOffsetExpand(self,mode,offset,expand):
-        '''
+        """
         Function sets the channel offset and expand parameters.
         Offset is a percentage, and expand is given as a multiplication
         factor of 1, 10, or 100.
@@ -273,7 +273,7 @@ class SR830:
         :param expand: Expansion factor for the measurement
         :type expand: {1|10|100},integer
         SCPI : OEXP mode,offset,expand
-        '''
+        """
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
 
@@ -303,7 +303,7 @@ class SR830:
 
     # Enable Auto Offset
     def autoOffset(self,mode):
-        '''
+        """
         Function sets a specific channel mode to auto offset. This is the
         same as pressing the auto offset key on the display.
         It sets the offset of the mode specified to zero.
@@ -311,7 +311,7 @@ class SR830:
         :param mode: Mode who's offset will be set to zero.
         :type mode: {X|Y|R},string
         SCPI : AOFF mode
-        '''
+        """
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
 
@@ -327,23 +327,23 @@ class SR830:
 
     # Enable Auto Phase
     def autoPhase(self):
-        '''
+        """
         Function sets the lock-in to auto phase.
         This does the same thing as pushing the auto phase button.
         Do not send this message again without waiting the correct amount
         of time for the lock-in to finish.
         SCPI : APHS
-        '''
+        """
         self.write('APHS')
 
     # Set Data Transfer on/off
     def dataTransfer(self,mode):
-        '''
+        """
         Function used to turn the data transfer from the lockin on or off
 
         :param mode: {ON|OFF},string
         SCPI : FAST mode
-        '''
+        """
         if not isinstance(mode,str):
             raise Exception('Parameter "mode" must be a string.')
 
