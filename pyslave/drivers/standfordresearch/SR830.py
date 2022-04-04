@@ -42,6 +42,7 @@ class SR830:
         SCPI: ``FREQ source``
 
         :param source: {EXTernal|INTernal}
+
         :type source: string
         """
         if not isinstance(source,str):
@@ -66,8 +67,9 @@ class SR830:
         Function sers the internal reference frequency. This command only
         works if the lock-in is set to use the internal reference.
         SCPI: ``FREQ freq``
-        
+
         :param freq: Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.
+
         :type freq: float
         """
         if not isinstance(freq,int) and not isinstance(freq,float):
@@ -83,9 +85,10 @@ class SR830:
     def setPhase(self,phase):
         """
         Function sets the phase of the internal reference signal.
-        SCPI: PHAS phase
+        SCPI: ``PHAS phase``
 
         :param phase: Desired phase
+
         :type phase: <-360...+729.99>,float
         """
         if not isinstance(phase,int) and not isinstance(phase,float):
@@ -100,10 +103,11 @@ class SR830:
     def setAmplitude(self,amplitude):
         """
         Function sets the amplitude of the internal reference signal.
+        SCPI: ``SLVL amplitude``
 
         :param amplitude: Desired peak-to-peak voltage
+        
         :type amplitude: <0.004...5>,float
-        SCPI : SLVL amplitude
         """
         if not isinstance(amplitude,int) and not isinstance(amplitude,float):
             raise Exception('Amplitude parameter must be an integer or a float.')
