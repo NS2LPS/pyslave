@@ -5,7 +5,7 @@ import h5py
 def dispattrs(files,*args):
     """Display attributes of a group of H5 files::
     
-    dispattrs('scan*.h5','power','rbw')"""
+        dispattrs('scan*.h5','power','rbw')"""
     allf = glob.glob(files)
     allf.sort()
     s = f"|File|{'|'.join(args)}|\n"
@@ -19,7 +19,7 @@ def dispattrs(files,*args):
 def fixattr(file,attr,value):
     """Fix or add the value of an attribute for all items in the file::
     
-    fixattr('scan0000.h5','rbw',10)"""
+        fixattr('scan0000.h5','rbw',10)"""
     with h5py.File(file,'a') as h5f:
         for d in h5f.values():
             d.attrs[attr]=value
@@ -27,7 +27,7 @@ def fixattr(file,attr,value):
 def copyh5(fin,fout,range):
     """Copy datasets from one file to another. Datasets are supposed to be named data????::
     
-    copyh5('scan0000.h5','scan0001.h5',range(100,200))"""
+        copyh5('scan0000.h5','scan0001.h5',range(100,200))"""
     with h5py.File(fout,'a') as h5fout:
         with h5py.File(fin,'r') as h5fin:
             for i in range:
@@ -36,7 +36,7 @@ def copyh5(fin,fout,range):
 def delh5(file,range):
     """Delete datasets from one. Datasets are supposed to be named data????::
     
-    delh5('scan0000.h5',range(100,200))"""
+        delh5('scan0000.h5',range(100,200))"""
     with h5py.File(file,'a') as h5f:
         for i in range:
             del h5f[f'data{i:04d}']
