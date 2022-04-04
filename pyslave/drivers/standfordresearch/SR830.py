@@ -65,7 +65,7 @@ class SR830:
         '''
         Function sers the internal reference frequency. This command only
         works if the lock-in is set to use the internal reference.
-        SCPI: ``FREQ freq``
+        SCPI command ``FREQ freq``
 
         :param freq: Desired frequency. Rounded to 5 digits or 0.0001Hz, whichever is larger.
         :type freq: float

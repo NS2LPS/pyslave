@@ -8,7 +8,7 @@ class rszvb:
         is equal to the left edge of a Cartesian diagram.
         
         Remote-control command(s):
-        [SENSe<Ch>:]FREQuency:STARt
+        ``[SENSe<Ch>:]FREQuency:STARt``
 
         :param startFrequency: This control defines the start frequency for a frequency sweep which is equal to the left edge of a Cartesian diagram.
         :param channel: Channel number, defaults to 1"""
@@ -19,7 +19,7 @@ class rszvb:
         is equal to the left edge of a Cartesian diagram.
         
         Remote-control command(s):
-        [SENSe<Ch>:]FREQuency:STARt?
+        ``[SENSe<Ch>:]FREQuency:STARt?``
 
         :param channel: Channel number, defaults to 1
         :return: startFrequency"""
@@ -30,7 +30,7 @@ class rszvb:
         is equal to the right edge of a Cartesian diagram.
         
         Remote-control command(s):
-        [SENSe<Ch>:]FREQuency:STOP 
+        ``[SENSe<Ch>:]FREQuency:STOP ``
 
         :param stopFrequency: This control defines the stop frequency for afrequency sweep which is equal to the right edge of a Cartesiandiagram.
         :param channel: Channel number, defaults to 1"""
