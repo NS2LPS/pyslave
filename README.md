@@ -8,7 +8,7 @@ to control an experiment through Python scripts. The ``pydata`` module defines h
 functions and classes to manipulate experimental data.
 
 Installation
---------------
+---------------
 
 * First clone the github repository:
   
