@@ -12,7 +12,7 @@ def dispattrs(files,*args):
     s = s + f"| ---- | {'|'.join(['----' for a in args])} |\n"
     for f in allf:
         with h5py.File(f,'r') as h5f:
-            find_data = lambda name, obj : True if obj.hasattr('attrs') else None
+            find_data = lambda name, obj : name if 'data' in name  else None
             d0 = h5f.visititems(find_data)
             d0 = h5f[d0].attrs
             s = s + f"| {f} | {'|'.join([ str(d0[a]) for a in args])} |\n"
