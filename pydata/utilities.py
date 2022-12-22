@@ -14,8 +14,9 @@ def dispattrs(files,*args):
         with h5py.File(f,'r') as h5f:
             find_data = lambda name, obj : name if 'data' in name  else None
             d0 = h5f.visititems(find_data)
-            d0 = h5f[d0].attrs
-            s = s + f"| {f} | {'|'.join([ str(d0[a]) for a in args])} |\n"
+            if d0:
+                d0 = h5f[d0].attrs
+                s = s + f"| {f} | {'|'.join([ str(d0.get(a,'??')) for a in args])} |\n"
     return display(Markdown(s))
     
 def fixattr(file,attr,value):
