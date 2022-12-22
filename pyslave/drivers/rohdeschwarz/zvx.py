@@ -32,7 +32,7 @@ class zva(myrszvb.rszvb):
         self.write = self.instrument.write
         self.query = self.instrument.query
         self.read = self.instrument.read
-        self.write('FORM:DAT REAL ,32')
+        self.write('FORM REAL ,32')
     
     def fetch(self, channel=1, refresh_parameters=True):
         """Fetch the trace from the specified channel and return it as a Sij data object.

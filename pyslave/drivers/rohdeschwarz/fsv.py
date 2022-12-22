@@ -63,4 +63,71 @@ class fsv:
     def refresh_parameters(self):
         """Refresh the acquisition paramters and store them"""
         self.__acquisition_parameters__ = self.acquisition_parameters()
+    
+    def SendTrigger(self):
+        """This function triggers all actions waiting for a trigger event.
+        Generates a manual trigger signal (Manual Trigger).
+        
+        Remote-control command(s):
+        \*TRG
+        """
+        self.write("*TRG")
 
+    def SendChannelTrigger(self, channel=1):
+        """This function starts a new single sweep sequence. This function is
+        available in single sweep mode only (INITiate<Ch>:CONTinuous OFF).
+        
+        Note(s):
+        
+        (1) In contrast to all other functions of the analyzer,
+        INITiate<Ch>[:IMMediate] has been implemented to prevent overlapped
+        execution.
+        
+        (2) The data of the last sweep can be read using
+        CALCulate<Ch>:DATA:NSWeep? SDATa, <history_count>.
+        
+        Remote-control command(s):
+        INITiate<Ch>[:IMMediate]
+
+        :param channel: Channel number, defaults to 1"""
+        self.write(f"INIT{channel}:IMM")
+
+    def SendChannelTriggerWaitOPC(self, channel=1):
+        """This function starts a new single sweep sequence and waits for
+        operation completed (OPC) before returning the status code. This
+        function is available in single sweep mode only
+        (INITiate<Ch>:CONTinuous OFF).
+        
+        Note(s):
+        
+        (1) In contrast to all other functions of the analyzer,
+        INITiate<Ch>[:IMMediate] has been implemented to prevent overlapped
+        execution.
+        
+        (2) The data of the last sweep can be read using
+        CALCulate<Ch>:DATA:NSWeep? SDATa, <history_count>.
+        
+        Remote-control command(s):
+        INITiate<Ch>[:IMMediate];\*OPC?
+
+        :param channel: Channel number, defaults to 1"""
+        self.write(f"INIT{channel}:IMM")
+        self.query("*OPC?")
+        
+    def SendTriggerWaitOPC(self):
+        """This function triggers all actions waiting for a trigger event in the
+        selected window and waits for operation completed (OPC).
+        
+        Remote-control command(s):
+        \*TRG;\*OPC?
+        """
+        self.write("*TRG")
+        self.query("*OPC?")
+
+    def WaitOPC(self):
+        """This function waits for operation completed (OPC).
+        
+        Remote-control command(s):
+        \*OPC?
+        """
+        self.query("*OPC?")

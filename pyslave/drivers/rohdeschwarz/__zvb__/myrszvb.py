@@ -359,7 +359,8 @@ class rszvb:
         :param channel: Channel number used to identify the active trace, defaults to 1
         :return: S data as complex values"""
         data = self.instrument.query_binary_values(f'CALC{channel}:DATA? SDAT',container=np.ndarray)
-        return data.view(np.complex128)
+        assert data.dtype==np.float32
+        return data.view(np.complex64)
 
     def TraceResponseSingleSweepData(self, sweepNumber, channel=1):
         """This function reads the response values of a trace acquired in single
@@ -372,8 +373,9 @@ class rszvb:
         :param channel: Channel number used to identify the active trace, defaults to 1
         :return: S data as complex values"""
         data = self.instrument.query_binary_values(f'CALC{channel}:DATA:NSW? SDAT,{sweepNumber}',container=np.ndarray)
-        return data.view(np.complex128)
-
+        assert data.dtype==np.float32
+        return data.view(np.complex64)
+        
     def TraceResponseSingleSweepDataCount(self, channel=1):
         """This function reads the number of completed sweeps in single sweep
         mode (INITiate<Ch>:CONTinuous OFF). The trace can be any of the traces
@@ -397,7 +399,8 @@ class rszvb:
         :param channel: Channel number used to identify the active trace, defaults to 1
         :return: S data as complex values"""
         data = self.instrument.query_binary_values(f'CALC{channel}:DATA:NSW:FIRS? SDAT,{forwardCount}',container=np.ndarray)
-        return data.view(np.complex128)
+        assert data.dtype==np.float32
+        return data.view(np.complex64)
 
     def SetSweepNumberOfPoints(self, numberOfPoints, channel=1):
         """This function defines the total number of measurement points per
@@ -660,7 +663,7 @@ class rszvb:
         TRIGger<Ch>[:SEQuence]:SOURce IMMediate | EXTernal | TIMer | MANual |
         RFPower | PGENerator
         
-        :param triggerSource: This control selects the source for the eventsthat the analyzer uses to start a sweep.
+        :param triggerSource: This control selects the source for the events that the analyzer uses to start a sweep.
         :param channel: Channel number, defaults to 1"""
         self.write(f"TRIG{channel}:SOUR {triggerSource}")
 
@@ -673,7 +676,7 @@ class rszvb:
 
         :param channel: Channel number, defaults to 1
         :return: triggerSource"""
-        return self.query()
+        return self.query(f"TRIG{channel}:SOUR?").strip()
 
     def SetTriggerDelay(self, triggerDelay, channel=1):
         """This function defines a delay time between the trigger event and the
@@ -896,7 +899,7 @@ class rszvb:
         INITiate<Ch>:CONTinuous OFF | ON
         
         :param channel: Channel number, defaults to 1
-        :param singleSweep: This control qualifies whether the analyzermeasures in single sweep or in continuous sweep mode."""
+        :param singleSweep: This control qualifies whether the analyzer measures in single sweep or in continuous sweep mode."""
         self.write(f"INIT{channel}:CONT {singleSweep}")
 
     def GetSweepSingle(self, channel=1):
