@@ -135,7 +135,7 @@ class yokogawa7651:
         self.trigger()
 
     # Set output value
-    def setValue(self, value, autorange=True):
+    def setValue(self, value, autorange=False):
         '''
         Set the output value of the power supply.
 
