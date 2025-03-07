@@ -533,6 +533,21 @@ class SR830:
         Returns an integer.
         '''
         return int( self.query('SPTS?') )
+        
+    def acquisition_parameters(self):
+        phase = float(self.query('PHAS?'))
+        freq = float(self.query('FREQ?'))
+        slvl = float(self.query('SLVL?'))
+        sens = int(self.query('SENS?'))
+        oflt = int(self.query('OFLT?'))
+        ofsl = int(self.query('OFSL?'))
+        rmod = int(self.query('RMOD?'))
+        ignd = int(self.query('IGND?'))
+        icpl = int(self.query('ICPL?'))
+        isrc = int(self.query('ISRC?'))
+        ilin = int(self.query('ILIN?'))
+        sync = int(self.query('SYNC?'))
+        return dict( phase = phase, slvl=slvl, freq = freq, sens=sens, oflt = oflt, ofsl = ofsl, rmod = rmod, ignd = ignd, icpl = icpl, isrc=isrc, ilin=ilin, sync=sync )
 
     # Clear data (channel) buffer
     def clearDataBuffer(self):

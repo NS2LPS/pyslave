@@ -57,13 +57,14 @@ class zva(myrszvb.rszvb):
         
         :param channel: Channel number, defaults to 1"""
         return self.TraceResponseData(channel)
+
     def fetch_segments(self, nsegments, npoints, channel=1):
         """Fetch the segemented trace from the specified channel and return it as a complex array.
         
         :param nsegments: Number of segments
         :param npoints: Number of points per sweep segment
         :param channel: Channel number, defaults to 1"""
-        data = self.TraceResponseData(channel).reshape(nsegments,npoints,2)
+        data = self.TraceResponseData(channel).reshape(nsegments,npoints)
         return data
 
     def wait_for_average(self, channel=1, sleeptime=0.5):

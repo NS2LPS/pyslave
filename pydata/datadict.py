@@ -104,7 +104,7 @@ class Data(dict):
             self[k] = np.append(self[k], v)
     @property
     def __data__(self):
-        return np.core.rec.fromarrays( [self[k] for k in self.__data_attributes__] , names = self.__data_attributes__)
+        return np.rec.fromarrays( [self[k] for k in self.__data_attributes__] , names = self.__data_attributes__)
     @property
     def __attributes__(self):
         return dict([ (k,v) for k,v in self.items() if k not in self.__data_attributes__ and k not in self.__hidden_attributes__])
