@@ -23,15 +23,15 @@ if __visa_rm__ is None:
 
 
 
-class SR830:
+class SR844:
     """StandfordResearch SR830 instrument driver.
     Direct call to the instrument invokes the outp method.
     """
-    __inst_id__ = 'Stanford_Research_Systems SR830'
+    __inst_id__ = 'Stanford_Research_Systems SR844'
     __inst_type__ = 'lockin'
     def __init__(self, resource, *args, **kwargs):
         self.instrument = __visa_rm__.open_resource(resource, *args, **kwargs)
-        self.write('OUTX 1') # Set the device responce port to GPIB
+        #self.write('OUTX 1') # Set the device responce port to GPIB
         self.__class__.__call__ = self.__class__.outp
 
     # Set Frequency Source
@@ -537,17 +537,14 @@ class SR830:
     def acquisition_parameters(self):
         phase = float(self.query('PHAS?'))
         freq = float(self.query('FREQ?'))
-        slvl = float(self.query('SLVL?'))
         sens = int(self.query('SENS?'))
         oflt = int(self.query('OFLT?'))
         ofsl = int(self.query('OFSL?'))
         rmod = int(self.query('RMOD?'))
-        ignd = int(self.query('IGND?'))
-        icpl = int(self.query('ICPL?'))
-        isrc = int(self.query('ISRC?'))
-        ilin = int(self.query('ILIN?'))
-        sync = int(self.query('SYNC?'))
-        return dict( phase = phase, slvl=slvl, freq_lockin = freq, sens=sens, oflt = oflt, ofsl = ofsl, rmod = rmod, ignd = ignd, icpl = icpl, isrc=isrc, ilin=ilin, sync=sync )
+        inpz = int(self.query('INPZ?'))
+        wrsv = int(self.query('WRSV?'))
+        crsv = int(self.query('CRSV?'))
+        return dict( phase = phase, freq_lockin = freq, sens=sens, oflt = oflt, ofsl = ofsl, rmod = rmod, wrsv = wrsv, inpz = inpz, crsv = crsv)
 
     # Clear data (channel) buffer
     def clearDataBuffer(self):

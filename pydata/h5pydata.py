@@ -161,8 +161,8 @@ class loadh5:
         all_attrs = { k: np.empty(self.length, dtype=d) for k,d in zip(attr_keys,attr_types)}
         all_data  = { k: np.nan*np.ones((self.length, l), dtype=d) for k,d,l in zip(data_keys, data_types, data_len)}
         for i,d in enumerate(values):
-            for k in attr_keys: 
-                all_attrs[k][i] = d.attrs.get(k,np.nan)
+            for k in attr_keys:
+                all_attrs[k][i] = d.attrs.get(k,np.nan if all_attrs[k].dtype==float else all_attrs[k][i])
             for k in data_keys: 
                 if k in d.dtype.names:
                     all_data[k][i,:len(d[k])] = d[k]

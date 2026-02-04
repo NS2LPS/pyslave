@@ -634,7 +634,7 @@ class rszvb:
     def ConfigureTriggerManual(self, channel=1):
         """This function configures the manual trigger mode. In Manual trigger
         mode the trigger signal is generated on pressing the Manual Trigger
-        softkey or sending \*TRG remote command (function rszvb_SendTrigger).
+        softkey or sending *TRG remote command (function rszvb_SendTrigger).
         
         Remote-control command(s):
         TRIGger<Ch>[:SEQuence]:SOURce MANual
@@ -793,7 +793,7 @@ class rszvb:
         Generates a manual trigger signal (Manual Trigger).
         
         Remote-control command(s):
-        \*TRG
+        *TRG
         """
         self.write("*TRG")
 
@@ -802,7 +802,7 @@ class rszvb:
         selected window and waits for operation completed (OPC).
         
         Remote-control command(s):
-        \*TRG;\*OPC?
+        *TRG;*OPC?
         """
         self.write("*TRG")
         self.query("*OPC?")
@@ -811,7 +811,7 @@ class rszvb:
         """This function waits for operation completed (OPC).
         
         Remote-control command(s):
-        \*OPC?
+        *OPC?
         """
         self.query("*OPC?")
         
@@ -850,7 +850,7 @@ class rszvb:
         CALCulate<Ch>:DATA:NSWeep? SDATa, <history_count>.
         
         Remote-control command(s):
-        INITiate<Ch>[:IMMediate];\*OPC?
+        INITiate<Ch>[:IMMediate];*OPC?
 
         :param channel: Channel number, defaults to 1"""
         self.write(f"INIT{channel}:IMM")

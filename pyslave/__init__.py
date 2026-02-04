@@ -10,6 +10,7 @@ The module contains :
 """
 
 import logging, os, logging.handlers
+from concurrent_log_handler import ConcurrentTimedRotatingFileHandler 
 
 ########################################################
 # Start logging pyslave activity
@@ -25,7 +26,8 @@ if not logger.handlers:
         os.mkdir(logpath)
         print('Creating log directory :',logpath)
     logfile = os.path.normpath(os.path.join(logpath, 'pyslave_{0}.log'.format(counter)))
-    fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight')
+    #fh = logging.handlers.TimedRotatingFileHandler(logfile, when='midnight')
+    fh = ConcurrentTimedRotatingFileHandler(logfile, when='midnight')
     fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     fh.setLevel(logging.DEBUG)
     logger.addHandler(fh)
